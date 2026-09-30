@@ -111,7 +111,6 @@
     </ul>
   </div>
   {%- if has_3d -%}
-    <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }</script>
     <script>window.theme = window.theme || {}; window.theme.bottle = { module: {{ 'bottle-3d.js' | asset_url | json }}, texture: {{ 'bottle-body.jpg' | asset_url | json }} };</script>
   {%- endif -%}
   <script type="application/json" id="product-json">{{ product.variants | json }}</script>
