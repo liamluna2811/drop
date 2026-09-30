@@ -308,3 +308,20 @@ font{vertical-align:baseline!important}
 .account-link:hover{opacity:1;text-decoration:underline}
 .welcome-note{background:var(--lime);color:var(--ink);border-radius:12px;padding:.7rem .9rem;font-size:.85rem}
 .welcome-note a{text-decoration:underline}
+
+/* Bandeau cookies */
+.cookie-banner{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:1000;display:flex;justify-content:center;pointer-events:none}
+.cookie-banner[hidden]{display:none}
+.cookie-inner{pointer-events:auto;max-width:760px;width:100%;background:var(--white);color:var(--ink);border:2px solid var(--ink);border-radius:var(--radius);padding:1.25rem 1.4rem;box-shadow:0 18px 50px rgba(11,27,43,.28);max-height:85vh;overflow:auto}
+.cookie-inner h2{font-size:1.15rem;margin-bottom:.6rem}
+.cookie-inner p{font-size:.88rem;color:var(--muted)}
+.cookie-inner p a{color:var(--ink);text-decoration:underline}
+.cookie-options{display:grid;gap:.6rem;margin-top:1rem}
+.cookie-opt{display:flex;gap:.7rem;align-items:flex-start;font-size:.85rem;cursor:pointer}
+.cookie-opt input{margin-top:.25rem;width:1.1rem;height:1.1rem;accent-color:var(--ink);flex:none}
+.cookie-opt strong{display:block}
+.cookie-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.cookie-btn{flex:1 1 140px;padding:.8rem 1.1rem;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--white);font-weight:700;font-size:.9rem;cursor:pointer}
+.cookie-btn:hover{transform:translateY(-1px)}
+.cookie-btn.cookie-ghost{background:transparent;color:var(--ink)}
+@media (max-width:520px){.cookie-banner{left:.5rem;right:.5rem;bottom:.5rem}.cookie-inner{padding:1rem}}
