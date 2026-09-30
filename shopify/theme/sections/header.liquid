@@ -4,7 +4,18 @@
   <nav>
     {%- assign menu = linklists[section.settings.menu] -%}
     {%- if menu.links.size > 0 -%}
-      {%- for link in menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <div class="has-sub">
+            <a href="{{ link.url }}" aria-haspopup="true">{{ link.title }} <span aria-hidden="true">▾</span></a>
+            <div class="sub">
+              {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
     {%- else -%}
       <a href="{{ routes.all_products_collection_url }}">Collection</a>
       <a href="{{ routes.root_url }}#tech">Technologie</a>

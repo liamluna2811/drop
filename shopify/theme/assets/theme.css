@@ -147,7 +147,7 @@ cite{display:block;margin-top:1.2rem;font-style:normal;font-weight:700;font-size
 .toast.show{transform:translate(-50%,0)}
 
 @media (max-width:860px){
-  .nav nav{display:none}
+  .nav{flex-wrap:wrap}.nav nav{order:3;width:100%;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:.9rem}
   .hero,.split{grid-template-columns:1fr}
   .hero{min-height:auto;text-align:left}
   .hero-visual{order:-1;max-width:420px;margin:0 auto}
@@ -229,3 +229,14 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:3px solid var(--lime);
 .rte blockquote p+p{margin-top:.8rem}
 
 .slide[hidden],.thumb[hidden],.thumbs[hidden]{display:none!important}
+
+/* Sous-menu */
+.nav nav>a,.has-sub>a{opacity:.75;transition:opacity .2s}
+.nav nav>a:hover,.has-sub>a:hover,.has-sub:focus-within>a{opacity:1}
+.has-sub{position:relative}
+.sub{position:absolute;top:100%;left:-.8rem;min-width:190px;background:var(--white);border:1px solid rgba(11,27,43,.1);border-radius:12px;box-shadow:0 14px 30px rgba(11,27,43,.14);padding:.5rem;display:none;flex-direction:column;z-index:30}
+.has-sub:hover .sub,.has-sub:focus-within .sub{display:flex}
+.sub a{padding:.6rem .8rem;border-radius:8px;opacity:1;font-weight:600}
+.sub a:hover{background:var(--paper)}
+@media (max-width:860px){.sub{position:static;display:flex;flex-direction:row;box-shadow:none;border:0;padding:0;background:none;min-width:0;gap:.8rem;margin-left:.6rem}.has-sub{display:flex;flex-wrap:wrap;align-items:center}.sub a{padding:0;font-weight:500}}
+@media (min-width:861px){.nav nav{order:0;width:auto}}
