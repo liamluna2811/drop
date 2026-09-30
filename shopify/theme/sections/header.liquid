@@ -1,0 +1,27 @@
+<div class="topbar">{{ settings.announcement }}</div>
+<header class="nav">
+  <a href="{{ routes.root_url }}" class="logo">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
+  <nav>
+    {%- assign menu = linklists[section.settings.menu] -%}
+    {%- if menu.links.size > 0 -%}
+      {%- for link in menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+    {%- else -%}
+      <a href="{{ routes.all_products_collection_url }}">Collection</a>
+      <a href="{{ routes.root_url }}#tech">Technologie</a>
+      <a href="{{ routes.root_url }}#avis">Avis</a>
+    {%- endif -%}
+  </nav>
+  <button class="cart-btn" id="openCart" type="button" aria-label="Ouvrir le panier">
+    Panier <span id="cartCount">{{ cart.item_count }}</span>
+  </button>
+</header>
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [
+    { "type": "text", "id": "logo_1", "label": "Logo (partie 1)", "default": "BANDEJA" },
+    { "type": "text", "id": "logo_2", "label": "Logo (partie 2, surlignée)", "default": "CLUB" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

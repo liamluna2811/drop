@@ -1,0 +1,17 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Bandeja Club",
+    "theme_version": "1.0.0",
+    "theme_author": "Bandeja Club",
+    "theme_documentation_url": "https://help.shopify.com/",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Boutique",
+    "settings": [
+      { "type": "text", "id": "announcement", "label": "Bandeau d'annonce", "default": "Livraison offerte dès 60 € · Retours gratuits 30 jours" },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (en euros)", "default": 60 }
+    ]
+  }
+]

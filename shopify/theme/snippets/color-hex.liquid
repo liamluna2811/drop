@@ -1,0 +1,13 @@
+{%- comment -%} Renvoie la couleur CSS d'une valeur d'option "Couleur". Usage : {% render 'color-hex', name: value %} {%- endcomment -%}
+{%- assign key = name | downcase | strip -%}
+{%- case key -%}
+  {%- when 'nuit' -%}#0b1b2b
+  {%- when 'forêt', 'foret' -%}#14532d
+  {%- when 'noir' -%}#141414
+  {%- when 'blanc' -%}#ffffff
+  {%- when 'sable' -%}#efe3c8
+  {%- when 'ciel' -%}#bfe0ff
+  {%- when 'lime' -%}#d4ff3a
+  {%- when 'orange' -%}#e8642c
+  {%- else -%}#cccccc
+{%- endcase -%}

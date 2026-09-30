@@ -1,0 +1,74 @@
+[
+ {
+  "handle": "padel-club",
+  "title": "Padel Club",
+  "price": 39,
+  "tag": "Best-seller",
+  "desc": "Le logo du club, imprimé grand format sur le torse. Coton peigné 180 g.",
+  "colors": [
+   "Nuit",
+   "Forêt",
+   "Noir"
+  ]
+ },
+ {
+  "handle": "pas-ce-soir-j-ai-padel",
+  "title": "Pas ce soir, j'ai padel",
+  "price": 39,
+  "tag": "Nouveau",
+  "desc": "Pour décliner toutes les invitations, avec le sourire.",
+  "colors": [
+   "Blanc",
+   "Sable",
+   "Ciel"
+  ]
+ },
+ {
+  "handle": "cote-drive",
+  "title": "Côté Drive",
+  "price": 39,
+  "tag": "",
+  "desc": "Je prends tout à droite. Le t-shirt des joueurs de droite.",
+  "colors": [
+   "Blanc",
+   "Sable",
+   "Lime"
+  ]
+ },
+ {
+  "handle": "cote-reves",
+  "title": "Côté Revés",
+  "price": 39,
+  "tag": "",
+  "desc": "Je finis les points. Le t-shirt des joueurs de gauche.",
+  "colors": [
+   "Blanc",
+   "Sable",
+   "Lime"
+  ]
+ },
+ {
+  "handle": "lob-vitre-point",
+  "title": "Lob. Vitre. Point.",
+  "price": 39,
+  "tag": "Nouveau",
+  "desc": "La seule tactique qui compte. Impression grand format, encre haute densité.",
+  "colors": [
+   "Blanc",
+   "Sable",
+   "Ciel"
+  ]
+ },
+ {
+  "handle": "padel-cote-d-azur",
+  "title": "Padel Côte d'Azur",
+  "price": 42,
+  "tag": "Édition été",
+  "desc": "Soleil, vitres et bandejas. Le t-shirt des sessions au coucher du soleil.",
+  "colors": [
+   "Blanc",
+   "Sable",
+   "Ciel"
+  ]
+ }
+]

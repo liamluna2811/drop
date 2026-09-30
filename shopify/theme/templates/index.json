@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "4,9/5", "label": "2 300+ avis" } },
+        "s2": { "type": "stat", "settings": { "value": "140 g", "label": "tissu ultra-léger" } },
+        "s3": { "type": "stat", "settings": { "value": "48 h", "label": "livraison express" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {}
+    },
+    "marquee": { "type": "marquee", "settings": {} },
+    "products": { "type": "featured-products", "settings": { "collection": "all" } },
+    "tech": {
+      "type": "tech",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "◐", "title": "AirDry™", "text": "Micro-mesh qui évacue la transpiration 2× plus vite qu'un coton classique." } },
+        "f2": { "type": "feature", "settings": { "icon": "↔", "title": "Coupe mouvement", "text": "Manches raglan et coutures plates pour lever le bras sans frotter." } },
+        "f3": { "type": "feature", "settings": { "icon": "☀", "title": "Anti-UV 50+", "text": "Protégé pour les sessions en plein air, même à midi." } },
+        "f4": { "type": "feature", "settings": { "icon": "♻", "title": "Éco-conçu", "text": "78 % polyester recyclé, teintures certifiées OEKO-TEX®." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {}
+    },
+    "story": { "type": "story", "settings": {} },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "quote": "Le meilleur t-shirt que j'ai porté en match. Sec après 90 minutes, et il ne colle pas.", "author": "Thomas, classé P250" } },
+        "r2": { "type": "review", "settings": { "quote": "Enfin des couleurs qui sortent de l'ordinaire. Les copines de mon équipe en veulent toutes un.", "author": "Camille, Lyon" } },
+        "r3": { "type": "review", "settings": { "quote": "Taille parfaite, coutures nickel. Je l'ai même mis au bureau le lendemain.", "author": "Karim, Marseille" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {}
+    },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "marquee", "products", "tech", "story", "reviews", "newsletter"]
+}

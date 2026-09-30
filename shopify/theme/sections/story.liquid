@@ -1,0 +1,31 @@
+<section class="section split">
+  <div class="split-visual">
+    <div class="split-shirt">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.image.alt }}
+      {%- else -%}
+        <img src="{{ 'mockup-story.png' | asset_url }}" alt="T-shirt Padel Club" width="800" height="800" loading="lazy">
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="split-text">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.title }}</h2>
+    {{ section.settings.text }}
+    <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn">{{ section.settings.button_label }}</a>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Notre histoire",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Notre histoire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Né sur un court, pas dans un bureau." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Bandeja Club, c'est trois potes, un terrain de quartier et une frustration : aucun t-shirt de padel qui soit à la fois technique et beau. Alors on les a dessinés nous-mêmes.</p><p>Chaque drop est produit en série courte. Quand c'est épuisé, c'est fini.</p>" },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Rejoindre le club" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton" },
+    { "type": "image_picker", "id": "image", "label": "Image (par défaut : t-shirt Padel Club)" }
+  ],
+  "presets": [{ "name": "Notre histoire" }]
+}
+{% endschema %}

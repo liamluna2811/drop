@@ -1,0 +1,118 @@
+(function () {
+  'use strict';
+  var T = window.theme || {};
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var fmt = function (cents) {
+    try { return new Intl.NumberFormat(T.locale || undefined, { style: 'currency', currency: T.currency || 'EUR' }).format(cents / 100); }
+    catch (e) { return (cents / 100).toFixed(2) + ' €'; }
+  };
+  var esc = function (s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; };
+  var json = { 'Content-Type': 'application/json', Accept: 'application/json' };
+
+  var drawer = $('#drawer'), overlay = $('#overlay');
+  function toggle(open) {
+    if (!drawer) return;
+    drawer.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+
+  var toastTimer;
+  function toast(msg) {
+    var t = $('#toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2400);
+  }
+
+  function render(cart) {
+    var count = cart.item_count, total = cart.total_price;
+    var badge = $('#cartCount'); if (badge) badge.textContent = count;
+    var totalEl = $('#cartTotal'); if (totalEl) totalEl.textContent = fmt(total);
+    var ship = $('#shipMsg');
+    if (ship) {
+      var min = T.freeShipping || 0;
+      ship.textContent = !count || !min ? '' : total >= min ? '🎉 Livraison offerte !' : 'Plus que ' + fmt(min - total) + ' pour la livraison offerte.';
+    }
+    var box = $('#cartItems'); if (!box) return;
+    if (!count) { box.innerHTML = '<p class="empty">Ton panier est vide.<br>Il est temps de s\'équiper 🎾</p>'; return; }
+    box.innerHTML = cart.items.map(function (i) {
+      var img = i.image ? '<img src="' + esc(i.image) + '" alt="" width="70" height="70">' : '';
+      var variant = i.variant_title ? '<small>' + esc(i.variant_title) + '</small>' : '';
+      return '<div class="line" data-key="' + esc(i.key) + '" data-qty="' + i.quantity + '">' +
+        '<a class="thumb" href="' + esc(i.url) + '">' + img + '</a>' +
+        '<div><h4>' + esc(i.product_title) + '</h4>' + variant +
+        '<div class="qty"><button type="button" data-a="dec" aria-label="Moins">−</button><span>' + i.quantity + '</span><button type="button" data-a="inc" aria-label="Plus">+</button></div></div>' +
+        '<div class="right"><strong>' + fmt(i.final_line_price) + '</strong><br><button type="button" class="rm" data-a="rm">Retirer</button></div></div>';
+    }).join('');
+  }
+
+  function getCart() { return fetch('/cart.js', { headers: { Accept: 'application/json' } }).then(function (r) { return r.json(); }); }
+  function change(key, qty) {
+    return fetch('/cart/change.js', { method: 'POST', headers: json, body: JSON.stringify({ id: key, quantity: qty }) })
+      .then(function (r) { return r.json(); }).then(render);
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#openCart')) { e.preventDefault(); getCart().then(render); toggle(true); }
+    else if (e.target.closest('#closeCart') || e.target === overlay) toggle(false);
+    var a = e.target.closest('#cartItems [data-a]');
+    if (a) {
+      var row = a.closest('.line'), q = +row.dataset.qty, act = a.dataset.a;
+      change(row.dataset.key, act === 'inc' ? q + 1 : act === 'dec' ? q - 1 : 0);
+    }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
+
+  // Page produit ---------------------------------------------------------
+  var form = $('#product-form');
+  var dataEl = $('#product-json');
+  if (form && dataEl) {
+    var variants = JSON.parse(dataEl.textContent);
+    var btn = $('#addToCart'), err = $('#formError');
+
+    var showMedia = function (id) {
+      if (!id) return;
+      document.querySelectorAll('.slide').forEach(function (s) { s.classList.toggle('on', s.dataset.mediaId == id); });
+      document.querySelectorAll('.thumb').forEach(function (t) { t.classList.toggle('on', t.dataset.thumb == id); });
+    };
+    document.querySelectorAll('.thumb').forEach(function (t) {
+      t.addEventListener('click', function () { showMedia(t.dataset.thumb); });
+    });
+
+    var current = function () {
+      var picked = [];
+      form.querySelectorAll('input[type=radio]:checked').forEach(function (r) { picked[+r.dataset.index] = r.value; });
+      if (!picked.length) return variants[0];
+      return variants.find(function (v) { return v.options.every(function (o, i) { return o === picked[i]; }); });
+    };
+
+    form.addEventListener('change', function (e) {
+      if (e.target.type !== 'radio') return;
+      var idx = e.target.dataset.index, label = $('[data-selected-name="' + idx + '"]');
+      if (label) label.textContent = e.target.value;
+      var v = current();
+      err.hidden = true;
+      if (!v) { btn.disabled = true; btn.textContent = 'Indisponible'; return; }
+      $('#variantId').value = v.id;
+      $('#productPrice').textContent = fmt(v.price);
+      btn.disabled = !v.available;
+      btn.textContent = v.available ? 'Ajouter au panier' : 'Épuisé';
+      if (v.featured_media) showMedia(v.featured_media.id);
+      history.replaceState(null, '', '?variant=' + v.id);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (btn.disabled) return;
+      btn.disabled = true;
+      fetch('/cart/add.js', { method: 'POST', headers: json, body: JSON.stringify({ items: [{ id: +$('#variantId').value, quantity: +$('#quantity').value || 1 }] }) })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (!res.ok) { err.textContent = res.d.description || 'Impossible d\'ajouter ce produit.'; err.hidden = false; return; }
+          return getCart().then(function (c) { render(c); toggle(true); toast('Ajouté au panier ✓'); });
+        })
+        .catch(function () { err.textContent = 'Une erreur est survenue. Réessaie.'; err.hidden = false; })
+        .then(function () { btn.disabled = false; });
+    });
+  }
+})();

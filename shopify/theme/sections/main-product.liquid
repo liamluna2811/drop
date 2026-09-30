@@ -1,0 +1,71 @@
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="section product" data-product-section>
+  <div class="gallery">
+    <div class="gallery-main">
+      {%- for media in product.media -%}
+        <div class="slide{% if forloop.first %} on{% endif %}" data-media-id="{{ media.id }}">
+          {{ media | image_url: width: 1000 | image_tag: widths: '500, 1000', alt: media.alt | default: product.title, loading: 'eager' }}
+        </div>
+      {%- else -%}
+        <div class="slide on">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- if product.media.size > 1 -%}
+      <div class="thumbs">
+        {%- for media in product.media -%}
+          <button type="button" class="thumb{% if forloop.first %} on{% endif %}" data-thumb="{{ media.id }}" aria-label="Image {{ forloop.index }}">
+            {{ media | image_url: width: 160 | image_tag: alt: '' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-info">
+    {%- if product.tags.size > 0 -%}<p class="eyebrow">{{ product.tags.first }}</p>{%- endif -%}
+    <h1>{{ product.title }}</h1>
+    <p class="price big" id="productPrice">{{ current.price | money }}</p>
+
+    {%- form 'product', product, id: 'product-form', class: 'product-form' -%}
+      <input type="hidden" name="id" id="variantId" value="{{ current.id }}">
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          {%- assign oname = option.name | downcase -%}
+          {%- assign is_color = false -%}
+          {%- if oname == 'couleur' or oname == 'color' or oname == 'colour' -%}{%- assign is_color = true -%}{%- endif -%}
+          <fieldset class="opt">
+            <legend>{{ option.name }} : <span data-selected-name="{{ forloop.index0 }}">{{ option.selected_value }}</span></legend>
+            <div class="opt-values">
+              {%- for value in option.values -%}
+                <input type="radio" class="visually-hidden" id="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" data-index="{{ forloop.parentloop.index0 }}"{% if option.selected_value == value %} checked{% endif %}>
+                {%- if is_color -%}
+                  <label class="sw big" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" title="{{ value | escape }}" style="background:{% render 'color-hex', name: value %}"><span class="visually-hidden">{{ value }}</span></label>
+                {%- else -%}
+                  <label class="size" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}">{{ value }}</label>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endfor -%}
+      {%- endunless -%}
+      <div class="buy-row">
+        <label class="qty-field"><span class="visually-hidden">Quantité</span>
+          <input type="number" name="quantity" id="quantity" value="1" min="1" inputmode="numeric">
+        </label>
+        <button type="submit" class="btn full" id="addToCart"{% unless current.available %} disabled{% endunless %}>{% if current.available %}Ajouter au panier{% else %}Épuisé{% endif %}</button>
+      </div>
+      <p class="form-error" id="formError" role="alert" hidden></p>
+    {%- endform -%}
+
+    <div class="product-desc">{{ product.description }}</div>
+    <ul class="perks">
+      <li>Livraison offerte dès {{ settings.free_shipping_threshold | default: 60 }} €</li>
+      <li>Retours gratuits 30 jours</li>
+      <li>Paiement 100 % sécurisé</li>
+    </ul>
+  </div>
+  <script type="application/json" id="product-json">{{ product.variants | json }}</script>
+</section>
+{% schema %}
+{ "name": "Page produit" }
+{% endschema %}
