@@ -60,17 +60,14 @@
                   {{ 'product-' | append: ph | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}
               </span>
-              <span>
-                <span class="marquee-item__title">{{ product.title | escape }}</span><br>
-                <span class="marquee-item__price">{% if product.price_varies %}{% assign price_money = product.price_min | money %}{{ 'products.from_price_html' | t: price: price_money }}{% else %}{{ product.price | money }}{% endif %}</span>
-              </span>
+              <span class="marquee-item__title">{{ product.title | escape }}</span>
             </a>
           {%- else -%}
             {%- for i in (1..8) -%}
               {%- assign ph = i | modulo: 6 | plus: 1 -%}
               <span class="marquee-item"{% if hidden %} aria-hidden="true"{% endif %}>
                 <span class="marquee-item__img">{{ 'product-' | append: ph | placeholder_svg_tag: 'placeholder-svg' }}</span>
-                <span><span class="marquee-item__title">{{ 'products.placeholder_title' | t }}</span><br><span class="marquee-item__price">{{ 2900 | money }}</span></span>
+                <span class="marquee-item__title">{{ 'products.placeholder_title' | t }}</span>
               </span>
             {%- endfor -%}
           {%- endfor -%}

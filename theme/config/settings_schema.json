@@ -1,59 +1,186 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Terre de Pilates",
+    "theme_name": "Pilates & Moi",
     "theme_version": "1.0.0",
-    "theme_author": "Terre de Pilates",
+    "theme_author": "Pilates & Moi",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://help.shopify.com"
   },
   {
+    "name": "Identité",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Nom de la boutique affiché",
+        "default": "Pilates & Moi",
+        "info": "Utilisé dans l'en-tête, le pied de page et les titres. Vide = nom de la boutique Shopify."
+      }
+    ]
+  },
+  {
     "name": "Couleurs",
     "settings": [
-      { "type": "color", "id": "color_background", "label": "Fond principal (crème)", "default": "#F7F1E9" },
-      { "type": "color", "id": "color_background_alt", "label": "Fond secondaire (lin)", "default": "#EFE5D8" },
-      { "type": "color", "id": "color_sand", "label": "Sable", "default": "#DCC9B2" },
-      { "type": "color", "id": "color_text", "label": "Texte", "default": "#3E2C22" },
-      { "type": "color", "id": "color_text_soft", "label": "Texte secondaire", "default": "#7A6354" },
-      { "type": "color", "id": "color_accent", "label": "Accent (caramel)", "default": "#A87A55" },
-      { "type": "color", "id": "color_accent_dark", "label": "Accent foncé", "default": "#855C3D" },
-      { "type": "color", "id": "color_dark", "label": "Fond sombre (expresso)", "default": "#4A3528" },
-      { "type": "color", "id": "color_on_dark", "label": "Texte sur fond sombre", "default": "#F7F1E9" }
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fond principal (crème)",
+        "default": "#F7F1E9"
+      },
+      {
+        "type": "color",
+        "id": "color_background_alt",
+        "label": "Fond secondaire (lin)",
+        "default": "#EFE5D8"
+      },
+      {
+        "type": "color",
+        "id": "color_sand",
+        "label": "Sable",
+        "default": "#DCC9B2"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texte",
+        "default": "#3E2C22"
+      },
+      {
+        "type": "color",
+        "id": "color_text_soft",
+        "label": "Texte secondaire",
+        "default": "#7A6354"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (caramel)",
+        "default": "#A87A55"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_dark",
+        "label": "Accent foncé",
+        "default": "#855C3D"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Fond sombre (expresso)",
+        "default": "#4A3528"
+      },
+      {
+        "type": "color",
+        "id": "color_on_dark",
+        "label": "Texte sur fond sombre",
+        "default": "#F7F1E9"
+      }
     ]
   },
   {
     "name": "Typographie",
     "settings": [
-      { "type": "font_picker", "id": "type_heading_font", "label": "Police des titres", "default": "cormorant_n5" },
-      { "type": "font_picker", "id": "type_body_font", "label": "Police du texte", "default": "jost_n4" }
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "label": "Police des titres",
+        "default": "cormorant_n5"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Police du texte",
+        "default": "jost_n4"
+      }
     ]
   },
   {
     "name": "Mise en page",
     "settings": [
-      { "type": "range", "id": "page_width", "label": "Largeur de page", "min": 1000, "max": 1600, "step": 20, "unit": "px", "default": 1280 },
-      { "type": "range", "id": "radius", "label": "Arrondi des angles", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 14 },
-      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Largeur de page",
+        "min": 1000,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "label": "Arrondi des angles",
+        "min": 0,
+        "max": 32,
+        "step": 2,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
     ]
   },
   {
     "name": "Cartes produit",
     "settings": [
-      { "type": "checkbox", "id": "card_show_secondary_image", "label": "Afficher la 2e image au survol", "default": true },
-      { "type": "checkbox", "id": "card_show_vendor", "label": "Afficher la marque", "default": false },
-      { "type": "select", "id": "card_image_ratio", "label": "Format des images", "default": "portrait", "options": [
-        { "value": "square", "label": "Carré" },
-        { "value": "portrait", "label": "Portrait" }
-      ] }
+      {
+        "type": "checkbox",
+        "id": "card_show_secondary_image",
+        "label": "Afficher la 2e image au survol",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Afficher la marque",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Format des images",
+        "default": "portrait",
+        "options": [
+          {
+            "value": "square",
+            "label": "Carré"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait"
+          }
+        ]
+      }
     ]
   },
   {
     "name": "Réseaux sociaux",
     "settings": [
-      { "type": "text", "id": "social_instagram", "label": "Instagram (URL)" },
-      { "type": "text", "id": "social_tiktok", "label": "TikTok (URL)" },
-      { "type": "text", "id": "social_pinterest", "label": "Pinterest (URL)" },
-      { "type": "text", "id": "social_youtube", "label": "YouTube (URL)" }
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram (URL)"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok (URL)"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest (URL)"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube (URL)"
+      }
     ]
   }
 ]

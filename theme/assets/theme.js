@@ -1,4 +1,4 @@
-/* Terre de Pilates — scripts du thème */
+/* Pilates & Moi — scripts du thème */
 (function () {
   'use strict';
 

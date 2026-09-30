@@ -2,7 +2,7 @@
   <div class="page-width">
     <div class="site-footer__grid">
       <div>
-        <div class="site-footer__brand">{{ shop.name }}</div>
+        <div class="site-footer__brand">{{ settings.brand_name | default: shop.name }}</div>
         {%- if section.settings.about != blank -%}
           <div class="site-footer__about">{{ section.settings.about }}</div>
         {%- endif -%}
@@ -27,7 +27,7 @@
     </div>
 
     <div class="site-footer__bottom">
-      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} · {{ powered_by_link }}</span>
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: shop.name }} · {{ powered_by_link }}</span>
       {%- if section.settings.show_payment_icons -%}
         <ul class="payment-icons" aria-label="{{ 'sections.footer.payment' | t }}">
           {%- for type in shop.enabled_payment_types -%}

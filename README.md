@@ -1,4 +1,4 @@
-# Terre de Pilates — boutique Shopify
+# Pilates & Moi — boutique Shopify
 
 Un thème Shopify sur mesure, chaleureux et sobre (crème, lin, sable, caramel, expresso), pour une boutique de Pilates.
 
@@ -7,7 +7,7 @@ Un thème Shopify sur mesure, chaleureux et sobre (crème, lin, sable, caramel, 
 | Dossier / fichier | Rôle |
 |---|---|
 | `theme/` | Le thème Shopify (Online Store 2.0, 100 % personnalisable dans l'éditeur) |
-| `terre-de-pilates-theme.zip` | Le même thème, prêt à importer dans Shopify |
+| `pilates-et-moi-theme.zip` | Le même thème, prêt à importer dans Shopify |
 | `catalogue/produits-pilates.csv` | 13 produits prêts à importer (accessoires, vêtements, programme) |
 | `programme/programme-pilates-maison.pdf` | Le guide PDF du programme « 4 semaines à la maison » (8 pages) |
 | `programme/programme-pilates-maison.html` | La source du PDF, à modifier si besoin |
@@ -35,7 +35,7 @@ Et aussi : pages collection avec filtres et tri, panier avec barre « livraison 
 
 ## Mise en ligne (15 minutes)
 
-1. **Importer le thème** : Shopify admin → *Boutique en ligne* → *Thèmes* → *Ajouter un thème* → *Importer un fichier .zip* → `terre-de-pilates-theme.zip`.
+1. **Importer le thème** : Shopify admin → *Boutique en ligne* → *Thèmes* → *Ajouter un thème* → *Importer un fichier .zip* → `pilates-et-moi-theme.zip`.
 2. **Importer les produits** : *Produits* → *Importer* → `catalogue/produits-pilates.csv`. Ils arrivent **en brouillon** : ajoutez vos photos, vérifiez prix et stocks, puis passez-les en « Actif ».
 3. **Créer les collections** (*Produits* → *Collections* → *Créer*), en collections automatiques « Le tag du produit est égal à » :
 

@@ -3,63 +3,61 @@
 -%}
 <header class="site-header">
   <div class="page-width site-header__inner">
-    <div class="site-header__left">
-      <details class="menu-drawer">
-        <summary class="icon-button" aria-label="{{ 'sections.header.menu' | t }}">
-          {% render 'icon', name: 'menu' %}
-        </summary>
-        <nav class="menu-drawer__panel" aria-label="{{ 'sections.header.menu' | t }}">
-          <ul>
-            {%- for link in menu.links -%}
-              <li>
-                <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-                {%- if link.links != blank -%}
-                  <ul>
-                    {%- for child in link.links -%}
-                      <li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>
-                    {%- endfor -%}
-                  </ul>
-                {%- endif -%}
-              </li>
-            {%- endfor -%}
-          </ul>
-        </nav>
-      </details>
-
-      <nav class="site-header__nav" aria-label="{{ 'sections.header.menu' | t }}">
+    <details class="menu-drawer">
+      <summary class="icon-button" aria-label="{{ 'sections.header.menu' | t }}">
+        {% render 'icon', name: 'menu' %}
+      </summary>
+      <nav class="menu-drawer__panel" aria-label="{{ 'sections.header.menu' | t }}">
         <ul>
           {%- for link in menu.links -%}
             <li>
-              <a href="{{ link.url }}"{% if link.current or link.child_active %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+              <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
               {%- if link.links != blank -%}
-                <div class="site-header__dropdown">
-                  <ul>
-                    {%- for child in link.links -%}
-                      <li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>
-                    {%- endfor -%}
-                  </ul>
-                </div>
+                <ul>
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
               {%- endif -%}
             </li>
           {%- endfor -%}
         </ul>
       </nav>
-    </div>
+    </details>
 
     <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- assign brand_name = settings.brand_name | default: shop.name -%}
       {%- if section.settings.logo != blank -%}
         {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round -%}
         {{ section.settings.logo | image_url: width: 400 | image_tag:
           width: section.settings.logo_width,
           height: logo_height,
-          alt: shop.name,
+          alt: brand_name,
           loading: 'eager'
         }}
       {%- else -%}
-        <span class="site-header__logo-text">{{ shop.name }}</span>
+        <span class="site-header__logo-text">{{ settings.brand_name | default: shop.name }}</span>
       {%- endif -%}
     </a>
 
+    <nav class="site-header__nav" aria-label="{{ 'sections.header.menu' | t }}">
+      <ul>
+        {%- for link in menu.links -%}
+          <li>
+            <a href="{{ link.url }}"{% if link.current or link.child_active %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+            {%- if link.links != blank -%}
+              <div class="site-header__dropdown">
+                <ul>
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
     <div class="site-header__icons">
       <a href="{{ routes.search_url }}" class="icon-button" aria-label="{{ 'general.search' | t }}">
         {% render 'icon', name: 'search' %}
