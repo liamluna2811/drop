@@ -271,3 +271,8 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:3px solid var(--lime);
 .logo{display:inline-flex;align-items:center;gap:.55rem}
 .logo-mark{height:42px;width:auto;display:block}
 @media (max-width:520px){.logo-mark{height:34px}.logo{font-size:1.05rem}}
+
+/* Produits recommandés */
+.reco{padding-top:0}
+.reco .section-head h2{font-size:clamp(1.5rem,3.5vw,2.2rem)}
+.reco-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
