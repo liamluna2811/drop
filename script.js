@@ -11,7 +11,13 @@ const PRODUCTS = [
     colors: [['Blanc', '#ffffff', '#1b2b4b'], ['Sable', '#efe3c8', '#1b2b4b'], ['Lime', '#d4ff3a', '#1b2b4b']], img: 'assets/cote-drive.webp' },
   { id: 4, name: 'Côté Revés', price: 39,
     desc: 'Je finis les points. Le t-shirt des joueurs de gauche.',
-    colors: [['Blanc', '#ffffff', '#1b2b4b'], ['Sable', '#efe3c8', '#1b2b4b'], ['Lime', '#d4ff3a', '#1b2b4b']], img: 'assets/cote-reves.webp' }
+    colors: [['Blanc', '#ffffff', '#1b2b4b'], ['Sable', '#efe3c8', '#1b2b4b'], ['Lime', '#d4ff3a', '#1b2b4b']], img: 'assets/cote-reves.webp' },
+  { id: 5, name: 'Lob. Vitre. Point.', price: 39, tag: 'Nouveau',
+    desc: 'La seule tactique qui compte. Impression grand format, encre haute densité.',
+    colors: [['Blanc', '#ffffff', '#1b2b4b'], ['Sable', '#efe3c8', '#1b2b4b'], ['Ciel', '#bfe0ff', '#1b2b4b']], img: 'assets/lob-vitre-point.webp' },
+  { id: 6, name: 'Padel Côte d\'Azur', price: 42, tag: 'Édition été',
+    desc: 'Soleil, vitres et bandejas. Le t-shirt des sessions au coucher du soleil.',
+    colors: [['Blanc', '#ffffff', '#1b2b4b'], ['Sable', '#efe3c8', '#1b2b4b'], ['Ciel', '#bfe0ff', '#1b2b4b']], img: 'assets/cote-azur.webp' }
 ];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
 const FREE_SHIPPING = 60;
