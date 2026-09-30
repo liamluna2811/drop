@@ -1,0 +1,91 @@
+<section class="section contact">
+  <div class="section-head">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1 class="h2">{{ section.settings.title }}</h1>
+    <p class="lead">{{ section.settings.intro }}</p>
+  </div>
+
+  <div class="contact-grid">
+    {%- form 'contact', id: 'contact-form', class: 'contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-ok" role="status">Merci, ton message est bien parti. Nous te répondons par email dès que possible.</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div class="form-error" role="alert">
+          <strong>Le message n'a pas pu être envoyé :</strong>
+          <ul>{%- for field in form.errors -%}<li>{%- if field == 'form' -%}{{ form.errors.messages[field] }}{%- else -%}{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}{%- endif -%}</li>{%- endfor -%}</ul>
+        </div>
+      {%- endif -%}
+
+      <div class="field-row">
+        <div class="field">
+          <label for="contact-name">Nom</label>
+          <input id="contact-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name }}" required>
+        </div>
+        <div class="field">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email }}" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="contact-subject">Sujet</label>
+          <select id="contact-subject" name="contact[Sujet]">
+            <option>Une question sur une commande</option>
+            <option>Livraison</option>
+            <option>Retour ou échange</option>
+            <option>Une question sur un produit</option>
+            <option>Autre demande</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contact-order">Numéro de commande <span class="opt">(facultatif)</span></label>
+          <input id="contact-order" name="contact[Numéro de commande]" type="text" placeholder="#1001">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="contact-body">Message</label>
+        <textarea id="contact-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+      </div>
+
+      <p class="fine">En envoyant ce formulaire, tu acceptes que ces informations soient utilisées pour répondre à ta demande. Plus de détails dans notre <a href="/pages/politique-de-confidentialite">politique de confidentialité</a>.</p>
+      <button class="btn" type="submit">Envoyer le message</button>
+    {%- endform -%}
+
+    <aside class="contact-side" aria-label="Informations utiles">
+      <div class="info-card">
+        <h2>{{ section.settings.side_title }}</h2>
+        <p>{{ section.settings.side_text }}</p>
+      </div>
+      <div class="info-card">
+        <h2>Avant de nous écrire</h2>
+        <ul>
+          <li><a href="/pages/retractation-et-retours">Retours et rétractation</a></li>
+          <li><a href="/pages/conditions-generales-de-vente">Conditions générales de vente</a></li>
+          <li><a href="/pages/politique-de-confidentialite">Confidentialité et données</a></li>
+        </ul>
+      </div>
+      {%- if section.settings.show_shipping -%}
+      <div class="info-card">
+        <h2>Livraison</h2>
+        <p>Livraison offerte dès {{ settings.free_shipping_threshold | default: 60 }} € en France et en Europe.</p>
+      </div>
+      {%- endif -%}
+    </aside>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Contact" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Une question ? Écris-nous." },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Commande, livraison, taille ou produit personnalisé : envoie-nous ton message, nous te répondons par email." },
+    { "type": "text", "id": "side_title", "label": "Encart, titre", "default": "Nous répondre" },
+    { "type": "textarea", "id": "side_text", "label": "Encart, texte", "default": "Nous te répondons par email dès que possible. Indique ton numéro de commande pour aller plus vite." },
+    { "type": "checkbox", "id": "show_shipping", "label": "Afficher l'encart livraison", "default": true }
+  ]
+}
+{% endschema %}

@@ -240,3 +240,29 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:3px solid var(--lime);
 .sub a:hover{background:var(--paper)}
 @media (max-width:860px){.sub{position:static;display:flex;flex-direction:row;box-shadow:none;border:0;padding:0;background:none;min-width:0;gap:.8rem;margin-left:.6rem}.has-sub{display:flex;flex-wrap:wrap;align-items:center}.sub a{padding:0;font-weight:500}}
 @media (min-width:861px){.nav nav{order:0;width:auto}}
+
+/* Contact */
+.contact .lead{margin:1rem 0 0;max-width:52ch}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.contact-form{background:var(--white);border-radius:var(--radius);padding:clamp(1.2rem,3vw,2rem);display:grid;gap:1.1rem;min-width:0}
+.field-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.field{display:grid;gap:.4rem;min-width:0}
+.field label{font-weight:700;font-size:.85rem}
+.field .opt{font-weight:400;color:var(--muted)}
+.field input,.field select,.field textarea{width:100%;padding:.85rem 1rem;border:2px solid rgba(11,27,43,.18);border-radius:12px;font:inherit;background:var(--paper);color:var(--ink);transition:border-color .2s}
+.field textarea{resize:vertical;min-height:140px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ink);background:var(--white)}
+.fine{font-size:.8rem;color:var(--muted)}
+.fine a{text-decoration:underline}
+.contact-form .btn{justify-self:start;border:0;cursor:pointer;font:inherit;font-weight:700}
+.form-ok{background:var(--lime);color:var(--ink);padding:1rem 1.2rem;border-radius:12px;font-weight:600}
+.contact-form .form-error{background:#fdecea;color:#8a1c14;padding:1rem 1.2rem;border-radius:12px;margin:0}
+.contact-form .form-error ul{padding-left:1.2rem;margin-top:.4rem}
+.contact-side{display:grid;gap:1rem;min-width:0}
+.info-card{background:var(--ink);color:var(--white);border-radius:var(--radius);padding:1.4rem}
+.info-card h2{font-family:var(--display);font-weight:400;font-size:1.05rem;text-transform:uppercase;margin-bottom:.6rem}
+.info-card p{color:#b5c2cf;font-size:.92rem}
+.info-card ul{list-style:none;display:grid;gap:.5rem;font-size:.92rem}
+.info-card a{color:var(--lime);text-decoration:underline}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.field-row{grid-template-columns:1fr}}
