@@ -1,0 +1,53 @@
+<section class="hero" style="background: var(--color-{{ section.settings.color_scheme }});">
+  <div class="page-width hero__grid">
+    <div class="hero__content reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h1>{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 | default: routes.all_products_collection_url }}" class="button button--secondary">{{ section.settings.button_label_2 | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="hero__media reveal">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '(min-width: 900px) 50vw, 100vw',
+          widths: '600, 900, 1200, 1400'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      {%- if section.settings.badge != blank -%}
+        <div class="hero__badge"><span></span>{{ section.settings.badge | escape }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bannière d'accueil",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Pilates · Maison & studio" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Bouger en douceur, se sentir chez soi" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Tapis, bandes élastiques, leggings et chaussettes antidérapantes : tout ce qu'il faut pour pratiquer le Pilates avec confort, dans des tons chauds et naturels.</p>" },
+    { "type": "text", "id": "button_label", "label": "Bouton 1", "default": "Découvrir la boutique" },
+    { "type": "url", "id": "button_link", "label": "Lien bouton 1" },
+    { "type": "text", "id": "button_label_2", "label": "Bouton 2", "default": "Le programme maison" },
+    { "type": "url", "id": "button_link_2", "label": "Lien bouton 2" },
+    { "type": "text", "id": "badge", "label": "Pastille sur l'image", "default": "Nouvelle collection Terre" },
+    { "type": "select", "id": "color_scheme", "label": "Fond", "default": "bg", "options": [
+      { "value": "bg", "label": "Crème" }, { "value": "bg-alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+    ] }
+  ],
+  "presets": [{ "name": "Bannière d'accueil" }]
+}
+{% endschema %}

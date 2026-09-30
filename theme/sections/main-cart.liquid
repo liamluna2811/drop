@@ -1,0 +1,90 @@
+{%- liquid
+  assign threshold = section.settings.free_shipping_threshold | times: 100
+  assign remaining = threshold | minus: cart.total_price
+  assign progress = 100
+  if threshold > 0
+    assign progress = cart.total_price | times: 100 | divided_by: threshold | at_most: 100
+  endif
+-%}
+<div class="page-width cart">
+  <h1 style="text-align:center">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" data-cart-form novalidate>
+      <div class="cart__grid">
+        <div>
+          {%- for item in cart.items -%}
+            <div class="cart-item">
+              <a href="{{ item.url }}" class="cart-item__media">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: item.title }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
+              <div>
+                <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+                <div class="cart-item__meta">
+                  {%- unless item.product.has_only_default_variant -%}{{ item.variant.title | escape }}<br>{%- endunless -%}
+                  {%- for property in item.properties -%}
+                    {%- unless property.last == blank or property.first contains '_' -%}{{ property.first }} : {{ property.last }}<br>{%- endunless -%}
+                  {%- endfor -%}
+                  {{ item.final_price | money }}
+                </div>
+                <div style="display:flex; align-items:center; flex-wrap: wrap;">
+                  <div class="quantity">
+                    <button type="button" data-step="-1" aria-label="{{ 'products.decrease' | t }}">−</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="{{ 'products.quantity' | t }}">
+                    <button type="button" data-step="1" aria-label="{{ 'products.increase' | t }}">+</button>
+                  </div>
+                  <a href="{{ item.url_to_remove }}" class="cart-item__remove">{{ 'cart.remove' | t }}</a>
+                </div>
+              </div>
+              <div>{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <aside class="cart-summary">
+          {%- if section.settings.free_shipping_threshold > 0 -%}
+            <div class="free-shipping">
+              {%- if remaining > 0 -%}
+                {%- assign remaining_money = remaining | money -%}
+                {{ 'cart.free_shipping_remaining_html' | t: amount: remaining_money }}
+              {%- else -%}
+                {{ 'cart.free_shipping_reached' | t }}
+              {%- endif -%}
+              <div class="free-shipping__bar"><span style="width: {{ progress }}%"></span></div>
+            </div>
+          {%- endif -%}
+          <div class="cart-summary__row">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <span class="cart-summary__total">{{ cart.total_price | money }}</span>
+          </div>
+          <p style="font-size:.88rem; color: var(--color-text-soft)">{{ 'cart.taxes_shipping' | t }}</p>
+          {%- if section.settings.show_note -%}
+            <label for="CartNote" style="font-size:.9rem">{{ 'cart.note' | t }}</label>
+            <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+          {%- endif -%}
+          <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+          <p style="text-align:center; margin: 1rem 0 0;"><a href="{{ routes.all_products_collection_url }}" class="link-arrow">{{ 'general.continue_shopping' | t }}</a></p>
+        </aside>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="empty-state">
+      <p>{{ 'cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.continue_shopping' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Panier",
+  "settings": [
+    { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (€)", "default": 60, "info": "0 pour masquer la barre" },
+    { "type": "checkbox", "id": "show_note", "label": "Note de commande", "default": true }
+  ]
+}
+{% endschema %}

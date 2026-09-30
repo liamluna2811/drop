@@ -1,0 +1,73 @@
+{
+  "accessibility": { "skip_to_content": "Aller au contenu" },
+  "general": {
+    "home": "Accueil",
+    "search": "Rechercher",
+    "account": "Mon compte",
+    "cart": "Panier",
+    "breadcrumbs": "Fil d'Ariane",
+    "pagination": "Pagination",
+    "previous": "Page précédente",
+    "next": "Page suivante",
+    "continue_shopping": "Continuer mes achats",
+    "404_title": "Cette page s'est étirée un peu trop loin…",
+    "404_text": "La page que vous cherchez n'existe pas ou a été déplacée."
+  },
+  "sections": {
+    "announcement": "Annonce",
+    "header": { "menu": "Menu" },
+    "footer": { "payment": "Moyens de paiement acceptés" },
+    "featured_collection": { "view_all": "Tout voir" },
+    "program": { "details": "Voir le détail du programme" }
+  },
+  "products": {
+    "add_to_cart": "Ajouter au panier",
+    "sold_out": "Épuisé",
+    "unavailable": "Indisponible",
+    "on_sale": "Promo",
+    "from_price_html": "Dès {{ price }}",
+    "placeholder_title": "Votre produit",
+    "quantity": "Quantité",
+    "increase": "Augmenter la quantité",
+    "decrease": "Diminuer la quantité",
+    "taxes_included": "TVA incluse"
+  },
+  "collections": {
+    "eyebrow": "Collection",
+    "count": { "one": "{{ count }} produit", "other": "{{ count }} produits" },
+    "sort": "Trier par",
+    "apply": "Appliquer",
+    "clear": "Effacer les filtres",
+    "empty": "Aucun produit ne correspond pour le moment."
+  },
+  "cart": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide… pour l'instant !",
+    "remove": "Retirer",
+    "subtotal": "Sous-total",
+    "taxes_shipping": "Taxes incluses. Frais de livraison calculés à l'étape suivante.",
+    "note": "Un mot pour nous ?",
+    "checkout": "Passer commande",
+    "free_shipping_remaining_html": "Plus que <strong>{{ amount }}</strong> pour la livraison offerte",
+    "free_shipping_reached": "Bonne nouvelle : la livraison vous est offerte !"
+  },
+  "search": {
+    "title": "Rechercher",
+    "placeholder": "Tapis, legging, programme…",
+    "results_count": { "one": "{{ count }} résultat pour « {{ terms }} »", "other": "{{ count }} résultats pour « {{ terms }} »" }
+  },
+  "blog": { "eyebrow": "Le journal", "back": "Retour au journal" },
+  "newsletter": {
+    "label": "Votre adresse e-mail",
+    "button": "Je m'inscris",
+    "success": "Merci ! Vous êtes bien inscrit(e)."
+  },
+  "password": {
+    "eyebrow": "Bientôt",
+    "notify": "Me prévenir",
+    "owner": "Vous êtes le propriétaire de la boutique ?",
+    "password": "Mot de passe",
+    "enter": "Entrer"
+  },
+  "gift_card": { "title": "Votre carte cadeau", "expired": "Cette carte cadeau n'est plus valide." }
+}

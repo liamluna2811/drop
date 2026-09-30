@@ -1,0 +1,52 @@
+<section class="section section--{{ section.settings.background }}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="testimonials">
+      {%- for block in section.blocks -%}
+        <figure class="testimonial reveal" {{ block.shopify_attributes }}>
+          <div class="testimonial__stars" aria-label="{{ block.settings.rating }}/5">{% for i in (1..block.settings.rating) %}★{% endfor %}</div>
+          <blockquote>{{ block.settings.quote | escape }}</blockquote>
+          <figcaption>{{ block.settings.author | escape }}</figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Ils en parlent" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Vos avis" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "alt", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Avis",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Note", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Avis", "default": "Remplacez ce texte par un véritable avis client." },
+        { "type": "text", "id": "author", "label": "Auteur", "default": "Prénom, ville" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Avis clients",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}

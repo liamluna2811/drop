@@ -1,0 +1,55 @@
+<section class="section section--{{ section.settings.background }}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- endif -%}
+    </div>
+    <div class="principles">
+      {%- for block in section.blocks -%}
+        <div class="principle reveal" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Principes du Pilates",
+  "max_blocks": 9,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "La pratique" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Les 6 principes fondamentaux" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Chaque exercice repose sur ces six piliers. Les garder en tête, c'est transformer un simple mouvement en vrai travail du corps.</p>" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principe",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Principe" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Principes du Pilates",
+      "blocks": [
+        { "type": "principle", "settings": { "title": "Respiration", "text": "Inspirer par le nez, expirer par la bouche en engageant le centre : le souffle rythme et soutient l'effort." } },
+        { "type": "principle", "settings": { "title": "Centrage", "text": "Tout part du « powerhouse », la ceinture abdominale et pelvienne, véritable moteur du mouvement." } },
+        { "type": "principle", "settings": { "title": "Concentration", "text": "L'attention portée à chaque geste relie le corps et l'esprit et rend l'exercice plus efficace." } },
+        { "type": "principle", "settings": { "title": "Contrôle", "text": "Aucun mouvement n'est laissé au hasard : on privilégie la maîtrise à la vitesse ou au nombre de répétitions." } },
+        { "type": "principle", "settings": { "title": "Précision", "text": "Mieux vaut cinq répétitions parfaites que vingt approximatives. L'alignement fait toute la différence." } },
+        { "type": "principle", "settings": { "title": "Fluidité", "text": "Les mouvements s'enchaînent avec grâce, sans à-coups, comme une chorégraphie lente et continue." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,9 @@
+{
+  "type": "header",
+  "name": "Groupe en-tête",
+  "sections": {
+    "announcement": { "type": "announcement-bar", "settings": { "text": "Livraison offerte dès 60 € · Retours gratuits sous 30 jours" } },
+    "header": { "type": "header", "settings": { "menu": "main-menu", "logo_width": 140 } }
+  },
+  "order": ["announcement", "header"]
+}

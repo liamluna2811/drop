@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "eyebrow": { "type": "eyebrow", "settings": { "text": "Programme numérique · Accès immédiat" } },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "buy": { "type": "buy_buttons", "settings": { "show_quantity": false, "show_dynamic_checkout": true } },
+        "description": { "type": "description", "settings": {} },
+        "contents": { "type": "collapsible", "settings": { "heading": "Ce que contient le programme", "open": true, "content": "<ul><li>12 séances de 20 à 30 minutes (3 par semaine pendant 4 semaines)</li><li>Un guide PDF illustré avec chaque exercice expliqué pas à pas</li><li>Un calendrier de suivi à imprimer</li><li>Des variantes débutant et avancé</li></ul>" } },
+        "material": { "type": "collapsible", "settings": { "heading": "Matériel nécessaire", "content": "<p>Un tapis de Pilates (idéalement 6 à 10 mm). En option : une bande élastique et des chaussettes antidérapantes pour les semaines 3 et 4.</p>" } },
+        "delivery": { "type": "collapsible", "settings": { "heading": "Comment le recevoir ?", "content": "<p>Produit 100 % numérique : vous recevez le lien de téléchargement par e-mail juste après votre commande. Aucune livraison physique.</p>" } },
+        "health": { "type": "collapsible", "settings": { "heading": "Précautions", "content": "<p>Ce programme ne remplace pas un avis médical. En cas de grossesse, de douleurs ou de pathologie, demandez l'avis de votre médecin avant de commencer.</p>" } }
+      },
+      "block_order": ["eyebrow", "title", "price", "buy", "description", "contents", "material", "delivery", "health"]
+    },
+    "weeks": {
+      "type": "principles",
+      "blocks": {
+        "w1": { "type": "principle", "settings": { "title": "Semaine 1 · Les fondations", "text": "Respiration latérale, bassin neutre, imprint, activation du centre et premiers enroulés." } },
+        "w2": { "type": "principle", "settings": { "title": "Semaine 2 · Force & stabilité", "text": "Hundred, planches, ponts fessiers, série des jambes latérales et Swimming." } },
+        "w3": { "type": "principle", "settings": { "title": "Semaine 3 · Mobilité", "text": "Roll up, Spine stretch, Saw, torsions et ouverture des épaules à la bande élastique." } },
+        "w4": { "type": "principle", "settings": { "title": "Semaine 4 · Le flow complet", "text": "Des enchaînements fluides de 30 minutes qui combinent tout ce que vous avez appris." } }
+      },
+      "block_order": ["w1", "w2", "w3", "w4"],
+      "settings": { "eyebrow": "Le déroulé", "heading": "4 semaines, étape par étape", "text": "<p>3 séances par semaine, à caler quand vous voulez. Chaque semaine s'appuie sur la précédente.</p>", "background": "alt" }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Je n'ai jamais fait de Pilates, est-ce pour moi ?", "answer": "<p>Oui, le programme est conçu pour les débutants. Chaque exercice a une version simplifiée.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Combien de temps faut-il par séance ?", "answer": "<p>Entre 20 et 30 minutes, échauffement et retour au calme compris.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Est-ce que j'y ai accès à vie ?", "answer": "<p>Oui, une fois téléchargé, le programme est à vous. Refaites-le autant de fois que vous le souhaitez.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "heading": "Questions sur le programme" }
+    },
+    "related": { "type": "featured-collection", "settings": { "eyebrow": "Pour bien démarrer", "heading": "Le matériel conseillé", "collection": "accessoires", "products_to_show": 4 } }
+  },
+  "order": ["main", "weeks", "faq", "related"]
+}

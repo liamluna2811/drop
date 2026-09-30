@@ -1,0 +1,111 @@
+{%- comment -%}
+  Banderole défilante : fait défiler en continu les produits d'une (ou plusieurs) collection(s),
+  ou des mots-clés, pour donner un aperçu global de la boutique.
+  Le contenu est rendu deux fois pour obtenir une boucle infinie sans à-coup.
+{%- endcomment -%}
+{%- liquid
+  assign source = section.settings.collection.products
+  if section.settings.collection == blank
+    assign source = collections.all.products
+  endif
+  assign limit = section.settings.products_to_show
+  assign speed = section.settings.speed
+
+  # Répète le contenu quand il y a peu d'éléments pour remplir toute la largeur
+  if section.settings.mode == 'words'
+    assign item_count = section.blocks.size
+    if item_count == 0
+      assign item_count = 6
+    endif
+  else
+    assign item_count = source.size | at_most: limit
+    if item_count == 0
+      assign item_count = 8
+    endif
+  endif
+  assign repeat = 10 | divided_by: item_count | plus: 1
+-%}
+<section class="marquee marquee--{{ section.settings.style }}{% if section.settings.reverse %} marquee--reverse{% endif %}" style="--marquee-duration: {{ speed }}s;" aria-label="{{ section.settings.title | default: 'Aperçu de la boutique' | escape }}">
+  {%- if section.settings.title != blank -%}
+    <p class="marquee__title">{{ section.settings.title | escape }}</p>
+  {%- endif -%}
+  <div class="marquee__viewport">
+    <div class="marquee__track">
+      {%- for pass in (1..2) -%}
+        {%- for r in (1..repeat) -%}
+        {%- liquid
+          assign hidden = false
+          if pass == 2 or r > 1
+            assign hidden = true
+          endif
+        -%}
+        {%- if section.settings.mode == 'words' -%}
+          {%- for block in section.blocks -%}
+            <span class="marquee-word"{% if hidden %} aria-hidden="true"{% endif %} {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+          {%- endfor -%}
+          {%- if section.blocks.size == 0 -%}
+            {%- assign words = 'Tapis de sol,Bandes élastiques,Leggings,Brassières,Chaussettes antidérapantes,Programme maison' | split: ',' -%}
+            {%- for word in words -%}
+              <span class="marquee-word"{% if hidden %} aria-hidden="true"{% endif %}>{{ word }}</span>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- else -%}
+          {%- for product in source limit: limit -%}
+            <a class="marquee-item" href="{{ product.url }}"{% if hidden %} aria-hidden="true" tabindex="-1"{% endif %}>
+              <span class="marquee-item__img">
+                {%- if product.featured_media -%}
+                  {{ product.featured_media | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: '' }}
+                {%- else -%}
+                  {%- assign ph = forloop.index | modulo: 6 | plus: 1 -%}
+                  {{ 'product-' | append: ph | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </span>
+              <span>
+                <span class="marquee-item__title">{{ product.title | escape }}</span><br>
+                <span class="marquee-item__price">{% if product.price_varies %}{% assign price_money = product.price_min | money %}{{ 'products.from_price_html' | t: price: price_money }}{% else %}{{ product.price | money }}{% endif %}</span>
+              </span>
+            </a>
+          {%- else -%}
+            {%- for i in (1..8) -%}
+              {%- assign ph = i | modulo: 6 | plus: 1 -%}
+              <span class="marquee-item"{% if hidden %} aria-hidden="true"{% endif %}>
+                <span class="marquee-item__img">{{ 'product-' | append: ph | placeholder_svg_tag: 'placeholder-svg' }}</span>
+                <span><span class="marquee-item__title">{{ 'products.placeholder_title' | t }}</span><br><span class="marquee-item__price">{{ 2900 | money }}</span></span>
+              </span>
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banderole défilante",
+  "settings": [
+    { "type": "select", "id": "mode", "label": "Contenu", "default": "products", "options": [
+      { "value": "products", "label": "Produits" },
+      { "value": "words", "label": "Mots-clés" }
+    ] },
+    { "type": "text", "id": "title", "label": "Titre (petit)", "default": "Un aperçu de la boutique" },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Laisser vide pour afficher tous les produits" },
+    { "type": "range", "id": "products_to_show", "label": "Nombre de produits", "min": 4, "max": 24, "step": 1, "default": 12 },
+    { "type": "range", "id": "speed", "label": "Durée d'un tour (plus grand = plus lent)", "min": 15, "max": 120, "step": 5, "unit": "s", "default": 45 },
+    { "type": "checkbox", "id": "reverse", "label": "Défiler vers la droite", "default": false },
+    { "type": "select", "id": "style", "label": "Style", "default": "sand", "options": [
+      { "value": "light", "label": "Clair" },
+      { "value": "sand", "label": "Lin" },
+      { "value": "dark", "label": "Expresso" }
+    ] }
+  ],
+  "blocks": [
+    { "type": "word", "name": "Mot-clé", "settings": [ { "type": "text", "id": "text", "label": "Texte", "default": "Pilates" } ] }
+  ],
+  "presets": [
+    { "name": "Banderole produits" },
+    { "name": "Banderole mots-clés", "settings": { "mode": "words", "title": "", "style": "dark" } }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-cart", "settings": { "free_shipping_threshold": 60, "show_note": true } },
+    "suggestions": { "type": "featured-collection", "settings": { "eyebrow": "Petit plus", "heading": "Pour compléter votre pratique", "collection": "accessoires", "products_to_show": 4, "background": "alt" } }
+  },
+  "order": ["main", "suggestions"]
+}

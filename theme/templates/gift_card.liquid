@@ -1,0 +1,27 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ 'gift_card.title' | t }} · {{ shop.name }}</title>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root { --color-bg: {{ settings.color_background }}; --color-bg-alt: {{ settings.color_background_alt }}; --color-text: {{ settings.color_text }}; --color-text-soft: {{ settings.color_text_soft }}; --color-dark: {{ settings.color_dark }}; --color-on-dark: {{ settings.color_on_dark }}; --color-accent: {{ settings.color_accent }}; --color-accent-dark: {{ settings.color_accent_dark }}; --radius: {{ settings.radius }}px; --font-heading: Georgia, serif; --font-body: system-ui, sans-serif; }
+    </style>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="password">
+      <div class="password__inner">
+        <span class="eyebrow">{{ shop.name }}</span>
+        <h1>{{ 'gift_card.title' | t }}</h1>
+        <p style="font-size: 2.5rem; font-family: var(--font-heading);">{{ gift_card.balance | money }}</p>
+        {%- if gift_card.enabled == false or gift_card.expired -%}<p>{{ 'gift_card.expired' | t }}</p>{%- endif -%}
+        <p style="font-size: 1.4rem; letter-spacing: .15em;">{{ gift_card.code | format_code }}</p>
+        {%- if gift_card.pass_url -%}<p><a href="{{ gift_card.pass_url }}">Apple Wallet</a></p>{%- endif -%}
+        <p><a href="{{ shop.url }}" class="button">{{ 'general.continue_shopping' | t }}</a></p>
+      </div>
+    </main>
+  </body>
+</html>

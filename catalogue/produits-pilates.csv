@@ -1,0 +1,46 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Variant SKU,Variant Grams,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Status
+tapis-pilates-terre-8mm,Tapis de Pilates Terre 8 mm,"<p>Un tapis épais et dense qui protège la colonne pendant les enroulés. Surface antidérapante, toucher doux, sangle de transport incluse.</p><ul><li>183 × 61 cm, 8 mm</li><li>Mousse TPE sans PVC</li></ul>",Terre de Pilates,Tapis de sol,"accessoires, tapis-de-sol",TRUE,Couleur,Sable,,,TAPIS-PILATES-TERR-SABLE,1200,deny,manual,59.00,,TRUE,TRUE,draft
+tapis-pilates-terre-8mm,,,,,,,,Caramel,,,TAPIS-PILATES-TERR-CARAMEL,1200,deny,manual,59.00,,TRUE,TRUE,
+tapis-pilates-terre-8mm,,,,,,,,Expresso,,,TAPIS-PILATES-TERR-EXPRESSO,1200,deny,manual,59.00,,TRUE,TRUE,
+tapis-liege-naturel,Tapis en liège naturel 6 mm,"<p>Le liège offre une adhérence qui augmente avec la transpiration. Naturel, antibactérien et doux pour la peau.</p>",Terre de Pilates,Tapis de sol,"accessoires, tapis-de-sol",TRUE,Taille,Standard,,,TAPIS-LIEGE-NATURE-STANDARD,1800,deny,manual,79.00,,TRUE,TRUE,draft
+bandes-elastiques-tissu-lot-3,Bandes élastiques en tissu – lot de 3,"<p>Trois résistances (légère, moyenne, forte) pour les fessiers, les jambes et le travail latéral. Tissu doux qui ne roule pas.</p>",Terre de Pilates,Bandes élastiques,"accessoires, bandes-elastiques",TRUE,Title,Default Title,,,BANDES-ELASTIQUES--DEFAULTTITLE,250,deny,manual,24.90,,TRUE,TRUE,draft
+bande-elastique-longue,Bande élastique longue 2 m,"<p>La bande idéale pour les étirements des ischios, l'ouverture des épaules et les exercices du programme maison.</p>",Terre de Pilates,Bandes élastiques,"accessoires, bandes-elastiques",TRUE,Résistance,Légère,,,BANDE-ELASTIQUE-LO-LÉGÈRE,150,deny,manual,14.90,,TRUE,TRUE,draft
+bande-elastique-longue,,,,,,,,Moyenne,,,BANDE-ELASTIQUE-LO-MOYENNE,150,deny,manual,14.90,,TRUE,TRUE,
+bande-elastique-longue,,,,,,,,Forte,,,BANDE-ELASTIQUE-LO-FORTE,150,deny,manual,14.90,,TRUE,TRUE,
+ballon-pilates-25cm,Petit ballon de Pilates 25 cm,"<p>Un ballon souple pour soutenir le dos, travailler les adducteurs ou intensifier le gainage.</p>",Terre de Pilates,Petits accessoires,"accessoires, petits-accessoires",TRUE,Couleur,Sable,,,BALLON-PILATES-25C-SABLE,200,deny,manual,12.90,,TRUE,TRUE,draft
+ballon-pilates-25cm,,,,,,,,Terracotta,,,BALLON-PILATES-25C-TERRACOTTA,200,deny,manual,12.90,,TRUE,TRUE,
+brique-liege,Brique en liège,"<p>Stable et légère, elle aide à adapter les postures et à trouver le bon alignement.</p>",Terre de Pilates,Petits accessoires,"accessoires, petits-accessoires",TRUE,Title,Default Title,,,BRIQUE-LIEGE-DEFAULTTITLE,400,deny,manual,19.90,,TRUE,TRUE,draft
+legging-taille-haute-sable,Legging taille haute Sable,"<p>Taille haute gainante, tissu seconde peau opaque et respirant. Coutures plates pour rouler sur le tapis sans gêne.</p>",Terre de Pilates,Leggings,"vetements, leggings",TRUE,Taille,XS,Couleur,Sable,LEGGING-TAILLE-HAU-XS-SABLE,250,deny,manual,54.00,,TRUE,TRUE,draft
+legging-taille-haute-sable,,,,,,,,XS,,Expresso,LEGGING-TAILLE-HAU-XS-EXPRESSO,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,S,,Sable,LEGGING-TAILLE-HAU-S-SABLE,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,S,,Expresso,LEGGING-TAILLE-HAU-S-EXPRESSO,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,M,,Sable,LEGGING-TAILLE-HAU-M-SABLE,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,M,,Expresso,LEGGING-TAILLE-HAU-M-EXPRESSO,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,L,,Sable,LEGGING-TAILLE-HAU-L-SABLE,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,L,,Expresso,LEGGING-TAILLE-HAU-L-EXPRESSO,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,XL,,Sable,LEGGING-TAILLE-HAU-XL-SABLE,250,deny,manual,54.00,,TRUE,TRUE,
+legging-taille-haute-sable,,,,,,,,XL,,Expresso,LEGGING-TAILLE-HAU-XL-EXPRESSO,250,deny,manual,54.00,,TRUE,TRUE,
+legging-7-8-cotele,Legging 7/8 côtelé,"<p>Une maille côtelée douce, longueur 7/8 qui dégage la cheville pour vérifier l'alignement.</p>",Terre de Pilates,Leggings,"vetements, leggings",TRUE,Taille,XS,,,LEGGING-7-8-COTELE-XS,230,deny,manual,49.00,,TRUE,TRUE,draft
+legging-7-8-cotele,,,,,,,,S,,,LEGGING-7-8-COTELE-S,230,deny,manual,49.00,,TRUE,TRUE,
+legging-7-8-cotele,,,,,,,,M,,,LEGGING-7-8-COTELE-M,230,deny,manual,49.00,,TRUE,TRUE,
+legging-7-8-cotele,,,,,,,,L,,,LEGGING-7-8-COTELE-L,230,deny,manual,49.00,,TRUE,TRUE,
+legging-7-8-cotele,,,,,,,,XL,,,LEGGING-7-8-COTELE-XL,230,deny,manual,49.00,,TRUE,TRUE,
+brassiere-croisee-caramel,Brassière croisée Caramel,"<p>Maintien léger à moyen, dos croisé, coussinets amovibles. Parfaite pour le Pilates et le yoga.</p>",Terre de Pilates,Brassières,"vetements, brassieres",TRUE,Taille,XS,,,BRASSIERE-CROISEE--XS,120,deny,manual,39.00,,TRUE,TRUE,draft
+brassiere-croisee-caramel,,,,,,,,S,,,BRASSIERE-CROISEE--S,120,deny,manual,39.00,,TRUE,TRUE,
+brassiere-croisee-caramel,,,,,,,,M,,,BRASSIERE-CROISEE--M,120,deny,manual,39.00,,TRUE,TRUE,
+brassiere-croisee-caramel,,,,,,,,L,,,BRASSIERE-CROISEE--L,120,deny,manual,39.00,,TRUE,TRUE,
+brassiere-croisee-caramel,,,,,,,,XL,,,BRASSIERE-CROISEE--XL,120,deny,manual,39.00,,TRUE,TRUE,
+brassiere-col-rond,Brassière col rond Lin,"<p>Une coupe épurée et couvrante, dans une matière douce qui accompagne chaque mouvement.</p>",Terre de Pilates,Brassières,"vetements, brassieres",TRUE,Taille,XS,,,BRASSIERE-COL-ROND-XS,120,deny,manual,36.00,,TRUE,TRUE,draft
+brassiere-col-rond,,,,,,,,S,,,BRASSIERE-COL-ROND-S,120,deny,manual,36.00,,TRUE,TRUE,
+brassiere-col-rond,,,,,,,,M,,,BRASSIERE-COL-ROND-M,120,deny,manual,36.00,,TRUE,TRUE,
+brassiere-col-rond,,,,,,,,L,,,BRASSIERE-COL-ROND-L,120,deny,manual,36.00,,TRUE,TRUE,
+brassiere-col-rond,,,,,,,,XL,,,BRASSIERE-COL-ROND-XL,120,deny,manual,36.00,,TRUE,TRUE,
+chaussettes-antiderapantes-cocoon,Chaussettes antidérapantes Cocoon,<p>Picots en silicone sous la plante pour une adhérence parfaite sur le tapis ou le Reformer. Coton doux et respirant.</p>,Terre de Pilates,Chaussettes antidérapantes,"vetements, chaussettes-antiderapantes",TRUE,Taille,35-38,Couleur,Crème,CHAUSSETTES-ANTIDE-35-38-CRÈME,60,deny,manual,14.90,,TRUE,TRUE,draft
+chaussettes-antiderapantes-cocoon,,,,,,,,35-38,,Taupe,CHAUSSETTES-ANTIDE-35-38-TAUPE,60,deny,manual,14.90,,TRUE,TRUE,
+chaussettes-antiderapantes-cocoon,,,,,,,,35-38,,Expresso,CHAUSSETTES-ANTIDE-35-38-EXPRESSO,60,deny,manual,14.90,,TRUE,TRUE,
+chaussettes-antiderapantes-cocoon,,,,,,,,39-42,,Crème,CHAUSSETTES-ANTIDE-39-42-CRÈME,60,deny,manual,14.90,,TRUE,TRUE,
+chaussettes-antiderapantes-cocoon,,,,,,,,39-42,,Taupe,CHAUSSETTES-ANTIDE-39-42-TAUPE,60,deny,manual,14.90,,TRUE,TRUE,
+chaussettes-antiderapantes-cocoon,,,,,,,,39-42,,Expresso,CHAUSSETTES-ANTIDE-39-42-EXPRESSO,60,deny,manual,14.90,,TRUE,TRUE,
+chaussettes-antiderapantes-lot-3,Chaussettes antidérapantes – lot de 3,"<p>Trois paires dans nos teintes terre, pour ne jamais être à court.</p>",Terre de Pilates,Chaussettes antidérapantes,"vetements, chaussettes-antiderapantes",TRUE,Taille,35-38,,,CHAUSSETTES-ANTIDE-35-38,180,deny,manual,36.00,42.00,TRUE,TRUE,draft
+chaussettes-antiderapantes-lot-3,,,,,,,,39-42,,,CHAUSSETTES-ANTIDE-39-42,180,deny,manual,36.00,42.00,TRUE,TRUE,
+programme-pilates-maison-4-semaines,Programme Pilates à la maison – 4 semaines,"<p>12 séances guidées de 20 à 30 minutes pour découvrir le Pilates chez vous, avec un simple tapis. Guide PDF illustré de 8 pages, calendrier de suivi à imprimer, variantes débutant et avancé.</p><p><strong>Produit numérique :</strong> lien de téléchargement envoyé par e-mail après l'achat.</p>",Terre de Pilates,Programme numérique,programme,TRUE,Title,Default Title,,,PROG-4SEM,0,continue,manual,29.00,39.00,FALSE,TRUE,draft

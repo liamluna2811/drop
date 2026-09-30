@@ -1,0 +1,31 @@
+<div class="page-width">
+  <div class="collection-hero reveal">
+    <span class="eyebrow">{{ 'blog.eyebrow' | t }}</span>
+    <h1>{{ blog.title | escape }}</h1>
+  </div>
+  {%- paginate blog.articles by 9 -%}
+    <ul class="product-grid" style="--columns: 3;">
+      {%- for article in blog.articles -%}
+        <li class="reveal">
+          <a href="{{ article.url }}" class="article-card">
+            <div class="article-card__media">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 50vw', widths: '400, 600, 800' }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <h3>{{ article.title | escape }}</h3>
+            <p>{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if paginate.pages > 1 -%}{% render 'pagination', paginate: paginate %}{%- endif -%}
+  {%- endpaginate -%}
+</div>
+<div style="height: 5rem"></div>
+
+{% schema %}
+{ "name": "Blog" }
+{% endschema %}

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mon Pilates à la maison — Programme 4 semaines</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --bg:#F7F1E9; --alt:#EFE5D8; --sand:#DCC9B2; --text:#3E2C22; --soft:#7A6354; --accent:#A87A55; --accentd:#855C3D; --dark:#4A3528; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Jost, system-ui, sans-serif; color: var(--text); font-size: 10.5pt; line-height: 1.55; background: var(--bg); }
+  h1,h2,h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; margin: 0 0 .4em; line-height: 1.1; }
+  .page { width: 210mm; min-height: 297mm; padding: 18mm 18mm 16mm; page-break-after: always; position: relative; background: var(--bg); }
+  .page:last-child { page-break-after: auto; }
+  .eyebrow { font-size: 7.5pt; letter-spacing: .22em; text-transform: uppercase; color: var(--accentd); font-weight: 500; display:block; margin-bottom: 6pt; }
+  .footer { position: absolute; bottom: 9mm; left: 18mm; right: 18mm; display:flex; justify-content: space-between; font-size: 7.5pt; color: var(--soft); letter-spacing: .1em; text-transform: uppercase; }
+  /* Couverture */
+  .cover { background: var(--dark); color: var(--bg); display:flex; flex-direction: column; justify-content: space-between; }
+  .cover h1 { color: var(--bg); font-size: 46pt; margin-top: 30mm; }
+  .cover .eyebrow { color: var(--sand); }
+  .cover p { max-width: 120mm; font-size: 12pt; opacity: .88; }
+  .arch { width: 90mm; height: 110mm; border-radius: 45mm 45mm 6mm 6mm; background: linear-gradient(170deg, #A87A55, #6F5242); margin-left: auto; position: relative; }
+  .arch::after { content:""; position:absolute; left: 50%; top: 32%; width: 40mm; height: 40mm; margin-left: -20mm; border-radius: 50%; background: rgba(247,241,233,.18); }
+  .cover .meta { display:flex; gap: 10mm; font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--sand); }
+  h2 { font-size: 26pt; }
+  h3 { font-size: 15pt; }
+  p { margin: 0 0 8pt; }
+  .lead { font-size: 11.5pt; color: var(--soft); }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .grid3 { display:grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .card { background: #FBF7F1; border: 1px solid rgba(62,44,34,.12); border-radius: 4mm; padding: 4mm 4.5mm; }
+  .card h3 { margin-bottom: 2pt; }
+  .card p { color: var(--soft); margin: 0; font-size: 9.5pt; }
+  .num { font-family: "Cormorant Garamond", serif; color: var(--accentd); font-size: 13pt; }
+  ul.check { list-style: none; padding: 0; margin: 0 0 8pt; }
+  ul.check li { padding-left: 16pt; position: relative; margin-bottom: 4pt; }
+  ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+  .week-head { background: var(--alt); border-radius: 4mm; padding: 6mm; margin-bottom: 6mm; display:flex; justify-content: space-between; align-items: flex-end; gap: 6mm; }
+  .week-head h2 { margin: 0; }
+  .week-head p { margin: 0; color: var(--soft); max-width: 95mm; font-size: 10pt; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  th { text-align: left; font-size: 7.5pt; letter-spacing: .15em; text-transform: uppercase; color: var(--accentd); font-weight: 500; padding: 0 0 4pt; border-bottom: 1px solid var(--sand); }
+  td { padding: 5pt 6pt 5pt 0; border-bottom: 1px solid rgba(62,44,34,.1); vertical-align: top; }
+  td:first-child { font-weight: 500; width: 40mm; }
+  td.reps { white-space: nowrap; color: var(--accentd); width: 26mm; }
+  .session { margin-bottom: 6mm; }
+  .session h3 { display:flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--sand); padding-bottom: 2pt; margin-bottom: 4pt; }
+  .session h3 small { font-family: Jost, sans-serif; font-size: 8pt; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+  .tip { background: var(--dark); color: var(--bg); border-radius: 4mm; padding: 5mm 6mm; font-size: 9.5pt; }
+  .tip strong { color: var(--sand); font-weight: 500; }
+  .ex { break-inside: avoid; }
+  .ex h3 { font-size: 13pt; margin-bottom: 1pt; }
+  .ex .tag { font-size: 7pt; letter-spacing: .12em; text-transform: uppercase; color: var(--accentd); }
+  .ex p { font-size: 9pt; color: var(--soft); margin: 2pt 0 0; }
+  .ex p b { color: var(--text); font-weight: 500; }
+  .cal { width: 100%; border-collapse: separate; border-spacing: 2mm; }
+  .cal th { border: 0; text-align: center; }
+  .cal td { border: 1px solid var(--sand); border-radius: 2mm; height: 22mm; width: 14%; background: #FBF7F1; font-size: 8pt; color: var(--soft); padding: 2mm; }
+  .cal td.s { background: var(--alt); color: var(--accentd); font-weight: 500; }
+  .cal td:first-child { font-weight: 400; width: auto; }
+  .cal .wk { font-family: "Cormorant Garamond", serif; font-size: 12pt; color: var(--text); border: 0; background: none; width: 16mm; vertical-align: middle; }
+  .box { display:inline-block; width: 9pt; height: 9pt; border: 1px solid var(--accentd); border-radius: 2pt; vertical-align: middle; margin-right: 4pt; }
+  .small { font-size: 8.5pt; color: var(--soft); }
+</style>
+</head>
+<body>
+
+<!-- 1. Couverture -->
+<section class="page cover">
+  <div>
+    <span class="eyebrow">Programme numérique · 4 semaines</span>
+    <h1>Mon Pilates<br>à la maison</h1>
+    <p>12 séances de 20 à 30 minutes pour découvrir la méthode, renforcer votre centre, gagner en souplesse et retrouver une posture légère — avec un simple tapis.</p>
+  </div>
+  <div class="arch"></div>
+  <div class="meta"><span>Débutant → intermédiaire</span><span>3 séances / semaine</span><span>Tapis + bande élastique</span></div>
+</section>
+
+<!-- 2. Bienvenue -->
+<section class="page">
+  <span class="eyebrow">Bienvenue</span>
+  <h2>Avant de commencer</h2>
+  <p class="lead">Ce programme vous accompagne pas à pas pendant quatre semaines. Chaque semaine s'appuie sur la précédente : prenez le temps de bien maîtriser les bases, c'est là que se cache toute l'efficacité du Pilates.</p>
+
+  <div class="grid2" style="margin: 6mm 0;">
+    <div class="card">
+      <h3>Le matériel</h3>
+      <ul class="check">
+        <li>Un tapis de Pilates de 6 à 10 mm</li>
+        <li>Des chaussettes antidérapantes (ou pieds nus)</li>
+        <li>Une bande élastique (semaines 3 et 4)</li>
+        <li>Une serviette roulée ou un petit coussin</li>
+        <li>Une tenue près du corps et confortable</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Le rythme</h3>
+      <ul class="check">
+        <li>3 séances par semaine, avec un jour de repos entre deux</li>
+        <li>20 min (semaine 1) → 30 min (semaine 4)</li>
+        <li>Chaque séance : échauffement, cœur de séance, retour au calme</li>
+        <li>Cochez vos séances dans le calendrier en fin de guide</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Les 6 principes à garder en tête</h3>
+  <div class="grid3" style="margin-bottom: 6mm;">
+    <div class="card"><span class="num">01</span><h3>Respiration</h3><p>Inspirez par le nez en ouvrant les côtes sur les côtés, expirez par la bouche en rentrant le nombril.</p></div>
+    <div class="card"><span class="num">02</span><h3>Centrage</h3><p>Le mouvement part du « powerhouse » : abdominaux profonds, dos, fessiers et plancher pelvien.</p></div>
+    <div class="card"><span class="num">03</span><h3>Concentration</h3><p>Pensez à ce que fait chaque partie du corps. Pas de téléphone pendant la séance !</p></div>
+    <div class="card"><span class="num">04</span><h3>Contrôle</h3><p>Aucun mouvement brusque : on ralentit plutôt que d'accélérer.</p></div>
+    <div class="card"><span class="num">05</span><h3>Précision</h3><p>Mieux vaut 5 répétitions parfaites que 15 approximatives.</p></div>
+    <div class="card"><span class="num">06</span><h3>Fluidité</h3><p>Les mouvements s'enchaînent sans à-coups, portés par le souffle.</p></div>
+  </div>
+
+  <div class="tip"><strong>Sécurité ·</strong> Ce programme ne remplace pas un avis médical. En cas de grossesse, de douleurs, de blessure récente ou de pathologie (dos, cœur, tension…), demandez l'avis de votre médecin ou d'un kinésithérapeute avant de commencer. Une sensation d'effort est normale ; une douleur vive ne l'est pas : arrêtez l'exercice.</div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>2</span></div>
+</section>
+
+<!-- 3. Positions de base -->
+<section class="page">
+  <span class="eyebrow">Les fondamentaux</span>
+  <h2>Les positions de base</h2>
+  <p class="lead">Ces repères reviennent dans presque tous les exercices. Relisez cette page dès que vous avez un doute.</p>
+  <div class="grid2" style="margin-top: 6mm;">
+    <div class="card"><h3>Bassin neutre</h3><p>Allongé sur le dos, genoux fléchis, pieds à plat largeur de hanches. Les deux os saillants du bassin et le pubis forment un plan parallèle au sol : un petit creux naturel reste sous les lombaires.</p></div>
+    <div class="card"><h3>Imprint (empreinte)</h3><p>À l'expiration, rentrez le nombril et rapprochez doucement le bas du dos du tapis, sans serrer les fessiers. Position de sécurité quand les jambes sont décollées du sol.</p></div>
+    <div class="card"><h3>Respiration latérale</h3><p>Mains posées sur les côtes : à l'inspiration, les côtes s'écartent sous vos mains ; à l'expiration, elles se referment et le ventre se creuse vers la colonne.</p></div>
+    <div class="card"><h3>Épaules stables</h3><p>Omoplates glissées vers le bas du dos, nuque longue, menton légèrement rentré comme si vous teniez une petite pêche sous le menton.</p></div>
+    <div class="card"><h3>Position « tabletop »</h3><p>Allongé, genoux au-dessus des hanches et fléchis à 90°, tibias parallèles au sol. Maintenez l'imprint pour protéger le dos.</p></div>
+    <div class="card"><h3>Position quadrupédie</h3><p>À quatre pattes : mains sous les épaules, genoux sous les hanches, dos long du sommet du crâne au coccyx.</p></div>
+  </div>
+  <div class="tip" style="margin-top: 6mm;"><strong>Le bon réflexe ·</strong> Si vous sentez votre bas du dos se creuser ou votre nuque se crisper, réduisez l'amplitude : reposez la tête, pliez les genoux, ou gardez un pied au sol. Adapter n'est pas tricher, c'est pratiquer intelligemment.</div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>3</span></div>
+</section>
+
+<!-- 4. Semaine 1 -->
+<section class="page">
+  <div class="week-head">
+    <div><span class="eyebrow">Semaine 1 · 20 min</span><h2>Les fondations</h2></div>
+    <p>Objectif : apprendre à respirer, à placer le bassin et à activer le centre. On va lentement, on observe.</p>
+  </div>
+  <div class="session">
+    <h3>Échauffement commun <small>5 min · chaque séance</small></h3>
+    <table>
+      <tr><th>Exercice</th><th>Répétitions</th><th>Consigne</th></tr>
+      <tr><td>Respiration latérale</td><td class="reps">8 cycles</td><td>Allongé, genoux fléchis, mains sur les côtes.</td></tr>
+      <tr><td>Bascules du bassin</td><td class="reps">8</td><td>Alternez bassin neutre et imprint, au rythme du souffle.</td></tr>
+      <tr><td>Cercles de bras</td><td class="reps">5 + 5</td><td>Bras vers le plafond, dessinez de grands cercles sans décoller les côtes.</td></tr>
+      <tr><td>Chat-vache</td><td class="reps">6</td><td>À quatre pattes, enroulez puis allongez la colonne vertèbre par vertèbre.</td></tr>
+    </table>
+  </div>
+  <div class="session">
+    <h3>Séances 1, 2 et 3 <small>12 min · cœur de séance</small></h3>
+    <table>
+      <tr><th>Exercice</th><th>Répétitions</th><th>Consigne</th></tr>
+      <tr><td>Toe taps</td><td class="reps">6 par jambe</td><td>En tabletop, posez une pointe de pied au sol puis l'autre, bassin immobile.</td></tr>
+      <tr><td>Pont articulé</td><td class="reps">8</td><td>Déroulez la colonne pour monter le bassin, puis redescendez vertèbre par vertèbre.</td></tr>
+      <tr><td>Chest lift</td><td class="reps">8</td><td>Mains derrière la tête, soulevez la tête et le haut du dos à l'expiration.</td></tr>
+      <tr><td>Hundred préparatoire</td><td class="reps">5 × 10 battements</td><td>Pieds au sol, tête soulevée, battez des bras : inspirez sur 5, expirez sur 5.</td></tr>
+      <tr><td>Clam (coquillage)</td><td class="reps">10 par côté</td><td>Sur le côté, genoux fléchis, ouvrez le genou du dessus sans basculer le bassin.</td></tr>
+      <tr><td>Bird dog</td><td class="reps">5 par côté</td><td>À quatre pattes, allongez bras et jambe opposés, tenez 3 secondes.</td></tr>
+    </table>
+  </div>
+  <div class="session">
+    <h3>Retour au calme commun <small>3 min</small></h3>
+    <table>
+      <tr><td>Posture de l'enfant</td><td class="reps">5 respirations</td><td>Fesses vers les talons, bras allongés, respirez dans le dos.</td></tr>
+      <tr><td>Étirement des ischios</td><td class="reps">30 s par jambe</td><td>Allongé, jambe tendue vers le plafond, mains derrière la cuisse (ou serviette).</td></tr>
+    </table>
+  </div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>4</span></div>
+</section>
+
+<!-- 5. Semaine 2 -->
+<section class="page">
+  <div class="week-head">
+    <div><span class="eyebrow">Semaine 2 · 25 min</span><h2>Force &amp; stabilité</h2></div>
+    <p>Objectif : renforcer le gainage profond, les fessiers et le dos. On garde l'échauffement et le retour au calme de la semaine 1.</p>
+  </div>
+  <div class="session">
+    <h3>Séances 4 et 6 <small>17 min · cœur de séance</small></h3>
+    <table>
+      <tr><th>Exercice</th><th>Répétitions</th><th>Consigne</th></tr>
+      <tr><td>The Hundred</td><td class="reps">8 × 10 battements</td><td>Jambes en tabletop, tête soulevée. Débutant : pieds au sol.</td></tr>
+      <tr><td>Single leg stretch</td><td class="reps">8 par jambe</td><td>Tête soulevée, tirez un genou vers la poitrine pendant que l'autre jambe s'allonge.</td></tr>
+      <tr><td>Pont + marche</td><td class="reps">6 par jambe</td><td>En pont, décollez un pied puis l'autre, sans que le bassin ne bascule.</td></tr>
+      <tr><td>Side kick (avant/arrière)</td><td class="reps">8 par côté</td><td>Allongé sur le côté, balancez la jambe du dessus d'avant en arrière, buste stable.</td></tr>
+      <tr><td>Swan préparatoire</td><td class="reps">6</td><td>Sur le ventre, mains sous les épaules, soulevez le buste en allongeant la nuque.</td></tr>
+      <tr><td>Planche sur genoux</td><td class="reps">3 × 20 s</td><td>Avant-bras au sol, corps aligné des genoux à la tête. Avancé : sur les pieds.</td></tr>
+    </table>
+  </div>
+  <div class="session">
+    <h3>Séance 5 <small>17 min · variante dos &amp; fessiers</small></h3>
+    <table>
+      <tr><th>Exercice</th><th>Répétitions</th><th>Consigne</th></tr>
+      <tr><td>Swimming</td><td class="reps">3 × 10 s</td><td>Sur le ventre, battez bras et jambes opposés, nombril décollé du tapis.</td></tr>
+      <tr><td>Donkey kick</td><td class="reps">10 par jambe</td><td>À quatre pattes, poussez un talon vers le plafond, genou fléchi à 90°.</td></tr>
+      <tr><td>Clam avec pause</td><td class="reps">10 par côté</td><td>Comme en semaine 1, tenez l'ouverture 2 secondes.</td></tr>
+      <tr><td>Dead bug</td><td class="reps">6 par côté</td><td>En tabletop, bras vers le plafond : allongez bras et jambe opposés, bas du dos plaqué.</td></tr>
+      <tr><td>Side plank sur genou</td><td class="reps">2 × 15 s / côté</td><td>Sur le côté, en appui sur l'avant-bras et le genou, bassin haut.</td></tr>
+    </table>
+  </div>
+  <div class="tip"><strong>Repère ·</strong> Le Hundred doit brûler un peu les abdominaux, jamais la nuque. Si la nuque tire, posez la tête et continuez les battements.</div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>5</span></div>
+</section>
+
+<!-- 6. Semaine 3 -->
+<section class="page">
+  <div class="week-head">
+    <div><span class="eyebrow">Semaine 3 · 25-30 min</span><h2>Mobilité &amp; souplesse</h2></div>
+    <p>Objectif : articuler la colonne, travailler les rotations et ouvrir les épaules. La bande élastique fait son entrée.</p>
+  </div>
+  <div class="session">
+    <h3>Séances 7, 8 et 9 <small>20 min · cœur de séance</small></h3>
+    <table>
+      <tr><th>Exercice</th><th>Répétitions</th><th>Consigne</th></tr>
+      <tr><td>Roll down assisté</td><td class="reps">6</td><td>Assis, genoux fléchis, mains derrière les cuisses : déroulez le dos vers l'arrière à mi-chemin, puis revenez.</td></tr>
+      <tr><td>Spine stretch forward</td><td class="reps">6</td><td>Assis jambes écartées, enroulez-vous vers l'avant comme au-dessus d'un ballon.</td></tr>
+      <tr><td>Saw (la scie)</td><td class="reps">4 par côté</td><td>Assis, bras en croix : tournez le buste et allez chercher le petit orteil opposé.</td></tr>
+      <tr><td>Criss-cross</td><td class="reps">6 par côté</td><td>Tête soulevée, amenez le coude vers le genou opposé en tournant le buste.</td></tr>
+      <tr><td>Ouverture d'épaules à la bande</td><td class="reps">10</td><td>Debout ou assis, bande tenue devant, écartez-la en serrant les omoplates.</td></tr>
+      <tr><td>Étirement ischios à la bande</td><td class="reps">30 s / jambe</td><td>Allongé, bande sous le pied, jambe vers le plafond : ouvrez-la ensuite sur le côté.</td></tr>
+      <tr><td>Mermaid (sirène)</td><td class="reps">4 par côté</td><td>Assis jambes pliées sur le côté, bras au-dessus de la tête, inclinez-vous latéralement.</td></tr>
+      <tr><td>Thread the needle</td><td class="reps">5 par côté</td><td>À quatre pattes, glissez un bras sous le corps pour tourner le haut du dos.</td></tr>
+    </table>
+  </div>
+  <div class="tip"><strong>Astuce ·</strong> Dans les enroulés, imaginez que vous posez ou décollez votre colonne comme un collier de perles, une perle après l'autre. Si vous « tombez » en arrière, raccourcissez le mouvement.</div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>6</span></div>
+</section>
+
+<!-- 7. Semaine 4 -->
+<section class="page">
+  <div class="week-head">
+    <div><span class="eyebrow">Semaine 4 · 30 min</span><h2>Le flow complet</h2></div>
+    <p>Objectif : enchaîner sans pause, avec fluidité. Un seul flow, répété 3 fois dans la semaine — vous verrez vos progrès d'une séance à l'autre.</p>
+  </div>
+  <div class="session">
+    <h3>Séances 10, 11 et 12 <small>25 min · enchaînement continu</small></h3>
+    <table>
+      <tr><th>Exercice</th><th>Répétitions</th><th>Consigne</th></tr>
+      <tr><td>The Hundred</td><td class="reps">10 × 10</td><td>Jambes en tabletop ou tendues à 45° si le dos reste plaqué.</td></tr>
+      <tr><td>Roll up</td><td class="reps">5</td><td>Allongé bras au-dessus de la tête, enroulez-vous jusqu'à l'assise puis déroulez. Débutant : genoux fléchis.</td></tr>
+      <tr><td>Single leg circles</td><td class="reps">5 + 5 / jambe</td><td>Une jambe au plafond, dessinez des cercles, bassin immobile.</td></tr>
+      <tr><td>Rolling like a ball</td><td class="reps">6</td><td>Assis en boule, roulez sur le dos jusqu'aux omoplates et revenez en équilibre.</td></tr>
+      <tr><td>Single + double leg stretch</td><td class="reps">8 + 6</td><td>Enchaînez les deux variantes sans reposer la tête.</td></tr>
+      <tr><td>Criss-cross</td><td class="reps">8 par côté</td><td>Lentement, en gardant les coudes ouverts.</td></tr>
+      <tr><td>Pont + bande aux genoux</td><td class="reps">10</td><td>Bande au-dessus des genoux, poussez vers l'extérieur pendant le pont.</td></tr>
+      <tr><td>Série latérale à la bande</td><td class="reps">10 par côté</td><td>Bande aux chevilles, allongé sur le côté, levez la jambe du dessus.</td></tr>
+      <tr><td>Swimming</td><td class="reps">3 × 15 s</td><td>Rythme régulier, souffle continu.</td></tr>
+      <tr><td>Planche</td><td class="reps">3 × 30 s</td><td>Sur les pieds ou les genoux, corps gainé.</td></tr>
+      <tr><td>Seal (le phoque)</td><td class="reps">6</td><td>Comme le rolling, en claquant trois fois les pieds en haut : une touche de légèreté pour finir.</td></tr>
+    </table>
+  </div>
+  <div class="session">
+    <h3>Retour au calme <small>5 min</small></h3>
+    <table>
+      <tr><td>Posture de l'enfant</td><td class="reps">6 respirations</td><td>Relâchez tout.</td></tr>
+      <tr><td>Torsion allongée</td><td class="reps">30 s / côté</td><td>Genoux basculés d'un côté, regard de l'autre.</td></tr>
+      <tr><td>Respiration finale</td><td class="reps">1 min</td><td>Allongé, yeux fermés : observez les sensations dans votre corps.</td></tr>
+    </table>
+  </div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>7</span></div>
+</section>
+
+<!-- 8. Calendrier -->
+<section class="page">
+  <span class="eyebrow">À imprimer</span>
+  <h2>Mon calendrier de suivi</h2>
+  <p class="lead">Cochez chaque séance réalisée. Les cases en couleur sont une suggestion : adaptez-les à votre semaine en gardant un jour de repos entre deux séances.</p>
+  <table class="cal">
+    <tr><th></th><th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Sam</th><th>Dim</th></tr>
+    <tr><td class="wk">Sem. 1</td><td class="s"><span class="box"></span>Séance 1</td><td></td><td class="s"><span class="box"></span>Séance 2</td><td></td><td class="s"><span class="box"></span>Séance 3</td><td></td><td></td></tr>
+    <tr><td class="wk">Sem. 2</td><td class="s"><span class="box"></span>Séance 4</td><td></td><td class="s"><span class="box"></span>Séance 5</td><td></td><td class="s"><span class="box"></span>Séance 6</td><td></td><td></td></tr>
+    <tr><td class="wk">Sem. 3</td><td class="s"><span class="box"></span>Séance 7</td><td></td><td class="s"><span class="box"></span>Séance 8</td><td></td><td class="s"><span class="box"></span>Séance 9</td><td></td><td></td></tr>
+    <tr><td class="wk">Sem. 4</td><td class="s"><span class="box"></span>Séance 10</td><td></td><td class="s"><span class="box"></span>Séance 11</td><td></td><td class="s"><span class="box"></span>Séance 12</td><td></td><td></td></tr>
+  </table>
+
+  <div class="grid2" style="margin-top: 8mm;">
+    <div class="card">
+      <h3>Mon ressenti · jour 1</h3>
+      <p class="small">Dos, énergie, sommeil, souplesse (ex. : je touche mes genoux / mes tibias / mes pieds)…</p>
+      <div style="height: 38mm; border-bottom: 1px dashed var(--sand);"></div>
+    </div>
+    <div class="card">
+      <h3>Mon ressenti · jour 28</h3>
+      <p class="small">Qu'est-ce qui a changé ? Quel exercice est devenu plus facile ?</p>
+      <div style="height: 38mm; border-bottom: 1px dashed var(--sand);"></div>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top: 8mm;"><strong>Et après ?</strong> Recommencez le programme en choisissant les variantes avancées, ou gardez le flow de la semaine 4 comme routine, 2 à 3 fois par semaine. Merci d'avoir pratiqué avec nous !</div>
+  <div class="footer"><span>Mon Pilates à la maison</span><span>8</span></div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Groupe pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": { "type": "menu", "settings": { "heading": "Boutique", "menu": "main-menu" } },
+        "help": { "type": "menu", "settings": { "heading": "Aide", "menu": "footer" } }
+      },
+      "block_order": ["shop", "help"],
+      "settings": { "show_payment_icons": true }
+    }
+  },
+  "order": ["footer"]
+}

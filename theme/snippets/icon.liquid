@@ -1,0 +1,72 @@
+{%- comment -%}
+  Icônes au trait. Utilisation : {% render 'icon', name: 'posture' %}
+{%- endcomment -%}
+{%- capture attrs -%}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"{%- endcapture -%}
+{%- case name -%}
+  {%- when 'cart' -%}
+    <svg {{ attrs }}><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+  {%- when 'search' -%}
+    <svg {{ attrs }}><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
+  {%- when 'account' -%}
+    <svg {{ attrs }}><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+  {%- when 'menu' -%}
+    <svg {{ attrs }}><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+  {%- when 'close' -%}
+    <svg {{ attrs }}><path d="M6 6l12 12M18 6 6 18"/></svg>
+  {%- when 'posture' -%}
+    <svg {{ attrs }}><circle cx="12" cy="4.5" r="2"/><path d="M12 7v7M12 14l-3 7M12 14l3 7M7 10c1.5 1 3 1.5 5 1.5s3.5-.5 5-1.5"/></svg>
+  {%- when 'core' -%}
+    <svg {{ attrs }}><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
+  {%- when 'flexibility' -%}
+    <svg {{ attrs }}><circle cx="17" cy="5" r="2"/><path d="M3 19c3-1 6-4 8-8l2-3M11 11l5 3 3 5M13 8l3 1"/></svg>
+  {%- when 'breath' -%}
+    <svg {{ attrs }}><path d="M3 9h11a3 3 0 1 0-3-3M3 13h15a3 3 0 1 1-3 3M3 17h7"/></svg>
+  {%- when 'mind' -%}
+    <svg {{ attrs }}><path d="M12 21c-4-2-7-5-7-9a7 7 0 0 1 14 0c0 4-3 7-7 9Z"/><path d="M12 8v4l2.5 2"/></svg>
+  {%- when 'heart' -%}
+    <svg {{ attrs }}><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
+  {%- when 'balance' -%}
+    <svg {{ attrs }}><path d="M12 3v18M5 21h14M6 7h12M6 7l-3 7a3 3 0 0 0 6 0L6 7ZM18 7l-3 7a3 3 0 0 0 6 0l-3-7Z"/></svg>
+  {%- when 'leaf' -%}
+    <svg {{ attrs }}><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg>
+  {%- when 'spine' -%}
+    <svg {{ attrs }}><path d="M12 2v20"/><rect x="9" y="3" width="6" height="3" rx="1.5"/><rect x="8.5" y="8" width="7" height="3" rx="1.5"/><rect x="8" y="13" width="8" height="3" rx="1.5"/><rect x="9" y="18" width="6" height="3" rx="1.5"/></svg>
+  {%- when 'mat' -%}
+    <svg {{ attrs }}><path d="M4 7a3 3 0 0 1 6 0v10a3 3 0 0 1-6 0V7Z"/><path d="M7 4h11a2 2 0 0 1 2 2v11a3 3 0 0 1-3 3H7"/></svg>
+  {%- when 'band' -%}
+    <svg {{ attrs }}><path d="M4 12c0-4 3.5-7 8-7s8 3 8 7-3.5 7-8 7-8-3-8-7Z"/><path d="M7 12c0-2.4 2.2-4 5-4s5 1.6 5 4-2.2 4-5 4-5-1.6-5-4Z"/></svg>
+  {%- when 'legging' -%}
+    <svg {{ attrs }}><path d="M7 3h10l1 18h-4l-2-11-2 11H6L7 3Z"/><path d="M7 6h10"/></svg>
+  {%- when 'bra' -%}
+    <svg {{ attrs }}><path d="M7 4l-2 9c0 3 3 5 7 5s7-2 7-5l-2-9"/><path d="M5 13c2-2 4.5-2.5 7 0 2.5-2.5 5-2 7 0"/></svg>
+  {%- when 'sock' -%}
+    <svg {{ attrs }}><path d="M9 3h6v9l3 3a3 3 0 0 1-2.1 5.1H10a4 4 0 0 1-4-4v-1l3-3V3Z"/><circle cx="11" cy="17" r=".5"/><circle cx="14" cy="17" r=".5"/></svg>
+  {%- when 'home' -%}
+    <svg {{ attrs }}><path d="M4 11 12 4l8 7v9H4v-9Z"/><path d="M10 20v-5h4v5"/></svg>
+  {%- when 'play' -%}
+    <svg {{ attrs }}><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5v-7Z"/></svg>
+  {%- when 'clock' -%}
+    <svg {{ attrs }}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+  {%- when 'calendar' -%}
+    <svg {{ attrs }}><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+  {%- when 'truck' -%}
+    <svg {{ attrs }}><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+  {%- when 'return' -%}
+    <svg {{ attrs }}><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+  {%- when 'lock' -%}
+    <svg {{ attrs }}><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+  {%- when 'sparkle' -%}
+    <svg {{ attrs }}><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7Z"/></svg>
+  {%- when 'chat' -%}
+    <svg {{ attrs }}><path d="M5 18l-1 3 4-2h9a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v9"/></svg>
+  {%- when 'instagram' -%}
+    <svg {{ attrs }}><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>
+  {%- when 'tiktok' -%}
+    <svg {{ attrs }}><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 2.8 2.3 4.5 5 4.8"/></svg>
+  {%- when 'pinterest' -%}
+    <svg {{ attrs }}><circle cx="12" cy="12" r="9"/><path d="M11 8.5c3-1 5.5.5 5 3.5-.4 2.5-3 3.5-4.5 2M11.5 11 9 21"/></svg>
+  {%- when 'youtube' -%}
+    <svg {{ attrs }}><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+  {%- else -%}
+    <svg {{ attrs }}><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7Z"/></svg>
+{%- endcase -%}

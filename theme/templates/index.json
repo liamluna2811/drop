@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "hero": { "type": "hero", "settings": {} },
+    "marquee_products": { "type": "product-marquee", "settings": { "mode": "products", "title": "Un aperçu de la boutique", "style": "sand", "speed": 45 } },
+    "universes": {
+      "type": "universes",
+      "blocks": {
+        "accessoires": { "type": "universe", "settings": { "collection": "accessoires", "eyebrow": "Univers 01", "title": "Accessoires", "text": "Tapis épais, bandes élastiques, briques et balles : l'équipement qui soutient chaque exercice.", "button_label": "Voir les accessoires", "link_1_label": "Tapis de sol", "link_1_collection": "tapis-de-sol", "link_2_label": "Bandes élastiques", "link_2_collection": "bandes-elastiques", "link_3_label": "Petits accessoires", "link_3_collection": "petits-accessoires" } },
+        "vetements": { "type": "universe", "settings": { "collection": "vetements", "eyebrow": "Univers 02", "title": "Vêtements", "text": "Des matières douces et respirantes, pensées pour s'étirer, rouler et tenir la posture.", "button_label": "Voir les vêtements", "link_1_label": "Leggings", "link_1_collection": "leggings", "link_2_label": "Brassières", "link_2_collection": "brassieres", "link_3_label": "Chaussettes antidérapantes", "link_3_collection": "chaussettes-antiderapantes" } }
+      },
+      "block_order": ["accessoires", "vetements"],
+      "settings": {}
+    },
+    "featured_accessoires": { "type": "featured-collection", "settings": { "eyebrow": "Accessoires", "heading": "L'équipement essentiel", "collection": "accessoires", "products_to_show": 4, "background": "plain" } },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "posture", "title": "Une posture redressée", "text": "En renforçant les muscles profonds qui soutiennent la colonne, le Pilates aide à se tenir droit et à soulager le dos au quotidien." } },
+        "b2": { "type": "benefit", "settings": { "icon": "core", "title": "Un centre solide", "text": "Le « powerhouse » — abdominaux, lombaires, fessiers et plancher pelvien — est au cœur de chaque mouvement." } },
+        "b3": { "type": "benefit", "settings": { "icon": "flexibility", "title": "Souplesse & mobilité", "text": "Des mouvements amples et contrôlés qui allongent les muscles et redonnent de l'amplitude aux articulations." } },
+        "b4": { "type": "benefit", "settings": { "icon": "breath", "title": "Une respiration consciente", "text": "La respiration guide l'effort : elle oxygène, apaise le système nerveux et améliore la concentration." } },
+        "b5": { "type": "benefit", "settings": { "icon": "mind", "title": "Moins de stress", "text": "Se concentrer sur la précision du geste, c'est offrir une vraie pause à l'esprit." } },
+        "b6": { "type": "benefit", "settings": { "icon": "balance", "title": "Équilibre & coordination", "text": "Un meilleur contrôle du corps dans l'espace, pour des gestes plus sûrs et moins de risques de blessure." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
+      "settings": { "background": "alt", "button_label": "Découvrir l'histoire du Pilates", "button_link": "/pages/histoire-et-bienfaits" }
+    },
+    "featured_vetements": { "type": "featured-collection", "settings": { "eyebrow": "Vêtements", "heading": "Bien dans sa tenue", "collection": "vetements", "products_to_show": 4, "background": "plain" } },
+    "marquee_words": {
+      "type": "product-marquee",
+      "blocks": {
+        "w1": { "type": "word", "settings": { "text": "Respiration" } },
+        "w2": { "type": "word", "settings": { "text": "Centrage" } },
+        "w3": { "type": "word", "settings": { "text": "Concentration" } },
+        "w4": { "type": "word", "settings": { "text": "Contrôle" } },
+        "w5": { "type": "word", "settings": { "text": "Précision" } },
+        "w6": { "type": "word", "settings": { "text": "Fluidité" } }
+      },
+      "block_order": ["w1", "w2", "w3", "w4", "w5", "w6"],
+      "settings": { "mode": "words", "title": "", "style": "dark", "speed": 35, "reverse": true }
+    },
+    "program": {
+      "type": "program-promo",
+      "blocks": {
+        "s1": { "type": "week", "settings": { "title": "Les fondations", "text": "Respiration, placement du bassin, activation du centre." } },
+        "s2": { "type": "week", "settings": { "title": "Force & stabilité", "text": "Gainage, travail des fessiers et du dos." } },
+        "s3": { "type": "week", "settings": { "title": "Mobilité & souplesse", "text": "Enroulés, rotations et étirements dynamiques." } },
+        "s4": { "type": "week", "settings": { "title": "Le flow complet", "text": "Enchaînements fluides avec bande élastique." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": { "background": "dark" }
+    },
+    "story": {
+      "type": "pilates-story",
+      "blocks": {
+        "e1": { "type": "event", "settings": { "year": "1883", "title": "Une enfance fragile", "text": "Joseph Pilates naît près de Düsseldorf, en Allemagne. Enfant asthmatique et de santé fragile, il se passionne pour la gymnastique, la boxe et l'anatomie pour renforcer son corps." } },
+        "e2": { "type": "event", "settings": { "year": "1914", "title": "Naissance d'une méthode", "text": "Installé en Angleterre, il est interné pendant la Première Guerre mondiale. Il fait travailler ses codétenus et fixe des ressorts aux lits de l'infirmerie : l'ancêtre du Reformer est né." } },
+        "e3": { "type": "event", "settings": { "year": "1926", "title": "Le studio de New York", "text": "Avec sa femme Clara, il ouvre un studio sur la 8e Avenue. Les danseurs et chorégraphes adoptent vite sa méthode pour se renforcer et se rééduquer." } },
+        "e4": { "type": "event", "settings": { "year": "Aujourd'hui", "title": "Une pratique universelle", "text": "La méthode est pratiquée par des millions de personnes, au sol comme sur machine, du sportif de haut niveau à la rééducation." } }
+      },
+      "block_order": ["e1", "e2", "e3", "e4"],
+      "settings": { "background": "plain" }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte", "text": "Dès 60 € d'achat" } },
+        "t2": { "type": "item", "settings": { "icon": "return", "title": "Retours gratuits", "text": "Sous 30 jours" } },
+        "t3": { "type": "item", "settings": { "icon": "lock", "title": "Paiement sécurisé", "text": "CB, PayPal, Apple Pay" } },
+        "t4": { "type": "item", "settings": { "icon": "chat", "title": "Conseils personnalisés", "text": "Une question ? On vous répond" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": { "background": "alt" }
+    },
+    "newsletter": { "type": "newsletter", "settings": { "background": "sand" } }
+  },
+  "order": ["hero", "marquee_products", "universes", "featured_accessoires", "benefits", "featured_vetements", "marquee_words", "program", "story", "trust", "newsletter"]
+}

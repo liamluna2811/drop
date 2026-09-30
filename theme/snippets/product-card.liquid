@@ -1,0 +1,62 @@
+{%- comment -%}
+  Carte produit.
+  - product: objet produit (peut être vide pour un aperçu)
+  - index: numéro pour le placeholder
+{%- endcomment -%}
+{%- liquid
+  assign placeholder_index = index | default: 0 | modulo: 6 | plus: 1
+  assign placeholder_name = 'product-' | append: placeholder_index
+  assign ratio_class = ''
+  if settings.card_image_ratio == 'square'
+    assign ratio_class = ' product-card__media--square'
+  endif
+-%}
+<div class="product-card">
+  <div class="product-card__media{{ ratio_class }}">
+    {%- if product != blank -%}
+      {%- if product.available == false -%}
+        <span class="product-card__badge">{{ 'products.sold_out' | t }}</span>
+      {%- elsif product.compare_at_price_min > product.price_min -%}
+        <span class="product-card__badge product-card__badge--sale">{{ 'products.on_sale' | t }}</span>
+      {%- endif -%}
+      {%- if product.featured_media -%}
+        {{ product.featured_media | image_url: width: 900 | image_tag:
+          loading: 'lazy',
+          sizes: '(min-width: 990px) 25vw, 50vw',
+          widths: '360, 540, 720, 900',
+          alt: product.featured_media.alt | default: product.title
+        }}
+        {%- if settings.card_show_secondary_image and product.media[1] -%}
+          {{ product.media[1] | image_url: width: 900 | image_tag:
+            loading: 'lazy',
+            class: 'secondary',
+            sizes: '(min-width: 990px) 25vw, 50vw',
+            widths: '360, 540, 720, 900',
+            alt: ''
+          }}
+        {%- endif -%}
+      {%- else -%}
+        {{ placeholder_name | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    {%- else -%}
+      {{ placeholder_name | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="product-card__info">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}
+      <div class="product-card__vendor">{{ product.vendor }}</div>
+    {%- endif -%}
+    <h3 class="product-card__title">
+      {%- if product != blank -%}
+        <a href="{{ product.url }}">{{ product.title | escape }}</a>
+      {%- else -%}
+        <a href="{{ routes.all_products_collection_url }}">{{ 'products.placeholder_title' | t }}</a>
+      {%- endif -%}
+    </h3>
+    {%- if product != blank -%}
+      {% render 'price', product: product %}
+    {%- else -%}
+      <div class="price"><span class="price__current">{{ 3900 | money }}</span></div>
+    {%- endif -%}
+  </div>
+</div>

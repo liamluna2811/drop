@@ -1,0 +1,30 @@
+<section class="section section--{{ section.settings.background }}">
+  <div class="page-width">
+    <div class="section-header reveal" style="max-width: {{ section.settings.width }}rem; margin-bottom: 0;">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      <div class="rte">{{ section.settings.text }}</div>
+      {%- if section.settings.button_label != blank -%}
+        <p style="margin-top: 1.5rem;"><a href="{{ section.settings.button_link }}" class="button button--secondary">{{ section.settings.button_label | escape }}</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Texte enrichi",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Parlez de votre marque" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Partagez ici votre histoire et vos valeurs.</p>" },
+    { "type": "range", "id": "width", "label": "Largeur max.", "min": 30, "max": 70, "step": 2, "unit": "rem", "default": 44 },
+    { "type": "text", "id": "button_label", "label": "Bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }, { "value": "dark", "label": "Expresso" }
+    ] }
+  ],
+  "presets": [{ "name": "Texte enrichi" }]
+}
+{% endschema %}

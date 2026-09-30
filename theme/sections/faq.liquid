@@ -1,0 +1,51 @@
+<section class="section section--{{ section.settings.background }}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="faq reveal">
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question | escape }}</summary>
+          <div class="rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Questions fréquentes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Vos questions sur le Pilates" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question ?" },
+        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Réponse.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Questions fréquentes",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Le Pilates, c'est pour les débutants ?", "answer": "<p>Oui ! Chaque exercice peut être adapté. On commence par les bases (respiration, placement) et on progresse à son rythme.</p>" } },
+        { "type": "question", "settings": { "question": "Quelle différence avec le yoga ?", "answer": "<p>Le yoga vise l'union du corps et de l'esprit à travers des postures tenues et une dimension méditative. Le Pilates est plus axé sur le renforcement des muscles profonds et le contrôle du mouvement, avec des enchaînements dynamiques.</p>" } },
+        { "type": "question", "settings": { "question": "À quelle fréquence pratiquer ?", "answer": "<p>2 à 3 séances de 20 à 45 minutes par semaine suffisent pour ressentir les premiers effets en quelques semaines.</p>" } },
+        { "type": "question", "settings": { "question": "De quel matériel ai-je besoin ?", "answer": "<p>Un tapis un peu épais (6 à 10 mm) pour protéger la colonne. Des chaussettes antidérapantes, une bande élastique ou un petit ballon permettent ensuite de varier les exercices.</p>" } },
+        { "type": "question", "settings": { "question": "Puis-je pratiquer enceinte ou avec des douleurs de dos ?", "answer": "<p>Le Pilates est souvent recommandé dans ces situations, mais demandez toujours l'avis de votre médecin ou d'un kinésithérapeute avant de commencer.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

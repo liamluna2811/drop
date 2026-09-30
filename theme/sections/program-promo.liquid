@@ -1,0 +1,94 @@
+{%- comment -%}
+  Mise en avant du programme de Pilates à la maison (produit numérique).
+{%- endcomment -%}
+{%- assign program = section.settings.product -%}
+<section class="section section--{{ section.settings.background }}" id="programme">
+  <div class="page-width program">
+    <div class="reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | escape }}</h2>
+      <div class="rte">{{ section.settings.text }}</div>
+      {%- if section.settings.checklist != blank -%}
+        <ul class="checklist">
+          {%- assign lines = section.settings.checklist | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}
+            {%- assign clean = line | strip -%}
+            {%- if clean != blank -%}<li>{{ clean | escape }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="program__card reveal">
+      <span class="eyebrow">{{ section.settings.card_eyebrow | escape }}</span>
+      <h3>{{ program.title | default: section.settings.card_title | escape }}</h3>
+      <ol class="program__weeks">
+        {%- for block in section.blocks -%}
+          <li class="program__week" {{ block.shopify_attributes }}>
+            <span class="program__week-num">{{ forloop.index }}</span>
+            <span><strong>{{ block.settings.title | escape }}</strong><span>{{ block.settings.text | escape }}</span></span>
+          </li>
+        {%- endfor -%}
+      </ol>
+
+      {%- if program != blank -%}
+        <div class="program__price">
+          <span class="program__price-current">{{ program.price | money }}</span>
+          {%- if program.compare_at_price > program.price -%}<s>{{ program.compare_at_price | money }}</s>{%- endif -%}
+        </div>
+        {%- form 'product', program -%}
+          <input type="hidden" name="id" value="{{ program.selected_or_first_available_variant.id }}">
+          <button type="submit" class="button button--full"{% unless program.available %} disabled{% endunless %}>
+            {%- if program.available -%}{{ section.settings.button_label | escape }}{%- else -%}{{ 'products.sold_out' | t }}{%- endif -%}
+          </button>
+        {%- endform -%}
+        <p style="text-align:center; margin: 1rem 0 0;"><a href="{{ program.url }}" class="link-arrow">{{ 'sections.program.details' | t }}</a></p>
+      {%- else -%}
+        <div class="program__price"><span class="program__price-current">{{ section.settings.fallback_price | escape }}</span></div>
+        <a href="{{ routes.all_products_collection_url }}" class="button button--full">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Programme maison",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produit « programme »" },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Programme à la maison" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "4 semaines pour ancrer le Pilates dans votre quotidien" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un programme progressif de 20 à 30 minutes par séance, pensé pour les débutants comme pour celles et ceux qui reprennent. Un tapis suffit ; une bande élastique vous permettra d'aller plus loin.</p>" },
+    { "type": "textarea", "id": "checklist", "label": "Points forts (un par ligne)", "default": "12 séances guidées pas à pas\nGuide PDF illustré + calendrier à imprimer\nVariantes débutant et avancé pour chaque exercice\nAccès à vie, à votre rythme" },
+    { "type": "text", "id": "card_eyebrow", "label": "Sur-titre de la carte", "default": "Programme numérique" },
+    { "type": "text", "id": "card_title", "label": "Titre de la carte (si aucun produit)", "default": "Mon Pilates à la maison" },
+    { "type": "text", "id": "fallback_price", "label": "Prix affiché (si aucun produit)", "default": "29 €" },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Commencer le programme" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "dark", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }, { "value": "dark", "label": "Expresso" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "week",
+      "name": "Semaine",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Semaine" },
+        { "type": "text", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Programme maison",
+      "blocks": [
+        { "type": "week", "settings": { "title": "Les fondations", "text": "Respiration, placement du bassin, activation du centre." } },
+        { "type": "week", "settings": { "title": "Force & stabilité", "text": "Gainage, travail des fessiers et du dos." } },
+        { "type": "week", "settings": { "title": "Mobilité & souplesse", "text": "Enroulés, rotations et étirements dynamiques." } },
+        { "type": "week", "settings": { "title": "Le flow complet", "text": "Enchaînements fluides avec bande élastique." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

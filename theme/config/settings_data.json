@@ -1,0 +1,20 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_background": "#F7F1E9",
+      "color_background_alt": "#EFE5D8",
+      "color_sand": "#DCC9B2",
+      "color_text": "#3E2C22",
+      "color_text_soft": "#7A6354",
+      "color_accent": "#A87A55",
+      "color_accent_dark": "#855C3D",
+      "color_dark": "#4A3528",
+      "color_on_dark": "#F7F1E9",
+      "type_heading_font": "cormorant_n5",
+      "type_body_font": "jost_n4",
+      "page_width": 1280,
+      "radius": 14
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "hero": { "type": "page-hero", "settings": { "eyebrow": "Histoire & pratique", "heading": "Le Pilates, un art du mouvement centenaire", "text": "<p>D'un gymnase allemand du XIXe siècle aux studios du monde entier : découvrez d'où vient le Pilates, comment le pratiquer et pourquoi il fait tant de bien.</p>", "background": "alt" } },
+    "intro": { "type": "image-with-text", "settings": { "eyebrow": "L'homme derrière la méthode", "heading": "Joseph Pilates, l'autodidacte obstiné", "text": "<p>Né en 1883 en Allemagne, Joseph Hubertus Pilates est un enfant fragile : asthme, rachitisme, rhumatismes. Plutôt que de subir, il étudie le corps humain, pratique la gymnastique, la boxe, la plongée, et s'inspire aussi bien du yoga que des arts martiaux.</p><p>De ces expériences naît une conviction : un corps fort et souple, guidé par un esprit concentré, est la clé d'une vie en bonne santé. Il baptise sa méthode la <strong>« Contrology »</strong> — l'art de contrôler son corps par l'esprit.</p>", "layout": "left", "background": "plain" } },
+    "story": {
+      "type": "pilates-story",
+      "blocks": {
+        "e1": { "type": "event", "settings": { "year": "1883", "title": "Une enfance fragile", "text": "Joseph Pilates naît près de Düsseldorf. Enfant malade, il se construit un corps d'athlète à force de gymnastique et d'observation de l'anatomie." } },
+        "e2": { "type": "event", "settings": { "year": "1912", "title": "Départ pour l'Angleterre", "text": "Il y travaille comme boxeur, artiste de cirque et instructeur d'autodéfense." } },
+        "e3": { "type": "event", "settings": { "year": "1914", "title": "L'internement, laboratoire de la méthode", "text": "Interné comme citoyen allemand pendant la guerre, il enseigne ses exercices aux autres détenus et fixe des ressorts aux lits des malades pour les rééduquer : l'ancêtre du Reformer et du Cadillac." } },
+        "e4": { "type": "event", "settings": { "year": "1926", "title": "New York et les danseurs", "text": "Émigré aux États-Unis, il ouvre avec Clara un studio sur la 8e Avenue. Danseurs et chorégraphes adoptent la méthode pour gagner en force et se remettre de leurs blessures." } },
+        "e5": { "type": "event", "settings": { "year": "1945", "title": "Return to Life Through Contrology", "text": "Il publie ce livre qui décrit 34 exercices au sol, dont beaucoup — le Hundred, le Roll up, le Swan — sont toujours enseignés." } },
+        "e6": { "type": "event", "settings": { "year": "1967", "title": "Un héritage transmis", "text": "Joseph Pilates s'éteint à New York. Clara et ses élèves, les « elders », transmettent la méthode, qui se diffuse ensuite dans le monde entier." } },
+        "e7": { "type": "event", "settings": { "year": "Aujourd'hui", "title": "Une pratique pour tous", "text": "Pilates Mat, Reformer, prénatal, rééducation… La méthode s'est adaptée à tous les corps et à tous les objectifs." } }
+      },
+      "block_order": ["e1", "e2", "e3", "e4", "e5", "e6", "e7"],
+      "settings": { "eyebrow": "Chronologie", "heading": "Plus d'un siècle de Pilates", "text": "<p>Une méthode née de la curiosité et de la persévérance, enrichie par des générations de pratiquants.</p>", "button_label": "", "background": "alt" }
+    },
+    "principles": { "type": "principles", "blocks": {
+        "p1": { "type": "principle", "settings": { "title": "Respiration", "text": "Inspirer par le nez, expirer par la bouche en engageant le centre : le souffle rythme et soutient l'effort." } },
+        "p2": { "type": "principle", "settings": { "title": "Centrage", "text": "Tout part du « powerhouse », la ceinture abdominale et pelvienne, véritable moteur du mouvement." } },
+        "p3": { "type": "principle", "settings": { "title": "Concentration", "text": "L'attention portée à chaque geste relie le corps et l'esprit et rend l'exercice plus efficace." } },
+        "p4": { "type": "principle", "settings": { "title": "Contrôle", "text": "Aucun mouvement n'est laissé au hasard : on privilégie la maîtrise à la vitesse ou au nombre de répétitions." } },
+        "p5": { "type": "principle", "settings": { "title": "Précision", "text": "Mieux vaut cinq répétitions parfaites que vingt approximatives. L'alignement fait toute la différence." } },
+        "p6": { "type": "principle", "settings": { "title": "Fluidité", "text": "Les mouvements s'enchaînent avec grâce, sans à-coups, comme une chorégraphie lente et continue." } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "settings": { "background": "plain" }
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "spine", "title": "Un dos soulagé", "text": "Renforcer les muscles profonds autour de la colonne aide à réduire les tensions et les douleurs lombaires liées à la sédentarité." } },
+        "b2": { "type": "benefit", "settings": { "icon": "posture", "title": "Une posture redressée", "text": "Épaules basses, bassin aligné, tête dans l'axe : on se tient naturellement plus droit." } },
+        "b3": { "type": "benefit", "settings": { "icon": "core", "title": "Une sangle abdominale tonique", "text": "Le travail des abdominaux profonds (transverse) et du plancher pelvien affine la taille et protège le dos." } },
+        "b4": { "type": "benefit", "settings": { "icon": "flexibility", "title": "Plus de souplesse", "text": "Les muscles s'allongent au lieu de se raccourcir, pour une silhouette déliée et des articulations plus mobiles." } },
+        "b5": { "type": "benefit", "settings": { "icon": "breath", "title": "Une meilleure respiration", "text": "La respiration thoracique latérale améliore l'oxygénation et l'endurance." } },
+        "b6": { "type": "benefit", "settings": { "icon": "mind", "title": "Un esprit apaisé", "text": "La concentration sur le geste et le souffle réduit le stress et favorise un meilleur sommeil." } },
+        "b7": { "type": "benefit", "settings": { "icon": "balance", "title": "Équilibre & prévention", "text": "Meilleure coordination et proprioception : moins de risques de chute et de blessure." } },
+        "b8": { "type": "benefit", "settings": { "icon": "heart", "title": "Accessible à tous", "text": "Faible impact sur les articulations : adapté aux débutants, aux seniors, en rééducation ou pendant la grossesse (avec avis médical)." } },
+        "b9": { "type": "benefit", "settings": { "icon": "sparkle", "title": "Complément idéal", "text": "Course, danse, vélo, tennis : le Pilates renforce les bases et améliore les performances dans tous les sports." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9"],
+      "settings": { "eyebrow": "Les bienfaits", "heading": "Ce que le Pilates change dans votre corps", "text": "<p>Une pratique régulière — 2 à 3 fois par semaine — suffit pour en ressentir les effets en quelques semaines.</p>", "columns": 3, "background": "dark" }
+    },
+    "start": { "type": "image-with-text", "settings": { "eyebrow": "Bien débuter", "heading": "Pratiquer chez soi, simplement", "text": "<p><strong>1. Un bon tapis.</strong> Plus épais qu'un tapis de yoga (6 à 10 mm), il protège la colonne pendant les enroulés.</p><p><strong>2. Une tenue près du corps.</strong> Un legging et une brassière confortables permettent de vérifier son alignement.</p><p><strong>3. Des chaussettes antidérapantes.</strong> Pour l'hygiène et une adhérence parfaite, surtout sur parquet.</p><p><strong>4. De la régularité.</strong> 20 minutes trois fois par semaine valent mieux qu'une heure de temps en temps.</p>", "layout": "right", "button_label": "Voir le matériel", "button_link": "/collections/accessoires", "background": "plain" } },
+    "program": {
+      "type": "program-promo",
+      "blocks": {
+        "s1": { "type": "week", "settings": { "title": "Les fondations", "text": "Respiration, placement du bassin, activation du centre." } },
+        "s2": { "type": "week", "settings": { "title": "Force & stabilité", "text": "Gainage, travail des fessiers et du dos." } },
+        "s3": { "type": "week", "settings": { "title": "Mobilité & souplesse", "text": "Enroulés, rotations et étirements dynamiques." } },
+        "s4": { "type": "week", "settings": { "title": "Le flow complet", "text": "Enchaînements fluides avec bande élastique." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": { "background": "sand" }
+    },
+    "faq": { "type": "faq", "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Le Pilates, c'est pour les débutants ?", "answer": "<p>Oui ! Chaque exercice peut être adapté. On commence par les bases (respiration, placement) et on progresse à son rythme.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Quelle différence avec le yoga ?", "answer": "<p>Le yoga associe postures tenues, respiration et dimension méditative. Le Pilates est davantage centré sur le renforcement des muscles profonds et le contrôle du mouvement, avec des enchaînements dynamiques.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Pilates au sol ou sur machine ?", "answer": "<p>Le Pilates au sol (Mat) se pratique partout avec un simple tapis : c'est la base de la méthode. Le Reformer, en studio, ajoute la résistance de ressorts. Les deux sont complémentaires.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Au bout de combien de temps voit-on des résultats ?", "answer": "<p>La plupart des pratiquants ressentent plus de légèreté et une meilleure posture après 4 à 6 semaines de pratique régulière.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "Y a-t-il des contre-indications ?", "answer": "<p>Le Pilates est doux, mais en cas de grossesse, de hernie, d'opération récente ou de douleurs, demandez l'avis de votre médecin ou d'un kinésithérapeute.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": { "background": "alt" }
+    },
+    "newsletter": { "type": "newsletter", "settings": { "background": "plain" } }
+  },
+  "order": ["hero", "intro", "story", "principles", "benefits", "start", "program", "faq", "newsletter"]
+}

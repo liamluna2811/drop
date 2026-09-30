@@ -1,0 +1,49 @@
+{%- liquid
+  assign collection = section.settings.collection
+  if collection == blank
+    assign collection = collections.all
+  endif
+  assign columns = section.settings.columns
+-%}
+<section class="section section--{{ section.settings.background }}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | default: collection.title | escape }}</h2>
+      {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- endif -%}
+    </div>
+    <ul class="product-grid reveal" style="--columns: {{ columns }};">
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        <li>{% render 'product-card', product: product, index: forloop.index %}</li>
+      {%- else -%}
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <li>{% render 'product-card', product: blank, index: i %}</li>
+        {%- endfor -%}
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.show_view_all -%}
+      <div class="section-footer">
+        <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="button button--secondary">{{ 'sections.featured_collection.view_all' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection en vedette",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Sélection" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Nos essentiels" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Nombre de produits", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns", "label": "Colonnes (ordinateur)", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Bouton « Tout voir »", "default": true },
+    { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+    ] }
+  ],
+  "presets": [{ "name": "Collection en vedette" }]
+}
+{% endschema %}

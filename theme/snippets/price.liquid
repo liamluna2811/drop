@@ -1,0 +1,39 @@
+{%- comment -%}
+  Affiche le prix d'un produit.
+  - product: objet produit
+  - use_variant: true pour utiliser la variante sélectionnée
+{%- endcomment -%}
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+  assign price = target.price
+  assign compare_at = target.compare_at_price
+  if use_variant
+    assign on_sale = false
+    if compare_at > price
+      assign on_sale = true
+    endif
+  else
+    assign compare_at = product.compare_at_price_min
+    assign on_sale = false
+    if compare_at > price
+      assign on_sale = true
+    endif
+  endif
+-%}
+<div class="price{% if on_sale %} price--sale{% endif %}"{% if use_variant %} data-price{% endif %}>
+  <span class="price__current">
+    {%- if use_variant == blank and product.price_varies -%}
+      {%- assign price_money = price | money -%}
+      {{ 'products.from_price_html' | t: price: price_money }}
+    {%- else -%}
+      {{ price | money }}
+    {%- endif -%}
+  </span>
+  {%- if on_sale -%}
+    <s>{{ compare_at | money }}</s>
+  {%- endif -%}
+</div>

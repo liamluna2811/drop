@@ -1,0 +1,94 @@
+{%- comment -%}
+  Les univers de la boutique : Accessoires et Vêtements, chacun avec ses sous-catégories.
+{%- endcomment -%}
+<section class="section section--{{ section.settings.background }}">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- endif -%}
+    </div>
+    <div class="universes">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'universe' -%}
+          {%- assign main_url = block.settings.collection.url | default: routes.all_products_collection_url -%}
+          <article class="universe reveal" {{ block.shopify_attributes }}>
+            <div class="universe__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 800px) 50vw, 100vw', widths: '600, 900, 1200' }}
+              {%- elsif block.settings.collection.featured_image -%}
+                {{ block.settings.collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 800px) 50vw, 100vw', widths: '600, 900, 1200' }}
+              {%- else -%}
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="universe__content">
+              <span class="eyebrow" style="color: var(--color-sand)">{{ block.settings.eyebrow | escape }}</span>
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+              <ul class="universe__links">
+                {%- for i in (1..4) -%}
+                  {%- capture label_key -%}link_{{ i }}_label{%- endcapture -%}
+                  {%- capture url_key -%}link_{{ i }}_collection{%- endcapture -%}
+                  {%- assign label = block.settings[label_key] -%}
+                  {%- assign sub = block.settings[url_key] -%}
+                  {%- if label != blank -%}
+                    <li><a href="{{ sub.url | default: main_url }}">{{ label | escape }}</a></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+              <a href="{{ main_url }}" class="button button--light">{{ block.settings.button_label | escape }}</a>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Univers de la boutique",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Nos univers" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Tout pour votre pratique" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Choisissez votre univers : l'équipement qui vous accompagne sur le tapis, ou la tenue qui suit chacun de vos mouvements.</p>" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
+      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "universe",
+      "name": "Univers",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "collection", "id": "collection", "label": "Collection principale" },
+        { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Univers" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Accessoires" },
+        { "type": "text", "id": "text", "label": "Texte" },
+        { "type": "text", "id": "button_label", "label": "Bouton", "default": "Tout voir" },
+        { "type": "header", "content": "Sous-catégories" },
+        { "type": "text", "id": "link_1_label", "label": "Sous-catégorie 1" },
+        { "type": "collection", "id": "link_1_collection", "label": "Collection 1" },
+        { "type": "text", "id": "link_2_label", "label": "Sous-catégorie 2" },
+        { "type": "collection", "id": "link_2_collection", "label": "Collection 2" },
+        { "type": "text", "id": "link_3_label", "label": "Sous-catégorie 3" },
+        { "type": "collection", "id": "link_3_collection", "label": "Collection 3" },
+        { "type": "text", "id": "link_4_label", "label": "Sous-catégorie 4" },
+        { "type": "collection", "id": "link_4_collection", "label": "Collection 4" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Univers de la boutique",
+      "blocks": [
+        { "type": "universe", "settings": { "eyebrow": "Univers 01", "title": "Accessoires", "text": "Tapis épais, bandes élastiques, briques et balles : l'équipement qui soutient chaque exercice.", "link_1_label": "Tapis de sol", "link_2_label": "Bandes élastiques", "link_3_label": "Petits accessoires" } },
+        { "type": "universe", "settings": { "eyebrow": "Univers 02", "title": "Vêtements", "text": "Des matières douces et respirantes, pensées pour s'étirer, rouler et tenir la posture.", "link_1_label": "Leggings", "link_2_label": "Brassières", "link_3_label": "Chaussettes antidérapantes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
