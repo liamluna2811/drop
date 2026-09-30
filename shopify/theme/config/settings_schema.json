@@ -10,8 +10,8 @@
   {
     "name": "Boutique",
     "settings": [
-      { "type": "text", "id": "announcement", "label": "Bandeau d'annonce", "default": "Livraison offerte dès 80 €" },
-      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (en euros)", "default": 80 }
+      { "type": "text", "id": "announcement", "label": "Bandeau d'annonce", "default": "Livraison offerte dès 60 € en France et en Europe" },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (en euros)", "default": 60 }
     ]
   }
 ]
