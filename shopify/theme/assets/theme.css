@@ -17,7 +17,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 h1,h2,h3{font-family:var(--display);line-height:1;letter-spacing:-.01em;font-weight:400}
 :focus-visible{outline:3px solid var(--lime);outline-offset:3px}
 
-.topbar{background:var(--lime);color:var(--ink);text-align:center;font-size:.8rem;font-weight:600;padding:.55rem 1rem;letter-spacing:.02em}
+.topbar{position:relative;background:var(--lime);color:var(--ink);text-align:center;font-size:.8rem;font-weight:600;padding:.55rem 4.5rem;letter-spacing:.02em}
 
 .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,3rem);background:rgba(246,244,238,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(11,27,43,.08)}
 .logo{font-family:var(--display);font-size:1.25rem;letter-spacing:.02em}
@@ -276,3 +276,16 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:3px solid var(--lime);
 .reco{padding-top:0}
 .reco .section-head h2{font-size:clamp(1.5rem,3.5vw,2.2rem)}
 .reco-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+
+/* Sélecteur de langue */
+.topbar{position:relative;padding-left:4.5rem;padding-right:4.5rem}
+.lang-switch{position:absolute;right:clamp(.6rem,2vw,1.5rem);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:.35rem;font-size:.78rem}
+.lang-btn{font:inherit;font-weight:700;letter-spacing:.05em;padding:.15rem .4rem;border-radius:6px;opacity:.6}
+.lang-btn[aria-pressed="true"]{background:var(--ink);color:var(--lime);opacity:1}
+.lang-btn:hover{opacity:1}
+/* Masquer l'interface Google Translate */
+.goog-te-banner-frame,.skiptranslate iframe,#goog-gt-tt,.goog-te-balloon-frame{display:none!important}
+body{top:0!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
+font{vertical-align:baseline!important}
+@media (max-width:520px){.topbar{padding-left:.8rem;padding-right:4.2rem;font-size:.72rem}}

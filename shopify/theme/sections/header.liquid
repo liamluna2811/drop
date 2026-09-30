@@ -1,6 +1,13 @@
-<div class="topbar">{{ settings.announcement }}</div>
+<div class="topbar">
+  <span class="topbar-text">{{ settings.announcement }}</span>
+  <div class="lang-switch notranslate" translate="no" role="group" aria-label="Langue / Language">
+    <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true">FR</button>
+    <span aria-hidden="true">/</span>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</div>
 <header class="nav">
-  <a href="{{ routes.root_url }}" class="logo"><img class="logo-mark" src="{{ 'logo-mark.png' | asset_url }}" alt="" width="42" height="43">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
+  <a href="{{ routes.root_url }}" class="logo notranslate" translate="no"><img class="logo-mark" src="{{ 'logo-mark.png' | asset_url }}" alt="" width="42" height="43">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
   <nav>
     {%- assign menu = linklists[section.settings.menu] -%}
     {%- if menu.links.size > 0 -%}

@@ -158,4 +158,61 @@
         .then(function () { btn.disabled = false; });
     });
   }
+
+  // Langue : FR / EN (traduction automatique Google, chargée uniquement si le visiteur choisit EN) --------
+  (function () {
+    var buttons = [].slice.call(document.querySelectorAll('.lang-btn'));
+    if (!buttons.length) return;
+    var loaded = false;
+
+    function setCookie(name, value, days) {
+      var d = new Date(); d.setTime(d.getTime() + (days || 0) * 864e5);
+      var exp = days ? '; expires=' + d.toUTCString() : '; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      var host = location.hostname, parts = host.split('.');
+      document.cookie = name + '=' + value + exp + '; path=/';
+      document.cookie = name + '=' + value + exp + '; path=/; domain=' + host;
+      if (parts.length > 2) document.cookie = name + '=' + value + exp + '; path=/; domain=.' + parts.slice(-2).join('.');
+    }
+    function current() {
+      return /(?:^|; )googtrans=\/fr\/en/.test(document.cookie) ? 'en' : 'fr';
+    }
+    function mark(lang) {
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false'); });
+      document.documentElement.setAttribute('data-lang', lang);
+    }
+    function load(cb) {
+      if (loaded) { cb && cb(); return; }
+      loaded = true;
+      window.googleTranslateElementInit = function () {
+        new google.translate.TranslateElement({ pageLanguage: 'fr', includedLanguages: 'en,fr', autoDisplay: false }, 'google_translate_element');
+        cb && cb();
+      };
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    function applyEnglish() {
+      var tries = 0;
+      (function wait() {
+        var sel = document.querySelector('.goog-te-combo');
+        if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); return; }
+        if (tries++ < 40) setTimeout(wait, 150);
+      })();
+    }
+    function choose(lang) {
+      if (lang === current() && (lang === 'fr' || loaded)) return;
+      if (lang === 'en') {
+        setCookie('googtrans', '/fr/en', 365);
+        mark('en');
+        load(applyEnglish);
+      } else {
+        setCookie('googtrans', '', 0);
+        mark('fr');
+        location.reload();
+      }
+    }
+    buttons.forEach(function (b) { b.addEventListener('click', function () { choose(b.dataset.lang); }); });
+    if (current() === 'en') { mark('en'); load(); } else { mark('fr'); }
+  })();
 })();
