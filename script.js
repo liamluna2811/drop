@@ -20,7 +20,7 @@ const PRODUCTS = [
     colors: [['Blanc', '#ffffff', '#1b2b4b'], ['Sable', '#efe3c8', '#1b2b4b'], ['Ciel', '#bfe0ff', '#1b2b4b']], img: 'assets/cote-azur.webp' }
 ];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
-const FREE_SHIPPING = 60;
+const FREE_SHIPPING = 80;
 
 // T-shirt SVG ---------------------------------------------------------
 function shirt(bg, collar, img) {

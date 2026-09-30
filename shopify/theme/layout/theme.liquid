@@ -15,7 +15,7 @@
     window.theme = {
       currency: {{ cart.currency.iso_code | json }},
       locale: {{ request.locale.iso_code | json }},
-      freeShipping: {{ settings.free_shipping_threshold | default: 60 | times: 100 }}
+      freeShipping: {{ settings.free_shipping_threshold | default: 80 | times: 100 }}
     };
   </script>
 </head>
