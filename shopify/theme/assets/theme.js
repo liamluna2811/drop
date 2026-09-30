@@ -84,6 +84,15 @@
     }
     var colorOf = function (el) { return el.dataset.color || mediaColor[el.dataset.mediaId || el.dataset.thumb] || ''; };
 
+    var loadScript = function (src) {
+      return new Promise(function (resolve, reject) {
+        var el = document.createElement('script');
+        el.src = src; el.async = true;
+        el.onload = resolve;
+        el.onerror = function () { reject(new Error('fichier introuvable : ' + src)); };
+        document.head.appendChild(el);
+      });
+    };
     var load3D = function () {
       if (load3D.done) return;
       load3D.done = true;
@@ -91,14 +100,17 @@
       var cfg = (window.theme || {}).bottle;
       if (!host || !cfg) return;
       var canvasHost = host.querySelector('[data-3d-canvas]');
-      canvasHost.textContent = 'Chargement du modèle 3D…';
-      import(cfg.module).then(function (m) {
-        canvasHost.textContent = '';
-        m.mount(host, { bodyTexture: cfg.texture });
-      }).catch(function () {
-        canvasHost.textContent = 'Le modèle 3D n\'a pas pu se charger.';
+      var fail = function (err) {
+        if (window.console) console.error('Modèle 3D :', err);
+        canvasHost.textContent = 'Le modèle 3D n\'a pas pu se charger (' + (err && err.message ? err.message : err) + ').';
         load3D.done = false;
-      });
+      };
+      canvasHost.textContent = 'Chargement du modèle 3D…';
+      (window.BottleViewer ? Promise.resolve() : loadScript(cfg.module)).then(function () {
+        canvasHost.textContent = '';
+        var viewer = window.BottleViewer.mount(host, { bodyTexture: cfg.texture });
+        if (!viewer) load3D.done = false;
+      }).catch(fail);
     };
 
     var showMedia = function (id) {
