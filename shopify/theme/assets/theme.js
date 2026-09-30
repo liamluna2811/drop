@@ -70,14 +70,56 @@
     var variants = JSON.parse(dataEl.textContent);
     var btn = $('#addToCart'), err = $('#formError');
 
+    var slides = [].slice.call(document.querySelectorAll('.slide'));
+    var thumbs = [].slice.call(document.querySelectorAll('.thumb'));
+    var colorInput = form.querySelector('input[data-color-option]');
+    var colorIdx = colorInput ? +colorInput.dataset.index : -1;
+
+    // Couleur de chaque image : détectée dans le nom du fichier, sinon via l'image de la variante
+    var mediaColor = {};
+    if (colorIdx > -1) {
+      variants.forEach(function (v) {
+        if (v.featured_media) mediaColor[v.featured_media.id] = v.options[colorIdx];
+      });
+    }
+    var colorOf = function (el) { return el.dataset.color || mediaColor[el.dataset.mediaId || el.dataset.thumb] || ''; };
+
     var showMedia = function (id) {
       if (!id) return;
-      document.querySelectorAll('.slide').forEach(function (s) { s.classList.toggle('on', s.dataset.mediaId == id); });
-      document.querySelectorAll('.thumb').forEach(function (t) { t.classList.toggle('on', t.dataset.thumb == id); });
+      slides.forEach(function (s) { s.classList.toggle('on', s.dataset.mediaId == id); });
+      thumbs.forEach(function (t) { t.classList.toggle('on', t.dataset.thumb == id); });
     };
-    document.querySelectorAll('.thumb').forEach(function (t) {
+    thumbs.forEach(function (t) {
       t.addEventListener('click', function () { showMedia(t.dataset.thumb); });
     });
+
+    // N'affiche que les images de la couleur choisie (les images sans couleur restent visibles)
+    var filterByColor = function (color, preferredId) {
+      var visible = [];
+      slides.forEach(function (s) {
+        var c = colorOf(s), show = !c || !color || c === color;
+        s.hidden = !show;
+        if (show) visible.push(s.dataset.mediaId);
+      });
+      thumbs.forEach(function (t) {
+        var c = colorOf(t), show = !c || !color || c === color;
+        t.hidden = !show;
+      });
+      var wrap = document.querySelector('.thumbs');
+      if (wrap) wrap.hidden = visible.length < 2;
+      var pick = preferredId && visible.indexOf(String(preferredId)) > -1 ? preferredId : visible[0];
+      showMedia(pick);
+    };
+
+    var selectedColor = function () {
+      var r = colorInput && form.querySelector('input[data-color-option]:checked');
+      return r ? r.value : '';
+    };
+    var lastColor = selectedColor();
+    if (colorIdx > -1) {
+      var v0 = variants.find(function (v) { return String(v.id) === $('#variantId').value; });
+      filterByColor(lastColor, v0 && v0.featured_media && v0.featured_media.id);
+    }
 
     var current = function () {
       var picked = [];
@@ -97,7 +139,8 @@
       $('#productPrice').textContent = fmt(v.price);
       btn.disabled = !v.available;
       btn.textContent = v.available ? 'Ajouter au panier' : 'Épuisé';
-      if (v.featured_media) showMedia(v.featured_media.id);
+      var color = selectedColor();
+      if (colorIdx > -1 && color !== lastColor) { lastColor = color; filterByColor(color, v.featured_media && v.featured_media.id); }
       history.replaceState(null, '', '?variant=' + v.id);
     });
 

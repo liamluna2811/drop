@@ -22,7 +22,7 @@
       <div class="swatches">
         {%- for value in color_option.values -%}
           {%- assign v = product.variants | where: 'option1', value | first -%}
-          <a class="sw" href="{{ product.url }}?variant={{ v.id }}" aria-label="{{ value | escape }}" title="{{ value | escape }}" style="background:{% render 'color-hex', name: value %}"></a>
+          <a class="sw" href="{{ product.url }}?variant={{ v.id }}" aria-label="{{ value | escape }}" title="{{ value | escape }}" style="background:#cccccc;background:{% render 'color-hex', name: value %}"></a>
         {%- endfor -%}
       </div>
     {%- endif -%}

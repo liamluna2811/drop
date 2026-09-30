@@ -227,3 +227,5 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:3px solid var(--lime);
 .rte blockquote{background:var(--white);padding:1.5rem;border-radius:var(--radius);margin-top:1rem}
 .rte blockquote::before{content:none}
 .rte blockquote p+p{margin-top:.8rem}
+
+.slide[hidden],.thumb[hidden],.thumbs[hidden]{display:none!important}

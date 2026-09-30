@@ -1,9 +1,27 @@
 {%- assign current = product.selected_or_first_available_variant -%}
 <section class="section product" data-product-section>
+  {%- assign color_option = nil -%}
+{%- for option in product.options_with_values -%}
+  {%- assign oname = option.name | downcase -%}
+  {%- if oname == 'couleur' or oname == 'color' or oname == 'colour' -%}{%- assign color_option = option -%}{%- endif -%}
+{%- endfor -%}
   <div class="gallery">
     <div class="gallery-main">
       {%- for media in product.media -%}
-        <div class="slide{% if forloop.first %} on{% endif %}" data-media-id="{{ media.id }}">
+        {%- assign src = media.preview_image.src | downcase -%}
+        {%- assign media_color = '' -%}
+        {%- assign best = 0 -%}
+        {%- if color_option -%}
+          {%- for value in color_option.values -%}
+            {%- assign slug = value | handleize -%}
+            {%- assign p1 = '-' | append: slug | append: '-' -%}
+            {%- assign p2 = '-' | append: slug | append: '.' -%}
+            {%- if src contains p1 or src contains p2 -%}
+              {%- if slug.size > best -%}{%- assign media_color = value -%}{%- assign best = slug.size -%}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        <div class="slide{% if forloop.first %} on{% endif %}" data-media-id="{{ media.id }}" data-color="{{ media_color | escape }}">
           {{ media | image_url: width: 1000 | image_tag: widths: '500, 1000', alt: media.alt | default: product.title, loading: 'eager' }}
         </div>
       {%- else -%}
@@ -13,7 +31,21 @@
     {%- if product.media.size > 1 -%}
       <div class="thumbs">
         {%- for media in product.media -%}
-          <button type="button" class="thumb{% if forloop.first %} on{% endif %}" data-thumb="{{ media.id }}" aria-label="Image {{ forloop.index }}">
+          {%- assign src = media.preview_image.src | downcase -%}
+          {%- assign media_color = '' -%}
+          {%- assign best = 0 -%}
+          {%- if color_option -%}
+            {%- for value in color_option.values -%}
+              {%- assign slug = value | handleize -%}
+              {%- assign p1 = '-' | append: slug | append: '-' -%}
+              {%- assign p2 = '-' | append: slug | append: '.' -%}
+              {%- if src contains p1 or src contains p2 -%}
+                {%- if slug.size > best -%}{%- assign media_color = value -%}{%- assign best = slug.size -%}{%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if src contains '-back' -%}{%- assign view_label = 'Arrière' -%}{%- elsif src contains '-front' -%}{%- assign view_label = 'Avant' -%}{%- else -%}{%- assign view_label = 'Image ' | append: forloop.index -%}{%- endif -%}
+          <button type="button" class="thumb{% if forloop.first %} on{% endif %}" data-thumb="{{ media.id }}" data-color="{{ media_color | escape }}" aria-label="{{ view_label }}">
             {{ media | image_url: width: 160 | image_tag: alt: '' }}
           </button>
         {%- endfor -%}
@@ -37,9 +69,9 @@
             <legend>{{ option.name }} : <span data-selected-name="{{ forloop.index0 }}">{{ option.selected_value }}</span></legend>
             <div class="opt-values">
               {%- for value in option.values -%}
-                <input type="radio" class="visually-hidden" id="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" data-index="{{ forloop.parentloop.index0 }}"{% if option.selected_value == value %} checked{% endif %}>
+                <input type="radio" class="visually-hidden" id="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" data-index="{{ forloop.parentloop.index0 }}"{% if is_color %} data-color-option{% endif %}{% if option.selected_value == value %} checked{% endif %}>
                 {%- if is_color -%}
-                  <label class="sw big" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" title="{{ value | escape }}" style="background:{% render 'color-hex', name: value %}"><span class="visually-hidden">{{ value }}</span></label>
+                  <label class="sw big" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" title="{{ value | escape }}" style="background:#cccccc;background:{% render 'color-hex', name: value %}"><span class="visually-hidden">{{ value }}</span></label>
                 {%- else -%}
                   <label class="size" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}">{{ value }}</label>
                 {%- endif -%}
