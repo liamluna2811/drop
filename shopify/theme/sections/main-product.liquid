@@ -1,4 +1,6 @@
 {%- assign current = product.selected_or_first_available_variant -%}
+{%- assign has_3d = false -%}
+{%- if product.tags contains '3d-bouteille' -%}{%- assign has_3d = true -%}{%- endif -%}
 <section class="section product" data-product-section>
   {%- assign color_option = nil -%}
 {%- for option in product.options_with_values -%}
@@ -27,8 +29,18 @@
       {%- else -%}
         <div class="slide on">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
       {%- endfor -%}
+      {%- if has_3d -%}
+        <div class="slide slide-3d" data-media-id="3d" data-color="">
+          <div data-3d-canvas></div>
+          <p class="viewer-hint" data-3d-hint>Glisse pour tourner · pince pour zoomer</p>
+          <div class="viewer-tools">
+            <button type="button" data-3d-cap aria-pressed="false">Bouchon</button>
+            <button type="button" data-3d-reset>Recentrer</button>
+          </div>
+        </div>
+      {%- endif -%}
     </div>
-    {%- if product.media.size > 1 -%}
+    {%- if product.media.size > 1 or has_3d -%}
       <div class="thumbs">
         {%- for media in product.media -%}
           {%- assign src = media.preview_image.src | downcase -%}
@@ -49,6 +61,9 @@
             {{ media | image_url: width: 160 | image_tag: alt: '' }}
           </button>
         {%- endfor -%}
+        {%- if has_3d -%}
+          <button type="button" class="thumb thumb-3d" data-thumb="3d" data-color="" aria-label="Modèle 3D">3D</button>
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>
@@ -95,6 +110,10 @@
       <li>Paiement 100 % sécurisé</li>
     </ul>
   </div>
+  {%- if has_3d -%}
+    <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }</script>
+    <script>window.theme = window.theme || {}; window.theme.bottle = { module: {{ 'bottle-3d.js' | asset_url | json }}, texture: {{ 'bottle-body.jpg' | asset_url | json }} };</script>
+  {%- endif -%}
   <script type="application/json" id="product-json">{{ product.variants | json }}</script>
 </section>
 {% schema %}

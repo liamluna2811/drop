@@ -84,8 +84,26 @@
     }
     var colorOf = function (el) { return el.dataset.color || mediaColor[el.dataset.mediaId || el.dataset.thumb] || ''; };
 
+    var load3D = function () {
+      if (load3D.done) return;
+      load3D.done = true;
+      var host = document.querySelector('.slide-3d');
+      var cfg = (window.theme || {}).bottle;
+      if (!host || !cfg) return;
+      var canvasHost = host.querySelector('[data-3d-canvas]');
+      canvasHost.textContent = 'Chargement du modèle 3D…';
+      import(cfg.module).then(function (m) {
+        canvasHost.textContent = '';
+        m.mount(host, { bodyTexture: cfg.texture });
+      }).catch(function () {
+        canvasHost.textContent = 'Le modèle 3D n\'a pas pu se charger.';
+        load3D.done = false;
+      });
+    };
+
     var showMedia = function (id) {
       if (!id) return;
+      if (String(id) === '3d') load3D();
       slides.forEach(function (s) { s.classList.toggle('on', s.dataset.mediaId == id); });
       thumbs.forEach(function (t) { t.classList.toggle('on', t.dataset.thumb == id); });
     };

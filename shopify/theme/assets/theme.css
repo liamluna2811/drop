@@ -289,3 +289,14 @@ body{top:0!important}
 .goog-text-highlight{background:none!important;box-shadow:none!important}
 font{vertical-align:baseline!important}
 @media (max-width:520px){.topbar{padding-left:.8rem;padding-right:4.2rem;font-size:.72rem}}
+
+/* Visionneuse 3D */
+.slide-3d{background:radial-gradient(circle at 50% 38%,#ffffff 0%,#e4e8ed 100%)}
+.slide-3d [data-3d-canvas]{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:.9rem;text-align:center;padding:1rem}
+.slide-3d canvas{cursor:grab}
+.slide-3d canvas:active{cursor:grabbing}
+.viewer-hint{position:absolute;left:0;right:0;bottom:1rem;text-align:center;font-size:.8rem;color:var(--muted);pointer-events:none;transition:opacity .4s}
+.viewer-tools{position:absolute;top:.8rem;right:.8rem;display:flex;gap:.4rem;z-index:2}
+.viewer-tools button{background:var(--white);border:1.5px solid rgba(11,27,43,.2);border-radius:999px;padding:.35rem .8rem;font-size:.8rem;font-weight:600}
+.viewer-tools button[aria-pressed="true"]{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+.thumb-3d{display:grid;place-items:center;font-family:var(--display);font-size:1rem;background:var(--ink);color:var(--lime)}
