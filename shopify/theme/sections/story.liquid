@@ -1,10 +1,11 @@
-<section class="section split">
+<section class="section split" id="histoire">
   <div class="split-visual">
     <div class="split-shirt">
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: section.settings.image.alt }}
-      {%- else -%}
-        <img src="{{ 'mockup-story-2.png' | asset_url }}" alt="T-shirt Padel Club" width="800" height="800" loading="lazy">
+      {%- elsif collections['textiles'].products.first.featured_media -%}
+        {%- assign story_product = collections['textiles'].products.first -%}
+        {{ story_product.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', alt: story_product.title }}
       {%- endif -%}
     </div>
   </div>
@@ -20,9 +21,9 @@
   "name": "Notre histoire",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Notre histoire" },
-    { "type": "text", "id": "title", "label": "Titre", "default": "Né sur un court, pas dans un bureau." },
-    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Bandeja Club, c'est trois potes, un terrain de quartier et une frustration : aucun t-shirt de padel qui soit à la fois technique et beau. Alors on les a dessinés nous-mêmes.</p><p>Chaque drop est produit en série courte. Quand c'est épuisé, c'est fini.</p>" },
-    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Rejoindre le club" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Le padel, sur toi." },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Bandeja Club propose des t-shirts, des brassières et des accessoires pour les joueurs de padel, avec des designs pensés autour du jeu : la bandeja, la vitre, le lob.</p><p>Chaque pièce est imprimée à la demande, après ta commande.</p>" },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Voir les produits" },
     { "type": "url", "id": "button_url", "label": "Lien du bouton" },
     { "type": "image_picker", "id": "image", "label": "Image (par défaut : t-shirt Padel Club)" }
   ],
