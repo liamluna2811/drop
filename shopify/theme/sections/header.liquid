@@ -1,5 +1,11 @@
 <div class="topbar">
-  <span class="topbar-text">{{ settings.announcement }}</span>
+  <span class="topbar-text">
+    {%- if customer -%}
+      {{ settings.announcement_customer }}
+    {%- else -%}
+      <a href="{{ routes.account_register_url }}">{{ settings.announcement }}</a>
+    {%- endif -%}
+  </span>
   <div class="lang-switch notranslate" translate="no" role="group" aria-label="Langue / Language">
     <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true">FR</button>
     <span aria-hidden="true">/</span>
@@ -27,9 +33,16 @@
       <a href="{{ routes.all_products_collection_url }}">Collection</a>
     {%- endif -%}
   </nav>
-  <button class="cart-btn" id="openCart" type="button" aria-label="Ouvrir le panier">
-    Panier <span id="cartCount">{{ cart.item_count }}</span>
-  </button>
+  <div class="nav-actions">
+    {%- if customer -%}
+      <a class="account-link" href="{{ routes.account_url }}">Mon compte</a>
+    {%- else -%}
+      <a class="account-link" href="{{ routes.account_login_url }}">Connexion</a>
+    {%- endif -%}
+    <button class="cart-btn" id="openCart" type="button" aria-label="Ouvrir le panier">
+      Panier <span id="cartCount">{{ cart.item_count }}</span>
+    </button>
+  </div>
 </header>
 {% schema %}
 {

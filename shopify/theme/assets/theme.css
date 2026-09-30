@@ -300,3 +300,11 @@ font{vertical-align:baseline!important}
 .viewer-tools button{background:var(--white);border:1.5px solid rgba(11,27,43,.2);border-radius:999px;padding:.35rem .8rem;font-size:.8rem;font-weight:600}
 .viewer-tools button[aria-pressed="true"]{background:var(--ink);color:var(--lime);border-color:var(--ink)}
 .thumb-3d{display:grid;place-items:center;font-family:var(--display);font-size:1rem;background:var(--ink);color:var(--lime)}
+
+/* Compte client et offre de bienvenue */
+.topbar-text a{text-decoration:underline;text-underline-offset:3px}
+.nav-actions{display:flex;align-items:center;gap:1rem}
+.account-link{font-weight:600;font-size:.9rem;opacity:.85}
+.account-link:hover{opacity:1;text-decoration:underline}
+.welcome-note{background:var(--lime);color:var(--ink);border-radius:12px;padding:.7rem .9rem;font-size:.85rem}
+.welcome-note a{text-decoration:underline}

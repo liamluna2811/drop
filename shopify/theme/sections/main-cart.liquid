@@ -20,6 +20,7 @@
       </div>
       <div class="cart-total">
         <div class="total"><span>Total</span><strong>{{ cart.total_price | money }}</strong></div>
+        {%- unless customer -%}<p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>{%- endunless -%}
         <p class="ship">Taxes incluses. Frais de livraison calculés à l'étape suivante.</p>
         <div class="cart-actions">
           <button type="submit" name="update" class="btn ghost">Mettre à jour</button>
