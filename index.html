@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BANDEJA CLUB — T-shirts de padel</title>
+<meta name="description" content="T-shirts de padel techniques et stylés. Respirants, coupe athlétique, éditions limitées. Livraison offerte dès 60 €.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">Livraison offerte dès 60 € · Retours gratuits 30 jours</div>
+
+<header class="nav">
+  <a href="#top" class="logo">BANDEJA<span>CLUB</span></a>
+  <nav>
+    <a href="#collection">Collection</a>
+    <a href="#tech">Technologie</a>
+    <a href="#avis">Avis</a>
+    <a href="#newsletter">Newsletter</a>
+  </nav>
+  <button class="cart-btn" id="openCart" aria-label="Ouvrir le panier">
+    Panier <span id="cartCount">0</span>
+  </button>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Drop #03 — Saison 2026</p>
+      <h1>Joue<br>comme<br><em>tu vis.</em></h1>
+      <p class="lead">Des t-shirts de padel conçus sur le court : ultra-légers, respirants, et assez stylés pour l'afterwork.</p>
+      <div class="hero-cta">
+        <a href="#collection" class="btn">Voir la collection</a>
+        <a href="#tech" class="btn ghost">Pourquoi nous ?</a>
+      </div>
+      <ul class="hero-stats">
+        <li><strong>4,9/5</strong>2 300+ avis</li>
+        <li><strong>140 g</strong>tissu ultra-léger</li>
+        <li><strong>48 h</strong>livraison express</li>
+      </ul>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="ball"></div>
+      <div id="heroShirt"></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>BANDEJA</span><span>VÍBORA</span><span>SMASH</span><span>CHIQUITA</span><span>GLOBO</span><span>REMATE</span>
+      <span>BANDEJA</span><span>VÍBORA</span><span>SMASH</span><span>CHIQUITA</span><span>GLOBO</span><span>REMATE</span>
+    </div>
+  </div>
+
+  <section class="section" id="collection">
+    <div class="section-head">
+      <p class="eyebrow">La collection</p>
+      <h2>Six maillots, zéro compromis.</h2>
+    </div>
+    <div class="filters" id="filters">
+      <button class="chip active" data-f="all">Tous</button>
+      <button class="chip" data-f="homme">Homme</button>
+      <button class="chip" data-f="femme">Femme</button>
+      <button class="chip" data-f="limited">Édition limitée</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="section tech" id="tech">
+    <div class="section-head light">
+      <p class="eyebrow">Technologie</p>
+      <h2>Pensé pour les longs échanges.</h2>
+    </div>
+    <div class="features">
+      <article><span class="ico">◐</span><h3>AirDry™</h3><p>Micro-mesh qui évacue la transpiration 2× plus vite qu'un coton classique.</p></article>
+      <article><span class="ico">↔</span><h3>Coupe mouvement</h3><p>Manches raglan et coutures plates pour lever le bras sans frotter.</p></article>
+      <article><span class="ico">☀</span><h3>Anti-UV 50+</h3><p>Protégé pour les sessions en plein air, même à midi.</p></article>
+      <article><span class="ico">♻</span><h3>Éco-conçu</h3><p>78 % polyester recyclé, teintures certifiées OEKO-TEX®.</p></article>
+    </div>
+  </section>
+
+  <section class="section split">
+    <div class="split-visual" aria-hidden="true">
+      <div id="splitShirt"></div>
+    </div>
+    <div class="split-text">
+      <p class="eyebrow">Notre histoire</p>
+      <h2>Né sur un court, pas dans un bureau.</h2>
+      <p>Bandeja Club, c'est trois potes, un terrain de quartier et une frustration : aucun t-shirt de padel qui soit à la fois technique <em>et</em> beau. Alors on les a dessinés nous-mêmes.</p>
+      <p>Chaque drop est produit en série courte. Quand c'est épuisé, c'est fini.</p>
+      <a href="#collection" class="btn">Rejoindre le club</a>
+    </div>
+  </section>
+
+  <section class="section" id="avis">
+    <div class="section-head">
+      <p class="eyebrow">Ils l'ont porté</p>
+      <h2>Validé par les joueurs.</h2>
+    </div>
+    <div class="reviews">
+      <blockquote>“Le meilleur t-shirt que j'ai porté en match. Sec après 90 minutes, et il ne colle pas.”<cite>— Thomas, classé P250</cite></blockquote>
+      <blockquote>“Enfin des couleurs qui sortent de l'ordinaire. Les copines de mon équipe en veulent toutes un.”<cite>— Camille, Lyon</cite></blockquote>
+      <blockquote>“Taille parfaite, coutures nickel. Je l'ai même mis au bureau le lendemain.”<cite>— Karim, Marseille</cite></blockquote>
+    </div>
+  </section>
+
+  <section class="section newsletter" id="newsletter">
+    <h2>Ne rate aucun drop.</h2>
+    <p>−10 % sur ta première commande et accès anticipé aux éditions limitées.</p>
+    <form id="nlForm">
+      <input type="email" required placeholder="ton@email.com" aria-label="Adresse email">
+      <button class="btn dark" type="submit">Je m'inscris</button>
+    </form>
+    <p class="nl-msg" id="nlMsg" role="status"></p>
+  </section>
+</main>
+
+<footer class="footer">
+  <a href="#top" class="logo">BANDEJA<span>CLUB</span></a>
+  <p>© 2026 Bandeja Club · Paiement sécurisé · Livraison en France & Europe</p>
+</footer>
+
+<!-- Panier -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Panier">
+  <div class="drawer-head"><h3>Ton panier</h3><button id="closeCart" aria-label="Fermer">✕</button></div>
+  <div class="drawer-body" id="cartItems"></div>
+  <div class="drawer-foot">
+    <div class="ship" id="shipMsg"></div>
+    <div class="total"><span>Total</span><strong id="cartTotal">0 €</strong></div>
+    <button class="btn full" id="checkout">Commander</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
