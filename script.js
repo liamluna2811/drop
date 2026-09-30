@@ -26,9 +26,9 @@ const FREE_SHIPPING = 60;
 function shirt(bg, collar, img) {
   const shade = 'rgba(0,0,0,.09)';
   return `<svg viewBox="0 0 400 400" role="img" aria-label="T-shirt">
-    <path d="M140 52c16 22 104 22 120 0l84 36 40 78-52 28-24-30v198c0 10-8 18-18 18H130c-10 0-18-8-18-18V164l-24 30-52-28 40-78z" fill="${bg}" stroke="rgba(11,27,43,.18)" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M140 52c16 22 104 22 120 0l84 36 40 78-52 28-24-30v198c0 10-8 18-18 18H110c-10 0-18-8-18-18V164l-24 30-52-28 40-78z" fill="${bg}" stroke="rgba(11,27,43,.18)" stroke-width="2" stroke-linejoin="round"/>
     <path d="M140 52c16 22 104 22 120 0" fill="none" stroke="${collar}" stroke-width="7" stroke-linecap="round"/>
-    <path d="M112 164l-24 30M288 164l24 30" stroke="${shade}" stroke-width="3"/>
+    <path d="M92 164L58 96M308 164l34-68" stroke="${shade}" stroke-width="3" stroke-linecap="round"/>
     <image href="${img}" x="120" y="96" width="160" height="186" preserveAspectRatio="xMidYMid meet"/>
   </svg>`;
 }
