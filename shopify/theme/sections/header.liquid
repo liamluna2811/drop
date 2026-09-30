@@ -1,6 +1,6 @@
 <div class="topbar">{{ settings.announcement }}</div>
 <header class="nav">
-  <a href="{{ routes.root_url }}" class="logo">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
+  <a href="{{ routes.root_url }}" class="logo"><img class="logo-mark" src="{{ 'logo-mark.png' | asset_url }}" alt="" width="42" height="43">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
   <nav>
     {%- assign menu = linklists[section.settings.menu] -%}
     {%- if menu.links.size > 0 -%}
