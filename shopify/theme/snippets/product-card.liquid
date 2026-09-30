@@ -7,13 +7,41 @@
   <a class="card-img" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     {%- if product.tags.size > 0 -%}<span class="tag">{{ product.tags.first }}</span>{%- endif -%}
     {%- assign card_media = product.featured_media -%}
-    {%- for media in product.media -%}
-      {%- assign src = media.preview_image.src | downcase -%}
-      {%- if src contains '-white-' or src contains '-white.' or src contains '-blanc-' or src contains '-blanc.' -%}
-        {%- assign card_media = media -%}
-        {%- break -%}
-      {%- endif -%}
-    {%- endfor -%}
+    {%- assign first_color = '' -%}
+    {%- if color_option -%}{%- assign first_color = color_option.values.first | handleize -%}{%- endif -%}
+    {%- assign found = false -%}
+    {%- if first_color != '' -%}
+      {%- assign c_mid = '-' | append: first_color | append: '-' -%}
+      {%- assign c_end = '-' | append: first_color | append: '.' -%}
+      {%- for media in product.media -%}
+        {%- assign src = media.preview_image.src | split: '?' | first | downcase -%}
+        {%- if src contains c_mid or src contains c_end -%}
+          {%- assign longer = false -%}
+          {%- for other in color_option.values -%}
+            {%- assign o_slug = other | handleize -%}
+            {%- if o_slug.size > first_color.size and o_slug contains first_color -%}
+              {%- assign o_mid = '-' | append: o_slug | append: '-' -%}
+              {%- assign o_end = '-' | append: o_slug | append: '.' -%}
+              {%- if src contains o_mid or src contains o_end -%}{%- assign longer = true -%}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- unless longer -%}
+            {%- assign card_media = media -%}
+            {%- assign found = true -%}
+            {%- break -%}
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+    {%- unless found -%}
+      {%- for media in product.media -%}
+        {%- assign src = media.preview_image.src | downcase -%}
+        {%- if src contains '-white-' or src contains '-white.' or src contains '-blanc-' or src contains '-blanc.' -%}
+          {%- assign card_media = media -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endunless -%}
     {%- if card_media -%}
       {{ card_media | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 700', alt: card_media.alt | default: product.title }}
     {%- else -%}
