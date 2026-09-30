@@ -76,7 +76,7 @@ h1,h2,h3{font-family:var(--display);line-height:1;letter-spacing:-.01em;font-wei
 .card-body{padding:1.2rem 1.3rem 1.4rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
 .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
 .card h3{font-size:1.15rem;text-transform:uppercase}
-.price{font-weight:700}
+.price{font-weight:700;white-space:nowrap}
 .desc{font-size:.88rem;color:var(--muted)}
 .swatches{display:flex;gap:.45rem}
 .sw{width:22px;height:22px;border-radius:50%;border:2px solid var(--white);box-shadow:0 0 0 1.5px rgba(11,27,43,.25);transition:.2s}
