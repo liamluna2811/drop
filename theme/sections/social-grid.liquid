@@ -1,0 +1,76 @@
+{%- comment -%}
+  Galerie façon réseaux sociaux (#pilatesetmoi) : cartes polaroïd légèrement inclinées.
+  Sans image, chaque carte affiche un fond doux avec une icône.
+{%- endcomment -%}
+<section class="section section--{{ section.settings.background }} social">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{% render 'rich-heading', text: section.settings.heading %}</h2>
+      {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- endif -%}
+    </div>
+    <ul class="social__grid">
+      {%- for block in section.blocks -%}
+        <li class="polaroid reveal" {{ block.shopify_attributes }}>
+          <div class="polaroid__media polaroid__media--{{ forloop.index | modulo: 4 }}">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw', widths: '350, 500, 700' }}
+            {%- else -%}
+              <span class="polaroid__placeholder">{% render 'icon', name: block.settings.icon %}</span>
+            {%- endif -%}
+          </div>
+          <p class="polaroid__caption">{{ block.settings.caption | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.button_label != blank -%}
+      <div class="section-footer">
+        <a href="{{ section.settings.button_link | default: settings.social_instagram }}" class="button button--secondary" target="_blank" rel="noopener">
+          {% render 'icon', name: 'instagram' %}{{ section.settings.button_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Galerie réseaux sociaux",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "#pilatesetmoi" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "Vos moments *matcha & pilates*" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Partage ta routine avec #pilatesetmoi pour apparaître ici.</p>" },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "Nous suivre sur Instagram" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton", "info": "Vide = lien Instagram des paramètres du thème" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Légende", "default": "matcha before mat 🍵" },
+        { "type": "select", "id": "icon", "label": "Icône (sans image)", "default": "matcha", "options": [
+          { "value": "matcha", "label": "Matcha" }, { "value": "sock", "label": "Chaussette" }, { "value": "mat", "label": "Tapis" },
+          { "value": "bow", "label": "Nœud" }, { "value": "sun", "label": "Soleil" }, { "value": "sparkle", "label": "Étoile" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Galerie réseaux sociaux",
+      "blocks": [
+        { "type": "post", "settings": { "caption": "matcha before mat 🍵", "icon": "matcha" } },
+        { "type": "post", "settings": { "caption": "grip socks era", "icon": "sock" } },
+        { "type": "post", "settings": { "caption": "slow morning flow", "icon": "sun" } },
+        { "type": "post", "settings": { "caption": "set assorti, mood assorti", "icon": "bow" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

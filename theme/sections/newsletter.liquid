@@ -1,7 +1,7 @@
 <section class="section section--{{ section.settings.background }}">
   <div class="page-width newsletter reveal">
     {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-    <h2>{{ section.settings.heading | escape }}</h2>
+    <h2>{% render 'rich-heading', text: section.settings.heading %}</h2>
     {{ section.settings.text }}
     {%- form 'customer', class: 'newsletter__form', id: 'newsletter-form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
@@ -22,10 +22,10 @@
   "name": "Newsletter",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Restons en lien" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "-10 % sur votre première commande" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "-10 % sur votre première commande" },
     { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Recevez nos conseils Pilates, nos nouveautés et une routine offerte chaque mois.</p>" },
     { "type": "select", "id": "background", "label": "Fond", "default": "sand", "options": [
-      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }, { "value": "dark", "label": "Expresso" }
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }, { "value": "dark", "label": "Expresso" }
     ] }
   ],
   "presets": [{ "name": "Newsletter" }]

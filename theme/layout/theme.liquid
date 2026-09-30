@@ -52,6 +52,8 @@
         --color-bg: {{ settings.color_background }};
         --color-bg-alt: {{ settings.color_background_alt }};
         --color-sand: {{ settings.color_sand }};
+        --color-matcha-soft: {{ settings.color_matcha_soft }};
+        --color-blush: {{ settings.color_blush }};
         --color-text: {{ settings.color_text }};
         --color-text-soft: {{ settings.color_text_soft }};
         --color-accent: {{ settings.color_accent }};
@@ -71,7 +73,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.suffix | handle }}{% endif %}">
+  <body class="{% if settings.film_grain %}has-grain {% endif %}template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.suffix | handle }}{% endif %}">
     <a class="skip-link visually-hidden" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
 
     {% sections 'header-group' %}

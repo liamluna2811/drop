@@ -1,0 +1,9 @@
+{%- comment -%}
+  Titre avec accent italique : les mots entre astérisques sont mis en italique vert matcha.
+  Exemple : « Pilates, matcha & *moi* ».
+{%- endcomment -%}
+{%- assign parts = text | escape | split: '*' -%}
+{%- for part in parts -%}
+  {%- assign odd = forloop.index | modulo: 2 -%}
+  {%- if odd == 0 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+{%- endfor -%}

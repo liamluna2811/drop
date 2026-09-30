@@ -2,7 +2,8 @@
   <div class="page-width">
     <div class="section-header reveal" style="max-width: 48rem; margin-bottom: 0;">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-      <h1>{{ section.settings.heading | default: page.title | escape }}</h1>
+      {%- assign heading_text = section.settings.heading | default: page.title -%}
+      <h1>{% render 'rich-heading', text: heading_text %}</h1>
       {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- elsif page.content != blank -%}<div class="rte">{{ page.content }}</div>{%- endif -%}
     </div>
   </div>
@@ -13,10 +14,10 @@
   "name": "En-tête de page",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
-    { "type": "text", "id": "heading", "label": "Titre", "info": "Vide = titre de la page" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Vide = titre de la page. Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha" },
     { "type": "richtext", "id": "text", "label": "Texte", "info": "Vide = contenu de la page" },
     { "type": "select", "id": "background", "label": "Fond", "default": "alt", "options": [
-      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }
     ] }
   ],
   "presets": [{ "name": "En-tête de page" }]

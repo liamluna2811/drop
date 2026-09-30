@@ -1,7 +1,7 @@
 <div class="page-width">
   <div class="collection-hero reveal">
     <span class="eyebrow">{{ 'collections.eyebrow' | t }}</span>
-    <h1>{{ section.settings.heading | escape }}</h1>
+    <h1>{% render 'rich-heading', text: section.settings.heading %}</h1>
   </div>
   <ul class="collection-list">
     {%- for collection in collections -%}
@@ -27,7 +27,7 @@
 {
   "name": "Liste des collections",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Toutes nos collections" }
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "Toutes nos collections" }
   ]
 }
 {% endschema %}

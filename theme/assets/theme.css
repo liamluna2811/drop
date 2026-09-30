@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pilates & Moi — thème chaleureux marron / beige
+   Pilates & Moi — univers pilates princess : lait, latte, avoine & matcha
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -644,3 +644,137 @@ p { margin: 0 0 1em; }
 .switch input:disabled + span[aria-hidden] { opacity: .6; }
 .switch input:focus-visible + span[aria-hidden] { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 @media (min-width: 750px) { .cookie-banner { left: 1.5rem; bottom: 1.5rem; right: auto; } }
+
+
+/* ==========================================================================
+   Univers « pilates princess / matcha girl »
+   ========================================================================== */
+
+/* Accent italique dans les titres : « Pilates, matcha & *moi* » */
+h1 em, h2 em, h3 em, .quote-band blockquote em {
+  font-style: italic; color: var(--color-accent-dark); font-weight: inherit; letter-spacing: -0.005em;
+}
+.section--dark h1 em, .section--dark h2 em { color: var(--color-accent); }
+
+/* Eyebrows en minuscules, plus doux */
+.eyebrow { text-transform: lowercase; letter-spacing: .18em; font-size: .82rem; color: var(--color-accent-dark); }
+.eyebrow::before { content: "✦ "; color: var(--color-accent); }
+
+/* Fond matcha doux */
+.section--matcha { background: var(--color-matcha-soft); }
+.marquee--matcha { background: var(--color-matcha-soft); border-color: transparent; }
+.marquee--matcha .marquee-word::after { color: var(--color-accent-dark); }
+
+/* Grain « photo argentique » très léger */
+.has-grain::after {
+  content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Boutons plus doux */
+.button { letter-spacing: .06em; box-shadow: 0 10px 24px -16px rgba(62,49,41,.55); }
+.button:hover { background: var(--color-accent-dark); border-color: var(--color-accent-dark); transform: translateY(-1px); }
+.button--secondary { box-shadow: none; }
+
+/* Stickers */
+.sticker {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .55rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; letter-spacing: .02em;
+  background: var(--color-bg); color: var(--color-text);
+  box-shadow: 0 14px 30px -18px rgba(62,49,41,.55);
+  white-space: nowrap;
+}
+.sticker--matcha { background: var(--color-matcha-soft); color: var(--color-accent-dark); }
+.sticker--blush { background: var(--color-blush); color: var(--color-text); }
+.hero__sticker { position: absolute; z-index: 2; }
+.hero__sticker--1 { top: 12%; right: -.75rem; transform: rotate(6deg); animation: float 6s ease-in-out infinite; }
+.hero__sticker--2 { top: 46%; left: -1.25rem; transform: rotate(-5deg); animation: float 7s ease-in-out infinite reverse; }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@media (max-width: 899px) { .hero__sticker--1 { right: .75rem; } .hero__sticker--2 { left: .75rem; } }
+@media (prefers-reduced-motion: reduce) { .hero__sticker { animation: none; } }
+.hero__media { overflow: visible; }
+.hero__media > img, .hero__media > svg { border-radius: inherit; }
+.hero__media::before {
+  content: ""; position: absolute; inset: -14px 14px 14px -14px; z-index: -1;
+  border-radius: 260px 260px var(--radius) var(--radius); background: var(--color-matcha-soft);
+}
+.hero { isolation: isolate; }
+
+/* Cartes produit : coins plus ronds, pastille « matcha » */
+.product-card__badge { background: var(--color-matcha-soft); color: var(--color-accent-dark); }
+.product-card__badge--sale { background: var(--color-blush); color: var(--color-text); }
+
+/* Univers : léger voile latte plutôt que brun */
+.universe::before { background: linear-gradient(180deg, rgba(59,47,39,0) 30%, rgba(59,47,39,.72) 100%); }
+
+/* ---------- Ma routine ---------- */
+.routine__list {
+  list-style: none; margin: 0; padding: 0 0 .5rem; display: grid; gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 989px) {
+  .routine__list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 78%; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -1.25rem; padding: 0 1.25rem .75rem; }
+  .routine__step { scroll-snap-align: start; }
+}
+.routine__step {
+  position: relative; background: var(--color-bg); border-radius: calc(var(--radius) * 1.1);
+  padding: 1.5rem 1.4rem 1.4rem; display: flex; flex-direction: column; gap: .35rem;
+  box-shadow: 0 20px 40px -32px rgba(62,49,41,.55);
+}
+.routine__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: .75rem; }
+.routine__time {
+  font-family: var(--font-heading); font-style: italic; font-size: 1.9rem; line-height: 1; color: var(--color-accent-dark);
+}
+.routine__icon {
+  width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--color-matcha-soft); color: var(--color-accent-dark);
+}
+.routine__icon svg { width: 24px; height: 24px; }
+.routine__step h3 { font-size: 1.45rem; margin: 0; }
+.routine__step p { color: var(--color-text-soft); font-size: .95rem; margin: 0 0 .75rem; flex: 1; }
+.routine__product {
+  display: flex; align-items: center; gap: .75rem; text-decoration: none; font-size: .9rem;
+  padding: .4rem .9rem .4rem .4rem; border-radius: 999px; background: var(--color-bg-alt); align-self: flex-start;
+}
+.routine__product-img { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex: 0 0 auto; }
+.routine__product-img img, .routine__product-img svg { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Galerie réseaux sociaux (polaroïds) ---------- */
+.social__grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 990px) { .social__grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+.polaroid {
+  background: #fff; padding: .75rem .75rem 0; border-radius: 6px;
+  box-shadow: 0 18px 36px -24px rgba(62,49,41,.5); transition: transform .35s ease;
+}
+.polaroid:nth-child(4n+1) { transform: rotate(-2.5deg); }
+.polaroid:nth-child(4n+2) { transform: rotate(1.8deg) translateY(12px); }
+.polaroid:nth-child(4n+3) { transform: rotate(-1.2deg); }
+.polaroid:nth-child(4n+4) { transform: rotate(2.4deg) translateY(8px); }
+.polaroid:hover { transform: rotate(0) translateY(-4px); }
+.polaroid__media { aspect-ratio: 1; overflow: hidden; border-radius: 3px; background: var(--color-bg-alt); display: grid; place-items: center; }
+.polaroid__media--1 { background: linear-gradient(160deg, var(--color-matcha-soft), var(--color-bg-alt)); }
+.polaroid__media--2 { background: linear-gradient(160deg, var(--color-blush), var(--color-bg)); }
+.polaroid__media--3 { background: linear-gradient(160deg, var(--color-sand), var(--color-bg-alt)); }
+.polaroid__media--0 { background: linear-gradient(160deg, var(--color-bg-alt), var(--color-matcha-soft)); }
+.polaroid__media img { width: 100%; height: 100%; object-fit: cover; }
+.polaroid__placeholder svg { width: 54px; height: 54px; color: var(--color-accent-dark); opacity: .8; }
+.polaroid__caption { font-family: var(--font-heading); font-style: italic; font-size: 1.15rem; text-align: center; padding: .7rem .25rem .85rem; margin: 0; }
+.social .button svg { width: 18px; height: 18px; }
+
+/* ---------- Citation éditoriale ---------- */
+.quote-band__inner { max-width: 52rem; margin: 0 auto; text-align: center; }
+.quote-band__icon {
+  display: inline-grid; place-items: center; width: 60px; height: 60px; border-radius: 50%;
+  background: var(--color-bg); color: var(--color-accent-dark); margin-bottom: 1.5rem;
+}
+.quote-band__icon svg { width: 30px; height: 30px; }
+.quote-band blockquote {
+  margin: 0; font-family: var(--font-heading); font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.15; color: var(--color-text);
+}
+.quote-band figcaption { margin-top: 1.25rem; font-size: .9rem; letter-spacing: .12em; color: var(--color-text-soft); text-transform: lowercase; }
+
+/* Ton plus doux : annonce et boutons en casse normale */
+.announcement { text-transform: none; letter-spacing: .04em; font-size: .88rem; }
+.button { text-transform: none; font-size: .98rem; letter-spacing: .02em; }
+.link-arrow { text-transform: lowercase; letter-spacing: .08em; }
+.marquee__title { text-transform: lowercase; letter-spacing: .16em; }

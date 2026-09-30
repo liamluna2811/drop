@@ -2,14 +2,25 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "eyebrow": "pilates princess club",
+        "heading": "Pilates, matcha & *moi*",
+        "text": "<p>Ta routine slow & glow : tapis moelleux, sets assortis, grip socks et ton matcha latte jamais très loin. Tout ce qu'il faut pour te sentir bien, sur le tapis comme en dehors.</p>",
+        "button_label": "Shopper la collection",
+        "button_label_2": "Mon pilates maison",
+        "button_link_2": "/products/programme-pilates-a-la-maison-4-semaines",
+        "badge": "nouvelle collection · matcha & oat",
+        "sticker_1": "matcha ready 🍵",
+        "sticker_2": "pilates princess ✨",
+        "color_scheme": "bg"
+      }
     },
     "marquee_products": {
       "type": "product-marquee",
       "settings": {
         "mode": "products",
-        "title": "Un aperçu de la boutique",
-        "style": "sand",
+        "title": "le shop en un coup d'œil",
+        "style": "matcha",
         "speed": 45
       }
     },
@@ -20,9 +31,9 @@
           "type": "universe",
           "settings": {
             "collection": "accessoires",
-            "eyebrow": "Univers 01",
+            "eyebrow": "univers 01",
             "title": "Accessoires",
-            "text": "Tapis épais, bandes élastiques, briques et balles : l'équipement qui soutient chaque exercice.",
+            "text": "Tapis moelleux, bandes en tissu, ballon et brique : ton coin pilates, version cocon.",
             "button_label": "Voir les accessoires",
             "link_1_label": "Tapis de sol",
             "link_1_collection": "tapis-de-sol",
@@ -36,9 +47,9 @@
           "type": "universe",
           "settings": {
             "collection": "vetements",
-            "eyebrow": "Univers 02",
+            "eyebrow": "univers 02",
             "title": "Vêtements",
-            "text": "Des matières douces et respirantes, pensées pour s'étirer, rouler et tenir la posture.",
+            "text": "Leggings seconde peau, brassières assorties et grip socks : le set parfait, du reformer au café.",
             "button_label": "Voir les vêtements",
             "link_1_label": "Leggings",
             "link_1_collection": "leggings",
@@ -53,13 +64,18 @@
         "accessoires",
         "vetements"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "nos univers",
+        "heading": "Choisis ton *mood*",
+        "text": "<p>L'équipement qui rend chaque séance plus douce, et les tenues qui te donnent envie d'y aller.</p>",
+        "background": "plain"
+      }
     },
     "featured_accessoires": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Accessoires",
-        "heading": "L'équipement essentiel",
+        "eyebrow": "accessoires",
+        "heading": "Les *essentiels* du tapis",
         "collection": "accessoires",
         "products_to_show": 4,
         "background": "plain"
@@ -127,15 +143,18 @@
       ],
       "settings": {
         "background": "alt",
-        "button_label": "Découvrir l'histoire du Pilates",
-        "button_link": "/pages/histoire-et-bienfaits"
+        "button_label": "L'histoire du pilates",
+        "button_link": "/pages/histoire-et-bienfaits",
+        "eyebrow": "pourquoi on est accro",
+        "heading": "Ce que le pilates fait pour *toi*",
+        "text": "<p>Une méthode douce mais redoutable, pour toutes les morphologies et tous les niveaux.</p>"
       }
     },
     "featured_vetements": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Vêtements",
-        "heading": "Bien dans sa tenue",
+        "eyebrow": "vêtements",
+        "heading": "Set assorti, *mood* assorti",
         "collection": "vetements",
         "products_to_show": 4,
         "background": "plain"
@@ -147,37 +166,37 @@
         "w1": {
           "type": "word",
           "settings": {
-            "text": "Respiration"
+            "text": "pilates princess"
           }
         },
         "w2": {
           "type": "word",
           "settings": {
-            "text": "Centrage"
+            "text": "matcha latte"
           }
         },
         "w3": {
           "type": "word",
           "settings": {
-            "text": "Concentration"
+            "text": "slow morning"
           }
         },
         "w4": {
           "type": "word",
           "settings": {
-            "text": "Contrôle"
+            "text": "grip socks"
           }
         },
         "w5": {
           "type": "word",
           "settings": {
-            "text": "Précision"
+            "text": "core & glow"
           }
         },
         "w6": {
           "type": "word",
           "settings": {
-            "text": "Fluidité"
+            "text": "that girl era"
           }
         }
       },
@@ -236,8 +255,11 @@
         "s4"
       ],
       "settings": {
-        "background": "dark",
-        "product": "programme-pilates-a-la-maison-4-semaines"
+        "background": "matcha",
+        "product": "programme-pilates-a-la-maison-4-semaines",
+        "eyebrow": "programme maison",
+        "heading": "Ton *pilates maison* en 4 semaines",
+        "text": "<p>12 séances de 20 à 30 minutes, pensées pour les débutantes comme pour celles qui reprennent. Un tapis, ton matcha, et c'est parti.</p>"
       }
     },
     "story": {
@@ -284,7 +306,9 @@
       ],
       "settings": {
         "background": "plain",
-        "button_link": "/pages/histoire-et-bienfaits"
+        "button_link": "/pages/histoire-et-bienfaits",
+        "eyebrow": "un peu d'histoire",
+        "heading": "Joseph Pilates, le *OG* du mouvement"
       }
     },
     "trust": {
@@ -336,7 +360,123 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "background": "sand"
+        "eyebrow": "rejoins le club",
+        "heading": "-10 % sur ta *première commande*",
+        "text": "<p>Nos routines, nos nouveautés et une séance offerte chaque mois, directement dans ta boîte mail 🍵</p>",
+        "background": "matcha"
+      }
+    },
+    "routine": {
+      "type": "routine",
+      "blocks": {
+        "r1": {
+          "type": "step",
+          "settings": {
+            "time": "7h30",
+            "icon": "matcha",
+            "title": "Matcha time",
+            "text": "Un matcha latte glacé au lait d'avoine, la lumière du matin, et on prend le temps de respirer.",
+            "link_label": "Découvrir le programme",
+            "link": "/products/programme-pilates-a-la-maison-4-semaines"
+          }
+        },
+        "r2": {
+          "type": "step",
+          "settings": {
+            "time": "8h00",
+            "icon": "legging",
+            "title": "Le set du jour",
+            "text": "Legging taille haute, brassière assortie : on se sent prête avant même de commencer.",
+            "product": "legging-taille-haute-sable"
+          }
+        },
+        "r3": {
+          "type": "step",
+          "settings": {
+            "time": "8h15",
+            "icon": "mat",
+            "title": "30 min sur le tapis",
+            "text": "Hundred, roll up, side kicks… le centre s'active, l'esprit se pose.",
+            "product": "tapis-de-pilates-terre-8-mm"
+          }
+        },
+        "r4": {
+          "type": "step",
+          "settings": {
+            "time": "9h00",
+            "icon": "sparkle",
+            "title": "Glow & go",
+            "text": "Grip socks dans le tote bag, deuxième matcha à la main : la journée peut commencer.",
+            "product": "chaussettes-antiderapantes-cocoon"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "eyebrow": "a day in my life",
+        "heading": "La routine d'une *pilates princess*",
+        "text": "<p>Slow morning, matcha glacé et 30 minutes rien qu'à toi : notre rituel préféré, étape par étape.</p>",
+        "background": "alt"
+      }
+    },
+    "quote": {
+      "type": "editorial-quote",
+      "settings": {
+        "quote": "Un matcha dans une main, le *centre engagé* dans l'autre.",
+        "author": "— la philosophie Pilates & Moi",
+        "icon": "matcha",
+        "background": "matcha"
+      }
+    },
+    "social": {
+      "type": "social-grid",
+      "blocks": {
+        "p1": {
+          "type": "post",
+          "settings": {
+            "caption": "matcha before mat 🍵",
+            "icon": "matcha"
+          }
+        },
+        "p2": {
+          "type": "post",
+          "settings": {
+            "caption": "grip socks era",
+            "icon": "sock"
+          }
+        },
+        "p3": {
+          "type": "post",
+          "settings": {
+            "caption": "slow morning flow",
+            "icon": "sun"
+          }
+        },
+        "p4": {
+          "type": "post",
+          "settings": {
+            "caption": "set assorti, mood assorti",
+            "icon": "bow"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "eyebrow": "#pilatesetmoi",
+        "heading": "Vos moments *matcha & pilates*",
+        "text": "<p>Partage ta routine avec #pilatesetmoi pour apparaître ici.</p>",
+        "button_label": "Nous suivre sur Instagram",
+        "background": "plain"
       }
     }
   },
@@ -344,12 +484,15 @@
     "hero",
     "marquee_products",
     "universes",
+    "routine",
     "featured_accessoires",
-    "benefits",
+    "quote",
     "featured_vetements",
     "marquee_words",
     "program",
+    "benefits",
     "story",
+    "social",
     "trust",
     "newsletter"
   ]

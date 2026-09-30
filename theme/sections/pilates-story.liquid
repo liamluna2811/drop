@@ -2,7 +2,7 @@
   <div class="page-width story__grid">
     <div class="story__intro reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-      <h2>{{ section.settings.heading | escape }}</h2>
+      <h2>{% render 'rich-heading', text: section.settings.heading %}</h2>
       {{ section.settings.text }}
       {%- if section.settings.quote != blank -%}
         <blockquote class="story__quote">
@@ -32,14 +32,14 @@
   "max_blocks": 10,
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Un peu d'histoire" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Joseph Pilates et la « Contrology »" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "Joseph Pilates et la « Contrology »" },
     { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Bien avant de remplir les studios du monde entier, le Pilates est né de l'obstination d'un homme : Joseph Hubertus Pilates, persuadé que la santé du corps et celle de l'esprit ne font qu'un.</p>" },
     { "type": "text", "id": "quote", "label": "Citation", "default": "En 10 séances, vous sentirez la différence ; en 20, vous la verrez ; en 30, vous aurez un nouveau corps." },
     { "type": "text", "id": "quote_author", "label": "Auteur de la citation", "default": "Attribuée à Joseph Pilates" },
     { "type": "text", "id": "button_label", "label": "Lien", "default": "Lire toute l'histoire" },
     { "type": "url", "id": "button_link", "label": "URL du lien" },
     { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
-      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }
     ] }
   ],
   "blocks": [

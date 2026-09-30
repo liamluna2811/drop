@@ -9,7 +9,8 @@
   <div class="page-width">
     <div class="section-header reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-      <h2>{{ section.settings.heading | default: collection.title | escape }}</h2>
+      {%- assign heading_text = section.settings.heading | default: collection.title -%}
+      <h2>{% render 'rich-heading', text: heading_text %}</h2>
       {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- endif -%}
     </div>
     <ul class="product-grid reveal" style="--columns: {{ columns }};">
@@ -34,14 +35,14 @@
   "name": "Collection en vedette",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Sélection" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Nos essentiels" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "Nos essentiels" },
     { "type": "richtext", "id": "text", "label": "Texte" },
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "products_to_show", "label": "Nombre de produits", "min": 2, "max": 12, "step": 1, "default": 4 },
     { "type": "range", "id": "columns", "label": "Colonnes (ordinateur)", "min": 2, "max": 5, "step": 1, "default": 4 },
     { "type": "checkbox", "id": "show_view_all", "label": "Bouton « Tout voir »", "default": true },
     { "type": "select", "id": "background", "label": "Fond", "default": "plain", "options": [
-      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }
     ] }
   ],
   "presets": [{ "name": "Collection en vedette" }]

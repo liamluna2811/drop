@@ -1,0 +1,26 @@
+<section class="section section--{{ section.settings.background }} quote-band">
+  <div class="page-width">
+    <figure class="quote-band__inner reveal">
+      <span class="quote-band__icon">{% render 'icon', name: section.settings.icon %}</span>
+      <blockquote>{% render 'rich-heading', text: section.settings.quote %}</blockquote>
+      {%- if section.settings.author != blank -%}<figcaption>{{ section.settings.author | escape }}</figcaption>{%- endif -%}
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Citation éditoriale",
+  "settings": [
+    { "type": "text", "id": "quote", "label": "Citation", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "Un matcha dans une main, le *centre engagé* dans l'autre." },
+    { "type": "text", "id": "author", "label": "Signature", "default": "— la philosophie Pilates & Moi" },
+    { "type": "select", "id": "icon", "label": "Icône", "default": "matcha", "options": [
+      { "value": "matcha", "label": "Matcha" }, { "value": "bow", "label": "Nœud" }, { "value": "sparkle", "label": "Étoile" }, { "value": "sun", "label": "Soleil" }
+    ] },
+    { "type": "select", "id": "background", "label": "Fond", "default": "matcha", "options": [
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }
+    ] }
+  ],
+  "presets": [{ "name": "Citation éditoriale" }]
+}
+{% endschema %}

@@ -6,7 +6,7 @@
   <div class="page-width program">
     <div class="reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-      <h2>{{ section.settings.heading | escape }}</h2>
+      <h2>{% render 'rich-heading', text: section.settings.heading %}</h2>
       <div class="rte">{{ section.settings.text }}</div>
       {%- if section.settings.checklist != blank -%}
         <ul class="checklist">
@@ -58,15 +58,15 @@
   "settings": [
     { "type": "product", "id": "product", "label": "Produit « programme »" },
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Programme à la maison" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "4 semaines pour ancrer le Pilates dans votre quotidien" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "4 semaines pour ancrer le Pilates dans votre quotidien" },
     { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un programme progressif de 20 à 30 minutes par séance, pensé pour les débutants comme pour celles et ceux qui reprennent. Un tapis suffit ; une bande élastique vous permettra d'aller plus loin.</p>" },
-    { "type": "textarea", "id": "checklist", "label": "Points forts (un par ligne)", "default": "12 séances guidées pas à pas\nGuide PDF illustré + calendrier à imprimer\nVariantes débutant et avancé pour chaque exercice\nAccès à vie, à votre rythme" },
+    { "type": "textarea", "id": "checklist", "label": "Points forts (un par ligne)", "default": "12 séances guidées pas à pas\nGuide PDF illustré + calendrier à imprimer\nVariantes débutant et avancé pour chaque exercice\nAccès à vie, à ton rythme" },
     { "type": "text", "id": "card_eyebrow", "label": "Sur-titre de la carte", "default": "Programme numérique" },
     { "type": "text", "id": "card_title", "label": "Titre de la carte (si aucun produit)", "default": "Mon Pilates à la maison" },
     { "type": "text", "id": "fallback_price", "label": "Prix affiché (si aucun produit)", "default": "29 €" },
     { "type": "text", "id": "button_label", "label": "Bouton", "default": "Commencer le programme" },
     { "type": "select", "id": "background", "label": "Fond", "default": "dark", "options": [
-      { "value": "plain", "label": "Crème" }, { "value": "alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }, { "value": "dark", "label": "Expresso" }
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }, { "value": "dark", "label": "Expresso" }
     ] }
   ],
   "blocks": [

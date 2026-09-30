@@ -1,0 +1,86 @@
+{%- comment -%}
+  « Ma routine » : une journée type façon pilates princess, étape par étape,
+  avec un produit associé à chaque moment.
+{%- endcomment -%}
+<section class="section section--{{ section.settings.background }} routine">
+  <div class="page-width">
+    <div class="section-header reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h2>{% render 'rich-heading', text: section.settings.heading %}</h2>
+      {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- endif -%}
+    </div>
+    <ol class="routine__list">
+      {%- for block in section.blocks -%}
+        {%- assign item_product = block.settings.product -%}
+        <li class="routine__step reveal" {{ block.shopify_attributes }}>
+          <div class="routine__top">
+            <span class="routine__time">{{ block.settings.time | escape }}</span>
+            <span class="routine__icon">{% render 'icon', name: block.settings.icon %}</span>
+          </div>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+          {%- if item_product != blank -%}
+            <a class="routine__product" href="{{ item_product.url }}">
+              <span class="routine__product-img">
+                {%- if item_product.featured_media -%}
+                  {{ item_product.featured_media | image_url: width: 120, height: 120, crop: 'center' | image_tag: loading: 'lazy', alt: '' }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </span>
+              <span>{{ item_product.title | escape }}</span>
+            </a>
+          {%- elsif block.settings.link_label != blank -%}
+            <a class="link-arrow" href="{{ block.settings.link | default: routes.all_products_collection_url }}">{{ block.settings.link_label | escape }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ma routine",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "a day in my life" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "La routine d'une *pilates princess*" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Slow morning, matcha glacé et 30 minutes rien qu'à toi : notre rituel préféré, étape par étape.</p>" },
+    { "type": "select", "id": "background", "label": "Fond", "default": "alt", "options": [
+      { "value": "plain", "label": "Lait" }, { "value": "alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha", "label": "Matcha doux" }
+    ] }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Moment", "default": "7h30" },
+        { "type": "select", "id": "icon", "label": "Icône", "default": "matcha", "options": [
+          { "value": "matcha", "label": "Matcha" }, { "value": "sun", "label": "Soleil" }, { "value": "moon", "label": "Lune" },
+          { "value": "mat", "label": "Tapis" }, { "value": "band", "label": "Bande élastique" }, { "value": "sock", "label": "Chaussette" },
+          { "value": "legging", "label": "Legging" }, { "value": "bra", "label": "Brassière" }, { "value": "bow", "label": "Nœud" },
+          { "value": "sparkle", "label": "Étoile" }, { "value": "heart", "label": "Cœur" }, { "value": "breath", "label": "Respiration" }
+        ] },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Matcha time" },
+        { "type": "textarea", "id": "text", "label": "Texte" },
+        { "type": "product", "id": "product", "label": "Produit associé" },
+        { "type": "text", "id": "link_label", "label": "Lien (si aucun produit)" },
+        { "type": "url", "id": "link", "label": "URL du lien" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ma routine",
+      "blocks": [
+        { "type": "step", "settings": { "time": "7h30", "icon": "matcha", "title": "Matcha time", "text": "Un matcha latte glacé au lait d'avoine, la lumière du matin, et on respire." } },
+        { "type": "step", "settings": { "time": "8h00", "icon": "legging", "title": "Le set du jour", "text": "Legging taille haute, brassière assortie : on se sent prête avant même de commencer." } },
+        { "type": "step", "settings": { "time": "8h15", "icon": "mat", "title": "30 min sur le tapis", "text": "Hundred, roll up, side kicks… le centre s'active, l'esprit se pose." } },
+        { "type": "step", "settings": { "time": "9h00", "icon": "sparkle", "title": "Glow & go", "text": "Chaussettes dans le tote bag, deuxième matcha à la main : la journée peut commencer." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

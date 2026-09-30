@@ -2,7 +2,7 @@
   <div class="page-width hero__grid">
     <div class="hero__content reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-      <h1>{{ section.settings.heading | escape }}</h1>
+      <h1>{% render 'rich-heading', text: section.settings.heading %}</h1>
       {%- if section.settings.text != blank -%}<div>{{ section.settings.text }}</div>{%- endif -%}
       <div class="hero__actions">
         {%- if section.settings.button_label != blank -%}
@@ -27,6 +27,12 @@
       {%- if section.settings.badge != blank -%}
         <div class="hero__badge"><span></span>{{ section.settings.badge | escape }}</div>
       {%- endif -%}
+      {%- if section.settings.sticker_1 != blank -%}
+        <span class="sticker sticker--matcha hero__sticker hero__sticker--1">{{ section.settings.sticker_1 | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.sticker_2 != blank -%}
+        <span class="sticker sticker--blush hero__sticker hero__sticker--2">{{ section.settings.sticker_2 | escape }}</span>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -37,15 +43,17 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Pilates · Maison & studio" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Bouger en douceur, se sentir chez soi" },
+    { "type": "text", "id": "heading", "label": "Titre", "info": "Mettez un mot entre *astérisques* pour l’écrire en italique vert matcha", "default": "Bouger en douceur, se sentir chez soi" },
     { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Tapis, bandes élastiques, leggings et chaussettes antidérapantes : tout ce qu'il faut pour pratiquer le Pilates avec confort, dans des tons chauds et naturels.</p>" },
     { "type": "text", "id": "button_label", "label": "Bouton 1", "default": "Découvrir la boutique" },
     { "type": "url", "id": "button_link", "label": "Lien bouton 1" },
     { "type": "text", "id": "button_label_2", "label": "Bouton 2", "default": "Le programme maison" },
     { "type": "url", "id": "button_link_2", "label": "Lien bouton 2" },
-    { "type": "text", "id": "badge", "label": "Pastille sur l'image", "default": "Nouvelle collection Terre" },
+    { "type": "text", "id": "badge", "label": "Pastille sur l'image", "default": "nouvelle collection · matcha & oat" },
+    { "type": "text", "id": "sticker_1", "label": "Sticker 1", "default": "matcha ready 🍵" },
+    { "type": "text", "id": "sticker_2", "label": "Sticker 2", "default": "pilates princess ✨" },
     { "type": "select", "id": "color_scheme", "label": "Fond", "default": "bg", "options": [
-      { "value": "bg", "label": "Crème" }, { "value": "bg-alt", "label": "Lin" }, { "value": "sand", "label": "Sable" }
+      { "value": "bg", "label": "Lait" }, { "value": "bg-alt", "label": "Latte" }, { "value": "sand", "label": "Avoine" }, { "value": "matcha-soft", "label": "Matcha doux" }
     ] }
   ],
   "presets": [{ "name": "Bannière d'accueil" }]

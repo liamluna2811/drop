@@ -2,20 +2,23 @@
   "current": "Default",
   "presets": {
     "Default": {
-      "color_background": "#F7F1E9",
-      "color_background_alt": "#EFE5D8",
-      "color_sand": "#DCC9B2",
-      "color_text": "#3E2C22",
-      "color_text_soft": "#7A6354",
-      "color_accent": "#A87A55",
-      "color_accent_dark": "#855C3D",
-      "color_dark": "#4A3528",
-      "color_on_dark": "#F7F1E9",
+      "color_background": "#FBF7F1",
+      "color_background_alt": "#F2EADF",
+      "color_sand": "#E6D9C7",
+      "color_text": "#3B2F27",
+      "color_text_soft": "#83706A",
+      "color_accent": "#A3B584",
+      "color_accent_dark": "#5D6F45",
+      "color_dark": "#3E3129",
+      "color_on_dark": "#FBF7F1",
       "type_heading_font": "cormorant_n5",
       "type_body_font": "jost_n4",
       "page_width": 1280,
-      "radius": 14,
-      "brand_name": "Pilates & Moi"
+      "radius": 20,
+      "brand_name": "Pilates & Moi",
+      "color_matcha_soft": "#E4E9D6",
+      "color_blush": "#F3E1D9",
+      "film_grain": true
     }
   }
 }

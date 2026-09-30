@@ -25,56 +25,68 @@
       {
         "type": "color",
         "id": "color_background",
-        "label": "Fond principal (crème)",
-        "default": "#F7F1E9"
+        "label": "Fond principal (lait)",
+        "default": "#FBF7F1"
       },
       {
         "type": "color",
         "id": "color_background_alt",
-        "label": "Fond secondaire (lin)",
-        "default": "#EFE5D8"
+        "label": "Fond secondaire (latte)",
+        "default": "#F2EADF"
       },
       {
         "type": "color",
         "id": "color_sand",
-        "label": "Sable",
-        "default": "#DCC9B2"
+        "label": "Avoine",
+        "default": "#E6D9C7"
+      },
+      {
+        "type": "color",
+        "id": "color_matcha_soft",
+        "label": "Matcha doux (fonds)",
+        "default": "#E4E9D6"
+      },
+      {
+        "type": "color",
+        "id": "color_blush",
+        "label": "Rose poudré (stickers)",
+        "default": "#F3E1D9"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "Texte",
-        "default": "#3E2C22"
+        "default": "#3B2F27"
       },
       {
         "type": "color",
         "id": "color_text_soft",
         "label": "Texte secondaire",
-        "default": "#7A6354"
+        "default": "#83706A"
       },
       {
         "type": "color",
         "id": "color_accent",
-        "label": "Accent (caramel)",
-        "default": "#A87A55"
+        "label": "Accent (matcha)",
+        "default": "#A3B584"
       },
       {
         "type": "color",
         "id": "color_accent_dark",
-        "label": "Accent foncé",
-        "default": "#855C3D"
+        "label": "Accent foncé (matcha profond)",
+        "default": "#5D6F45"
       },
       {
         "type": "color",
         "id": "color_dark",
-        "label": "Fond sombre (expresso)",
-        "default": "#4A3528"
+        "label": "Fond sombre et boutons (espresso)",
+        "default": "#3E3129"
       },
       {
         "type": "color",
         "id": "color_on_dark",
         "label": "Texte sur fond sombre",
-        "default": "#F7F1E9"
+        "default": "#FBF7F1"
       }
     ]
   },
@@ -116,12 +128,18 @@
         "max": 32,
         "step": 2,
         "unit": "px",
-        "default": 14
+        "default": 20
       },
       {
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
+      },
+      {
+        "type": "checkbox",
+        "id": "film_grain",
+        "label": "Léger grain « photo argentique »",
+        "default": true
       }
     ]
   },
