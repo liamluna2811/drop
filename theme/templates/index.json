@@ -376,8 +376,8 @@
             "icon": "matcha",
             "title": "Matcha time",
             "text": "Un matcha latte glacé au lait d'avoine, la lumière du matin, et on prend le temps de respirer.",
-            "link_label": "Découvrir le programme",
-            "link": "/products/programme-pilates-a-la-maison-4-semaines"
+            "link_label": "Shopper le rituel matcha",
+            "link": "/collections/rituel-matcha"
           }
         },
         "r2": {
@@ -478,6 +478,19 @@
         "button_label": "Nous suivre sur Instagram",
         "background": "plain"
       }
+    },
+    "rituel_matcha": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "rituel matcha",
+        "heading": "Le petit *plus* qui change tout",
+        "text": "<p>Verre cannelé, kit matcha, chouchous et claw clips : les accessoires qui transforment ta séance en rituel.</p>",
+        "collection": "rituel-matcha",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true,
+        "background": "matcha"
+      }
     }
   },
   "order": [
@@ -488,6 +501,7 @@
     "featured_accessoires",
     "quote",
     "featured_vetements",
+    "rituel_matcha",
     "marquee_words",
     "program",
     "benefits",

@@ -8,7 +8,7 @@ Un thème Shopify sur mesure, chaleureux et sobre (crème, lin, sable, caramel, 
 |---|---|
 | `theme/` | Le thème Shopify (Online Store 2.0, 100 % personnalisable dans l'éditeur) |
 | `pilates-et-moi-theme.zip` | Le même thème, prêt à importer dans Shopify |
-| `catalogue/produits-pilates.csv` | 13 produits prêts à importer (accessoires, vêtements, programme) |
+| `catalogue/produits-pilates.csv` | 18 produits prêts à importer (accessoires, vêtements, rituel matcha, programme) |
 | `programme/programme-pilates-maison.pdf` | Le guide PDF du programme « 4 semaines à la maison » (8 pages) |
 | `programme/programme-pilates-maison.html` | La source du PDF, à modifier si besoin |
 
@@ -49,11 +49,12 @@ Et aussi : pages collection avec filtres et tri, panier avec barre « livraison 
    | Leggings | `leggings` | `leggings` |
    | Brassières | `brassieres` | `brassieres` |
    | Chaussettes antidérapantes | `chaussettes-antiderapantes` | `chaussettes-antiderapantes` |
+   | Rituel matcha | `rituel-matcha` | `rituel-matcha` |
 
    Avec ces identifiants, la page d'accueil se remplit toute seule.
 4. **Créer la page Histoire** : *Boutique en ligne* → *Pages* → *Ajouter* → titre « Histoire & bienfaits », modèle **`page.histoire`**, et dans « Référencement » fixez l’URL à `histoire-et-bienfaits` (c’est le lien utilisé par la page d’accueil).
 5. **Le programme** : ouvrez le produit « Programme Pilates à la maison », choisissez le modèle **`product.programme`**, puis joignez le PDF avec l'app gratuite **Digital Downloads** de Shopify. Dans l'éditeur de thème, choisissez ce produit dans la section « Programme maison ».
-6. **Le menu** (*Boutique en ligne* → *Navigation* → *Menu principal*) : Accessoires (sous-menus Tapis / Bandes / Petits accessoires), Vêtements (Leggings / Brassières / Chaussettes), Programme maison, Histoire & bienfaits.
+6. **Le menu** (*Boutique en ligne* → *Navigation* → *Menu principal*) : Accessoires (sous-menus Tapis / Bandes / Petits accessoires), Vêtements (Leggings / Brassières / Chaussettes), Rituel matcha, Programme maison, Histoire & bienfaits.
 7. **Personnaliser** : logo, photos de la bannière et des univers, couleurs et polices dans *Paramètres du thème*.
 
 ## Vérifications

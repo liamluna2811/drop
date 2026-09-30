@@ -164,7 +164,7 @@ p { margin: 0 0 1em; }
 .menu-drawer > summary { list-style: none; }
 .menu-drawer > summary::-webkit-details-marker { display: none; }
 
-@media (max-width: 989px) {
+@media (max-width: 1099px) {
   .site-header__inner { gap: .5rem; }
   .site-header__nav { display: none; }
   .site-header__logo { flex: 1 1 auto; justify-content: center; }
