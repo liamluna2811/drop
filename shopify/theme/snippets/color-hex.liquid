@@ -1,7 +1,8 @@
 {%- comment -%} Renvoie la couleur CSS d'une valeur d'option couleur (français et anglais). Usage : {% render 'color-hex', name: value %} {%- endcomment -%}
 {%- assign key = name | downcase | strip -%}
 {%- case key -%}
-  {%- when 'nuit', 'navy', 'navy blue', 'midnight navy' -%}#0b1b2b
+  {%- when 'nuit' -%}#0b1b2b
+  {%- when 'navy', 'navy blue', 'midnight navy', 'french navy' -%}#1c2a4a
   {%- when 'forêt', 'foret', 'forest green', 'forest', 'dark green' -%}#14532d
   {%- when 'noir', 'black', 'vintage black' -%}#141414
   {%- when 'blanc', 'white' -%}#ffffff
@@ -10,6 +11,7 @@
   {%- when 'carolina blue' -%}#7ba9d4
   {%- when 'lime', 'lime green', 'neon green' -%}#d4ff3a
   {%- when 'orange' -%}#f47521
+  {%- when 'neon orange', 'safety orange' -%}#ff5f1f
   {%- when 'azalea' -%}#f29ab6
   {%- when 'light pink', 'rose clair', 'pastel pink', 'baby pink' -%}#f4c6d6
   {%- when 'pink', 'rose', 'hot pink' -%}#ec6f9f
@@ -24,5 +26,5 @@
   {%- when 'grey', 'gray', 'gris', 'heather grey', 'heather gray', 'sport grey', 'athletic heather' -%}#a7a9ac
   {%- when 'charcoal', 'dark heather', 'dark grey', 'anthracite' -%}#4a4d52
   {%- when 'brown', 'marron', 'chocolate' -%}#5b3a29
-  {%- else -%}{{ key | remove: ' ' }}
+  {%- else -%}#cccccc
 {%- endcase -%}
