@@ -1,0 +1,171 @@
+{%- comment -%}
+  Bandeau de consentement aux cookies (recommandations CNIL) :
+  - « Tout accepter » et « Tout refuser » au même niveau, choix par catégorie via « Personnaliser » ;
+  - transmet le choix à l'API Customer Privacy de Shopify, qui pilote les pixels et statistiques ;
+  - choix conservé 6 mois, puis redemandé ;
+  - rouvrable depuis tout lien href="#gerer-cookies" ou élément [data-open-cookies].
+{%- endcomment -%}
+{%- if section.settings.enabled -%}
+  <div class="cookie-banner" id="CookieBanner" role="dialog" aria-live="polite" aria-labelledby="CookieBannerTitle" hidden>
+    <div class="cookie-banner__inner">
+      <h2 class="cookie-banner__title" id="CookieBannerTitle">{{ section.settings.title | escape }}</h2>
+      <div class="cookie-banner__text">
+        {{ section.settings.text }}
+        {%- if section.settings.policy_page != blank -%}
+          <p><a href="{{ section.settings.policy_page.url }}">{{ section.settings.policy_label | escape }}</a></p>
+        {%- endif -%}
+      </div>
+
+      <div class="cookie-banner__prefs" id="CookiePrefs" hidden>
+        <div class="cookie-pref">
+          <div>
+            <strong>Nécessaires</strong>
+            <span>Panier, sécurité, paiement, mémorisation de vos choix. Toujours actifs.</span>
+          </div>
+          <label class="switch"><input type="checkbox" checked disabled><span aria-hidden="true"></span><span class="visually-hidden">Cookies nécessaires (toujours actifs)</span></label>
+        </div>
+        <div class="cookie-pref">
+          <div>
+            <strong>Préférences</strong>
+            <span>Mémorisent vos réglages (langue, région).</span>
+          </div>
+          <label class="switch"><input type="checkbox" data-consent="preferences"><span aria-hidden="true"></span><span class="visually-hidden">Cookies de préférences</span></label>
+        </div>
+        <div class="cookie-pref">
+          <div>
+            <strong>Mesure d'audience</strong>
+            <span>Nous aident à comprendre l'utilisation du site pour l'améliorer.</span>
+          </div>
+          <label class="switch"><input type="checkbox" data-consent="analytics"><span aria-hidden="true"></span><span class="visually-hidden">Cookies de mesure d'audience</span></label>
+        </div>
+        <div class="cookie-pref">
+          <div>
+            <strong>Marketing</strong>
+            <span>Permettent de vous proposer des publicités adaptées.</span>
+          </div>
+          <label class="switch"><input type="checkbox" data-consent="marketing"><span aria-hidden="true"></span><span class="visually-hidden">Cookies marketing</span></label>
+        </div>
+      </div>
+
+      <div class="cookie-banner__actions">
+        <button type="button" class="button" data-cookie-action="refuse">Tout refuser</button>
+        <button type="button" class="button" data-cookie-action="accept">Tout accepter</button>
+        <button type="button" class="cookie-banner__link" data-cookie-action="customize">Personnaliser</button>
+        <button type="button" class="button button--secondary button--full" data-cookie-action="save" hidden>Enregistrer mes choix</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var KEY = 'pm_cookie_consent';
+      var MAX_AGE = 1000 * 60 * 60 * 24 * 182; // 6 mois
+      var banner = document.getElementById('CookieBanner');
+      if (!banner) return;
+      var prefs = document.getElementById('CookiePrefs');
+      var saveBtn = banner.querySelector('[data-cookie-action="save"]');
+      var customizeBtn = banner.querySelector('[data-cookie-action="customize"]');
+      var boxes = banner.querySelectorAll('[data-consent]');
+
+      function readChoice() {
+        try {
+          var value = JSON.parse(window.localStorage.getItem(KEY));
+          if (value && Date.now() - value.t < MAX_AGE) return value;
+        } catch (e) {}
+        return null;
+      }
+
+      function privacyApi() {
+        return window.Shopify && window.Shopify.customerPrivacy;
+      }
+
+      function applyChoice(choice) {
+        var api = privacyApi();
+        if (api && typeof api.setTrackingConsent === 'function') {
+          api.setTrackingConsent({
+            analytics: choice.analytics,
+            marketing: choice.marketing,
+            preferences: choice.preferences,
+            sale_of_data: choice.marketing
+          }, function () {});
+        }
+      }
+
+      function saveChoice(choice) {
+        choice.t = Date.now();
+        try { window.localStorage.setItem(KEY, JSON.stringify(choice)); } catch (e) {}
+        applyChoice(choice);
+        hide();
+        document.dispatchEvent(new CustomEvent('cookie-consent:updated', { detail: choice }));
+      }
+
+      function openPrefs() {
+        prefs.hidden = false;
+        saveBtn.hidden = false;
+        customizeBtn.hidden = true;
+      }
+
+      function show(withPrefs) {
+        var current = readChoice() || {};
+        boxes.forEach(function (box) { box.checked = !!current[box.dataset.consent]; });
+        prefs.hidden = true;
+        saveBtn.hidden = true;
+        customizeBtn.hidden = false;
+        banner.hidden = false;
+        if (withPrefs) openPrefs();
+        var first = banner.querySelector('button:not([hidden])');
+        if (first && withPrefs) first.focus();
+      }
+
+      function hide() { banner.hidden = true; }
+
+      banner.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-cookie-action]');
+        if (!button) return;
+        var action = button.dataset.cookieAction;
+        if (action === 'accept') saveChoice({ preferences: true, analytics: true, marketing: true });
+        if (action === 'refuse') saveChoice({ preferences: false, analytics: false, marketing: false });
+        if (action === 'customize') openPrefs();
+        if (action === 'save') {
+          var choice = {};
+          boxes.forEach(function (box) { choice[box.dataset.consent] = box.checked; });
+          saveChoice(choice);
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        var trigger = event.target.closest('a[href="#gerer-cookies"], [data-open-cookies]');
+        if (!trigger) return;
+        event.preventDefault();
+        show(true);
+      });
+
+      if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+        window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function (error) {
+          if (error) return;
+          var saved = readChoice();
+          if (saved) applyChoice(saved);
+        });
+      }
+
+      if (window.Shopify && window.Shopify.designMode) {
+        show(false);
+      } else if (!readChoice()) {
+        show(false);
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bandeau cookies",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Afficher le bandeau cookies", "default": true, "info": "Désactivez la bannière de cookies native de Shopify (Paramètres > Confidentialité des clients) pour éviter un double bandeau." },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Vos cookies, vos choix" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Nous utilisons des cookies nécessaires au fonctionnement du site et, avec votre accord, des cookies pour mesurer l'audience et vous proposer des contenus adaptés. Vous pouvez changer d'avis à tout moment via « Gérer les cookies » en bas de page.</p>" },
+    { "type": "page", "id": "policy_page", "label": "Page de politique cookies" },
+    { "type": "text", "id": "policy_label", "label": "Texte du lien", "default": "En savoir plus sur notre politique cookies" }
+  ]
+}
+{% endschema %}

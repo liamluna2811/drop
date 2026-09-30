@@ -1,5 +1,7 @@
 {
-  "accessibility": { "skip_to_content": "Aller au contenu" },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu"
+  },
   "general": {
     "home": "Accueil",
     "search": "Rechercher",
@@ -15,10 +17,20 @@
   },
   "sections": {
     "announcement": "Annonce",
-    "header": { "menu": "Menu" },
-    "footer": { "payment": "Moyens de paiement acceptés" },
-    "featured_collection": { "view_all": "Tout voir" },
-    "program": { "details": "Voir le détail du programme" }
+    "header": {
+      "menu": "Menu"
+    },
+    "footer": {
+      "payment": "Moyens de paiement acceptés",
+      "legal": "Informations légales",
+      "manage_cookies": "Gérer les cookies"
+    },
+    "featured_collection": {
+      "view_all": "Tout voir"
+    },
+    "program": {
+      "details": "Voir le détail du programme"
+    }
   },
   "products": {
     "add_to_cart": "Ajouter au panier",
@@ -34,7 +46,10 @@
   },
   "collections": {
     "eyebrow": "Collection",
-    "count": { "one": "{{ count }} produit", "other": "{{ count }} produits" },
+    "count": {
+      "one": "{{ count }} produit",
+      "other": "{{ count }} produits"
+    },
     "sort": "Trier par",
     "apply": "Appliquer",
     "clear": "Effacer les filtres",
@@ -54,9 +69,15 @@
   "search": {
     "title": "Rechercher",
     "placeholder": "Tapis, legging, programme…",
-    "results_count": { "one": "{{ count }} résultat pour « {{ terms }} »", "other": "{{ count }} résultats pour « {{ terms }} »" }
+    "results_count": {
+      "one": "{{ count }} résultat pour « {{ terms }} »",
+      "other": "{{ count }} résultats pour « {{ terms }} »"
+    }
   },
-  "blog": { "eyebrow": "Le journal", "back": "Retour au journal" },
+  "blog": {
+    "eyebrow": "Le journal",
+    "back": "Retour au journal"
+  },
   "newsletter": {
     "label": "Votre adresse e-mail",
     "button": "Je m'inscris",
@@ -69,5 +90,8 @@
     "password": "Mot de passe",
     "enter": "Entrer"
   },
-  "gift_card": { "title": "Votre carte cadeau", "expired": "Cette carte cadeau n'est plus valide." }
+  "gift_card": {
+    "title": "Votre carte cadeau",
+    "expired": "Cette carte cadeau n'est plus valide."
+  }
 }

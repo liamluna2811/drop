@@ -5,12 +5,48 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "shop": { "type": "menu", "settings": { "heading": "Boutique", "menu": "main-menu" } },
-        "help": { "type": "menu", "settings": { "heading": "Aide", "menu": "footer" } }
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Boutique",
+            "menu": "main-menu"
+          }
+        },
+        "help": {
+          "type": "menu",
+          "settings": {
+            "heading": "Aide",
+            "menu": "footer"
+          }
+        },
+        "legal": {
+          "type": "menu",
+          "settings": {
+            "heading": "Informations légales",
+            "menu": "informations-legales"
+          }
+        }
       },
-      "block_order": ["shop", "help"],
-      "settings": { "show_payment_icons": true }
+      "block_order": [
+        "shop",
+        "help",
+        "legal"
+      ],
+      "settings": {
+        "show_payment_icons": true,
+        "legal_menu": "informations-legales"
+      }
+    },
+    "cookies": {
+      "type": "cookie-banner",
+      "settings": {
+        "enabled": true,
+        "policy_page": "politique-cookies"
+      }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer",
+    "cookies"
+  ]
 }

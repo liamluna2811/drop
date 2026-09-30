@@ -28,6 +28,12 @@
 
     <div class="site-footer__bottom">
       <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: shop.name }} · {{ powered_by_link }}</span>
+      <nav class="site-footer__legal" aria-label="{{ 'sections.footer.legal' | t }}">
+        {%- for link in section.settings.legal_menu.links -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+        <button type="button" class="site-footer__cookies" data-open-cookies>{{ 'sections.footer.manage_cookies' | t }}</button>
+      </nav>
       {%- if section.settings.show_payment_icons -%}
         <ul class="payment-icons" aria-label="{{ 'sections.footer.payment' | t }}">
           {%- for type in shop.enabled_payment_types -%}
@@ -43,10 +49,11 @@
 {
   "name": "Pied de page",
   "class": "section-footer-wrapper",
-  "max_blocks": 3,
+  "max_blocks": 4,
   "settings": [
     { "type": "richtext", "id": "about", "label": "Texte de présentation", "default": "<p>Des accessoires et vêtements de Pilates choisis avec soin, pour bouger en douceur, chez vous comme au studio.</p>" },
-    { "type": "checkbox", "id": "show_payment_icons", "label": "Afficher les moyens de paiement", "default": true }
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Afficher les moyens de paiement", "default": true },
+    { "type": "link_list", "id": "legal_menu", "label": "Liens légaux (bas de page)", "default": "footer", "info": "Mentions légales, CGV, CGU, confidentialité, cookies, retours. Un lien « Gérer les cookies » est ajouté automatiquement." }
   ],
   "blocks": [
     {
