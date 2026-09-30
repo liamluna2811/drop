@@ -1,6 +1,14 @@
 <footer class="footer">
   <a href="{{ routes.root_url }}" class="logo">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
   <p>© {{ 'now' | date: '%Y' }} {{ shop.name }} · {{ section.settings.text }}</p>
+  <nav class="legal-links" aria-label="Informations légales">
+    <a href="/pages/mentions-legales">Mentions légales</a>
+    <a href="/pages/conditions-generales-de-vente">CGV</a>
+    <a href="/pages/conditions-generales-d-utilisation">CGU</a>
+    <a href="/pages/politique-de-confidentialite">Confidentialité</a>
+    <a href="/pages/politique-de-cookies">Cookies</a>
+    <a href="/pages/retractation-et-retours">Retours et rétractation</a>
+  </nav>
 </footer>
 {% schema %}
 {

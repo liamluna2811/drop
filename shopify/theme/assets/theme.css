@@ -212,3 +212,18 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:3px solid var(--lime);
 .split-text p{margin-bottom:1rem}
 .rm{background:none;border:0;padding:0;cursor:pointer}
 @media (max-width:860px){.product{grid-template-columns:1fr}}
+
+.legal-links{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;width:100%;font-size:.8rem}
+.legal-links a{color:#b5c2cf;text-decoration:underline}
+.legal-links a:hover{color:var(--white)}
+.rte{max-width:78ch}
+.rte h2{font-size:1.3rem;text-transform:uppercase;margin-top:2rem}
+.rte ul,.rte ol{padding-left:1.3rem;display:grid;gap:.5rem}
+.rte a{text-decoration:underline}
+.rte mark{background:var(--lime);color:var(--ink);padding:0 .2em;border-radius:4px}
+.rte table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+.rte th,.rte td{border:1px solid rgba(11,27,43,.2);padding:.6rem;text-align:left;vertical-align:top}
+.rte th{background:var(--ink);color:var(--white)}
+.rte blockquote{background:var(--white);padding:1.5rem;border-radius:var(--radius);margin-top:1rem}
+.rte blockquote::before{content:none}
+.rte blockquote p+p{margin-top:.8rem}
