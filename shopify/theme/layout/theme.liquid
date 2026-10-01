@@ -17,6 +17,8 @@
       collectionUrl: {{ routes.all_products_collection_url | json }},
       freeShipping: {{ settings.free_shipping_threshold | default: 60 | times: 100 }},
       country: {{ localization.country.iso_code | json }},
+      market: {{ localization.market.handle | json }},
+      logged: {% if customer %}true{% else %}false{% endif %},
       sellTo: [{% for c in localization.available_countries %}{{ c.iso_code | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]
     };
   </script>

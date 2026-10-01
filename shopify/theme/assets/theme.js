@@ -455,11 +455,16 @@
           // Refus « épuisé » alors que le stock est là : le pays retenu pour la session (adresse absente
           // du compte, géolocalisation hors France/UE) n'est pas desservi. On rattache le panier à un pays
           // desservi puis on réessaie une fois ; l'adresse réelle est contrôlée au paiement.
-          if (!res.ok && res.status === 422) return setCountry().then(function () { return addToCart(items); });
+          if (!res.ok && res.status === 422) return setCountry().then(function () { return addToCart(items); }).then(function (r2) { r2.retried = true; return r2; });
           return res;
         })
         .then(function (res) {
-          if (!res.ok) { err.textContent = res.d.description || 'Impossible d\'ajouter ce produit.'; err.hidden = false; return; }
+          if (!res.ok) {
+            var t = window.theme || {};
+            // Diagnostic temporaire : pays et marché vus par Shopify pour cette session
+            err.textContent = (res.d.description || 'Impossible d\'ajouter ce produit.') + ' [diag : pays ' + t.country + ', marché ' + t.market + ', connecté ' + t.logged + ', essais ' + (res.retried ? 2 : 1) + ']';
+            err.hidden = false; return;
+          }
           var waitCut = Promise.race([prepareCut(), new Promise(function (r) { setTimeout(function () { r(null); }, 400); })]);
           return Promise.all([getCart(), waitCut.then(function (cut) { return flyToCart(document.querySelector('.slide.on img'), cut); })]).then(function (r) {
             render(r[0]);
