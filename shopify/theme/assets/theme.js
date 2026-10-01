@@ -982,7 +982,7 @@
     'Romania': 'Roumanie', 'Sweden': 'Suède', 'Slovenia': 'Slovénie', 'Slovakia': 'Slovaquie', 'Switzerland': 'Suisse', 'United Kingdom': 'Royaume-Uni',
     'United States': 'États-Unis', 'Canada': 'Canada', 'Australia': 'Australie', 'New Zealand': 'Nouvelle-Zélande', 'Japan': 'Japon',
     'South Korea': 'Corée du Sud', 'Singapore': 'Singapour', 'Hong Kong SAR': 'Hong Kong', 'Hong Kong': 'Hong Kong', 'Israel': 'Israël',
-    'Malaysia': 'Malaisie', 'Norway': 'Norvège', 'United Arab Emirates': 'Émirats arabes unis' };
+    'Malaysia': 'Malaisie', 'Norway': 'Norvège', 'United Arab Emirates': 'Émirats arabes unis', 'Monaco': 'Monaco' };
   var money = function (amount) {
     var cents = Math.round(parseFloat(amount) * 100);
     if (!cents) return 'Offerte';
@@ -1002,7 +1002,16 @@
 
   boxes.forEach(function (box) {
     var sel = box.querySelector('[data-se-country]'), prov = box.querySelector('[data-se-province]');
-    [].forEach.call(sel.options, function (o) { if (FR[o.value]) o.textContent = FR[o.value]; if (o.value === '---') o.disabled = true; });
+    // Seuls la France, Monaco et l'Union européenne sont desservis : les autres pays sont retirés de la liste
+    var seen = {}, keep = [].filter.call(sel.options, function (o) {
+      var ok = (FREE_IN.indexOf(o.value) > -1 || o.value === 'Monaco') && !seen[o.value];
+      seen[o.value] = true;
+      return ok;
+    });
+    keep.forEach(function (o) { o.textContent = FR[o.value] || o.textContent; });
+    keep.sort(function (a, b) { return a.value === 'France' ? -1 : b.value === 'France' ? 1 : a.textContent.localeCompare(b.textContent, 'fr'); });
+    sel.innerHTML = '';
+    keep.forEach(function (o) { sel.appendChild(o); });
     if ([].some.call(sel.options, function (o) { return o.value === sel.dataset.default; })) sel.value = sel.dataset.default;
     var fillProv = function () {
       var o = sel.options[sel.selectedIndex], list = [];

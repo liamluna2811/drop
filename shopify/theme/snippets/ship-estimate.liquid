@@ -2,7 +2,7 @@
   Estimation des frais de livraison avant la commande (panier et tiroir du panier).
   Les tarifs viennent de Shopify (/cart/prepare_shipping_rates.json puis async_shipping_rates.json) :
   ce sont ceux qui s'appliqueront au panier, frais Printful des accessoires compris.
-  Pays par défaut : France. Le code postal est facultatif. Usage : {% render 'ship-estimate', id: 'drawer' %}
+  Pays proposés : France, Monaco et Union européenne (les seuls desservis). Pays par défaut : France. Le code postal est facultatif. Usage : {% render 'ship-estimate', id: 'drawer' %}
 {%- endcomment -%}
 <details class="ship-est" data-ship-est data-total="{{ cart.total_price }}"{% if cart.item_count == 0 %} hidden{% endif %}>
   <summary>
@@ -20,5 +20,5 @@
     <button class="btn ghost" type="submit">Calculer</button>
   </form>
   <ul class="se-list" data-se-list></ul>
-  <p class="se-note">Livraison offerte dès {{ settings.free_shipping_threshold | default: 60 }} € en France et dans l'Union européenne. Montants indiqués par la boutique pour ce panier, confirmés au paiement.</p>
+  <p class="se-note"><strong>Livraison uniquement en France et dans l'Union européenne</strong>, offerte dès {{ settings.free_shipping_threshold | default: 60 }} €. Montants indiqués par la boutique pour ce panier, confirmés au paiement.</p>
 </details>

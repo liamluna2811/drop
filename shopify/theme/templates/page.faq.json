@@ -26,7 +26,7 @@
           "type": "qa",
           "settings": {
             "question": "La livraison est-elle offerte ?",
-            "answer": "<p>Oui, dès 60 € d'achat, en France et dans l'Union européenne. Ailleurs, les frais de livraison s'affichent dans le panier et au paiement.</p>"
+            "answer": "<p>Oui, dès 60 € d'achat, en France et dans l'Union européenne. Nous livrons uniquement en France (Monaco compris) et dans les pays de l'Union européenne.</p>"
           }
         },
         "q_suivi": {
