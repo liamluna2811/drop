@@ -295,6 +295,8 @@
 (function () {
   if (!document.querySelector('.glass-wall') || !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   window.addEventListener('bc:ballbounce', function (e) {
+    var fx = document.querySelector('.racket-fx');
+    if (fx && parseFloat(fx.style.opacity || 1) < 0.5) return;   // balle déjà effacée avant le pied de page
     var side = document.querySelector(e.detail.side === 'left' ? '.glass-l' : '.glass-r');
     if (!side || getComputedStyle(side).display === 'none') return;
     var r = side.getBoundingClientRect();
@@ -353,4 +355,17 @@
   window.addEventListener('resize', later);
   if (window.MutationObserver) new MutationObserver(later).observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
   later();
+})();
+
+// La balle s'efface juste avant le pied de page, pour ne jamais cacher ses liens
+(function () {
+  var fx = document.querySelector('.racket-fx'), foot = document.querySelector('.footer');
+  if (!fx || !foot) return;
+  function upd() {
+    var top = foot.getBoundingClientRect().top, h = window.innerHeight;
+    fx.style.opacity = Math.max(0, Math.min(1, (top - h) / (h * 0.3)));
+  }
+  window.addEventListener('scroll', upd, { passive: true });
+  window.addEventListener('resize', upd);
+  upd();
 })();

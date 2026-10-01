@@ -201,6 +201,21 @@
         "ball": true,
         "size": 100
       }
+    },
+    "marquee_coups": {
+      "type": "marquee",
+      "settings": {
+        "scheme": "dark",
+        "reverse": true,
+        "words": "PADEL,POR TRES,BAJADA,DEJADA,RULO,GLOBO"
+      }
+    },
+    "marquee_infos": {
+      "type": "marquee",
+      "settings": {
+        "scheme": "alt",
+        "words": "IMPRIMÉ À LA DEMANDE,LIVRAISON OFFERTE DÈS 60 €,FRANCE ET EUROPE"
+      }
     }
   },
   "order": [
@@ -208,7 +223,9 @@
     "hero",
     "marquee",
     "universes",
+    "marquee_coups",
     "duo",
+    "marquee_infos",
     "picks",
     "spirit",
     "arguments",
