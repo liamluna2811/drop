@@ -311,6 +311,7 @@ export function mount(host, options) {
   }
 
   var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;
+  var lastTri = 0, lastDir = 0;
   var BALL_IN = 0.26;                       // impact : juste après que la raquette s'est relevée
   function setPose(obj, s, bob, wob) {
     obj.position.set(s.x, s.y + bob, s.z);
@@ -364,6 +365,14 @@ export function mount(host, options) {
         var v = (contact.x - edgeL) / (edgeR - edgeL) - q * crossings * k;
         var f = ((v % 2) + 2) % 2;
         var tri = f <= 1 ? f : 2 - f;
+        // Signale chaque rebond contre une vitre (pour un éventuel effet sur les vitres)
+        var dir = tri > lastTri ? 1 : tri < lastTri ? -1 : lastDir;
+        if (lastDir && dir !== lastDir && k > 0.5 && (tri < 0.06 || tri > 0.94)) {
+          var side = tri < 0.5 ? 'left' : 'right';
+          var sy = window.innerHeight / 2 - (lerp(contact.y, -view.hh + rb + 8 / view.pxPerCm, Math.min(1, q * 1.02))) * view.pxPerCm;
+          window.dispatchEvent(new CustomEvent('bc:ballbounce', { detail: { side: side, y: sy } }));
+        }
+        lastTri = tri; lastDir = dir;
         var x = edgeL + tri * (edgeR - edgeL);
         var floor = -view.hh + rb + 8 / view.pxPerCm;
         bp = new THREE.Vector3(x, lerp(contact.y, floor, Math.min(1, q * 1.02)), lerp(contact.z, 0, k));
