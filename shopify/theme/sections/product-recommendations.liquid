@@ -1,28 +1,43 @@
-{%- assign shown = 0 -%}
-{%- capture cards -%}
-  {%- for other in collections['all'].products -%}
-    {%- if other.id != product.id and shown < section.settings.limit -%}
-      {% render 'product-card', product: other %}
-      {%- assign shown = shown | plus: 1 -%}
-    {%- endif -%}
-  {%- endfor -%}
-{%- endcapture -%}
-{%- if shown > 0 -%}
-<section class="section reco">
-  <div class="section-head">
-    <h2>{{ section.settings.title }}</h2>
-  </div>
-  <div class="grid reco-grid">
-    {{ cards }}
-  </div>
-</section>
+{%- comment -%}
+  Produits associés : recommandations calculées par Shopify (chargées après la page),
+  avec en attendant, ou si Shopify n'en propose pas, les autres produits de la même collection.
+{%- endcomment -%}
+{%- liquid
+  assign limit = section.settings.limit
+  assign shown = 0
+-%}
+{%- if recommendations.performed? -%}
+  {%- if recommendations.products_count > 0 -%}
+    <div class="grid reco-grid" data-reco-result>
+      {%- for other in recommendations.products limit: limit -%}{% render 'product-card', product: other %}{%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- else -%}
+  {%- capture cards -%}
+    {%- assign source = product.collections.first.products | default: collections['all'].products -%}
+    {%- for other in source -%}
+      {%- if other.id != product.id and shown < limit -%}
+        {% render 'product-card', product: other %}
+        {%- assign shown = shown | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  <section class="section reco" data-reco-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ limit }}&intent=related"{% if shown == 0 %} hidden{% endif %}>
+    <div class="section-head">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <div class="grid reco-grid" data-reco-grid>
+      {{ cards }}
+    </div>
+  </section>
 {%- endif -%}
 {% schema %}
 {
   "name": "Produits recommandés",
   "settings": [
     { "type": "text", "id": "title", "label": "Titre", "default": "Vous pourriez aussi aimer" },
-    { "type": "range", "id": "limit", "min": 2, "max": 8, "step": 1, "label": "Nombre de produits", "default": 4 }
+    { "type": "range", "id": "limit", "min": 2, "max": 8, "step": 1, "label": "Nombre de produits", "default": 4 },
+    { "type": "paragraph", "content": "Shopify choisit les produits associés. S'il n'en propose pas encore, ce sont les autres produits de la même collection qui s'affichent." }
   ]
 }
 {% endschema %}

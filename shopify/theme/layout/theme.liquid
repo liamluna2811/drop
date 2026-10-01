@@ -33,6 +33,7 @@
     window.theme = {
       currency: {{ cart.currency.iso_code | json }},
       locale: {{ request.locale.iso_code | json }},
+      moneyFormat: {{ shop.money_format | json }},
       freeShipping: {{ settings.free_shipping_threshold | default: 60 | times: 100 }}
     };
   </script>

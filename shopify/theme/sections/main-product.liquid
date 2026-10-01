@@ -1,4 +1,12 @@
+{%- comment -%}
+  Fiche produit : galerie (devant / dos, flèches, balayage sur mobile), couleurs et tailles en français,
+  guide des tailles en fenêtre (page choisie dans les réglages, sinon la page « guide-des-tailles »),
+  barre d'achat fixe sur mobile.
+{%- endcomment -%}
 {%- assign current = product.selected_or_first_available_variant -%}
+{%- assign guide_page = section.settings.size_guide -%}
+{%- if guide_page == blank -%}{%- assign guide_page = pages['guide-des-tailles'] -%}{%- endif -%}
+{%- if guide_page.content == blank -%}{%- assign guide_page = nil -%}{%- endif -%}
 {%- assign has_3d = false -%}
 {%- if product.tags contains '3d-bouteille' -%}{%- assign has_3d = true -%}{%- endif -%}
 <section class="section product" data-product-section>
@@ -31,6 +39,10 @@
       {%- else -%}
         <div class="slide on">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
       {%- endfor -%}
+      {%- if product.media.size > 1 -%}
+        <button type="button" class="gal-nav gal-prev" data-gal="-1" aria-label="Image précédente">{% render 'icon', name: 'chevron-left' %}</button>
+        <button type="button" class="gal-nav gal-next" data-gal="1" aria-label="Image suivante">{% render 'icon', name: 'chevron-right' %}</button>
+      {%- endif -%}
       {%- if has_3d -%}
         <div class="slide slide-3d" data-media-id="3d" data-color="">
           <div data-3d-canvas></div>
@@ -58,9 +70,11 @@
               {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
-          {%- if src contains '-back' -%}{%- assign view_label = 'Arrière' -%}{%- elsif src contains '-front' -%}{%- assign view_label = 'Avant' -%}{%- else -%}{%- assign view_label = 'Image ' | append: forloop.index -%}{%- endif -%}
-          <button type="button" class="thumb{% if forloop.first %} on{% endif %}" data-thumb="{{ media.id }}" data-color="{{ media_color | escape }}" aria-label="{{ view_label }}">
+          {%- assign view_label = '' -%}
+          {%- if src contains '-back' -%}{%- assign view_label = 'Dos' -%}{%- elsif src contains '-front' -%}{%- assign view_label = 'Devant' -%}{%- elsif src contains '-left' -%}{%- assign view_label = 'Côté' -%}{%- elsif src contains '-right' -%}{%- assign view_label = 'Côté' -%}{%- endif -%}
+          <button type="button" class="thumb{% if forloop.first %} on{% endif %}" data-thumb="{{ media.id }}" data-color="{{ media_color | escape }}" aria-label="{% if view_label != blank %}{{ view_label }}{% else %}Image {{ forloop.index }}{% endif %}">
             {{ media | image_url: width: 160 | image_tag: alt: '' }}
+            {%- if view_label != blank -%}<span class="thumb-label">{{ view_label }}</span>{%- endif -%}
           </button>
         {%- endfor -%}
         {%- if has_3d -%}
@@ -82,14 +96,25 @@
         {%- for option in product.options_with_values -%}
           {%- assign oname = option.name | downcase -%}
           {%- assign is_color = false -%}
-          {%- if oname == 'couleur' or oname == 'color' or oname == 'colour' -%}{%- assign is_color = true -%}{%- endif -%}
+          {%- assign is_size = false -%}
+          {%- assign opt_label = option.name -%}
+          {%- if oname == 'couleur' or oname == 'color' or oname == 'colour' -%}{%- assign is_color = true -%}{%- assign opt_label = 'Couleur' -%}{%- endif -%}
+          {%- if oname == 'taille' or oname == 'size' -%}{%- assign is_size = true -%}{%- assign opt_label = 'Taille' -%}{%- endif -%}
+          {%- capture selected_label -%}{% if is_color %}{% render 'color-label', name: option.selected_value %}{% else %}{{ option.selected_value }}{% endif %}{%- endcapture -%}
           <fieldset class="opt">
-            <legend>{{ option.name }} : <span data-selected-name="{{ forloop.index0 }}">{{ option.selected_value }}</span></legend>
+            <legend class="opt-legend">
+              <span>{{ opt_label }} : <span data-selected-name="{{ forloop.index0 }}">{{ selected_label | strip }}</span></span>
+              {%- if is_size and guide_page != blank -%}
+                <button type="button" class="guide-link" data-guide-open aria-haspopup="dialog">{% render 'icon', name: 'ruler' %}Guide des tailles</button>
+              {%- endif -%}
+            </legend>
             <div class="opt-values">
               {%- for value in option.values -%}
-                <input type="radio" class="visually-hidden" id="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" data-index="{{ forloop.parentloop.index0 }}"{% if is_color %} data-color-option{% endif %}{% if option.selected_value == value %} checked{% endif %}>
+                {%- capture value_label -%}{% if is_color %}{% render 'color-label', name: value %}{% else %}{{ value }}{% endif %}{%- endcapture -%}
+                {%- assign value_label = value_label | strip -%}
+                <input type="radio" class="visually-hidden" id="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" data-label="{{ value_label | escape }}" data-index="{{ forloop.parentloop.index0 }}"{% if is_color %} data-color-option{% endif %}{% if option.selected_value == value %} checked{% endif %}>
                 {%- if is_color -%}
-                  <label class="sw big" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" title="{{ value | escape }}" style="background:#cccccc;background:{% render 'color-hex', name: value %}"><span class="visually-hidden">{{ value }}</span></label>
+                  <label class="sw big" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}" title="{{ value_label | escape }}" style="background:#cccccc;background:{% render 'color-hex', name: value %}"><span class="visually-hidden">{{ value_label }}</span></label>
                 {%- else -%}
                   <label class="size" for="opt-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}">{{ value }}</label>
                 {%- endif -%}
@@ -107,17 +132,49 @@
       <p class="form-error" id="formError" role="alert" hidden></p>
     {%- endform -%}
 
-    <div class="product-desc">{{ product.description }}</div>
     <ul class="perks">
-      <li>Livraison offerte dès {{ settings.free_shipping_threshold | default: 60 }} € en France et en Europe</li>
-      <li>Paiement 100 % sécurisé</li>
+      {%- for i in (1..3) -%}
+        {%- assign k = 'perk_' | append: i -%}
+        {%- if section.settings[k] != blank -%}<li>{{ section.settings[k] }}</li>{%- endif -%}
+      {%- endfor -%}
     </ul>
+    <div class="product-desc rte">{{ product.description }}</div>
   </div>
+
+  {%- if guide_page != blank -%}
+    <dialog class="guide" data-guide aria-labelledby="GuideTitle">
+      <div class="guide-head">
+        <h2 id="GuideTitle">{{ guide_page.title }}</h2>
+        <button type="button" class="guide-close" data-guide-close aria-label="Fermer">{% render 'icon', name: 'close' %}</button>
+      </div>
+      <div class="guide-body rte">{{ guide_page.content }}</div>
+    </dialog>
+  {%- endif -%}
+
+  {%- if section.settings.sticky_atc -%}
+    <div class="sticky-atc" data-sticky-atc aria-hidden="true">
+      <div class="sticky-atc-info">
+        <span class="sticky-atc-title">{{ product.title }}</span>
+        <span class="sticky-atc-meta"><span data-sticky-variant></span><span data-sticky-price>{{ current.price | money }}</span></span>
+      </div>
+      <button type="button" class="btn" data-sticky-add tabindex="-1"{% unless current.available %} disabled{% endunless %}>{% if current.available %}Ajouter{% else %}Épuisé{% endif %}</button>
+    </div>
+  {%- endif -%}
   {%- if has_3d -%}
     <script>window.theme = window.theme || {}; window.theme.bottle = { module: {{ 'bottle-3d.js' | asset_url | json }}, texture: {{ 'bottle-body.jpg' | asset_url | json }} };</script>
   {%- endif -%}
   <script type="application/json" id="product-json">{{ product.variants | json }}</script>
 </section>
 {% schema %}
-{ "name": "Page produit" }
+{
+  "name": "Page produit",
+  "settings": [
+    { "type": "page", "id": "size_guide", "label": "Page du guide des tailles", "info": "Sinon, la page dont l'adresse est /pages/guide-des-tailles. Sans page, le lien n'apparaît pas." },
+    { "type": "checkbox", "id": "sticky_atc", "label": "Barre « Ajouter au panier » fixe sur mobile", "default": true },
+    { "type": "header", "content": "Avantages sous le bouton" },
+    { "type": "text", "id": "perk_1", "label": "Avantage 1", "default": "Livraison offerte dès 60 € en France et en Europe" },
+    { "type": "text", "id": "perk_2", "label": "Avantage 2", "default": "Paiement 100 % sécurisé" },
+    { "type": "text", "id": "perk_3", "label": "Avantage 3", "default": "Imprimé à la demande, après ta commande" }
+  ]
+}
 {% endschema %}

@@ -2,7 +2,23 @@
   'use strict';
   var T = window.theme || {};
   var $ = function (s, r) { return (r || document).querySelector(s); };
+  // Prix au format de la boutique (le même que celui affiché par Shopify au chargement)
   var fmt = function (cents) {
+    var f = T.moneyFormat;
+    if (f && f.indexOf('{{') > -1) {
+      var sep = function (n, d, t, dec) {
+        var p = (n / 100).toFixed(d).split('.');
+        return p[0].replace(/\B(?=(\d{3})+(?!\d))/g, t) + (p[1] ? dec + p[1] : '');
+      };
+      return f.replace(/\{\{\s*(\w+)\s*\}\}/, function (m, k) {
+        if (k === 'amount_with_comma_separator') return sep(cents, 2, '.', ',');
+        if (k === 'amount_no_decimals') return sep(cents, 0, ',', '.');
+        if (k === 'amount_no_decimals_with_comma_separator') return sep(cents, 0, '.', ',');
+        if (k === 'amount_with_space_separator') return sep(cents, 2, ' ', ',');
+        if (k === 'amount_with_apostrophe_separator') return sep(cents, 2, "'", '.');
+        return sep(cents, 2, ',', '.');
+      }).replace(/<[^>]*>/g, '');
+    }
     try { return new Intl.NumberFormat(T.locale || undefined, { style: 'currency', currency: T.currency || 'EUR' }).format(cents / 100); }
     catch (e) { return (cents / 100).toFixed(2) + ' €'; }
   };
@@ -161,7 +177,7 @@
     form.addEventListener('change', function (e) {
       if (e.target.type !== 'radio') return;
       var idx = e.target.dataset.index, label = $('[data-selected-name="' + idx + '"]');
-      if (label) label.textContent = e.target.value;
+      if (label) label.textContent = e.target.dataset.label || e.target.value;
       var v = current();
       err.hidden = true;
       if (!v) { btn.disabled = true; btn.textContent = 'Indisponible'; return; }
@@ -172,7 +188,73 @@
       var color = selectedColor();
       if (colorIdx > -1 && color !== lastColor) { lastColor = color; filterByColor(color, v.featured_media && v.featured_media.id); }
       history.replaceState(null, '', '?variant=' + v.id);
+      syncSticky();
     });
+
+    // Galerie : flèches et balayage entre les images visibles (couleur choisie)
+    var galMain = document.querySelector('.gallery-main');
+    var stepMedia = function (dir) {
+      var vis = slides.filter(function (sl) { return !sl.hidden; });
+      if (vis.length < 2) return;
+      var i = vis.findIndex(function (sl) { return sl.classList.contains('on'); });
+      showMedia(vis[(i + dir + vis.length) % vis.length].dataset.mediaId);
+    };
+    var navState = function () {
+      if (galMain) galMain.classList.toggle('single', slides.filter(function (sl) { return !sl.hidden; }).length < 2);
+    };
+    [].forEach.call(document.querySelectorAll('[data-gal]'), function (b) {
+      b.addEventListener('click', function () { stepMedia(+b.dataset.gal); });
+    });
+    if (galMain) {
+      var x0 = null, y0 = 0;
+      galMain.addEventListener('touchstart', function (e) { if (e.target.closest('.slide-3d')) return; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      galMain.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+        x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) stepMedia(dx < 0 ? 1 : -1);
+      }, { passive: true });
+    }
+    navState();
+    form.addEventListener('change', navState);
+
+    // Guide des tailles (fenêtre)
+    var guide = document.querySelector('[data-guide]');
+    if (guide && typeof guide.showModal === 'function') {
+      document.addEventListener('click', function (e) {
+        if (e.target.closest('[data-guide-open]')) guide.showModal();
+        else if (e.target.closest('[data-guide-close]') || e.target === guide) guide.close();
+      });
+    } else {
+      [].forEach.call(document.querySelectorAll('[data-guide-open]'), function (b) { b.hidden = true; });
+    }
+
+    // Barre d'achat fixe sur mobile : visible quand le bouton principal n'est plus à l'écran
+    var sticky = document.querySelector('[data-sticky-atc]');
+    function syncSticky() {
+      if (!sticky) return;
+      var names = [].map.call(form.querySelectorAll('input[type=radio]:checked'), function (r) { return r.dataset.label || r.value; });
+      sticky.querySelector('[data-sticky-variant]').textContent = names.join(' · ');
+      sticky.querySelector('[data-sticky-price]').textContent = $('#productPrice').textContent;
+      var sb = sticky.querySelector('[data-sticky-add]');
+      sb.disabled = btn.disabled && btn.textContent !== 'Ajouter au panier';
+      sb.textContent = btn.textContent === 'Ajouter au panier' ? 'Ajouter' : btn.textContent;
+    }
+    if (sticky) {
+      syncSticky();
+      sticky.querySelector('[data-sticky-add]').addEventListener('click', function () {
+        if (form.requestSubmit) form.requestSubmit(btn); else btn.click();
+      });
+      var buyRow = form.querySelector('.buy-row');
+      if (buyRow && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (en) {
+          var off = !en[0].isIntersecting;
+          sticky.classList.toggle('show', off);
+          sticky.setAttribute('aria-hidden', off ? 'false' : 'true');
+          sticky.querySelector('[data-sticky-add]').tabIndex = off ? 0 : -1;
+        }).observe(buyRow);
+      }
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -498,4 +580,18 @@
   });
 
   apply(false);
+})();
+
+// Produits associés : remplace la sélection de la collection par les recommandations de Shopify quand il y en a
+(function () {
+  var box = document.querySelector('[data-reco-url]');
+  if (!box || !window.fetch) return;
+  fetch(box.dataset.recoUrl).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+    if (!html) return;
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var res = doc.querySelector('[data-reco-result]');
+    if (!res || res.querySelectorAll('.card').length < 2) return;
+    box.querySelector('[data-reco-grid]').innerHTML = res.innerHTML;
+    box.hidden = false;
+  }).catch(function () {});
 })();
