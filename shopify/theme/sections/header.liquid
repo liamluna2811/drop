@@ -1,6 +1,9 @@
 <div class="topbar">
   <span class="topbar-text">
-    {%- if customer -%}
+    {%- comment -%} Client sans commande : offre de bienvenue (−15 %) ; client ayant déjà commandé : −10 % dès 60 € {%- endcomment -%}
+    {%- if customer and customer.orders_count == 0 -%}
+      {{ settings.announcement_first | default: settings.announcement_customer }}
+    {%- elsif customer -%}
       {{ settings.announcement_customer }}
     {%- else -%}
       <a href="{{ routes.account_register_url }}">{{ settings.announcement }}</a>

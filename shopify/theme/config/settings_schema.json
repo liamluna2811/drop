@@ -75,8 +75,14 @@
       },
       {
         "type": "text",
+        "id": "announcement_first",
+        "label": "Bandeau d'annonce (clients connectés sans commande)",
+        "default": "−15 % appliqués automatiquement sur ta première commande"
+      },
+      {
+        "type": "text",
         "id": "announcement_customer",
-        "label": "Bandeau d'annonce (clients connectés)",
+        "label": "Bandeau d'annonce (clients ayant déjà commandé)",
         "default": "−10 % sur ta commande dès 60 € d'achat"
       },
       {
