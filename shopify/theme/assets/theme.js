@@ -52,6 +52,17 @@
     var count = cart.item_count, total = cart.total_price;
     var badge = $('#cartCount'); if (badge) { badge.textContent = count; badge.dataset.n = count; }
     var totalEl = $('#cartTotal'); if (totalEl) totalEl.textContent = fmt(total);
+    // Réductions : sous-total avant réduction, puis chaque réduction (automatique ou code) avec son montant
+    var sumEl = $('#cartSum');
+    if (sumEl) {
+      var disc = {}, order = [];
+      var add = function (title, amount) { if (!amount) return; if (!(title in disc)) { disc[title] = 0; order.push(title); } disc[title] += amount; };
+      (cart.items || []).forEach(function (i) { (i.line_level_discount_allocations || []).forEach(function (a) { add(a.discount_application && a.discount_application.title || 'Réduction', a.amount); }); });
+      (cart.cart_level_discount_applications || []).forEach(function (a) { add(a.title || 'Réduction', a.total_allocated_amount); });
+      sumEl.hidden = !order.length || !count;
+      sumEl.innerHTML = order.length ? '<div class="sum-row"><span>Sous-total</span><span>' + esc(fmt(cart.original_total_price)) + '</span></div>' +
+        order.map(function (t) { return '<div class="sum-row disc"><span>' + esc(t) + '</span><span>−' + esc(fmt(disc[t])) + '</span></div>'; }).join('') : '';
+    }
     // Barre de progression vers la livraison offerte
     var min = T.freeShipping || 0;
     [].forEach.call(document.querySelectorAll('[data-ship]'), function (el) {
@@ -77,7 +88,7 @@
         '<a class="thumb" href="' + esc(i.url) + '">' + img + '</a>' +
         '<div><h4>' + esc(i.product_title) + '</h4>' + variant +
         '<div class="qty"><button type="button" data-a="dec" aria-label="Moins">−</button><span>' + i.quantity + '</span><button type="button" data-a="inc" aria-label="Plus">+</button></div></div>' +
-        '<div class="right"><strong>' + fmt(i.final_line_price) + '</strong><br><button type="button" class="rm" data-a="rm">Retirer</button></div></div>';
+        '<div class="right">' + (i.original_line_price > i.final_line_price ? '<s class="was">' + fmt(i.original_line_price) + '</s> ' : '') + '<strong>' + fmt(i.final_line_price) + '</strong><br><button type="button" class="rm" data-a="rm">Retirer</button></div></div>';
     }).join('');
   }
 

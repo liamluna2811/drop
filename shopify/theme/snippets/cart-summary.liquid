@@ -1,0 +1,23 @@
+{%- comment -%}
+  Sous-total et réductions du panier (réductions automatiques et codes), affichés au-dessus du total.
+  Le tiroir du panier est ensuite mis à jour par theme.js (#cartSum) sans recharger la page.
+{%- endcomment -%}
+{%- liquid
+  assign has_disc = false
+  if cart.total_discount > 0
+    assign has_disc = true
+  endif
+-%}
+<div class="cart-sum" id="{{ id | default: 'cartSum' }}"{% unless has_disc %} hidden{% endunless %}>
+  {%- if has_disc -%}
+    <div class="sum-row"><span>Sous-total</span><span>{{ cart.original_total_price | money }}</span></div>
+    {%- for item in cart.items -%}
+      {%- for a in item.line_level_discount_allocations -%}
+        <div class="sum-row disc"><span>{{ a.discount_application.title }}{% if cart.items.size > 1 %} ({{ item.product.title }}){% endif %}</span><span>−{{ a.amount | money }}</span></div>
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- for d in cart.cart_level_discount_applications -%}
+      <div class="sum-row disc"><span>{{ d.title }}</span><span>−{{ d.total_allocated_amount | money }}</span></div>
+    {%- endfor -%}
+  {%- endif -%}
+</div>

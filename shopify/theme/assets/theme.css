@@ -763,3 +763,10 @@ shopify-account{
 @media (max-width:860px){.hello{display:none}.nav-actions{gap:var(--s-1)}}
 /* Petits écrans : les favoris restent accessibles depuis le menu, pour laisser la place au compte et au panier */
 @media (max-width:520px){.nav .fav-link{display:none}}
+
+/* Panier : sous-total et réductions au-dessus du total */
+.cart-sum{display:grid;gap:.35rem;margin-bottom:var(--s-2);font-size:var(--fs-sm)}
+.sum-row{display:flex;justify-content:space-between;gap:var(--s-3)}
+.sum-row span:last-child{flex:none;white-space:nowrap}
+.sum-row.disc{color:#1f7a3a;font-weight:600}
+.line .was,.cart-lines .was{color:var(--c-text-muted);font-size:var(--fs-xs);font-weight:500}

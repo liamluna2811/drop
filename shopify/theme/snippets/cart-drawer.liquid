@@ -7,6 +7,7 @@
     {%- unless customer -%}
     <p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>
     {%- endunless -%}
+    {%- render 'cart-summary' -%}
     <div class="total"><span>Total</span><strong id="cartTotal">{{ cart.total_price | money }}</strong></div>
     <a class="btn full" id="checkout" href="{{ routes.cart_url }}">Commander</a>
   </div>

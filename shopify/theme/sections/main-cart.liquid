@@ -23,11 +23,12 @@
               {%- endunless -%}
               <div class="qty"><input type="number" class="qty-input" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantité {{ item.product.title | escape }}"></div>
             </div>
-            <div class="right"><strong>{{ item.final_line_price | money }}</strong><br><a class="rm" href="{{ item.url_to_remove }}">Retirer</a></div>
+            <div class="right">{% if item.original_line_price > item.final_line_price %}<s class="was">{{ item.original_line_price | money }}</s> {% endif %}<strong>{{ item.final_line_price | money }}</strong><br><a class="rm" href="{{ item.url_to_remove }}">Retirer</a></div>
           </div>
         {%- endfor -%}
       </div>
       <div class="cart-total">
+        {%- render 'cart-summary', id: 'cartSumPage' -%}
         <div class="total"><span>Total</span><strong>{{ cart.total_price | money }}</strong></div>
         {%- unless customer -%}<p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>{%- endunless -%}
         <p class="ship">Taxes incluses. Frais de livraison calculés à l'étape suivante.</p>
