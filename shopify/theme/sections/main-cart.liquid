@@ -31,7 +31,7 @@
         {%- render 'cart-summary', id: 'cartSumPage' -%}
         <div class="total"><span>Total</span><strong>{{ cart.total_price | money }}</strong></div>
         {%- unless customer -%}<p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>{%- endunless -%}
-        <p class="ship">Taxes incluses. Livraison uniquement en France et dans l'Union européenne, offerte dès {{ settings.free_shipping_threshold | default: 60 }} €. Frais calculés au paiement.</p>
+        <p class="ship">TVA non applicable, art. 293 B du CGI. Livraison uniquement en France et dans l'Union européenne, offerte dès {{ settings.free_shipping_threshold | default: 60 }} €. Frais calculés au paiement.</p>
         <div class="cart-actions">
           <button type="submit" name="update" class="btn ghost">Mettre à jour</button>
           <button type="submit" name="checkout" class="btn">Commander</button>
