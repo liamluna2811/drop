@@ -236,21 +236,20 @@ function buildRacket(logoImg, options) {
 function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-// Position de la raquette selon l'avancée p (0 = haut de page, 1 = sortie), dans la zone visible.
-// 0 → 0,2  : la raquette, posée devant le bord de l'arche, se relève vers le haut et dégage l'arche ;
-// 0,2 → 0,75 : elle rétrécit doucement en glissant vers la droite ; 0,75 → 1 : elle sort par la droite.
-var RAISE = 0.2;
-function pose(p, view) {
-  p = Math.min(1, Math.max(0, p));
+// Position de la raquette.
+// r (0 → 1) : redressement pendant que la bannière est figée (premiers coups de molette) ;
+// t (0 → 1) : ensuite, pendant le défilement normal : elle rétrécit (0 → 0,7) puis sort par la droite (0,7 → 1).
+function pose(r, t, view) {
+  r = ease(Math.min(1, Math.max(0, r)));
+  t = Math.min(1, Math.max(0, t));
+  var a = ease(Math.min(1, t / 0.7));
+  var b = t <= 0.7 ? 0 : ease((t - 0.7) / 0.3);
   var top = 80 / view.pxPerCm;                         // hauteur de l'en-tête (≈ 80 px) en cm
-  var s0 = Math.min(1.25, ((2 * view.hh - top) * 0.96) / 56, (view.hw * 0.8) / 60) * (view.size || 1);
-  var r = ease(Math.min(1, p / RAISE));                 // relevé
-  var a = p <= RAISE ? 0 : ease(Math.min(1, (p - RAISE) / (0.75 - RAISE)));
-  var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
+  var s0 = Math.min(1.35, ((2 * view.hh - top) * 1.04) / 56, (view.hw * 0.92) / 60) * (view.size || 1);
   return {
     s: lerp(s0, s0 * 0.55, a),
-    x: view.hw * 0.62 + r * view.hw * 0.12 + b * view.hw * 0.75,
-    y: -top / 2 + r * view.hh * 0.1 + a * view.hh * 0.04, z: r * 4,
+    x: view.hw * 0.6 + r * view.hw * 0.09 + b * view.hw * 0.8,
+    y: -top / 2 + r * view.hh * 0.08 + a * view.hh * 0.04, z: r * 4,
     rx: lerp(-0.1, 0.08, r),
     ry: lerp(-0.34, -0.42, r) - b * 0.9,
     rz: lerp(0.78, -0.12, r) - a * 0.15 - b * 0.3
@@ -321,49 +320,52 @@ export function mount(host, options) {
   function heroRange() { return window.innerHeight * (options.range || 0.9); }
 
   // y = position de défilement (lissée)
+  var PIN = 0.6;                            // la bannière reste figée pendant 60 % d'écran de défilement (voir theme.css)
+  function phases(y) {
+    var pin = window.innerHeight * PIN;
+    return { pin: pin, r: Math.min(1, Math.max(0, y / pin)), t: Math.min(1, Math.max(0, (y - pin) / heroRange())) };
+  }
   function apply(y, time) {
     if (!racket) return;
-    var p = Math.min(1, Math.max(0, y / heroRange()));
-    var s = pose(p, view);
-    var idle = (1 - Math.min(1, p * 4)) * 0.035;
-    racket.visible = p < 0.999;
+    var ph = phases(y);
+    var s = pose(ph.r, ph.t, view);
+    var idle = (1 - Math.min(1, ph.r * 3)) * 0.035;
+    racket.visible = ph.t < 0.999;
     if (racket.visible) setPose(racket, s, Math.sin(time / 1400) * idle * 12, Math.sin(time / 1700) * idle);
     if (ball) {
       if (!contact) {
-        var sc = pose(BALL_IN, view); setPose(dummy, sc, 0, 0); dummy.userData = racket.userData;
+        var sc = pose(1, 0, view); setPose(dummy, sc, 0, 0); dummy.userData = racket.userData;
         contact = faceCenter(dummy); contact.z += 3.3 * sc.s; contactScale = sc.s;
       }
       var bp, bs;
-      if (p <= BALL_IN) {
-        // Arrivée depuis la gauche de l'écran, en légère cloche, jusqu'à la face de la raquette
-        var t = ease(p / BALL_IN);
-        var target = faceCenter(racket); target.z += 3.3 * s.s;
-        bp = new THREE.Vector3(-view.hw - 6, view.hh * 0.3, 0).lerp(target, t);
-        bp.y += Math.sin(t * Math.PI) * view.hh * 0.18;
-        bs = s.s;
+      if (y <= ph.pin) {
+        // Pendant le redressement : la balle part du bord gauche et arrive sur la face au moment où la raquette est droite
+        var k0 = Math.min(1, Math.max(0, (ph.r - 0.15) / 0.85));
+        var tt = ease(k0);
+        bp = new THREE.Vector3(-view.hw - 6, view.hh * 0.3, 0).lerp(contact, tt);
+        bp.y += Math.sin(tt * Math.PI) * view.hh * 0.18;
+        bs = contactScale;
+        ball.visible = k0 > 0;
       } else {
-        // Après l'impact : la balle descend avec la page en rebondissant d'un bord de l'écran à l'autre (comme contre les vitres)
-        var yC = BALL_IN * heroRange();
-        var total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight - yC);
-        var q = Math.min(1, Math.max(0, (y - yC) / total));
-        var r = 3.3 * 0.5;
-        var edgeL = -view.hw + r + 6 / view.pxPerCm, edgeR = view.hw - r - 6 / view.pxPerCm;
+        // Après l'impact : la balle descend avec la page en rebondissant d'un bord de l'écran à l'autre
+        var total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight - ph.pin);
+        var q = Math.min(1, Math.max(0, (y - ph.pin) / total));
+        var rb = 3.3 * 0.5;
+        var edgeL = -view.hw + rb + 6 / view.pxPerCm, edgeR = view.hw - rb - 6 / view.pxPerCm;
         var k = ease(Math.min(1, q / 0.05));
         bs = lerp(contactScale, 0.5, k);
-        // Onde triangle entre les deux bords, en partant du point d'impact vers la gauche
         var crossings = 7;
         var v = (contact.x - edgeL) / (edgeR - edgeL) - q * crossings * k;
         var f = ((v % 2) + 2) % 2;
         var tri = f <= 1 ? f : 2 - f;
         var x = edgeL + tri * (edgeR - edgeL);
-        var floor = -view.hh + r + 8 / view.pxPerCm;
-        var baseY = lerp(contact.y, floor, Math.min(1, q * 1.02));
-        bp = new THREE.Vector3(x, baseY, lerp(contact.z, 0, k));
+        var floor = -view.hh + rb + 8 / view.pxPerCm;
+        bp = new THREE.Vector3(x, lerp(contact.y, floor, Math.min(1, q * 1.02)), lerp(contact.z, 0, k));
+        ball.visible = true;
       }
       ball.position.copy(bp);
       ball.scale.setScalar(bs);
       ball.rotation.set(y / 90, y / 140, 0);
-      ball.visible = p > 0.015;
     }
     renderer.render(scene, camera);
   }
@@ -372,12 +374,12 @@ export function mount(host, options) {
   function frame(time) {
     curY += (tgtY - curY) * 0.14;
     if (Math.abs(tgtY - curY) < 0.5) curY = tgtY;
-    var p = curY / heroRange();
+    var ph = phases(curY), p = ph.t;
     var keep = !!ball || p < 0.999;
     host.style.visibility = keep ? 'visible' : 'hidden';
     if (!ball) host.style.opacity = String(Math.min(1, (1 - Math.min(1, p)) / 0.12));
     if (keep) apply(curY, time);
-    var idle = p < 0.25;                      // petit flottement de la raquette en haut de page
+    var idle = ph.r < 0.34;                   // petit flottement de la raquette en haut de page
     if (curY !== tgtY || idle) { requestAnimationFrame(frame); } else { running = false; }
   }
   function wake() { tgtY = window.scrollY; if (!running) { running = true; requestAnimationFrame(frame); } }
