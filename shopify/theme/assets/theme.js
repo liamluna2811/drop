@@ -129,6 +129,31 @@
           var x0 = W, y0 = H, x1 = 0, y1 = 0;
           for (i = 0; i < n; i++) if (px[i * 4 + 3] > 40) { x = i % W; y = (i - x) / W; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
           if (x1 <= x0 || y1 <= y0) return resolve(null);
+          // Forme d'un t-shirt seul ? Un mannequin donne une silhouette haute (jambes)
+          // ou une tête étroite au-dessus des épaules : la photo est alors écartée.
+          var bw = x1 - x0 + 1, bh = y1 - y0 + 1, ratio = bh / bw;
+          if (ratio > 1.4 || ratio < 0.65) return resolve(null);
+          // Moyenne de couleur et largeur des pixels gardés dans une zone
+          var zone = function (ya, yb, xa, xb) {
+            var c = 0, R = 0, G = 0, B = 0, wsum = 0, rows = 0;
+            for (var yy = Math.round(y0 + bh * ya); yy < y0 + bh * yb; yy++) {
+              var rc = 0; rows++;
+              for (var xx = Math.round(x0 + bw * xa); xx < x0 + bw * xb; xx++) {
+                var q = (yy * W + xx) * 4;
+                if (px[q + 3] > 40) { rc++; c++; R += px[q]; G += px[q + 1]; B += px[q + 2]; }
+              }
+              wsum += rc;
+            }
+            return { w: rows ? wsum / rows : 0, r: c ? R / c : 0, g: c ? G / c : 0, b: c ? B / c : 0, n: c };
+          };
+          var maxW = 0;
+          for (y = y0; y <= y1; y += 2) { var cw = 0; for (x = x0; x <= x1; x++) if (px[(y * W + x) * 4 + 3] > 40) cw++; if (cw > maxW) maxW = cw; }
+          var top = zone(0, 0.15, 0, 1);
+          var fl = zone(0.45, 0.6, 0.15, 0.3), fr = zone(0.45, 0.6, 0.7, 0.85);
+          var fn = fl.n + fr.n || 1;
+          var fab = { r: (fl.r * fl.n + fr.r * fr.n) / fn, g: (fl.g * fl.n + fr.g * fr.n) / fn, b: (fl.b * fl.n + fr.b * fr.n) / fn };
+          var diff = Math.abs(top.r - fab.r) + Math.abs(top.g - fab.g) + Math.abs(top.b - fab.b);
+          if (maxW && top.w / maxW < 0.45 && diff > 70) return resolve(null);   // tête au-dessus du t-shirt
           var out = document.createElement('canvas'); out.width = x1 - x0 + 1; out.height = y1 - y0 + 1;
           out.getContext('2d').drawImage(cv, x0, y0, out.width, out.height, 0, 0, out.width, out.height);
           resolve({ url: out.toDataURL('image/png'), ratio: out.height / out.width });
@@ -314,7 +339,7 @@
         return /-front-and-back|-left-front|-right-front/.test(u) ? 2 : /-front[-.]/.test(u) ? 0 : /-back/.test(u) ? 3 : 1;
       };
       cands.sort(function (p, q) { return rank(p) - rank(q); });
-      cuts[key] = cands.slice(0, 4).reduce(function (prev, im) {
+      cuts[key] = cands.slice(0, 12).reduce(function (prev, im) {
         return prev.then(function (found) { return found || cutout(small(im.currentSrc || im.src)); });
       }, Promise.resolve(null));
       return cuts[key];
