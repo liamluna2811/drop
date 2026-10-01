@@ -49,6 +49,7 @@
   }
 
   function render(cart) {
+    document.dispatchEvent(new CustomEvent('bc:cart', { detail: cart }));
     var count = cart.item_count, total = cart.total_price;
     var badge = $('#cartCount'); if (badge) { badge.textContent = count; badge.dataset.n = count; }
     var totalEl = $('#cartTotal'); if (totalEl) totalEl.textContent = fmt(total);
@@ -947,4 +948,105 @@
   if (!box || !box.querySelector('shopify-account') || !window.customElements) return;
   var fallback = box.querySelector('.acct-fallback');
   customElements.whenDefined('shopify-account').then(function () { if (fallback) fallback.hidden = true; });
+})();
+
+// Estimation des frais de livraison (panier) : tarifs réels de Shopify pour le panier en cours
+(function () {
+  var boxes = [].slice.call(document.querySelectorAll('[data-ship-est]'));
+  if (!boxes.length) return;
+  var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+  var FR = { 'France': 'France', 'Germany': 'Allemagne', 'Austria': 'Autriche', 'Belgium': 'Belgique', 'Bulgaria': 'Bulgarie', 'Cyprus': 'Chypre',
+    'Czech Republic': 'Tchéquie', 'Czechia': 'Tchéquie', 'Denmark': 'Danemark', 'Estonia': 'Estonie', 'Spain': 'Espagne', 'Finland': 'Finlande',
+    'Greece': 'Grèce', 'Croatia': 'Croatie', 'Hungary': 'Hongrie', 'Ireland': 'Irlande', 'Italy': 'Italie', 'Lithuania': 'Lituanie',
+    'Luxembourg': 'Luxembourg', 'Latvia': 'Lettonie', 'Malta': 'Malte', 'Netherlands': 'Pays-Bas', 'Poland': 'Pologne', 'Portugal': 'Portugal',
+    'Romania': 'Roumanie', 'Sweden': 'Suède', 'Slovenia': 'Slovénie', 'Slovakia': 'Slovaquie', 'Switzerland': 'Suisse', 'United Kingdom': 'Royaume-Uni',
+    'United States': 'États-Unis', 'Canada': 'Canada', 'Australia': 'Australie', 'New Zealand': 'Nouvelle-Zélande', 'Japan': 'Japon',
+    'South Korea': 'Corée du Sud', 'Singapore': 'Singapour', 'Hong Kong SAR': 'Hong Kong', 'Hong Kong': 'Hong Kong', 'Israel': 'Israël',
+    'Malaysia': 'Malaisie', 'Norway': 'Norvège', 'United Arab Emirates': 'Émirats arabes unis' };
+  var money = function (amount) {
+    var cents = Math.round(parseFloat(amount) * 100);
+    if (!cents) return 'Offerte';
+    var f = (window.theme && theme.moneyFormat) || '{{amount_with_comma_separator}} €';
+    var v = (cents / 100).toFixed(2);
+    return f.replace(/\{\{\s*(\w+)\s*\}\}/, function (_, k) { return /comma/.test(k) ? v.replace('.', ',') : v; });
+  };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var count = null, seq = 0;
+
+  boxes.forEach(function (box) {
+    var sel = box.querySelector('[data-se-country]'), prov = box.querySelector('[data-se-province]');
+    [].forEach.call(sel.options, function (o) { if (FR[o.value]) o.textContent = FR[o.value]; if (o.value === '---') o.disabled = true; });
+    if ([].some.call(sel.options, function (o) { return o.value === sel.dataset.default; })) sel.value = sel.dataset.default;
+    var fillProv = function () {
+      var o = sel.options[sel.selectedIndex], list = [];
+      try { list = JSON.parse((o && o.dataset.provinces) || '[]'); } catch (e) {}
+      prov.innerHTML = list.map(function (p) { return '<option value="' + esc(p[0]) + '">' + esc(p[1]) + '</option>'; }).join('');
+      prov.hidden = !list.length;
+    };
+    fillProv();
+    sel.addEventListener('change', function () { fillProv(); estimate(box); });
+    box.querySelector('[data-se-form]').addEventListener('submit', function (e) { e.preventDefault(); estimate(box); });
+  });
+
+  function estimate(box) {
+    var sel = box.querySelector('[data-se-country]'), prov = box.querySelector('[data-se-province]');
+    var zip = box.querySelector('[data-se-zip]').value.trim();
+    var list = box.querySelector('[data-se-list]'), sum = box.querySelector('[data-se-sum]');
+    var country = sel.value, label = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].textContent : country;
+    var q = 'shipping_address%5Bcountry%5D=' + encodeURIComponent(country) +
+      (!prov.hidden && prov.value ? '&shipping_address%5Bprovince%5D=' + encodeURIComponent(prov.value) : '') +
+      (zip ? '&shipping_address%5Bzip%5D=' + encodeURIComponent(zip) : '');
+    var my = ++seq;
+    sum.textContent = 'Calcul…';
+    list.innerHTML = '';
+    fetch(root + 'cart/prepare_shipping_rates.json?' + q, { method: 'POST' })
+      .then(function () { return poll(q, 0); })
+      .then(function (rates) {
+        if (my !== seq) return;
+        // Un même mode affiché une seule fois, au prix le plus bas (ex. « Standard » offert dès 60 €)
+        var best = {};
+        (rates || []).forEach(function (r) {
+          var n = r.presentment_name || r.name, p = parseFloat(r.price);
+          if (!(n in best) || p < best[n]) best[n] = p;
+        });
+        var names = Object.keys(best).sort(function (a, b) { return best[a] - best[b]; });
+        if (!names.length) { sum.textContent = 'Indisponible'; list.innerHTML = '<li class="se-empty">Pas de livraison vers ' + esc(label) + ' pour ce panier.</li>'; return; }
+        sum.textContent = label + ' : ' + (best[names[0]] ? 'dès ' : '') + money(best[names[0]]);
+        list.innerHTML = names.map(function (n) { return '<li><span>' + esc(n) + '</span><strong>' + esc(money(best[n])) + '</strong></li>'; }).join('');
+      })
+      .catch(function (err) {
+        if (my !== seq) return;
+        sum.textContent = 'Estimer les frais';
+        // Réponse d'erreur de Shopify (pays non desservi, code postal invalide…) ou panne réseau
+        var refused = err && typeof err === 'object' && !(err instanceof Error);
+        list.innerHTML = '<li class="se-empty">' + (refused
+          ? 'Pas de tarif pour cette adresse. Vérifie le pays ou le code postal.'
+          : 'Impossible de calculer pour l\'instant. Les frais seront affichés au paiement.') + '</li>';
+      });
+  }
+  function poll(q, n) {
+    return fetch(root + 'cart/async_shipping_rates.json?' + q).then(function (r) {
+      if (!r.ok) return r.json().then(function (d) { throw d; });
+      return r.json();
+    }).then(function (d) {
+      if (d && d.shipping_rates) return d.shipping_rates;
+      if (n > 12) throw new Error('timeout');
+      return new Promise(function (res) { setTimeout(res, 500); }).then(function () { return poll(q, n + 1); });
+    });
+  }
+
+  // Recalcul automatique (France par défaut) quand le panier change ; rien si le panier est vide
+  var timer;
+  document.addEventListener('bc:cart', function (e) {
+    var c = e.detail || {};
+    boxes.forEach(function (b) { b.hidden = !c.item_count; });
+    if (!c.item_count) return;
+    var key = c.item_count + ':' + c.total_price;
+    if (key === count) return;
+    count = key;
+    clearTimeout(timer);
+    timer = setTimeout(function () { boxes.forEach(estimate); }, 250);
+  });
+  // Page panier : premier calcul au chargement
+  if (document.querySelector('.cart-page [data-ship-est]:not([hidden])')) boxes.forEach(function (b) { if (b.closest('.cart-page')) estimate(b); });
 })();

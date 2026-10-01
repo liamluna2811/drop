@@ -770,3 +770,22 @@ shopify-account{
 .sum-row span:last-child{flex:none;white-space:nowrap}
 .sum-row.disc{color:#1f7a3a;font-weight:600}
 .line .was,.cart-lines .was{color:var(--c-text-muted);font-size:var(--fs-xs);font-weight:500}
+
+/* Estimation des frais de livraison (panier) */
+.ship-est{margin:0 var(--s-5) var(--s-3);border:1px solid var(--c-border);border-radius:var(--radius-sm);background:var(--c-surface);font-size:var(--fs-sm)}
+.cart-page .ship-est{margin:0 0 var(--s-4)}
+.ship-est>summary{display:flex;align-items:center;gap:.5rem;min-height:48px;padding:0 var(--s-3);cursor:pointer;list-style:none}
+.ship-est>summary::-webkit-details-marker{display:none}
+.ship-est>summary svg{width:20px;height:20px;flex:none}
+.ship-est>summary::after{content:"";width:8px;height:8px;margin-left:.25rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.ship-est[open]>summary::after{transform:rotate(225deg)}
+.se-label{font-weight:600}
+.se-sum{margin-left:auto;color:var(--c-text-muted);font-weight:600;text-align:right}
+.se-form{display:flex;flex-wrap:wrap;gap:var(--s-2);padding:0 var(--s-3) var(--s-3)}
+.se-form select,.se-form input{flex:1 1 140px;min-height:44px;padding:0 .75rem;border:1px solid var(--c-border-strong);border-radius:var(--radius-sm);background:var(--c-bg);color:var(--c-text);font:inherit}
+.se-form .btn{flex:0 0 auto;min-height:44px}
+.se-list{list-style:none;margin:0;padding:0 var(--s-3);display:grid;gap:.25rem}
+.se-list li{display:flex;justify-content:space-between;gap:var(--s-3);padding:.4rem 0;border-top:1px solid var(--c-border)}
+.se-list li strong{white-space:nowrap}
+.se-empty{color:var(--c-text-muted)}
+.se-note{padding:var(--s-2) var(--s-3) var(--s-3);color:var(--c-text-muted);font-size:var(--fs-xs)}

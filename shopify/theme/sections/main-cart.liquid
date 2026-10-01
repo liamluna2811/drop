@@ -31,7 +31,8 @@
         {%- render 'cart-summary', id: 'cartSumPage' -%}
         <div class="total"><span>Total</span><strong>{{ cart.total_price | money }}</strong></div>
         {%- unless customer -%}<p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>{%- endunless -%}
-        <p class="ship">Taxes incluses. Frais de livraison calculés à l'étape suivante.</p>
+        {%- render 'ship-estimate', id: 'page' -%}
+        <p class="ship">Taxes incluses. Frais de livraison confirmés à l'étape suivante.</p>
         <div class="cart-actions">
           <button type="submit" name="update" class="btn ghost">Mettre à jour</button>
           <button type="submit" name="checkout" class="btn">Commander</button>

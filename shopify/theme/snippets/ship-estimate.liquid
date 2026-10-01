@@ -1,0 +1,24 @@
+{%- comment -%}
+  Estimation des frais de livraison avant la commande (panier et tiroir du panier).
+  Les tarifs viennent de Shopify (/cart/prepare_shipping_rates.json puis async_shipping_rates.json) :
+  ce sont ceux qui s'appliqueront au panier, frais Printful des accessoires compris.
+  Pays par défaut : France. Le code postal est facultatif. Usage : {% render 'ship-estimate', id: 'drawer' %}
+{%- endcomment -%}
+<details class="ship-est" data-ship-est{% if cart.item_count == 0 %} hidden{% endif %}>
+  <summary>
+    {% render 'icon', name: 'truck' %}
+    <span class="se-label">Livraison</span>
+    <span class="se-sum" data-se-sum aria-live="polite">Estimer les frais</span>
+  </summary>
+  <form class="se-form" data-se-form>
+    <label class="visually-hidden" for="SeCountry-{{ id }}">Pays</label>
+    <select id="SeCountry-{{ id }}" name="country" data-se-country data-default="France">{{ country_option_tags }}</select>
+    <label class="visually-hidden" for="SeProvince-{{ id }}">Région</label>
+    <select id="SeProvince-{{ id }}" name="province" data-se-province hidden></select>
+    <label class="visually-hidden" for="SeZip-{{ id }}">Code postal (facultatif)</label>
+    <input id="SeZip-{{ id }}" name="zip" data-se-zip inputmode="text" autocomplete="postal-code" placeholder="Code postal (facultatif)">
+    <button class="btn ghost" type="submit">Calculer</button>
+  </form>
+  <ul class="se-list" data-se-list></ul>
+  <p class="se-note">Montants indiqués par la boutique pour ce panier. Le choix final se fait au paiement.</p>
+</details>
