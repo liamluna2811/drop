@@ -4,7 +4,7 @@
   ce sont ceux qui s'appliqueront au panier, frais Printful des accessoires compris.
   Pays par défaut : France. Le code postal est facultatif. Usage : {% render 'ship-estimate', id: 'drawer' %}
 {%- endcomment -%}
-<details class="ship-est" data-ship-est{% if cart.item_count == 0 %} hidden{% endif %}>
+<details class="ship-est" data-ship-est data-total="{{ cart.total_price }}"{% if cart.item_count == 0 %} hidden{% endif %}>
   <summary>
     {% render 'icon', name: 'truck' %}
     <span class="se-label">Livraison</span>
@@ -20,5 +20,5 @@
     <button class="btn ghost" type="submit">Calculer</button>
   </form>
   <ul class="se-list" data-se-list></ul>
-  <p class="se-note">Montants indiqués par la boutique pour ce panier. Le choix final se fait au paiement.</p>
+  <p class="se-note">Livraison offerte dès {{ settings.free_shipping_threshold | default: 60 }} € en France et dans l'Union européenne. Montants indiqués par la boutique pour ce panier, confirmés au paiement.</p>
 </details>

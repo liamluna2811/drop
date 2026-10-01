@@ -971,7 +971,14 @@
     return f.replace(/\{\{\s*(\w+)\s*\}\}/, function (_, k) { return /comma/.test(k) ? v.replace('.', ',') : v; });
   };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var count = null, seq = 0;
+  var count = null, seq = 0, lastTotal = null;
+  // Réduction automatique « Livraison offerte dès 60 € » (France et Union européenne) : Shopify ne l'applique
+  // qu'au paiement, les tarifs renvoyés ici sont donc affichés barrés et « Offerte » quand le panier y a droit
+  var FREE_IN = ['France', 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Czechia', 'Denmark', 'Estonia',
+    'Finland', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands',
+    'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
+  var FREE_MIN = (window.theme && theme.freeShipping) || 0;
+  boxes.forEach(function (b) { if (b.dataset.total) lastTotal = +b.dataset.total; });
 
   boxes.forEach(function (box) {
     var sel = box.querySelector('[data-se-country]'), prov = box.querySelector('[data-se-province]');
@@ -1011,6 +1018,12 @@
         });
         var names = Object.keys(best).sort(function (a, b) { return best[a] - best[b]; });
         if (!names.length) { sum.textContent = 'Indisponible'; list.innerHTML = '<li class="se-empty">Pas de livraison vers ' + esc(label) + ' pour ce panier.</li>'; return; }
+        var free = FREE_MIN > 0 && lastTotal !== null && lastTotal >= FREE_MIN && FREE_IN.indexOf(country) > -1;
+        if (free) {
+          sum.textContent = label + ' : Offerte';
+          list.innerHTML = names.map(function (n) { return '<li><span>' + esc(n) + '</span><strong>' + (best[n] ? '<s>' + esc(money(best[n])) + '</s> ' : '') + 'Offerte</strong></li>'; }).join('');
+          return;
+        }
         sum.textContent = label + ' : ' + (best[names[0]] ? 'dès ' : '') + money(best[names[0]]);
         list.innerHTML = names.map(function (n) { return '<li><span>' + esc(n) + '</span><strong>' + esc(money(best[n])) + '</strong></li>'; }).join('');
       })
@@ -1041,6 +1054,7 @@
     var c = e.detail || {};
     boxes.forEach(function (b) { b.hidden = !c.item_count; });
     if (!c.item_count) return;
+    lastTotal = c.total_price;
     var key = c.item_count + ':' + c.total_price;
     if (key === count) return;
     count = key;
