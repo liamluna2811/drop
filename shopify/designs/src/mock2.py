@@ -41,6 +41,7 @@ D={
 }
 D['club-soleil-v3']=('Club Soleil','Médaillon une encre, esprit gravure : bague de texte continue, logo, soleil et fleurs.',[('Noir délavé','#232323','fonce'),('Ivoire','#EEE5D3','clair'),('Bleu marine délavé','#2D4560','fonce')],400,160,1.0)
 D['club-soleil-v3-rayons']=('Club Soleil · variante rayons','Même médaillon, intérieur gravé de rayons fins autour du logo.',[('Noir délavé','#232323','fonce'),('Ivoire','#EEE5D3','clair'),('Bleu marine délavé','#2D4560','fonce')],400,160,1.0)
+D['club-soleil-v3-rayons-leger']=('Club Soleil · rayons légers','Version allégée : 40 rayons plus fins.',[('Noir délavé','#232323','fonce'),('Ivoire','#EEE5D3','clair'),('Bleu marine délavé','#2D4560','fonce')],400,160,1.0)
 ONLY=os.environ.get('ONLY')
 for key,(title,sub,cols,pw,py,ratio) in D.items():
     if ONLY and key not in ONLY.split(','): continue

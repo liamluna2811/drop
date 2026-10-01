@@ -29,7 +29,7 @@ def sym_flower(x,y,s,c,rot=0):
         g+=f'<line x1="{x}" y1="{y-s*.12:.1f}" x2="{x}" y2="{y-s*.34:.1f}" stroke="{c}" stroke-width="{s*.04:.1f}" stroke-linecap="round" transform="rotate({a:.1f} {x} {y})"/>'
     return g+f'<circle cx="{x}" cy="{y}" r="{s*.1:.1f}" fill="{c}"/>'
 
-def club_soleil(ink, rays=False):
+def club_soleil(ink, rays=False, n=60, w_long=0.016, w_short=0.012):
     c=500; R1,R2=470,384; rt=(R1+R2)/2-14   # bague de texte
     b=f'<circle cx="{c}" cy="{c}" r="{R1}" fill="none" stroke="{ink}" stroke-width="9"/>'
     b+=f'<circle cx="{c}" cy="{c}" r="{R1-14}" fill="none" stroke="{ink}" stroke-width="3"/>'
@@ -55,10 +55,9 @@ def club_soleil(ink, rays=False):
         ang+=w
     # disque intérieur
     if rays:
-        n=60
         for i in range(n):   # rayons évasés : fins près du logo, qui s'élargissent vers l'extérieur
             a=i*2*math.pi/n; r0=172; r1=R2-24 if i%2==0 else R2-70
-            w0,w1=0.0025,(0.016 if i%2==0 else 0.012)
+            w0,w1=0.0025,(w_long if i%2==0 else w_short)
             b+=f'<path d="M{P(c+r0*math.cos(a-w0),c+r0*math.sin(a-w0))} L{P(c+r1*math.cos(a-w1),c+r1*math.sin(a-w1))} L{P(c+r1*math.cos(a+w1),c+r1*math.sin(a+w1))} L{P(c+r0*math.cos(a+w0),c+r0*math.sin(a+w0))}Z" fill="{ink}"/>'
         b+=f'<circle cx="{c}" cy="{c}" r="160" fill="none" stroke="{ink}" stroke-width="5"/>'
         b+=logo(c,c,232,ink,LIME)
@@ -77,6 +76,7 @@ if __name__=='__main__':
     for v,ink in (('clair',INK),('fonce',CREAM)):
         open(f'svg3/club-soleil-v3-dos-{v}.svg','w').write(club_soleil(ink))
         open(f'svg3/club-soleil-v3-rayons-dos-{v}.svg','w').write(club_soleil(ink,True))
-        for k in ('club-soleil-v3','club-soleil-v3-rayons'):
+        open(f'svg3/club-soleil-v3-rayons-leger-dos-{v}.svg','w').write(club_soleil(ink,True,n=40,w_long=0.012,w_short=0.009))
+        for k in ('club-soleil-v3','club-soleil-v3-rayons','club-soleil-v3-rayons-leger'):
             open(f'svg3/{k}-coeur-{v}.svg','w').write(coeur(ink))
     print('ok')
