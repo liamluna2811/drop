@@ -1,0 +1,47 @@
+<section class="section-d alt" id="histoire">
+  <div class="wrap">
+    <div class="hist">
+      <div class="hist-intro reveal">
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2>{{ section.settings.title }}</h2>
+        <p>{{ section.settings.intro }}</p>
+      </div>
+      <div class="reveal">
+        <ol class="tl">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="y">{{ block.settings.year }}</span>
+              <h3>{{ block.settings.place }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+        {%- if section.settings.sources != blank -%}<div class="src">{{ section.settings.sources }}</div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Histoire du padel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Histoire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "D'Acapulco à la France" },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Le padel est un sport récent. Voici quelques dates qui ont compté." },
+    { "type": "richtext", "id": "sources", "label": "Sources" }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Date",
+      "settings": [
+        { "type": "text", "id": "year", "label": "Année", "default": "1969" },
+        { "type": "text", "id": "place", "label": "Lieu ou sujet", "default": "Lieu" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Histoire du padel" }]
+}
+{% endschema %}

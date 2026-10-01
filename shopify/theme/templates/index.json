@@ -2,15 +2,165 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "product": "unisex-classic-tee-4"
+      }
     },
     "marquee": {
       "type": "marquee",
       "settings": {}
     },
-    "story": {
-      "type": "story",
+    "universes": {
+      "type": "universes",
+      "blocks": {
+        "u1": {
+          "type": "universe",
+          "settings": {
+            "collection": "lifestyle",
+            "title": "Lifestyle",
+            "button_label": "Voir lifestyle"
+          }
+        },
+        "u2": {
+          "type": "universe",
+          "settings": {
+            "collection": "sport",
+            "title": "Sport",
+            "button_label": "Voir sport"
+          }
+        },
+        "u3": {
+          "type": "universe",
+          "settings": {
+            "collection": "accessoires",
+            "title": "Accessoires",
+            "button_label": "Voir accessoires"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3"
+      ],
       "settings": {}
+    },
+    "picks": {
+      "type": "featured-picks",
+      "settings": {
+        "product_1": "unisex-classic-tee-5",
+        "product_2": "unisex-sports-jersey",
+        "product_3": "stainless-steel-water-bottle",
+        "product_4": "visor"
+      }
+    },
+    "arguments": {
+      "type": "arguments",
+      "blocks": {
+        "a1": {
+          "type": "argument",
+          "settings": {
+            "icon": "shirt",
+            "title": "T-shirts Lifestyle en coton",
+            "text": "100 % coton (170 à 180 g/m²), renforts au col et aux épaules, double couture aux manches et à l'ourlet."
+          }
+        },
+        "a2": {
+          "type": "argument",
+          "settings": {
+            "icon": "wind",
+            "title": "T-shirts de sport respirants",
+            "text": "Maille 100 % polyester respirante (140 g/m²), coupe décontractée et longueur allongée."
+          }
+        },
+        "a3": {
+          "type": "argument",
+          "settings": {
+            "icon": "thread",
+            "title": "Logo brodé",
+            "text": "Le logo est brodé sur les T-shirts « BandejaClub » (Lifestyle et sport), et en broderie 3D sur la visière."
+          }
+        },
+        "a4": {
+          "type": "argument",
+          "settings": {
+            "icon": "print",
+            "title": "Imprimé à la demande",
+            "text": "Chaque pièce est imprimée après ta commande."
+          }
+        },
+        "a5": {
+          "type": "argument",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison offerte dès 60 €",
+            "text": "En France et en Europe."
+          }
+        },
+        "a6": {
+          "type": "argument",
+          "settings": {
+            "icon": "shield",
+            "title": "Garantie de 2 ans",
+            "text": "Garantie légale de conformité de l'Union européenne, indiquée sur chaque fiche produit."
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6"
+      ],
+      "settings": {}
+    },
+    "history": {
+      "type": "history",
+      "blocks": {
+        "h1": {
+          "type": "event",
+          "settings": {
+            "year": "1969",
+            "place": "Acapulco, Mexique",
+            "text": "Enrique Corcuera aménage sur son terrain un petit court de 20 m sur 10 m, fermé par des murs pour que les balles ne finissent pas chez le voisin. C'est la naissance du padel."
+          }
+        },
+        "h2": {
+          "type": "event",
+          "settings": {
+            "year": "1974",
+            "place": "Marbella, Espagne",
+            "text": "Le prince Alfonso de Hohenlohe fait construire deux courts dans son club et introduit le padel en Espagne, sur la Costa del Sol."
+          }
+        },
+        "h3": {
+          "type": "event",
+          "settings": {
+            "year": "1991",
+            "place": "Fédération internationale",
+            "text": "Création de la Fédération internationale de padel. Son premier président, Julio Alegría, établit les règles du jeu au niveau international."
+          }
+        },
+        "h4": {
+          "type": "event",
+          "settings": {
+            "year": "2014",
+            "place": "France",
+            "text": "La Fédération française de tennis reçoit du ministère des Sports la délégation pour organiser le padel en France."
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ],
+      "settings": {
+        "sources": "<p>Sources : <a href=\"https://www.redbull.com/gb-en/history-of-padel\" rel=\"noopener\" target=\"_blank\">Red Bull, History of padel</a> · <a href=\"https://www.ltapadel.org.uk/what-we-do/what-is-the-history-of-padel/\" rel=\"noopener\" target=\"_blank\">LTA Padel, History of padel</a> · <a href=\"https://vvanat.fr/blog/paddle-quelle-federation/\" rel=\"noopener\" target=\"_blank\">La FFT et le padel</a></p>"
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -20,7 +170,10 @@
   "order": [
     "hero",
     "marquee",
-    "story",
+    "universes",
+    "picks",
+    "arguments",
+    "history",
     "newsletter"
   ]
 }

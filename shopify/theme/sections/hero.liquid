@@ -1,28 +1,40 @@
-<section class="hero">
-  <div class="hero-text">
-    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
-    <h1>{{ section.settings.title_1 }}<br>{{ section.settings.title_2 }}<br><em>{{ section.settings.title_highlight }}</em></h1>
-    <p class="lead">{{ section.settings.lead }}</p>
-    <div class="hero-cta">
-      <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn">{{ section.settings.button_label }}</a>
-      <a href="#histoire" class="btn ghost">{{ section.settings.button2_label }}</a>
+{%- liquid
+  assign hero_image = section.settings.image
+  assign hero_media = nil
+  if hero_image == blank
+    assign p = section.settings.product
+    if p != blank
+      assign hero_media = p.featured_media
+      for media in p.media
+        assign src = media.preview_image.src | split: '?' | first | downcase
+        if src contains '-white-front-'
+          assign hero_media = media
+          break
+        endif
+      endfor
+    endif
+  endif
+-%}
+<section class="hero2">
+  <div class="wrap hero2-grid">
+    <div class="hero2-text reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1>{{ section.settings.title_1 }}<br>{{ section.settings.title_2 }}<br><u>{{ section.settings.title_highlight }}</u></h1>
+      <p class="lead">{{ section.settings.lead }}</p>
+      <div class="hero-cta">
+        <a href="{{ section.settings.button_url | default: routes.all_products_collection_url }}" class="btn">{{ section.settings.button_label }}</a>
+        <a href="#histoire" class="btn ghost">{{ section.settings.button2_label }}</a>
+      </div>
     </div>
-    {%- if section.blocks.size > 0 -%}
-    <ul class="hero-stats">
-      {%- for block in section.blocks -%}
-        <li {{ block.shopify_attributes }}><strong>{{ block.settings.value }}</strong>{{ block.settings.label }}</li>
-      {%- endfor -%}
-    </ul>
-    {%- endif -%}
-  </div>
-  <div class="hero-visual">
-    <div class="ball" aria-hidden="true"></div>
-    <div class="hero-shirt">
-      {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'eager', widths: '450, 900', alt: section.settings.image.alt }}
+    <div class="arch reveal">
+      {%- if hero_image != blank -%}
+        {{ hero_image | image_url: width: 1000 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '500, 800, 1000', sizes: '(min-width: 900px) 45vw, 90vw', alt: hero_image.alt }}
+      {%- elsif hero_media != blank -%}
+        {{ hero_media | image_url: width: 1000 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '500, 800, 1000', sizes: '(min-width: 900px) 45vw, 90vw', alt: section.settings.product.title }}
       {%- else -%}
         <img src="{{ 'mockup-hero-2.png' | asset_url }}" alt="T-shirt Pas ce soir, j'ai padel" width="900" height="900">
       {%- endif -%}
+      {%- if section.settings.badge != blank -%}<div class="badge">{{ section.settings.badge }}</div>{%- endif -%}
     </div>
   </div>
 </section>
@@ -34,21 +46,13 @@
     { "type": "text", "id": "title_1", "label": "Titre, ligne 1", "default": "Joue" },
     { "type": "text", "id": "title_2", "label": "Titre, ligne 2", "default": "comme" },
     { "type": "text", "id": "title_highlight", "label": "Titre, ligne surlignée", "default": "tu vis." },
-    { "type": "textarea", "id": "lead", "label": "Texte", "default": "T-shirts, brassières et accessoires pour les joueurs de padel. Chaque pièce est imprimée à la demande après ta commande." },
+    { "type": "textarea", "id": "lead", "label": "Texte", "default": "T-shirts, brassières et accessoires pour les joueurs de padel. Chaque pièce est imprimée à la demande, après ta commande." },
     { "type": "text", "id": "button_label", "label": "Bouton principal", "default": "Voir la collection" },
     { "type": "url", "id": "button_url", "label": "Lien du bouton principal" },
-    { "type": "text", "id": "button2_label", "label": "Bouton secondaire", "default": "Notre histoire" },
-    { "type": "image_picker", "id": "image", "label": "Image (par défaut : t-shirt Pas ce soir)" }
-  ],
-  "blocks": [
-    {
-      "type": "stat",
-      "name": "Chiffre clé",
-      "settings": [
-        { "type": "text", "id": "value", "label": "Valeur", "default": "Valeur" },
-        { "type": "text", "id": "label", "label": "Légende", "default": "Légende" }
-      ]
-    }
+    { "type": "text", "id": "button2_label", "label": "Bouton secondaire (vers l'histoire)", "default": "L'histoire du padel" },
+    { "type": "text", "id": "badge", "label": "Pastille sur l'image", "default": "Imprimé à la demande" },
+    { "type": "product", "id": "product", "label": "T-shirt phare (image blanche de face)" },
+    { "type": "image_picker", "id": "image", "label": "Image à la place du produit (facultatif)" }
   ],
   "presets": [{ "name": "Bannière d'accueil" }]
 }

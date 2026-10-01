@@ -326,3 +326,124 @@ font{vertical-align:baseline!important}
 .cookie-btn:hover{transform:translateY(-1px)}
 .cookie-btn.cookie-ghost{background:transparent;color:var(--ink)}
 @media (max-width:520px){.cookie-banner{left:.5rem;right:.5rem;bottom:.5rem}.cookie-inner{padding:1rem}}
+
+/* ==========================================================================
+   Direction artistique sobre (maquette D)
+   ========================================================================== */
+:root{--alt:#ece8dd;--sand:#e0dccd;--lime-soft:#e8f6a8;--radius:20px;--line:rgba(11,27,43,.14)}
+body{font-size:1.05rem;line-height:1.6}
+.wrap{max-width:1280px;margin:0 auto;padding:0 1.25rem}
+@media (min-width:750px){.wrap{padding:0 2.5rem}}
+.section-d{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.section-d.alt{background:var(--alt)}
+.sh{text-align:center;max-width:42rem;margin:0 auto clamp(2rem,5vw,3.5rem)}
+.sh h2{font-size:clamp(2rem,3.6vw,3rem)}
+.sh p{color:var(--muted);margin-top:.8rem}
+h1,h2,h3{letter-spacing:-.015em;line-height:1.05}
+.section-head h2,.h2,.split-text h2,.newsletter h2,.product-info h1,.drawer-head h3,.rte h2,.info-card h2,.hero h1{text-transform:none}
+
+/* Barre d'annonce et en-tête */
+.topbar{background:var(--ink);color:var(--white);font-size:.74rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 4.5rem}
+.topbar-text a{color:var(--lime)}
+.lang-btn{opacity:.7}
+.lang-btn[aria-pressed="true"]{background:var(--lime);color:var(--ink);opacity:1}
+.nav{background:rgba(246,244,238,.92);border-bottom:1px solid var(--line);min-height:76px}
+.nav nav{gap:2.2rem;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.nav nav>a,.has-sub>a{opacity:1;padding:.3rem 0;border-bottom:1px solid transparent}
+.nav nav>a:hover,.has-sub>a:hover{border-color:var(--ink)}
+.sub a{text-transform:none;letter-spacing:0;font-size:.95rem}
+.account-link{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;opacity:1}
+.cart-btn{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+
+/* Boutons et liens */
+.btn{padding:.95rem 2rem;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)}
+.btn:hover{transform:none;box-shadow:none;background:var(--ink-2)}
+.btn.ghost{border:1px solid var(--ink);background:transparent}
+.btn.ghost:hover{background:var(--ink);color:var(--white)}
+.btn.light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn.light:hover{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.eyebrow{display:inline-block;font-size:.76rem;letter-spacing:.22em;font-weight:600}
+.link-arrow{display:inline-flex;gap:.4rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:2px}
+.link-arrow::after{content:"→"}
+
+/* Bannière avec image en arche */
+.hero2{padding:clamp(2.5rem,6vw,5rem) 0;overflow:hidden}
+.hero2-grid{display:grid;gap:3rem;align-items:center}
+@media (min-width:900px){.hero2-grid{grid-template-columns:1.05fr 1fr}}
+.hero2 h1{font-size:clamp(2.8rem,6vw,5.2rem);margin-bottom:1.3rem}
+.hero2 h1 u{text-decoration:none;box-shadow:inset 0 -.26em 0 var(--lime)}
+.hero2 .lead{max-width:44ch;margin:0 0 2rem}
+.arch{position:relative;aspect-ratio:4/5;border-radius:240px 240px var(--radius) var(--radius);background:var(--sand);max-width:560px;width:100%;justify-self:center}
+.arch::before{content:"";position:absolute;inset:-14px 14px 14px -14px;z-index:0;border-radius:260px 260px var(--radius) var(--radius);background:var(--lime-soft)}
+.arch>img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center 15%;border-radius:inherit}
+.badge{position:absolute;z-index:2;left:-1rem;bottom:2rem;background:var(--paper);border-radius:999px;padding:.75rem 1.25rem;box-shadow:0 18px 40px -18px rgba(11,27,43,.45);font-size:.85rem;display:flex;align-items:center;gap:.6rem}
+.badge::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--ink)}
+@media (max-width:900px){.badge{left:.5rem}}
+
+/* Bandeau de mots */
+.marquee{background:var(--alt);color:var(--ink);border-block:1px solid var(--line);padding:1.1rem 0}
+.marquee-track{font-size:1.3rem;letter-spacing:.04em}
+.marquee-track span::after{content:"•";color:var(--muted)}
+
+/* Univers */
+.universes{display:grid;gap:1.4rem}
+@media (min-width:900px){.universes{grid-template-columns:repeat(3,1fr)}}
+.universe{position:relative;border-radius:var(--radius);overflow:hidden;min-height:520px;display:flex;align-items:flex-end;color:var(--white);background:var(--ink);isolation:isolate}
+.universe img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+.universe:hover img{transform:scale(1.04)}
+.universe::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,27,43,0) 35%,rgba(11,27,43,.78))}
+.universe>div{padding:clamp(1.4rem,3vw,2.2rem);width:100%}
+.universe h3{font-size:clamp(1.8rem,3vw,2.3rem);margin-bottom:1rem}
+@media (max-width:900px){.universe{min-height:420px}}
+
+/* Cartes produit */
+.grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2.2rem 1.2rem}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:2.2rem 1.2rem}
+@media (max-width:900px){.four{grid-template-columns:repeat(2,1fr)}}
+.card{background:transparent;border-radius:0;overflow:visible}
+.card:hover{transform:none;box-shadow:none}
+.card-img{aspect-ratio:4/5;padding:0;background:var(--alt);border-radius:var(--radius)}
+.card-img img{transition:transform .5s}
+.card:hover .card-img img{transform:scale(1.03)}
+.card-body{padding:1rem .2rem 0;gap:.5rem}
+.card h3{font-family:var(--body);font-weight:600;font-size:.98rem;letter-spacing:0;line-height:1.35;text-transform:none}
+.card .price{font-weight:600;font-size:.95rem}
+.card .desc{display:none}
+.tag{background:var(--paper);color:var(--ink);letter-spacing:.12em}
+.add{background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:999px;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:.75rem}
+.add:hover{background:var(--ink);color:var(--white)}
+
+/* Arguments */
+.args{display:grid;gap:1.4rem;grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.args{grid-template-columns:1fr}}
+.arg{background:var(--alt);border-radius:var(--radius);padding:1.8rem}
+.arg svg{width:30px;height:30px;margin-bottom:1rem}
+.arg h3{font-family:var(--body);font-weight:700;font-size:1.05rem;letter-spacing:0;margin-bottom:.4rem}
+.arg p{color:var(--muted);font-size:.95rem;margin:0}
+
+/* Histoire */
+.hist{display:grid;gap:3rem}
+@media (min-width:900px){.hist{grid-template-columns:.8fr 1.2fr;gap:5rem;align-items:start}.hist-intro{position:sticky;top:110px}}
+.hist-intro h2{font-size:clamp(2rem,3.6vw,3rem);margin-bottom:1rem}
+.hist-intro p{color:var(--muted);max-width:38ch}
+.tl{list-style:none;border-left:1px solid var(--line);margin-left:.4rem}
+.tl li{position:relative;padding:0 0 2.4rem 2rem}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-6px;top:.6rem;width:11px;height:11px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--ink)}
+.tl .y{font-family:var(--display);font-size:2rem;line-height:1}
+.tl h3{font-family:var(--body);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--muted);margin:.5rem 0 .4rem}
+.tl p{margin:0;max-width:52ch}
+.src{margin-top:2.5rem;font-size:.78rem;color:var(--muted)}
+.src a{text-decoration:underline}
+
+/* Newsletter, pied de page */
+.newsletter{background:var(--alt);border-radius:0;margin:0;max-width:none;padding-left:1.25rem;padding-right:1.25rem}
+.newsletter h2{font-size:clamp(2rem,3.6vw,2.6rem)}
+.newsletter p{color:var(--muted)}
+.newsletter input{border:1px solid var(--ink);background:transparent}
+.newsletter button.btn{cursor:pointer}
+.footer{padding-top:3rem;padding-bottom:3rem}
+
+/* Apparition douce */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}
+.js .reveal.in{opacity:1;transform:none}

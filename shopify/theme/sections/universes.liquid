@@ -1,0 +1,50 @@
+<section class="section-d">
+  <div class="wrap">
+    <div class="sh reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <div class="universes">
+      {%- for block in section.blocks -%}
+        {%- assign coll = block.settings.collection -%}
+        {%- if coll != blank -%}
+          {%- assign u_media = block.settings.image -%}
+          {%- if u_media == blank -%}{%- assign u_media = coll.image | default: coll.products.first.featured_media -%}{%- endif -%}
+          <a class="universe reveal" href="{{ coll.url }}" {{ block.shopify_attributes }}>
+            {%- if u_media != blank -%}{{ u_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 900px) 30vw, 90vw', alt: '' }}{%- endif -%}
+            <div>
+              <h3>{{ block.settings.title | default: coll.title }}</h3>
+              <span class="btn light">{{ block.settings.button_label | default: 'Voir la catégorie' }}</span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Univers (catégories)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Les univers" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Lifestyle, sport et accessoires" },
+    { "type": "text", "id": "text", "label": "Texte", "default": "Tous les produits se trouvent dans leur catégorie." }
+  ],
+  "blocks": [
+    {
+      "type": "universe",
+      "name": "Catégorie",
+      "limit": 4,
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Titre (par défaut : nom de la collection)" },
+        { "type": "text", "id": "button_label", "label": "Bouton", "default": "Voir la catégorie" },
+        { "type": "image_picker", "id": "image", "label": "Image (par défaut : celle de la collection ou de son premier produit)" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Univers (catégories)" }]
+}
+{% endschema %}

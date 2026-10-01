@@ -1,0 +1,42 @@
+<section class="section-d">
+  <div class="wrap">
+    <div class="sh reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <div class="args">
+      {%- for block in section.blocks -%}
+        <div class="arg reveal" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon %}
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Arguments",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Pourquoi Bandeja Club" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ce que tu trouves chez nous" }
+  ],
+  "blocks": [
+    {
+      "type": "argument",
+      "name": "Argument",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icône", "default": "shirt", "options": [
+          { "value": "shirt", "label": "T-shirt" }, { "value": "wind", "label": "Air" }, { "value": "thread", "label": "Broderie" },
+          { "value": "print", "label": "Impression" }, { "value": "truck", "label": "Livraison" }, { "value": "shield", "label": "Garantie" }
+        ] },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Argument" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Arguments" }]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+<section class="section-d alt">
+  <div class="wrap">
+    <div class="sh reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <div class="four">
+      {%- for i in (1..4) -%}
+        {%- assign key = 'product_' | append: i -%}
+        {%- assign p = section.settings[key] -%}
+        {%- if p != blank -%}{% render 'product-card', product: p %}{%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Aperçu de 4 produits",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Un aperçu" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Quelques pièces" },
+    { "type": "product", "id": "product_1", "label": "Produit 1" },
+    { "type": "product", "id": "product_2", "label": "Produit 2" },
+    { "type": "product", "id": "product_3", "label": "Produit 3" },
+    { "type": "product", "id": "product_4", "label": "Produit 4" }
+  ],
+  "presets": [{ "name": "Aperçu de 4 produits" }]
+}
+{% endschema %}

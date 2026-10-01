@@ -246,3 +246,16 @@
     if (current() === 'en') { mark('en'); load(); } else { mark('fr'); }
   })();
 })();
+
+// Apparition douce des blocs au défilement
+(function () {
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (!els.length) return;
+  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
+  if (!('IntersectionObserver' in window)) { showAll(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  setTimeout(showAll, 4000);
+})();
