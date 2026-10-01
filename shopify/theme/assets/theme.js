@@ -782,3 +782,14 @@
   // Si l'écran s'élargit (rotation, fenêtre), le menu se ferme
   window.addEventListener('resize', function () { if (window.innerWidth > 860 && dlg.open) dlg.close(); });
 })();
+
+// Recherche : la loupe ouvre une barre de recherche (sinon, le lien mène à la page de recherche)
+(function () {
+  var dlg = document.querySelector('[data-search]');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  document.addEventListener('click', function (e) {
+    var open = e.target.closest('[data-search-open]');
+    if (open) { e.preventDefault(); dlg.showModal(); var i = dlg.querySelector('input[type=search]'); if (i) i.focus(); return; }
+    if (e.target.closest('[data-search-close]') || e.target === dlg) dlg.close();
+  });
+})();
