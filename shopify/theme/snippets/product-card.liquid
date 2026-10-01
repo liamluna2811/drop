@@ -3,6 +3,8 @@
   - Photo : celle de la première couleur proposée (sinon l'image principale).
   - Deuxième photo au survol : une autre vue de la même couleur.
   - Pastilles : couleurs disponibles (5 au maximum, puis « +N »).
+  - filterable: true (page collection) : ajoute les données utilisées par les filtres et le tri
+    (couleurs en français, tailles, combinaisons disponibles, prix, date, photos de chaque couleur).
 {%- endcomment -%}
 {%- liquid
   assign color_option = nil
@@ -55,6 +57,92 @@
     assign alt_media = product.media[1]
   endif
 
+  if filterable
+    assign size_option = nil
+    for option in product.options_with_values
+      assign oname = option.name | downcase
+      if oname == 'size' or oname == 'taille'
+        assign size_option = option
+      endif
+    endfor
+    assign f_colors = ''
+    assign f_imgs = ''
+    if color_option
+      assign opt_key = 'option' | append: color_option.position
+      for value in color_option.values
+        assign cvar = product.variants | where: opt_key, value | first
+        assign cid = cvar.id | default: 0
+        capture lbl
+          render 'color-label', name: value
+        endcapture
+        assign key = lbl | strip | handleize
+        assign f_colors = f_colors | append: key | append: '|'
+        assign v_slug = value | handleize
+        assign v_mid = '-' | append: v_slug | append: '-'
+        assign v_end = '-' | append: v_slug | append: '.'
+        assign img1 = ''
+        assign img2 = ''
+        for media in product.media
+          assign src = media.preview_image.src | split: '?' | first | downcase
+          if src contains v_mid or src contains v_end
+            assign longer = false
+            for other in color_option.values
+              assign o_slug = other | handleize
+              if o_slug.size > v_slug.size and o_slug contains v_slug
+                assign o_mid = '-' | append: o_slug | append: '-'
+                assign o_end = '-' | append: o_slug | append: '.'
+                if src contains o_mid or src contains o_end
+                  assign longer = true
+                endif
+              endif
+            endfor
+            unless longer
+              if img1 == ''
+                assign img1 = media | image_url: width: 800
+              elsif img2 == ''
+                assign img2 = media | image_url: width: 800
+                break
+              endif
+            endunless
+          endif
+        endfor
+        if img1 != ''
+          assign f_imgs = f_imgs | append: ',"' | append: key | append: '":["' | append: img1 | append: '","' | append: img2 | append: '",' | append: cid | append: ']'
+        endif
+      endfor
+    endif
+    assign f_sizes = ''
+    if size_option
+      for value in size_option.values
+        assign f_sizes = f_sizes | append: value | append: '|'
+      endfor
+    endif
+    assign f_combos = ''
+    if color_option
+      assign c_idx = color_option.position | minus: 1
+    endif
+    if size_option
+      assign s_idx = size_option.position | minus: 1
+    endif
+    for variant in product.variants
+      if variant.available
+        assign c_key = ''
+        assign s_key = ''
+        if color_option
+          capture lbl
+            render 'color-label', name: variant.options[c_idx]
+          endcapture
+          assign c_key = lbl | strip | handleize
+        endif
+        if size_option
+          assign s_key = variant.options[s_idx]
+        endif
+        assign f_combos = f_combos | append: c_key | append: '/' | append: s_key | append: '|'
+      endif
+    endfor
+    assign f_imgs = f_imgs | remove_first: ','
+  endif
+
   assign card_view = ''
   assign card_src = card_media.preview_image.src | downcase
   if card_src contains '-back'
@@ -63,7 +151,7 @@
     assign card_view = 'devant'
   endif
 -%}
-<article class="card">
+<article class="card"{% if filterable %} data-card data-price="{{ product.price_min }}" data-title="{{ product.title | downcase | escape }}" data-date="{{ product.published_at | date: '%s' }}" data-colors="{{ f_colors }}" data-sizes="{{ f_sizes | escape }}" data-combos="{{ f_combos | escape }}" data-url="{{ product.url }}" data-imgs="{{ '{' | append: f_imgs | append: '}' | escape }}"{% endif %}>
   <a class="card-media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
     {%- capture badge -%}{% render 'product-badge', product: product %}{%- endcapture -%}
     {%- if badge != blank -%}<span class="tag">{{ badge }}</span>{%- endif -%}

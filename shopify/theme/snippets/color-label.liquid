@@ -1,0 +1,24 @@
+{%- comment -%}
+  Nom français d'une couleur Printful (les variantes sont en anglais). Sert aux filtres de la page collection.
+  Les teintes très proches sont regroupées (Navy et French Navy → Bleu marine). Couleur inconnue : nom d'origine.
+  Usage : {% render 'color-label', name: value %}
+{%- endcomment -%}
+{%- assign key = name | downcase | strip -%}
+{%- case key -%}
+  {%- when 'white', 'blanc' -%}Blanc
+  {%- when 'black', 'vintage black', 'noir' -%}Noir
+  {%- when 'navy', 'navy blue', 'french navy', 'midnight navy', 'nuit' -%}Bleu marine
+  {%- when 'royal', 'royal blue', 'true royal', 'bleu roi' -%}Bleu roi
+  {%- when 'carolina blue', 'sky blue', 'light blue', 'baby blue', 'ciel' -%}Bleu ciel
+  {%- when 'red', 'rouge' -%}Rouge
+  {%- when 'azalea', 'pink', 'hot pink', 'rose' -%}Rose
+  {%- when 'gold', 'daisy', 'yellow', 'jaune' -%}Jaune
+  {%- when 'neon orange', 'safety orange' -%}Orange fluo
+  {%- when 'orange' -%}Orange
+  {%- when 'forest green', 'forest', 'dark green', 'forêt', 'foret' -%}Vert forêt
+  {%- when 'green', 'kelly green', 'vert' -%}Vert
+  {%- when 'grey', 'gray', 'heather grey', 'sport grey', 'athletic heather', 'gris' -%}Gris
+  {%- when 'charcoal', 'dark heather', 'dark grey', 'anthracite' -%}Anthracite
+  {%- when 'sand', 'natural', 'cream', 'beige', 'ivory', 'sable' -%}Sable
+  {%- else -%}{{ name }}
+{%- endcase -%}

@@ -293,6 +293,41 @@ html.racket-live .arch>.arch-racket{display:none}
 @keyframes glassRing{from{transform:scale(.5);opacity:1}to{transform:scale(2.4);opacity:0}}
 @keyframes glassShake{25%{transform:translateX(2px)}50%{transform:translateX(-2px)}75%{transform:translateX(1px)}}
 
+/* 9b. Page collection : univers, filtres couleur et taille, tri ------------------------ */
+.coll-nav{display:flex;gap:var(--s-2);overflow-x:auto;scrollbar-width:none;margin:0 calc(var(--gutter) * -1) var(--s-5);padding:0 var(--gutter) 2px}
+.coll-nav::-webkit-scrollbar{display:none}
+.coll-nav a{flex:none;padding:.55rem 1.1rem;border:1px solid var(--c-border-strong);border-radius:var(--radius-pill);font-size:var(--fs-sm);font-weight:600;color:var(--c-text);transition:background .2s,color .2s,border-color .2s}
+.coll-nav a:hover{border-color:var(--c-text)}
+.coll-nav a[aria-current]{background:var(--c-text);border-color:var(--c-text);color:var(--c-bg)}
+.coll-tools{display:none;position:relative;z-index:5;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-3);padding:var(--s-3) 0;border-block:1px solid var(--c-border);margin-bottom:var(--s-3)}
+.js .coll-tools{display:flex}
+.coll-filters{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2)}
+.fdrop>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.5rem 1.1rem;border:1px solid var(--c-border-strong);border-radius:var(--radius-pill);font-size:var(--fs-sm);font-weight:600;background:var(--c-surface)}
+.fdrop>summary::-webkit-details-marker{display:none}
+.fdrop>summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.fdrop[open]>summary{border-color:var(--c-text)}
+.fdrop[open]>summary::after{transform:translateY(2px) rotate(225deg)}
+.fcount:not(:empty){display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 .35rem;border-radius:var(--radius-pill);background:var(--c-text);color:var(--c-bg);font-size:.6875rem}
+.fpanel{position:absolute;top:calc(100% + .35rem);left:0;right:0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-sm);box-shadow:var(--shadow);padding:var(--s-4);display:flex;flex-wrap:wrap;gap:var(--s-2)}
+@media (min-width:750px){.fdrop{position:relative}.fpanel{right:auto;min-width:300px;max-width:420px}}
+.fopt,.fsize{position:relative;cursor:pointer}
+.fopt input,.fsize input{position:absolute;opacity:0;width:1px;height:1px}
+.fopt{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .85rem .45rem .5rem;border:1px solid var(--c-border);border-radius:var(--radius-pill);font-size:var(--fs-sm)}
+.fopt .sw{width:22px;height:22px}
+.fsize span{display:grid;place-items:center;min-width:48px;min-height:44px;padding:0 .75rem;border:1px solid var(--c-border-strong);border-radius:var(--radius-sm);font-size:var(--fs-sm);font-weight:600}
+.fopt:has(input:checked){border-color:var(--c-text);box-shadow:inset 0 0 0 1px var(--c-text);font-weight:600}
+.fsize input:checked+span{background:var(--c-text);border-color:var(--c-text);color:var(--c-bg)}
+.fopt:has(input:focus-visible),.fsize input:focus-visible+span{outline:2px solid var(--c-text);outline-offset:2px}
+@media (max-width:520px){.fclear-more{display:none}}
+.fclear{font-size:var(--fs-sm);font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:.5rem .25rem;min-height:44px}
+.coll-sort{display:flex;align-items:center;gap:var(--s-2);font-size:var(--fs-sm)}
+.coll-sort label{color:var(--c-text-muted)}
+.coll-sort select{min-height:44px;padding:.5rem 2.2rem .5rem 1rem;border:1px solid var(--c-border-strong);border-radius:var(--radius-pill);background:var(--c-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230B1B2B' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 1rem center;appearance:none;-webkit-appearance:none;font:inherit;font-weight:600;color:var(--c-text)}
+.coll-count{font-size:var(--fs-sm);color:var(--c-text-muted);margin-bottom:var(--s-5)}
+.coll-empty{text-align:center;padding:var(--s-7) 0;color:var(--c-text-muted)}
+.coll-empty p{margin-bottom:var(--s-4)}
+.card[hidden]{display:none}
+
 /* 10. Fiche produit ------------------------------------------------------------------ */
 .product{display:grid;gap:clamp(1.5rem,5vw,4rem);align-items:start}
 @media (min-width:900px){.product{grid-template-columns:1.1fr .9fr}}

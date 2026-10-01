@@ -1,14 +1,129 @@
-<section class="section">
+{%- comment -%}
+  Page collection : univers en raccourcis, filtres couleur et taille, tri, grille de cartes.
+  Les filtres et le tri se font dans le navigateur (catalogue court : jusqu'à 48 produits par page),
+  sans rechargement. Sans JavaScript, la grille complète s'affiche normalement.
+{%- endcomment -%}
+<section class="section coll" data-coll>
   <div class="section-head">
-    <p class="eyebrow">Collection</p>
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
     <h1 class="h2">{{ collection.title }}</h1>
     {%- if collection.description != blank -%}<div class="desc">{{ collection.description }}</div>{%- endif -%}
   </div>
-  {%- paginate collection.products by 12 -%}
-    {%- if collection.products.size > 0 -%}
-      <div class="grid">
-        {%- for product in collection.products -%}{% render 'product-card', product: product %}{%- endfor -%}
+
+  {%- if section.settings.show_nav -%}
+    <nav class="coll-nav" aria-label="Univers">
+      <a href="{{ routes.all_products_collection_url }}"{% if collection.handle == 'all' %} aria-current="page"{% endif %}>Tout</a>
+      {%- for c in collections -%}
+        {%- if c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 0 -%}
+          <a href="{{ c.url }}"{% if c.handle == collection.handle %} aria-current="page"{% endif %}>{{ c.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  {%- paginate collection.products by 48 -%}
+    {%- liquid
+      assign seen_c = '|'
+      assign color_list = ''
+      assign seen_s = '|'
+      for product in collection.products
+        for option in product.options_with_values
+          assign oname = option.name | downcase
+          if oname == 'couleur' or oname == 'color' or oname == 'colour'
+            for value in option.values
+              capture lbl
+                render 'color-label', name: value
+              endcapture
+              assign lbl = lbl | strip
+              assign key = lbl | handleize
+              assign probe = '|' | append: key | append: '|'
+              unless seen_c contains probe
+                assign seen_c = seen_c | append: key | append: '|'
+                capture hex
+                  render 'color-hex', name: value
+                endcapture
+                assign color_list = color_list | append: key | append: '::' | append: lbl | append: '::' | append: hex | append: ';;'
+              endunless
+            endfor
+          elsif oname == 'size' or oname == 'taille'
+            for value in option.values
+              assign probe = '|' | append: value | append: '|'
+              unless seen_s contains probe
+                assign seen_s = seen_s | append: value | append: '|'
+              endunless
+            endfor
+          endif
+        endfor
+      endfor
+      assign colors = color_list | split: ';;'
+      assign size_order = 'XXS,XS,S,M,L,XL,XXL,2XL,3XL,4XL,5XL' | split: ','
+      assign sizes = ''
+      for s in size_order
+        assign probe = '|' | append: s | append: '|'
+        if seen_s contains probe
+          assign sizes = sizes | append: s | append: ','
+          assign seen_s = seen_s | replace: probe, '|'
+        endif
+      endfor
+      assign rest = seen_s | split: '|'
+      for s in rest
+        if s != blank
+          assign sizes = sizes | append: s | append: ','
+        endif
+      endfor
+      assign sizes = sizes | split: ','
+      assign total = collection.products.size
+    -%}
+
+    {%- if total > 0 -%}
+      <div class="coll-tools" data-tools>
+        <div class="coll-filters">
+          {%- if section.settings.show_filters and colors.size > 1 -%}
+            <details class="fdrop" data-group="couleur">
+              <summary>Couleur<span class="fcount" data-fcount></span></summary>
+              <div class="fpanel fcolors">
+                {%- for c in colors -%}
+                  {%- assign parts = c | split: '::' -%}
+                  <label class="fopt"><input type="checkbox" value="{{ parts[0] }}"><span class="sw" style="background:{{ parts[2] | strip }}"></span>{{ parts[1] }}</label>
+                {%- endfor -%}
+              </div>
+            </details>
+          {%- endif -%}
+          {%- if section.settings.show_filters and sizes.size > 1 -%}
+            <details class="fdrop" data-group="taille">
+              <summary>Taille<span class="fcount" data-fcount></span></summary>
+              <div class="fpanel fsizes">
+                {%- for s in sizes -%}
+                  <label class="fsize"><input type="checkbox" value="{{ s | escape }}"><span>{{ s }}</span></label>
+                {%- endfor -%}
+              </div>
+            </details>
+          {%- endif -%}
+          <button type="button" class="fclear" data-clear hidden>Effacer<span class="fclear-more"> les filtres</span></button>
+        </div>
+        {%- if section.settings.show_sort -%}
+          <div class="coll-sort">
+            <label for="CollSort">Trier</label>
+            <select id="CollSort" data-sort>
+              <option value="">Mis en avant</option>
+              <option value="prix-croissant">Prix croissant</option>
+              <option value="prix-decroissant">Prix décroissant</option>
+              <option value="nouveautes">Nouveautés</option>
+              <option value="a-z">De A à Z</option>
+            </select>
+          </div>
+        {%- endif -%}
       </div>
+      <p class="coll-count" data-count aria-live="polite">{{ total }} produit{% if total > 1 %}s{% endif %}</p>
+
+      <div class="grid" data-grid>
+        {%- for product in collection.products -%}{% render 'product-card', product: product, filterable: true %}{%- endfor -%}
+      </div>
+      <div class="coll-empty" data-empty hidden>
+        <p>Aucun produit ne correspond à ces filtres.</p>
+        <button type="button" class="btn ghost" data-clear>Effacer les filtres</button>
+      </div>
+
       {%- if paginate.pages > 1 -%}
         <nav class="pagination" aria-label="Pagination">
           {%- if paginate.previous -%}<a class="btn ghost" href="{{ paginate.previous.url }}">← Précédent</a>{%- endif -%}
@@ -22,5 +137,14 @@
   {%- endpaginate -%}
 </section>
 {% schema %}
-{ "name": "Collection" }
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Collection" },
+    { "type": "checkbox", "id": "show_nav", "label": "Raccourcis vers les autres univers", "default": true },
+    { "type": "checkbox", "id": "show_filters", "label": "Filtres couleur et taille", "default": true },
+    { "type": "checkbox", "id": "show_sort", "label": "Tri (prix, nouveautés, A à Z)", "default": true },
+    { "type": "paragraph", "content": "Les couleurs Printful (en anglais) sont affichées en français dans les filtres. Les teintes très proches sont regroupées (Navy et French Navy : Bleu marine)." }
+  ]
+}
 {% endschema %}

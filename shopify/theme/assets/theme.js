@@ -369,3 +369,132 @@
   window.addEventListener('resize', upd);
   upd();
 })();
+
+// Page collection : filtres couleur et taille, tri, sans rechargement.
+// Avec une couleur choisie, la carte montre la photo de cette couleur et mène à cette variante.
+(function () {
+  var root = document.querySelector('[data-coll]');
+  if (!root) return;
+  var grid = root.querySelector('[data-grid]');
+  if (!grid) return;
+  var cards = [].slice.call(grid.querySelectorAll('[data-card]'));
+  var sortSel = root.querySelector('[data-sort]');
+  var countEl = root.querySelector('[data-count]');
+  var emptyEl = root.querySelector('[data-empty]');
+  var groups = [].slice.call(root.querySelectorAll('.fdrop'));
+  function list(s) { return (s || '').split('|').filter(Boolean); }
+
+  cards.forEach(function (c, i) {
+    c._i = i;
+    c._colors = list(c.dataset.colors);
+    c._sizes = list(c.dataset.sizes);
+    c._combos = list(c.dataset.combos).map(function (x) { var p = x.split('/'); return { c: p[0], s: p[1] }; });
+    try { c._imgs = JSON.parse(c.dataset.imgs || '{}'); } catch (e) { c._imgs = {}; }
+    var main = c.querySelector('.card-img-main'), alt = c.querySelector('.card-img-alt');
+    c._orig = {
+      main: main && { src: main.getAttribute('src'), srcset: main.getAttribute('srcset') },
+      alt: alt && { src: alt.getAttribute('src'), srcset: alt.getAttribute('srcset') },
+      hrefs: [].map.call(c.querySelectorAll('.card-media,.card-title a'), function (a) { return a.getAttribute('href'); })
+    };
+  });
+
+  function checked(name) {
+    var g = root.querySelector('.fdrop[data-group="' + name + '"]');
+    return g ? [].map.call(g.querySelectorAll('input:checked'), function (i) { return i.value; }) : [];
+  }
+
+  function setImg(img, src, srcset) {
+    if (!img) return;
+    if (srcset) img.setAttribute('srcset', srcset); else img.removeAttribute('srcset');
+    img.setAttribute('src', src);
+  }
+
+  function show(c, colorKey) {
+    var main = c.querySelector('.card-img-main'), alt = c.querySelector('.card-img-alt');
+    var links = c.querySelectorAll('.card-media,.card-title a');
+    var d = colorKey && c._imgs[colorKey];
+    if (d && d[0]) {
+      setImg(main, d[0]);
+      if (alt) { if (d[1]) setImg(alt, d[1]); else setImg(alt, d[0]); }
+      [].forEach.call(links, function (a) { a.setAttribute('href', c.dataset.url + (d[2] ? '?variant=' + d[2] : '')); });
+    } else {
+      if (c._orig.main) setImg(main, c._orig.main.src, c._orig.main.srcset);
+      if (c._orig.alt) setImg(alt, c._orig.alt.src, c._orig.alt.srcset);
+      [].forEach.call(links, function (a, i) { a.setAttribute('href', c._orig.hrefs[i]); });
+    }
+  }
+
+  function apply(push) {
+    var cs = checked('couleur'), ss = checked('taille'), n = 0;
+    cards.forEach(function (c) {
+      var ok = true;
+      if (cs.length || ss.length) {
+        var combos = c._combos.length ? c._combos : [{ c: '', s: '' }];
+        ok = combos.some(function (k) {
+          return (!cs.length || cs.indexOf(k.c) > -1) && (!ss.length || ss.indexOf(k.s) > -1);
+        });
+      }
+      c.hidden = !ok;
+      if (ok) n++;
+      var key = null;
+      if (ok && cs.length) for (var i = 0; i < cs.length; i++) if (c._colors.indexOf(cs[i]) > -1) { key = cs[i]; break; }
+      show(c, key);
+    });
+
+    var mode = sortSel ? sortSel.value : '';
+    var sorted = cards.slice().sort(function (a, b) {
+      if (mode === 'prix-croissant') return a.dataset.price - b.dataset.price || a._i - b._i;
+      if (mode === 'prix-decroissant') return b.dataset.price - a.dataset.price || a._i - b._i;
+      if (mode === 'nouveautes') return b.dataset.date - a.dataset.date || a._i - b._i;
+      if (mode === 'a-z') return a.dataset.title.localeCompare(b.dataset.title, 'fr');
+      return a._i - b._i;
+    });
+    sorted.forEach(function (c) { grid.appendChild(c); });
+
+    if (countEl) countEl.textContent = n + (n > 1 ? ' produits' : ' produit');
+    if (emptyEl) emptyEl.hidden = n > 0;
+    groups.forEach(function (g) {
+      var k = g.querySelectorAll('input:checked').length, b = g.querySelector('[data-fcount]');
+      if (b) b.textContent = k ? k : '';
+    });
+    [].forEach.call(root.querySelectorAll('.fclear[data-clear]'), function (b) { b.hidden = !(cs.length || ss.length); });
+
+    if (push && window.history && history.replaceState) {
+      var u = new URL(location.href);
+      ['couleur', 'taille', 'tri'].forEach(function (p) { u.searchParams.delete(p); });
+      if (cs.length) u.searchParams.set('couleur', cs.join(','));
+      if (ss.length) u.searchParams.set('taille', ss.join(','));
+      if (mode) u.searchParams.set('tri', mode);
+      history.replaceState(null, '', u.toString());
+    }
+  }
+
+  // État de départ depuis l'adresse (lien partagé)
+  var q = new URLSearchParams(location.search);
+  [['couleur', 'couleur'], ['taille', 'taille']].forEach(function (p) {
+    var v = (q.get(p[0]) || '').split(',');
+    [].forEach.call(root.querySelectorAll('.fdrop[data-group="' + p[1] + '"] input'), function (i) { i.checked = v.indexOf(i.value) > -1; });
+  });
+  if (sortSel && q.get('tri')) sortSel.value = q.get('tri');
+
+  root.addEventListener('change', function (e) {
+    if (e.target.matches('.fdrop input, [data-sort]')) apply(true);
+  });
+  root.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-clear]')) return;
+    [].forEach.call(root.querySelectorAll('.fdrop input'), function (i) { i.checked = false; });
+    groups.forEach(function (g) { g.open = false; });
+    apply(true);
+  });
+  // Un seul menu ouvert à la fois ; clic à l'extérieur ou Échap pour fermer
+  groups.forEach(function (g) {
+    g.addEventListener('toggle', function () { if (g.open) groups.forEach(function (o) { if (o !== g) o.open = false; }); });
+  });
+  document.addEventListener('click', function (e) { groups.forEach(function (g) { if (g.open && !g.contains(e.target)) g.open = false; }); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    groups.forEach(function (g) { if (g.open) { g.open = false; g.querySelector('summary').focus(); } });
+  });
+
+  apply(false);
+})();
