@@ -991,7 +991,8 @@
       prov.hidden = !list.length;
     };
     fillProv();
-    sel.addEventListener('change', function () { fillProv(); estimate(box); });
+    // Nouveau pays : on repart de zéro (le code postal et la région de l'ancien pays seraient refusés)
+    sel.addEventListener('change', function () { box.querySelector('[data-se-zip]').value = ''; fillProv(); estimate(box); });
     box.querySelector('[data-se-form]').addEventListener('submit', function (e) { e.preventDefault(); estimate(box); });
   });
 
@@ -1029,6 +1030,11 @@
       })
       .catch(function (err) {
         if (my !== seq) return;
+        var zipEl = box.querySelector('[data-se-zip]');
+        if (err && typeof err === 'object' && !(err instanceof Error) && zipEl.value.trim() && !box._retry) {
+          box._retry = true; zipEl.value = ''; estimate(box); box._retry = false;
+          return;
+        }
         sum.textContent = 'Estimer les frais';
         // Réponse d'erreur de Shopify (pays non desservi, code postal invalide…) ou panne réseau
         var refused = err && typeof err === 'object' && !(err instanceof Error);
