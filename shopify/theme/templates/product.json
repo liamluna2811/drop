@@ -47,10 +47,18 @@
     "recommendations": {
       "type": "product-recommendations",
       "settings": {}
+    },
+    "seen": {
+      "type": "recently-viewed",
+      "settings": {
+        "title": "Vus récemment",
+        "limit": 4
+      }
     }
   },
   "order": [
     "main",
-    "recommendations"
+    "recommendations",
+    "seen"
   ]
 }

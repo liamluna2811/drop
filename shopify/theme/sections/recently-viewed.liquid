@@ -1,0 +1,18 @@
+{%- comment -%}
+  « Vus récemment » : les derniers produits consultés par le visiteur (enregistrés dans son navigateur).
+  Sur une fiche produit, le produit affiché est exclu. La section reste cachée tant qu'il n'y a rien à montrer.
+{%- endcomment -%}
+<section class="section reco seen" data-seen-list data-limit="{{ section.settings.limit }}" data-current="{{ product.handle }}" hidden>
+  <div class="section-head"><h2>{{ section.settings.title }}</h2></div>
+  <div class="grid reco-grid" data-seen-grid></div>
+</section>
+{% schema %}
+{
+  "name": "Vus récemment",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Vus récemment" },
+    { "type": "range", "id": "limit", "min": 2, "max": 8, "step": 1, "label": "Nombre de produits", "default": 4 }
+  ],
+  "presets": [{ "name": "Vus récemment" }]
+}
+{% endschema %}

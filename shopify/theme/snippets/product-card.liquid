@@ -3,6 +3,7 @@
   - Photo : celle de la première couleur proposée (sinon l'image principale).
   - Deuxième photo au survol : une autre vue de la même couleur.
   - Pastilles : couleurs disponibles (5 au maximum, puis « +N »).
+  - Cœur : ajoute ou retire le produit des favoris (enregistrés dans le navigateur, voir theme.js).
   - filterable: true (page collection) : ajoute les données utilisées par les filtres et le tri
     (couleurs en français, tailles, combinaisons disponibles, prix, date, photos de chaque couleur).
 {%- endcomment -%}
@@ -167,6 +168,7 @@
       {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
     {%- endif -%}
   </a>
+  <button type="button" class="fav-btn" data-fav="{{ product.handle }}" aria-pressed="false" aria-label="Ajouter « {{ product.title | escape }} » aux favoris">{% render 'icon', name: 'heart' %}</button>
   <div class="card-body">
     <h3 class="card-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
     <span class="price">{% if product.price_varies %}dès {% endif %}{{ product.price_min | money }}</span>

@@ -1,0 +1,32 @@
+{%- comment -%}
+  Page « Mes favoris » : les produits marqués d'un cœur. Ils sont enregistrés dans le navigateur
+  du visiteur (pas de compte nécessaire) : ils ne passent donc pas d'un appareil à l'autre.
+  Les cartes sont chargées par theme.js (section card-ajax).
+{%- endcomment -%}
+<section class="section favs" data-favs>
+  <div class="section-head">
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h1 class="h2">{{ section.settings.title }}</h1>
+    {%- if section.settings.text != blank -%}<p class="desc">{{ section.settings.text }}</p>{%- endif -%}
+  </div>
+  <p class="coll-count" data-favs-count aria-live="polite"></p>
+  <div class="grid" data-favs-grid></div>
+  <div class="favs-empty" data-favs-empty hidden>
+    <span class="favs-empty-icon">{% render 'icon', name: 'heart' %}</span>
+    <p>{{ section.settings.empty }}</p>
+    <a class="btn" href="{{ routes.all_products_collection_url }}">Voir la collection</a>
+  </div>
+  <noscript><p class="empty">Active JavaScript pour voir tes favoris.</p></noscript>
+</section>
+{% schema %}
+{
+  "name": "Mes favoris",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Ta sélection" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Mes favoris" },
+    { "type": "text", "id": "text", "label": "Texte sous le titre", "default": "Clique sur le cœur d'un produit pour le retrouver ici." },
+    { "type": "text", "id": "empty", "label": "Texte quand la liste est vide", "default": "Tu n'as pas encore de favoris." },
+    { "type": "paragraph", "content": "Les favoris sont enregistrés dans le navigateur du visiteur : ils restent sur son appareil, sans compte." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "main": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Aide",
+        "title": "Questions fréquentes",
+        "contact_text": "Tu ne trouves pas ta réponse ?"
+      },
+      "blocks": {
+        "q_fabrication": {
+          "type": "qa",
+          "settings": {
+            "question": "Comment sont fabriqués vos articles ?",
+            "answer": "<p>Chaque pièce est imprimée à la demande, après ta commande.</p>"
+          }
+        },
+        "q_delais": {
+          "type": "qa",
+          "settings": {
+            "question": "Quels sont les délais de fabrication et de livraison ?",
+            "answer": ""
+          }
+        },
+        "q_livraison": {
+          "type": "qa",
+          "settings": {
+            "question": "La livraison est-elle offerte ?",
+            "answer": "<p>Oui, dès 60 € d'achat, en France et en Europe.</p>"
+          }
+        },
+        "q_suivi": {
+          "type": "qa",
+          "settings": {
+            "question": "Comment suivre ma commande ?",
+            "answer": "<p>Ouvre le lien de ton e-mail de confirmation ou d'expédition. Si tu as un compte, toutes tes commandes et leur suivi sont dans « Mon compte ». Tout est expliqué sur la page <a href=\"/pages/suivi\">Suivre ma commande</a>.</p>"
+          }
+        },
+        "q_taille": {
+          "type": "qa",
+          "settings": {
+            "question": "Comment choisir ma taille ?",
+            "answer": "<p>Sur chaque fiche produit, le lien « Guide des tailles » donne les mesures du vêtement.</p>"
+          }
+        },
+        "q_retours": {
+          "type": "qa",
+          "settings": {
+            "question": "Puis-je retourner un article ?",
+            "answer": "<p>Les conditions sont détaillées sur la page <a href=\"/pages/retractation-et-retours\">Rétractation et retours</a>.</p>"
+          }
+        },
+        "q_paiement": {
+          "type": "qa",
+          "settings": {
+            "question": "Le paiement est-il sécurisé ?",
+            "answer": "<p>Oui : le paiement se fait sur la page de paiement sécurisée de Shopify.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_fabrication",
+        "q_delais",
+        "q_livraison",
+        "q_suivi",
+        "q_taille",
+        "q_retours",
+        "q_paiement"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -837,3 +837,101 @@
     if (dlg) dlg.addEventListener('close', function () { input.value = ''; clear(); });
   });
 })();
+
+// Favoris et « Vus récemment » : enregistrés dans le navigateur du visiteur (sans compte, sur cet appareil)
+(function () {
+  var KF = 'bc:favs', KS = 'bc:seen', MAX_SEEN = 12;
+  var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+  function get(k) {
+    try { var v = JSON.parse(localStorage.getItem(k) || '[]'); return Array.isArray(v) ? v.filter(function (x) { return typeof x === 'string' && x; }) : []; }
+    catch (e) { return []; }
+  }
+  function set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function toast(msg) {
+    var t = document.getElementById('toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast.timer); toast.timer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+
+  // Cœurs : état affiché et compteur de l'en-tête
+  function paint() {
+    var favs = get(KF);
+    [].forEach.call(document.querySelectorAll('[data-fav]'), function (b) {
+      var on = favs.indexOf(b.dataset.fav) > -1;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.classList.toggle('on', on);
+    });
+    [].forEach.call(document.querySelectorAll('[data-fav-count]'), function (c) { c.textContent = favs.length; c.dataset.n = favs.length; });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-fav]');
+    if (!b) return;
+    e.preventDefault();
+    var h = b.dataset.fav, favs = get(KF), i = favs.indexOf(h);
+    if (i > -1) { favs.splice(i, 1); toast('Retiré des favoris'); }
+    else { favs.unshift(h); toast('Ajouté aux favoris'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); }
+    set(KF, favs);
+    paint();
+    if (i > -1) { var card = b.closest('[data-favs-grid] .card'); if (card) { card.remove(); listCount(); } }
+  });
+  window.addEventListener('storage', function (e) { if (e.key === KF) paint(); });
+
+  // Produit consulté : en tête de la liste « Vus récemment »
+  var seenEl = document.querySelector('[data-seen]');
+  if (seenEl) {
+    var seen = get(KS).filter(function (x) { return x !== seenEl.dataset.seen; });
+    seen.unshift(seenEl.dataset.seen);
+    set(KS, seen.slice(0, MAX_SEEN));
+  }
+
+  // Charge les cartes produit (même présentation que la boutique) ; les produits supprimés sont oubliés
+  function loadCards(handles, grid, key) {
+    return Promise.all(handles.map(function (h) {
+      return fetch(root + 'products/' + encodeURIComponent(h) + '?section_id=card-ajax')
+        .then(function (r) { return r.ok ? r.text() : (r.status === 404 ? null : undefined); })
+        .catch(function () { return undefined; });   // panne réseau : on ne retire rien de la liste
+    })).then(function (htmls) {
+      var gone = [], frag = document.createDocumentFragment();
+      htmls.forEach(function (html, i) {
+        var card = html && new DOMParser().parseFromString(html, 'text/html').querySelector('.card');
+        if (card) frag.appendChild(card); else if (html === null) gone.push(handles[i]);
+      });
+      if (gone.length && key) set(key, get(key).filter(function (x) { return gone.indexOf(x) < 0; }));
+      grid.appendChild(frag);
+      paint();
+      return grid.children.length;
+    });
+  }
+
+  // Page « Mes favoris »
+  var favs = document.querySelector('[data-favs]');
+  function listCount() {
+    if (!favs) return;
+    var n = favs.querySelector('[data-favs-grid]').children.length;
+    favs.querySelector('[data-favs-count]').textContent = n ? n + ' produit' + (n > 1 ? 's' : '') : '';
+    favs.querySelector('[data-favs-empty]').hidden = n > 0;
+  }
+  if (favs) {
+    var list = get(KF);
+    if (!list.length) listCount();
+    else loadCards(list, favs.querySelector('[data-favs-grid]'), KF).then(listCount);
+  }
+
+  // Section « Vus récemment »
+  [].forEach.call(document.querySelectorAll('[data-seen-list]'), function (sec) {
+    var cur = sec.dataset.current, lim = parseInt(sec.dataset.limit, 10) || 4;
+    var handles = get(KS).filter(function (x) { return x !== cur; }).slice(0, lim);
+    if (!handles.length) return;
+    loadCards(handles, sec.querySelector('[data-seen-grid]'), KS).then(function (n) { sec.hidden = !n; });
+  });
+
+  paint();
+})();
+
+// Compte : le lien classique s'affiche tant que le composant Shopify n'est pas chargé, puis lui laisse la place
+(function () {
+  var box = document.querySelector('[data-acct]');
+  if (!box || !box.querySelector('shopify-account') || !window.customElements) return;
+  var fallback = box.querySelector('.acct-fallback');
+  customElements.whenDefined('shopify-account').then(function () { if (fallback) fallback.hidden = true; });
+})();

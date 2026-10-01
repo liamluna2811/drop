@@ -34,12 +34,18 @@
       <a href="{{ routes.all_products_collection_url }}">Collection</a>
     {%- endif -%}
   </nav>
+  {%- assign fav_url = pages['favoris'].url | default: '/pages/favoris' -%}
   <div class="nav-actions">
-    {%- if customer -%}
-      <a class="account-link" href="{{ routes.account_url }}">Mon compte</a>
-    {%- else -%}
-      <a class="account-link" href="{{ routes.account_login_url }}">Connexion</a>
-    {%- endif -%}
+    {%- if customer and customer.first_name != blank -%}<span class="hello">Salut, {{ customer.first_name | escape }}</span>{%- endif -%}
+    <a class="fav-link" href="{{ fav_url }}" aria-label="Mes favoris">{% render 'icon', name: 'heart' %}<span class="fav-count" data-fav-count data-n="0">0</span></a>
+    {%- comment -%} Compte : composant officiel Shopify (connexion par code e-mail, Google ou Shop, sans quitter le site).
+      Tant que le composant n'est pas chargé (ou s'il ne se charge pas), un lien classique vers le compte s'affiche. {%- endcomment -%}
+    <div class="acct" data-acct>
+      {%- if shop.customer_accounts_enabled -%}
+        <shopify-account menu="customer-account-main-menu"><span slot="signed-out-avatar" class="acct-icon">{% render 'icon', name: 'user' %}<span class="visually-hidden">Se connecter</span></span></shopify-account>
+      {%- endif -%}
+      <a class="acct-fallback" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{% if customer %}Mon compte{% else %}Se connecter{% endif %}">{% render 'icon', name: 'user' %}</a>
+    </div>
     <a class="search-btn" href="{{ routes.search_url }}" data-search-open aria-label="Rechercher">{% render 'icon', name: 'search' %}</a>
     <button class="cart-btn" id="openCart" type="button" aria-label="Ouvrir le panier">
       {% render 'icon', name: 'cart' %}<span class="visually-hidden">Panier, articles :</span>
@@ -84,10 +90,15 @@
     {%- endif -%}
   </nav>
   <div class="mnav-foot">
+    {%- if customer and customer.first_name != blank -%}<p class="mnav-hello">Salut, {{ customer.first_name | escape }} !</p>{%- endif -%}
+    <div class="mnav-quick">
+      <a href="{{ fav_url }}">{% render 'icon', name: 'heart' %}Mes favoris</a>
+      <a href="{{ pages['suivi'].url | default: '/pages/suivi' }}">{% render 'icon', name: 'package' %}Suivre ma commande</a>
+    </div>
     {%- if customer -%}
       <a class="btn ghost full" href="{{ routes.account_url }}">Mon compte</a>
     {%- else -%}
-      <a class="btn ghost full" href="{{ routes.account_login_url }}">Connexion</a>
+      <a class="btn ghost full" href="{{ routes.account_login_url }}">Se connecter</a>
     {%- endif -%}
     {%- if section.settings.menu_note != blank -%}<p class="mnav-note">{{ section.settings.menu_note }}</p>{%- endif -%}
   </div>

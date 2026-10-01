@@ -1,0 +1,5 @@
+{%- comment -%}
+  Carte produit seule, appelée en arrière-plan (/products/<poignée>?section_id=card-ajax)
+  par les pages « Mes favoris » et « Vus récemment ». Ne s'ajoute pas depuis l'éditeur.
+{%- endcomment -%}
+{%- if product -%}{% render 'product-card', product: product %}{%- endif -%}

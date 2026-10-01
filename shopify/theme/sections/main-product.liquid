@@ -109,7 +109,11 @@
   <div class="product-info">
     {%- capture badge -%}{% render 'product-badge', product: product %}{%- endcapture -%}
     {%- if badge != blank -%}<p class="eyebrow">{{ badge }}</p>{%- endif -%}
-    <h1>{{ product.title }}</h1>
+    <div class="title-row">
+      <h1>{{ product.title }}</h1>
+      <button type="button" class="fav-btn fav-btn-lg" data-fav="{{ product.handle }}" aria-pressed="false" aria-label="Ajouter aux favoris">{% render 'icon', name: 'heart' %}</button>
+    </div>
+    <span hidden data-seen="{{ product.handle }}"></span>
     <p class="price big" id="productPrice">{{ current.price | money }}</p>
 
     {%- form 'product', product, id: 'product-form', class: 'product-form' -%}
