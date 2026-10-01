@@ -307,3 +307,40 @@
     side.classList.remove('shake'); void side.offsetWidth; side.classList.add('shake');
   });
 })();
+
+// Fond terrain de padel derrière la bannière : sol, lignes et filet, en perspective avec les vitres
+(function () {
+  var box = document.querySelector('[data-court]');
+  if (!box) return;
+  function draw() {
+    if (!document.documentElement.classList.contains('racket-live')) return;
+    var W = box.clientWidth, H = box.clientHeight;
+    if (!W || !H) return;
+    var g = document.querySelector('.glass-l');
+    var gw = g && getComputedStyle(g).display !== 'none' ? g.getBoundingClientRect().width : 0;
+    var vy = 0.40 * H, cx = W / 2, fh = 0.86 * H - vy, fx = cx - gw;
+    function P(x, z) { return [cx + fx * (x / 5) / z, vy + fh / z]; }   // x en mètres (demi-largeur 5 m), z profondeur relative
+    function ln(a, b, w, c) { return '<line x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '" stroke="' + c + '" stroke-width="' + w + '"/>'; }
+    var zNet = 2.6, zServ = 1 + (zNet - 1) * 0.35, white = 'rgba(255,255,255,.95)';
+    var Ln = P(-5, zNet), Rn = P(5, zNet);
+    var s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" focusable="false">' +
+      '<defs><linearGradient id="court-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--court-floor);stop-opacity:0"/><stop offset=".25" style="stop-color:var(--court-floor);stop-opacity:.55"/><stop offset="1" style="stop-color:var(--court-floor);stop-opacity:.8"/></linearGradient>' +
+      '<pattern id="court-net" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M0 0H9M0 0V9" stroke="rgba(11,27,43,.28)" stroke-width="1" fill="none"/></pattern></defs>' +
+      '<polygon points="0,' + H + ' ' + W + ',' + H + ' ' + W + ',' + 0.86 * H + ' ' + Rn + ' ' + Ln + ' 0,' + 0.86 * H + '" fill="url(#court-floor)"/>' +
+      ln([0, H], [gw, 0.86 * H], 3, white) + ln([W, H], [W - gw, 0.86 * H], 3, white) +
+      ln(P(-5, 1), Ln, 3, white) + ln(P(5, 1), Rn, 3, white) +
+      ln(P(-5, zServ), P(5, zServ), 3, white) + ln(P(0, zServ), P(0, 0.33), 3, white) + ln(Ln, Rn, 3, white);
+    if (box.dataset.net === '1') {
+      var nh = (Ln[1] - vy) * 0.55, ny = Ln[1] - nh;
+      s += '<rect x="' + Ln[0] + '" y="' + ny + '" width="' + (Rn[0] - Ln[0]) + '" height="' + nh + '" fill="url(#court-net)"/>' +
+        ln([Ln[0], ny], [Rn[0], ny], 4, '#fff') + ln([Ln[0], ny - 2], [Rn[0], ny - 2], 1, 'rgba(11,27,43,.25)') +
+        ln(Ln, [Ln[0], ny - 3], 3, 'rgba(11,27,43,.3)') + ln(Rn, [Rn[0], ny - 3], 3, 'rgba(11,27,43,.3)');
+    }
+    box.innerHTML = s + '</svg>';
+  }
+  var t;
+  function later() { clearTimeout(t); t = setTimeout(draw, 120); }
+  window.addEventListener('resize', later);
+  if (window.MutationObserver) new MutationObserver(later).observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
+  later();
+})();

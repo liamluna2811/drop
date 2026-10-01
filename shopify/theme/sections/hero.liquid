@@ -16,6 +16,9 @@
   endif
 -%}
 <section class="hero2 scheme-{{ section.settings.scheme }}">
+  {%- if section.settings.court -%}
+    <div class="court-bg" data-court data-net="{% if section.settings.court_net %}1{% endif %}" style="--court-floor:{{ section.settings.court_floor }}" aria-hidden="true"></div>
+  {%- endif -%}
   <div class="wrap hero2-grid">
     <div class="hero2-text reveal">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -53,6 +56,10 @@
     { "type": "url", "id": "button_url", "label": "Lien du bouton principal" },
     { "type": "text", "id": "button2_label", "label": "Bouton secondaire (vers l'histoire)", "default": "L'histoire du padel" },
     { "type": "text", "id": "badge", "label": "Pastille sur l'image", "default": "Imprimé à la demande" },
+    { "type": "header", "content": "Fond terrain de padel" },
+    { "type": "checkbox", "id": "court", "label": "Dessiner le terrain derrière la bannière (ordinateur, avec la raquette 3D)", "default": true },
+    { "type": "checkbox", "id": "court_net", "label": "Afficher le filet", "default": true },
+    { "type": "color", "id": "court_floor", "label": "Couleur du sol", "default": "#C9D6DE" },
     { "type": "checkbox", "id": "show_racket", "label": "Image fixe de la raquette sur la photo (mobile et animations réduites)", "default": true },
     { "type": "product", "id": "product", "label": "T-shirt phare (image blanche de face)" },
     { "type": "image_picker", "id": "image", "label": "Image à la place du produit (facultatif)" }
