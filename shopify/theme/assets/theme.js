@@ -22,6 +22,14 @@
     try { return new Intl.NumberFormat(T.locale || undefined, { style: 'currency', currency: T.currency || 'EUR' }).format(cents / 100); }
     catch (e) { return (cents / 100).toFixed(2) + ' €'; }
   };
+  // Noms de couleurs Printful en français (même table que snippets/color-label.liquid)
+  var COLORS = { 'white': 'Blanc', 'black': 'Noir', 'vintage black': 'Noir', 'navy': 'Bleu marine', 'navy blue': 'Bleu marine', 'french navy': 'Bleu marine', 'midnight navy': 'Bleu marine',
+    'royal': 'Bleu roi', 'royal blue': 'Bleu roi', 'true royal': 'Bleu roi', 'carolina blue': 'Bleu ciel', 'sky blue': 'Bleu ciel', 'light blue': 'Bleu ciel', 'baby blue': 'Bleu ciel',
+    'red': 'Rouge', 'azalea': 'Rose', 'pink': 'Rose', 'hot pink': 'Rose', 'gold': 'Jaune', 'daisy': 'Jaune', 'yellow': 'Jaune', 'neon orange': 'Orange fluo', 'safety orange': 'Orange fluo',
+    'orange': 'Orange', 'forest green': 'Vert forêt', 'forest': 'Vert forêt', 'dark green': 'Vert forêt', 'green': 'Vert', 'kelly green': 'Vert', 'grey': 'Gris', 'gray': 'Gris',
+    'heather grey': 'Gris', 'sport grey': 'Gris', 'athletic heather': 'Gris', 'charcoal': 'Anthracite', 'dark heather': 'Anthracite', 'dark grey': 'Anthracite',
+    'sand': 'Sable', 'natural': 'Sable', 'cream': 'Sable', 'beige': 'Sable', 'ivory': 'Sable' };
+  var colorLabel = function (v) { return COLORS[String(v).toLowerCase().trim()] || v; };
   var esc = function (s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; };
   var json = { 'Content-Type': 'application/json', Accept: 'application/json' };
 
@@ -44,16 +52,27 @@
     var count = cart.item_count, total = cart.total_price;
     var badge = $('#cartCount'); if (badge) badge.textContent = count;
     var totalEl = $('#cartTotal'); if (totalEl) totalEl.textContent = fmt(total);
-    var ship = $('#shipMsg');
-    if (ship) {
-      var min = T.freeShipping || 0;
-      ship.textContent = !count || !min ? '' : total >= min ? '🎉 Livraison offerte !' : 'Plus que ' + fmt(min - total) + ' pour la livraison offerte.';
-    }
+    // Barre de progression vers la livraison offerte
+    var min = T.freeShipping || 0;
+    [].forEach.call(document.querySelectorAll('[data-ship]'), function (el) {
+      el.hidden = !count || !min;
+      var left = min - total, pct = min ? Math.min(100, Math.round(total * 100 / min)) : 100;
+      el.classList.toggle('done', left <= 0);
+      el.querySelector('[data-ship-msg]').innerHTML = left > 0
+        ? 'Plus que <strong>' + esc(fmt(left)) + '</strong> pour la livraison offerte'
+        : '<strong>Livraison offerte</strong> sur cette commande';
+      var bar = el.querySelector('[data-ship-bar]');
+      bar.setAttribute('aria-valuenow', pct);
+      bar.firstElementChild.style.width = pct + '%';
+    });
     var box = $('#cartItems'); if (!box) return;
-    if (!count) { box.innerHTML = '<p class="empty">Ton panier est vide.<br>Il est temps de s\'équiper 🎾</p>'; return; }
+    if (!count) { box.innerHTML = '<div class="empty">Ton panier est vide.<br>Il est temps de s\'équiper 🎾<p><a class="btn" href="' + esc(T.collectionUrl || '/collections/all') + '">Voir la collection</a></p></div>'; return; }
     box.innerHTML = cart.items.map(function (i) {
       var img = i.image ? '<img src="' + esc(i.image) + '" alt="" width="70" height="70">' : '';
-      var variant = i.variant_title ? '<small>' + esc(i.variant_title) + '</small>' : '';
+      var opts = (i.options_with_values || []).filter(function (o) { return o.value !== 'Default Title'; }).map(function (o) {
+        return /^(colou?r|couleur)$/i.test(o.name) ? colorLabel(o.value) : o.value;
+      });
+      var variant = opts.length ? '<small>' + esc(opts.join(' · ')) + '</small>' : '';
       return '<div class="line" data-key="' + esc(i.key) + '" data-qty="' + i.quantity + '">' +
         '<a class="thumb" href="' + esc(i.url) + '">' + img + '</a>' +
         '<div><h4>' + esc(i.product_title) + '</h4>' + variant +
@@ -599,4 +618,23 @@
     box.querySelector('[data-reco-grid]').innerHTML = res.innerHTML;
     box.hidden = false;
   }).catch(function () {});
+})();
+
+// Menu mobile (panneau latéral)
+(function () {
+  var dlg = document.querySelector('[data-menu]'), btn = document.querySelector('[data-menu-open]');
+  if (!dlg || !btn || typeof dlg.showModal !== 'function') return;
+  function close() {
+    if (!dlg.open) return;
+    dlg.classList.add('closing');
+    setTimeout(function () { dlg.classList.remove('closing'); dlg.close(); }, 220);
+  }
+  btn.addEventListener('click', function () { dlg.showModal(); btn.setAttribute('aria-expanded', 'true'); });
+  dlg.addEventListener('close', function () { btn.setAttribute('aria-expanded', 'false'); });
+  dlg.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg || e.target.closest('[data-menu-close]')) close();
+  });
+  // Si l'écran s'élargit (rotation, fenêtre), le menu se ferme
+  window.addEventListener('resize', function () { if (window.innerWidth > 860 && dlg.open) dlg.close(); });
 })();

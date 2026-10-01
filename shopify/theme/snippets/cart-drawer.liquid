@@ -1,12 +1,12 @@
 <div class="overlay" id="overlay"></div>
 <aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
-  <div class="drawer-head"><h3>Ton panier</h3><button id="closeCart" type="button" aria-label="Fermer">✕</button></div>
+  <div class="drawer-head"><h3>Ton panier</h3><button id="closeCart" type="button" aria-label="Fermer">{% render 'icon', name: 'close' %}</button></div>
+  {%- render 'ship-progress', id: 'drawer' -%}
   <div class="drawer-body" id="cartItems"></div>
   <div class="drawer-foot">
     {%- unless customer -%}
     <p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>
     {%- endunless -%}
-    <div class="ship" id="shipMsg"></div>
     <div class="total"><span>Total</span><strong id="cartTotal">{{ cart.total_price | money }}</strong></div>
     <a class="btn full" id="checkout" href="{{ routes.cart_url }}">Commander</a>
   </div>

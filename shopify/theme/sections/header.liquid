@@ -13,6 +13,7 @@
   </div>
 </div>
 <header class="nav">
+  <button type="button" class="menu-btn" data-menu-open aria-controls="MobileMenu" aria-expanded="false" aria-label="Ouvrir le menu">{% render 'icon', name: 'menu' %}</button>
   <a href="{{ routes.root_url }}" class="logo notranslate" translate="no"><img class="logo-mark" src="{{ 'logo-mark.png' | asset_url }}" alt="" width="42" height="43">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></a>
   <nav>
     {%- assign menu = linklists[section.settings.menu] -%}
@@ -44,13 +45,48 @@
     </button>
   </div>
 </header>
+{%- comment -%} Menu mobile : panneau latéral avec les mêmes liens que le menu principal {%- endcomment -%}
+<dialog class="mnav" id="MobileMenu" aria-label="Menu" data-menu>
+  <div class="mnav-head">
+    <span class="logo notranslate" translate="no">{{ section.settings.logo_1 }}<span>{{ section.settings.logo_2 }}</span></span>
+    <button type="button" class="mnav-close" data-menu-close aria-label="Fermer le menu">{% render 'icon', name: 'close' %}</button>
+  </div>
+  <nav class="mnav-links">
+    {%- if menu.links.size > 0 -%}
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <details class="mnav-group"{% if link.active or link.child_active %} open{% endif %}>
+            <summary>{{ link.title }}</summary>
+            <div class="mnav-sub">
+              <a href="{{ link.url }}">Tout voir</a>
+              {%- for child in link.links -%}<a href="{{ child.url }}"{% if child.active %} aria-current="page"{% endif %}>{{ child.title }}</a>{%- endfor -%}
+            </div>
+          </details>
+        {%- else -%}
+          <a class="mnav-link" href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <a class="mnav-link" href="{{ routes.all_products_collection_url }}">Collection</a>
+    {%- endif -%}
+  </nav>
+  <div class="mnav-foot">
+    {%- if customer -%}
+      <a class="btn ghost full" href="{{ routes.account_url }}">Mon compte</a>
+    {%- else -%}
+      <a class="btn ghost full" href="{{ routes.account_login_url }}">Connexion</a>
+    {%- endif -%}
+    {%- if section.settings.menu_note != blank -%}<p class="mnav-note">{{ section.settings.menu_note }}</p>{%- endif -%}
+  </div>
+</dialog>
 {% schema %}
 {
   "name": "En-tête",
   "settings": [
     { "type": "text", "id": "logo_1", "label": "Logo (partie 1)", "default": "BANDEJA" },
     { "type": "text", "id": "logo_2", "label": "Logo (partie 2, surlignée)", "default": "CLUB" },
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "menu_note", "label": "Phrase en bas du menu mobile", "default": "Livraison offerte dès 60 € en France et en Europe" }
   ]
 }
 {% endschema %}

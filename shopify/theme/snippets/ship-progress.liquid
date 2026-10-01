@@ -1,0 +1,23 @@
+{%- comment -%}
+  Barre de progression vers la livraison offerte (seuil : réglage « free_shipping_threshold », 60 € par défaut).
+  Mise à jour en direct par theme.js quand le panier change.
+{%- endcomment -%}
+{%- liquid
+  assign min = settings.free_shipping_threshold | default: 60 | times: 100
+  assign total = cart.total_price
+  assign left = min | minus: total
+  if min > 0
+    assign pct = total | times: 100 | divided_by: min
+  else
+    assign pct = 100
+  endif
+  if pct > 100
+    assign pct = 100
+  endif
+-%}
+<div class="ship-progress{% if left <= 0 %} done{% endif %}" data-ship{% if cart.item_count == 0 or min == 0 %} hidden{% endif %}>
+  <p class="ship-msg" data-ship-msg>
+    {%- if left > 0 -%}Plus que <strong>{{ left | money }}</strong> pour la livraison offerte{%- else -%}<strong>Livraison offerte</strong> sur cette commande{%- endif -%}
+  </p>
+  <div class="ship-bar" role="progressbar" aria-label="Progression vers la livraison offerte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}" data-ship-bar><span style="width:{{ pct }}%"></span></div>
+</div>

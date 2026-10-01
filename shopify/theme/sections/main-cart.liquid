@@ -1,5 +1,6 @@
 <section class="section cart-page">
   <div class="section-head"><h1 class="h2">Ton panier</h1></div>
+  {%- render 'ship-progress', id: 'page' -%}
   {%- if cart.item_count == 0 -%}
     <p class="empty">Ton panier est vide.<br>Il est temps de s'équiper 🎾</p>
     <p class="center"><a class="btn" href="{{ routes.all_products_collection_url }}">Voir la collection</a></p>
@@ -11,7 +12,15 @@
             <a class="thumb" href="{{ item.url }}">{%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: alt: item.product.title }}{%- endif -%}</a>
             <div>
               <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
-              {%- unless item.product.has_only_default_variant -%}<small>{{ item.variant.title }}</small>{%- endunless -%}
+              {%- unless item.product.has_only_default_variant -%}
+                <small>
+                  {%- for o in item.options_with_values -%}
+                    {%- assign on = o.name | downcase -%}
+                    {%- if on == 'color' or on == 'couleur' or on == 'colour' -%}{% render 'color-label', name: o.value %}{%- else -%}{{ o.value }}{%- endif -%}
+                    {%- unless forloop.last %} · {% endunless -%}
+                  {%- endfor -%}
+                </small>
+              {%- endunless -%}
               <div class="qty"><input type="number" class="qty-input" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantité {{ item.product.title | escape }}"></div>
             </div>
             <div class="right"><strong>{{ item.final_line_price | money }}</strong><br><a class="rm" href="{{ item.url_to_remove }}">Retirer</a></div>
