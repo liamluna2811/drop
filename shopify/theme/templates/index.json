@@ -197,7 +197,7 @@
       "type": "racket-3d",
       "settings": {
         "enabled": true,
-        "width": 58
+        "width": 60
       }
     }
   },
