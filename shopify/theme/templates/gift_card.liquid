@@ -1,0 +1,51 @@
+{%- layout none -%}
+{%- comment -%} Carte cadeau envoyée par email : montant, code à copier, QR code, Apple Wallet, impression. {%- endcomment -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ta carte cadeau {{ shop.name }}</title>
+  <meta name="robots" content="noindex">
+  {% render 'theme-head' %}
+  {{ content_for_header }}
+  <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+</head>
+<body class="pw-body">
+  <main class="pw">
+    <div class="pw-card gc">
+      <a class="logo notranslate" translate="no" href="{{ shop.url }}"><img class="logo-mark" src="{{ 'logo-mark.png' | asset_url }}" alt="" width="42" height="43">BANDEJA<span>CLUB</span></a>
+      <h1>Ta carte cadeau</h1>
+      {%- assign initial = gift_card.initial_value | money_without_trailing_zeros -%}
+      <p class="gc-amount">{{ gift_card.balance | money }}</p>
+      {%- if gift_card.balance != gift_card.initial_value -%}<p class="pw-text">Montant initial : {{ initial }}</p>{%- endif -%}
+      {%- if gift_card.expired or gift_card.enabled == false -%}
+        <p class="form-error">{% if gift_card.expired %}Cette carte a expiré le {{ gift_card.expires_on | date: format: 'date' }}.{% else %}Cette carte est désactivée.{% endif %}</p>
+      {%- elsif gift_card.expires_on -%}
+        <p class="pw-text">Valable jusqu'au {{ gift_card.expires_on | date: format: 'date' }}.</p>
+      {%- endif -%}
+      <div class="gc-code">
+        <span id="GcCode">{{ gift_card.code | format_code }}</span>
+        <button type="button" class="btn ghost" id="GcCopy">Copier le code</button>
+      </div>
+      <div class="gc-qr" id="GcQr" data-identifier="{{ gift_card.qr_identifier }}" aria-label="QR code de la carte cadeau"></div>
+      <p class="pw-text">Utilise ce code au moment de payer.</p>
+      <div class="gc-actions">
+        <a class="btn" href="{{ shop.url }}">Aller à la boutique</a>
+        {%- if gift_card.pass_url -%}<a class="btn ghost" href="{{ gift_card.pass_url }}">Ajouter à Apple Wallet</a>{%- endif -%}
+        <button type="button" class="btn ghost" onclick="window.print()">Imprimer</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var q = document.getElementById('GcQr');
+      if (q && window.QRCode) new QRCode(q, { text: q.dataset.identifier, width: 140, height: 140 });
+      var b = document.getElementById('GcCopy');
+      if (b && navigator.clipboard) b.addEventListener('click', function () {
+        navigator.clipboard.writeText(document.getElementById('GcCode').textContent.replace(/\s/g, '')).then(function () { b.textContent = 'Code copié ✓'; });
+      });
+    });
+  </script>
+</body>
+</html>

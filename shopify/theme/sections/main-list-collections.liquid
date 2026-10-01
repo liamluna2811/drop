@@ -1,0 +1,32 @@
+{%- comment -%} Toutes les collections : une carte par univers (image de la collection, sinon celle de son premier produit). {%- endcomment -%}
+<section class="section">
+  <div class="section-head">
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h1 class="h2">{{ section.settings.title }}</h1>
+  </div>
+  <div class="coll-list">
+    {%- for c in collections -%}
+      {%- if c.handle != 'frontpage' and c.all_products_count > 0 -%}
+        {%- assign img = c.image | default: c.products.first.featured_media -%}
+        <a class="coll-tile" href="{{ c.url }}">
+          <span class="coll-tile-media">
+            {%- if img -%}{{ img | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 900px) 31vw, (min-width: 600px) 48vw, 100vw', alt: '' }}{%- endif -%}
+          </span>
+          <span class="coll-tile-body">
+            <span class="coll-tile-title">{{ c.title }}</span>
+            <span class="coll-tile-count">{{ c.all_products_count }} produit{% if c.all_products_count > 1 %}s{% endif %}</span>
+          </span>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Liste des collections",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Boutique" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Nos univers" }
+  ]
+}
+{% endschema %}

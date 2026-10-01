@@ -1,0 +1,60 @@
+{%- comment -%} Page de recherche : champ de recherche, produits (cartes du thème), puis pages et articles. {%- endcomment -%}
+<section class="section search-page">
+  <div class="section-head">
+    <h1 class="h2">{{ section.settings.title }}</h1>
+  </div>
+  <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+    <label class="visually-hidden" for="SearchQ">Rechercher</label>
+    <input id="SearchQ" class="search-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="off">
+    <input type="hidden" name="options[prefix]" value="last">
+    <button class="btn" type="submit">{% render 'icon', name: 'search' %}<span>Rechercher</span></button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="coll-count" aria-live="polite">
+        {%- if search.results_count == 0 -%}
+          Aucun résultat pour « {{ search.terms | escape }} ».
+        {%- else -%}
+          {{ search.results_count }} résultat{% if search.results_count > 1 %}s{% endif %} pour « {{ search.terms | escape }} »
+        {%- endif -%}
+      </p>
+      {%- if search.results_count == 0 -%}
+        <div class="coll-empty">
+          <p>Essaie un autre mot (« t-shirt », « sport », « gourde »…) ou parcours la collection.</p>
+          <a class="btn" href="{{ routes.all_products_collection_url }}">Voir la collection</a>
+        </div>
+      {%- else -%}
+        {%- capture products -%}{%- for item in search.results -%}{%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+        {%- capture others -%}
+          {%- for item in search.results -%}
+            {%- unless item.object_type == 'product' -%}
+              <li><a class="search-other" href="{{ item.url }}"><span class="search-type">{% if item.object_type == 'article' %}Article{% else %}Page{% endif %}</span><strong>{{ item.title }}</strong><span class="search-excerpt">{{ item.content | strip_html | truncatewords: 22 }}</span></a></li>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if products != blank -%}<div class="grid">{{ products }}</div>{%- endif -%}
+        {%- if others != blank -%}
+          <h2 class="search-sub">Pages et articles</h2>
+          <ul class="search-others">{{ others }}</ul>
+        {%- endif -%}
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}<a class="btn ghost" href="{{ paginate.previous.url }}">← Précédent</a>{%- endif -%}
+            <span>{{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}<a class="btn ghost" href="{{ paginate.next.url }}">Suivant →</a>{%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</section>
+{% schema %}
+{
+  "name": "Recherche",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Rechercher" },
+    { "type": "text", "id": "placeholder", "label": "Texte d'exemple du champ", "default": "T-shirt, brassière, gourde…" }
+  ]
+}
+{% endschema %}

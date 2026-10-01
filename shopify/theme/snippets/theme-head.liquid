@@ -1,0 +1,22 @@
+{%- comment -%} Icône, polices, couleurs du thème et feuille de style : commun au site, à la page mot de passe et à la carte cadeau {%- endcomment -%}
+  <link rel="icon" type="image/png" href="{{ 'favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'favicon.png' | asset_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --c-bg:{{ settings.color_bg | default: '#F6F4EE' }};
+      --c-surface:{{ settings.color_surface | default: '#FFFFFF' }};
+      --c-surface-alt:{{ settings.color_surface_alt | default: '#ECE8DD' }};
+      --c-text:{{ settings.color_text | default: '#0B1B2B' }};
+      --c-text-muted:{{ settings.color_text_muted | default: '#4F5D6B' }};
+      --c-accent:{{ settings.color_accent | default: '#D4FF3A' }};
+      --c-dark:{{ settings.color_dark | default: '#0B1B2B' }};
+      --c-on-dark:{{ settings.color_on_dark | default: '#F6F4EE' }};
+      --c-border:{{ settings.color_text | default: '#0B1B2B' | color_modify: 'alpha', 0.14 }};
+      --c-border-strong:{{ settings.color_text | default: '#0B1B2B' | color_modify: 'alpha', 0.3 }};
+      --c-on-dark-muted:{{ settings.color_on_dark | default: '#F6F4EE' | color_modify: 'alpha', 0.75 }};
+    }
+  </style>
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
