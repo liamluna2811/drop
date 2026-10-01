@@ -276,3 +276,17 @@
   };
   document.head.appendChild(s);
 })();
+
+// Hauteur du bandeau + en-tête fixés en haut (sert aux éléments qui se placent juste dessous)
+(function () {
+  var head = document.getElementById('shopify-section-header');
+  var bar = document.querySelector('.topbar');
+  function measure() {
+    var h = head ? head.getBoundingClientRect().height : ((bar ? bar.offsetHeight : 0) + (document.querySelector('.nav') || { offsetHeight: 72 }).offsetHeight);
+    document.documentElement.style.setProperty('--sticky-h', Math.round(h) + 'px');
+    if (bar) document.documentElement.style.setProperty('--topbar-h', bar.offsetHeight + 'px');
+  }
+  measure();
+  window.addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+})();

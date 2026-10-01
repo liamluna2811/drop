@@ -244,7 +244,7 @@ function pose(r, t, view) {
   t = Math.min(1, Math.max(0, t));
   var a = ease(Math.min(1, t / 0.7));
   var b = t <= 0.7 ? 0 : ease((t - 0.7) / 0.3);
-  var top = 80 / view.pxPerCm;                         // hauteur de l'en-tête (≈ 80 px) en cm
+  var top = (view.headPx || 115) / view.pxPerCm;       // hauteur du bandeau + en-tête, en cm
   var s0 = Math.min(1.35, ((2 * view.hh - top) * 1.04) / 56, (view.hw * 0.92) / 60) * (view.size || 1);
   return {
     s: lerp(s0, s0 * 0.55, a),
@@ -304,6 +304,7 @@ export function mount(host, options) {
     view.hh = DIST * Math.tan(camera.fov * Math.PI / 360);
     view.hw = view.hh * camera.aspect;
     view.pxPerCm = h / (2 * view.hh);
+    view.headPx = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sticky-h')) || 110) + 6;
   }
 
   var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;

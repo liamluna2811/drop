@@ -25,6 +25,7 @@
   --radius:20px;--radius-sm:12px;--radius-pill:999px;
   --shadow:0 18px 40px -18px rgba(11,27,43,.35);
   --header-h:72px;
+  --sticky-h:110px;   /* bandeau + en-tête, mesuré en JavaScript (theme.js) */
   /* Alias de compatibilité (anciennes classes) */
   --ink:var(--c-text);--paper:var(--c-bg);--white:var(--c-surface);--muted:var(--c-text-muted);--lime:var(--c-accent);--alt:var(--c-surface-alt);--display:var(--font-display);--body:var(--font-body);
 }
@@ -89,7 +90,7 @@ p+p{margin-top:var(--s-3)}
 font{vertical-align:baseline!important}
 
 /* 6. En-tête et menu --------------------------------------------------------- */
-.nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:var(--s-5);min-height:var(--header-h);padding:0 var(--gutter);background:color-mix(in srgb,var(--c-bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--c-border)}
+.nav{position:relative;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:var(--s-5);min-height:var(--header-h);padding:0 var(--gutter);background:color-mix(in srgb,var(--c-bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--c-border)}
 .logo{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--font-display);font-size:1.15rem;letter-spacing:.01em;white-space:nowrap}
 .logo span{background:var(--c-text);color:var(--c-accent);padding:.05em .35em;margin-left:.3em;border-radius:6px}
 .logo-mark{height:40px;width:auto}
@@ -107,6 +108,10 @@ font{vertical-align:baseline!important}
 .account-link:hover{text-decoration:underline;text-underline-offset:4px}
 .cart-btn{display:inline-flex;align-items:center;gap:var(--s-2);min-height:40px;padding:.45rem 1rem;border-radius:var(--radius-pill);background:var(--c-text);color:var(--c-bg);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 .cart-btn span{display:grid;place-items:center;min-width:1.35rem;height:1.35rem;padding:0 .3rem;border-radius:var(--radius-pill);background:var(--c-accent);color:var(--c-text);font-size:.7rem;font-weight:700;letter-spacing:0}
+
+/* Bandeau supérieur + en-tête : restent visibles pendant tout le défilement */
+#shopify-section-header,body>.topbar{position:sticky;top:0;z-index:40}
+body>.nav{position:sticky;top:var(--topbar-h,38px);z-index:39}
 
 /* 7. Pied de page ------------------------------------------------------------- */
 .footer{background:var(--c-dark);color:var(--c-on-dark-muted);padding:var(--s-7) var(--gutter);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--s-5);font-size:var(--fs-sm)}
@@ -180,7 +185,7 @@ font{vertical-align:baseline!important}
 .arg h3{font-family:var(--font-body);font-size:var(--fs-base);font-weight:700;letter-spacing:0;margin-bottom:var(--s-2)}
 .arg p{color:var(--c-text-muted);font-size:var(--fs-sm)}
 .hist{display:grid;gap:var(--s-7)}
-@media (min-width:900px){.hist{grid-template-columns:.8fr 1.2fr;gap:var(--s-8);align-items:start}.hist-intro{position:sticky;top:calc(var(--header-h) + 2rem)}}
+@media (min-width:900px){.hist{grid-template-columns:.8fr 1.2fr;gap:var(--s-8);align-items:start}.hist-intro{position:sticky;top:calc(var(--sticky-h) + 2rem)}}
 .hist-intro h2{margin-bottom:var(--s-4)}
 .hist-intro p{color:var(--c-text-muted);max-width:38ch}
 .tl{list-style:none;border-left:1px solid var(--c-border-strong);margin-left:.4rem}
@@ -221,13 +226,13 @@ html.racket-live .racket-fx{display:block}
    raquette devant le bord droit de l'arche. La bannière reste figée pendant 60 % d'écran de défilement :
    ces premiers coups de molette servent uniquement à redresser la raquette (voir racket-3d.js, PIN). */
 html.racket-live main>.shopify-section:has(.hero2)::after{content:"";display:block;height:60vh}
-html.racket-live .hero2{position:sticky;top:var(--header-h);padding:clamp(.75rem,2vh,1.5rem) 0}
+html.racket-live .hero2{position:sticky;top:var(--sticky-h);padding:clamp(.75rem,2vh,1.5rem) 0}
 html.racket-live .hero2>.wrap{max-width:none;padding:0 14vw 0 3vw}
-html.racket-live .hero2-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,2.5vw,3rem);min-height:calc(100vh - var(--header-h) - 60px)}
+html.racket-live .hero2-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,2.5vw,3rem);min-height:calc(100vh - var(--sticky-h) - 40px)}
 html.racket-live .hero2-text{justify-self:end;width:min(620px,100%)}
 html.racket-live .hero2 h1{font-size:clamp(3rem,5.6vw,6.25rem)}
 html.racket-live .hero2 .lead{font-size:clamp(1.05rem,1.25vw,1.3rem);max-width:40ch}
-html.racket-live .hero2 .arch{width:100%;max-width:min(640px,calc((100vh - var(--header-h) - 80px) * .8))}
+html.racket-live .hero2 .arch{width:100%;max-width:min(640px,calc((100vh - var(--sticky-h) - 60px) * .8))}
 main>.shopify-section:has(.racket-fx){z-index:20}
 .arch>.arch-racket{position:absolute;z-index:3;top:-4%;right:-7%;width:34%;height:auto;object-fit:contain;border-radius:0;transform:rotate(14deg);filter:drop-shadow(0 18px 24px rgba(11,27,43,.28));pointer-events:none}
 html.racket-live .arch>.arch-racket{display:none}
