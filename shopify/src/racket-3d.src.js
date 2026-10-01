@@ -244,10 +244,11 @@ function pose(p, view) {
   var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
   // Taille : la raquette (environ 62 cm en diagonale) doit tenir dans la moitié droite et dans la hauteur
   var top = 80 / view.pxPerCm;                         // hauteur de l'en-tête (≈ 80 px) en cm
-  var s0 = Math.min(1.15, ((2 * view.hh - top) * 0.9) / 56, (view.hw * 1.15) / 52) * (view.size || 1);
+  // La raquette occupe le tiers droit de l'écran (de 68 % à 100 % de la largeur), à côté de l'arche
+  var s0 = Math.min(1.15, ((2 * view.hh - top) * 0.88) / 56, (view.hw * 0.6) / 60) * (view.size || 1);
   return {
     s: lerp(s0, s0 * 0.55, a),
-    x: view.hw * 0.24 + lerp(0, view.hw * 0.25, a) + b * view.hw * 1.05,
+    x: view.hw * 0.66 + lerp(0, view.hw * 0.1, a) + b * view.hw * 0.75,
     y: -top / 2 + lerp(0, 1.5, a), z: 0,
     rx: -0.1, ry: lerp(-0.32, -0.18, a) - b * 0.9, rz: lerp(0.78, 0.6, a) - b * 0.3
   };
