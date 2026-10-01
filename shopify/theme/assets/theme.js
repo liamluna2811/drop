@@ -222,7 +222,12 @@
     var guide = document.querySelector('[data-guide]');
     if (guide && typeof guide.showModal === 'function') {
       document.addEventListener('click', function (e) {
-        if (e.target.closest('[data-guide-open]')) guide.showModal();
+        if (e.target.closest('[data-guide-open]')) {
+          // Met en avant la ligne de la taille choisie
+          var picked = [].map.call(form.querySelectorAll('input[type=radio]:checked'), function (r) { return r.value; });
+          [].forEach.call(guide.querySelectorAll('tr[data-size]'), function (tr) { tr.classList.toggle('is-current', picked.indexOf(tr.dataset.size) > -1); });
+          guide.showModal();
+        }
         else if (e.target.closest('[data-guide-close]') || e.target === guide) guide.close();
       });
     } else {

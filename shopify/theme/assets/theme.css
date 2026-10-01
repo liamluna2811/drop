@@ -384,6 +384,19 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:2px solid var(--c-text
 .guide-close:hover{background:var(--c-surface-alt)}
 .guide-close svg{width:22px;height:22px}
 .guide-body{padding:var(--s-5);overflow-x:auto}
+.guide-sub{font-size:var(--fs-sm);color:var(--c-text-muted);margin-bottom:var(--s-3)}
+.guide-table{overflow-x:auto;border:1px solid var(--c-border);border-radius:var(--radius-sm)}
+.guide-table table{width:100%;border-collapse:collapse;font-size:var(--fs-sm);font-variant-numeric:tabular-nums}
+.guide-table th,.guide-table td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid var(--c-border);white-space:nowrap}
+.guide-table thead th{background:var(--c-surface-alt);font-size:var(--fs-xs);letter-spacing:.08em;text-transform:uppercase}
+.guide-table tbody tr:last-child>*{border-bottom:0}
+.guide-table tr.is-current>*{background:color-mix(in srgb,var(--c-accent) 35%,var(--c-surface));font-weight:700}
+.guide-how{margin-top:var(--s-5)}
+.guide-how h3{font-size:1rem;margin-bottom:var(--s-2)}
+.guide-how p{font-size:var(--fs-sm);color:var(--c-text-muted)}
+.guide-how p+p{margin-top:var(--s-2)}
+.guide-note{margin-top:var(--s-4);font-size:var(--fs-xs);color:var(--c-text-muted)}
+@media (max-width:520px){.guide-body{padding:var(--s-4)}.guide-table th,.guide-table td{padding:.65rem .5rem}.guide-table thead th{font-size:.625rem;letter-spacing:.04em}}
 .perks{margin-top:var(--s-5)}
 /* Barre d'achat fixe (mobile) */
 .sticky-atc{display:none}

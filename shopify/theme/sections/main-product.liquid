@@ -4,9 +4,32 @@
   barre d'achat fixe sur mobile.
 {%- endcomment -%}
 {%- assign current = product.selected_or_first_available_variant -%}
-{%- assign guide_page = section.settings.size_guide -%}
-{%- if guide_page == blank -%}{%- assign guide_page = pages['guide-des-tailles'] -%}{%- endif -%}
-{%- if guide_page.content == blank -%}{%- assign guide_page = nil -%}{%- endif -%}
+{%- liquid
+  # Tableau des tailles : le premier bloc dont le mot-clé figure dans le titre du produit
+  assign guide_block = nil
+  assign title_lc = product.title | downcase
+  for block in section.blocks
+    if block.type == 'size_table'
+      assign kw = block.settings.match | downcase | strip
+      if kw != blank and title_lc contains kw
+        assign guide_block = block
+        break
+      endif
+    endif
+  endfor
+  # Sinon, une page Shopify (réglage, ou /pages/guide-des-tailles)
+  assign guide_page = section.settings.size_guide
+  if guide_page == blank
+    assign guide_page = pages['guide-des-tailles']
+  endif
+  if guide_page.content == blank
+    assign guide_page = nil
+  endif
+  assign has_guide = false
+  if guide_block or guide_page
+    assign has_guide = true
+  endif
+-%}
 {%- assign has_3d = false -%}
 {%- if product.tags contains '3d-bouteille' -%}{%- assign has_3d = true -%}{%- endif -%}
 <section class="section product" data-product-section>
@@ -104,7 +127,7 @@
           <fieldset class="opt">
             <legend class="opt-legend">
               <span>{{ opt_label }} : <span data-selected-name="{{ forloop.index0 }}">{{ selected_label | strip }}</span></span>
-              {%- if is_size and guide_page != blank -%}
+              {%- if is_size and has_guide -%}
                 <button type="button" class="guide-link" data-guide-open aria-haspopup="dialog">{% render 'icon', name: 'ruler' %}Guide des tailles</button>
               {%- endif -%}
             </legend>
@@ -141,13 +164,36 @@
     <div class="product-desc rte">{{ product.description }}</div>
   </div>
 
-  {%- if guide_page != blank -%}
+  {%- if has_guide -%}
     <dialog class="guide" data-guide aria-labelledby="GuideTitle">
       <div class="guide-head">
-        <h2 id="GuideTitle">{{ guide_page.title }}</h2>
+        <h2 id="GuideTitle">{% if guide_block %}Guide des tailles{% else %}{{ guide_page.title }}{% endif %}</h2>
         <button type="button" class="guide-close" data-guide-close aria-label="Fermer">{% render 'icon', name: 'close' %}</button>
       </div>
-      <div class="guide-body rte">{{ guide_page.content }}</div>
+      {%- if guide_block -%}
+        {%- assign cols = guide_block.settings.columns | split: '|' -%}
+        {%- assign rows = guide_block.settings.rows | newline_to_br | split: '<br />' -%}
+        <div class="guide-body" {{ guide_block.shopify_attributes }}>
+          {%- if guide_block.settings.title != blank -%}<p class="guide-sub">{{ guide_block.settings.title }}</p>{%- endif -%}
+          <div class="guide-table">
+            <table>
+              <thead><tr>{%- for c in cols -%}<th scope="col">{{ c | strip }}</th>{%- endfor -%}</tr></thead>
+              <tbody>
+                {%- for r in rows -%}
+                  {%- assign cells = r | strip | split: '|' -%}
+                  {%- if cells.size > 0 -%}
+                    <tr data-size="{{ cells[0] | strip | escape }}">{%- for c in cells -%}{%- if forloop.first -%}<th scope="row">{{ c | strip }}</th>{%- else -%}<td>{{ c | strip }}</td>{%- endif -%}{%- endfor -%}</tr>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+          {%- if guide_block.settings.how != blank -%}<div class="guide-how rte"><h3>Comment mesurer</h3>{{ guide_block.settings.how }}</div>{%- endif -%}
+          {%- if guide_block.settings.note != blank -%}<p class="guide-note">{{ guide_block.settings.note }}</p>{%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="guide-body rte">{{ guide_page.content }}</div>
+      {%- endif -%}
     </dialog>
   {%- endif -%}
 
@@ -169,12 +215,26 @@
 {
   "name": "Page produit",
   "settings": [
-    { "type": "page", "id": "size_guide", "label": "Page du guide des tailles", "info": "Sinon, la page dont l'adresse est /pages/guide-des-tailles. Sans page, le lien n'apparaît pas." },
+    { "type": "page", "id": "size_guide", "label": "Page du guide (si aucun tableau ne correspond)", "info": "Les blocs « Tableau des tailles » passent en premier. Sinon cette page, ou /pages/guide-des-tailles." },
     { "type": "checkbox", "id": "sticky_atc", "label": "Barre « Ajouter au panier » fixe sur mobile", "default": true },
     { "type": "header", "content": "Avantages sous le bouton" },
     { "type": "text", "id": "perk_1", "label": "Avantage 1", "default": "Livraison offerte dès 60 € en France et en Europe" },
     { "type": "text", "id": "perk_2", "label": "Avantage 2", "default": "Paiement 100 % sécurisé" },
     { "type": "text", "id": "perk_3", "label": "Avantage 3", "default": "Imprimé à la demande, après ta commande" }
+  ],
+  "blocks": [
+    {
+      "type": "size_table",
+      "name": "Tableau des tailles",
+      "settings": [
+        { "type": "text", "id": "match", "label": "Mot-clé dans le titre du produit", "info": "Ex. « T-shirt de sport ». Majuscules indifférentes." },
+        { "type": "text", "id": "title", "label": "Sous-titre", "default": "Mesures du produit, en centimètres" },
+        { "type": "text", "id": "columns", "label": "Colonnes (séparées par |)", "default": "Taille | Longueur | Largeur" },
+        { "type": "textarea", "id": "rows", "label": "Lignes (une taille par ligne, valeurs séparées par |)", "default": "S | 70 | 50" },
+        { "type": "richtext", "id": "how", "label": "Comment mesurer" },
+        { "type": "text", "id": "note", "label": "Note sous le tableau" }
+      ]
+    }
   ]
 }
 {% endschema %}

@@ -1,7 +1,44 @@
 {
   "sections": {
-    "main": { "type": "main-product", "settings": {} },
-    "recommendations": { "type": "product-recommendations", "settings": {} }
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "guide_sport": {
+          "type": "size_table",
+          "settings": {
+            "match": "T-shirt de sport",
+            "title": "T-shirt de sport · mesures en centimètres",
+            "columns": "Taille | Longueur | Largeur",
+            "rows": "S | 70 | 50\nM | 72 | 53\nL | 74 | 56\nXL | 76 | 59",
+            "how": "<p><strong>A – Longueur :</strong> du point le plus haut de l'épaule, à côté du col, jusqu'au bas du t-shirt.</p><p><strong>B – Largeur :</strong> t-shirt posé à plat, d'une couture sous la manche à l'autre.</p>",
+            "note": "Mesures fournies par le fabricant, t-shirt posé à plat. Elles peuvent varier jusqu'à 5 cm. Astuce : mesurez un t-shirt que vous avez déjà et comparez."
+          }
+        },
+        "guide_lifestyle": {
+          "type": "size_table",
+          "settings": {
+            "match": "T-shirt Lifestyle",
+            "title": "T-shirt Lifestyle · mesures en centimètres",
+            "columns": "Taille | Longueur | Largeur | Manches",
+            "rows": "S | 71 | 45,7 | 39,7\nM | 73,7 | 50,8 | 43,2\nL | 76,2 | 56 | 47\nXL | 78,7 | 61 | 50,8",
+            "how": "<p><strong>A – Longueur :</strong> du point le plus haut de l'épaule, à côté du col, jusqu'au bas du t-shirt.</p><p><strong>B – Largeur :</strong> t-shirt posé à plat, d'une couture sous la manche à l'autre.</p><p><strong>C – Longueur des manches :</strong> du centre du dos du col, le long de la couture de l'épaule, jusqu'au bord de la manche.</p>",
+            "note": "Mesures fournies par le fabricant, t-shirt posé à plat. Elles peuvent varier jusqu'à 5 cm. Astuce : mesurez un t-shirt que vous avez déjà et comparez."
+          }
+        }
+      },
+      "block_order": [
+        "guide_sport",
+        "guide_lifestyle"
+      ],
+      "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {}
+    }
   },
-  "order": ["main", "recommendations"]
+  "order": [
+    "main",
+    "recommendations"
+  ]
 }
