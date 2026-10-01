@@ -41,7 +41,8 @@
       <a class="account-link" href="{{ routes.account_login_url }}">Connexion</a>
     {%- endif -%}
     <button class="cart-btn" id="openCart" type="button" aria-label="Ouvrir le panier">
-      Panier <span id="cartCount">{{ cart.item_count }}</span>
+      {% render 'icon', name: 'cart' %}<span class="visually-hidden">Panier, articles :</span>
+      <span class="cart-count" id="cartCount" data-n="{{ cart.item_count }}">{{ cart.item_count }}</span>
     </button>
   </div>
 </header>
