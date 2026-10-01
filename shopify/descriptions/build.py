@@ -32,7 +32,7 @@ JER_INTRO = ("Un maillot en maille de polyester respirante, pensé pour bouger :
 JER_SPECS = ["100 % polyester respirant (maille)", "Grammage : 140 g/m²", "Coupe décontractée, longueur allongée",
              "Tissu élastique et résistant", "Manches raglan courtes", "Coutures latérales",
              "Encolure ronde classique avec bordure au col"]
-JER_LEGAL = ["Produit brut provenant de Chine.", "Restrictions d'âge : pour adultes. Garantie UE : 2 ans.",
+JER_LEGAL = ["Fabricant : Printful, support@printful.com, Raina bulvaris 25, Riga, LV-1050, Lettonie.", "Produit brut provenant de Chine.", "Restrictions d'âge : pour adultes. Garantie UE : 2 ans.",
              "Conformité : respecte les exigences en matière d'inflammabilité et de teneur en cadmium, bisphénols et phtalates."]
 
 DESIGNS = {
