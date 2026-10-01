@@ -179,14 +179,6 @@
         "scheme": "bg"
       }
     },
-    "court": {
-      "type": "court-animation",
-      "settings": {
-        "enabled": true,
-        "opacity": 35,
-        "height": 220
-      }
-    },
     "duo": {
       "type": "duo",
       "settings": {
@@ -200,10 +192,17 @@
       "settings": {
         "scheme": "dark"
       }
+    },
+    "racket": {
+      "type": "racket-3d",
+      "settings": {
+        "enabled": true,
+        "width": 58
+      }
     }
   },
   "order": [
-    "court",
+    "racket",
     "hero",
     "marquee",
     "universes",

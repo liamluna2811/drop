@@ -278,3 +278,20 @@
   window.addEventListener('resize', update);
   update();
 })();
+
+// Raquette 3D de l'accueil : chargée seulement sur ordinateur, si les animations ne sont pas réduites
+(function () {
+  var el = document.querySelector('[data-racket]');
+  if (!el || !window.matchMedia) return;
+  if (!matchMedia('(min-width: 900px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var root = document.documentElement;
+  var s = document.createElement('script');
+  s.src = el.dataset.src; s.async = true;
+  s.onload = function () {
+    if (!window.RacketFX) return;
+    root.classList.add('racket-live');
+    var ok = window.RacketFX.mount(el, { logo: el.dataset.logo });
+    if (!ok) root.classList.remove('racket-live');
+  };
+  document.head.appendChild(s);
+})();
