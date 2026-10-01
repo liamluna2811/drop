@@ -200,7 +200,7 @@ body>.nav{position:sticky;top:var(--topbar-h,38px);z-index:39}
 .newsletter{background:var(--c-surface-alt);text-align:center;padding:var(--section-y) var(--gutter)}
 .newsletter h2{margin-bottom:var(--s-3)}
 .newsletter p{max-width:46ch;margin:0 auto var(--s-5);color:var(--c-text-muted)}
-.newsletter form{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--s-2)}
+.newsletter form{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--s-2);background:none;padding:0;border-radius:0}
 .newsletter input{min-height:48px;padding:.8rem 1.3rem;border-radius:var(--radius-pill);border:1px solid var(--c-text);background:var(--c-surface);width:min(340px,100%)}
 .nl-msg{width:100%;margin-top:var(--s-4)!important;font-weight:600;color:var(--c-text)!important}
 
@@ -233,7 +233,8 @@ html.racket-live .hero2-text{justify-self:end;width:min(620px,100%)}
 html.racket-live .hero2 h1{font-size:clamp(3rem,5.6vw,6.25rem)}
 html.racket-live .hero2 .lead{font-size:clamp(1.05rem,1.25vw,1.3rem);max-width:40ch}
 html.racket-live .hero2 .arch{width:100%;max-width:min(640px,calc((100vh - var(--sticky-h) - 60px) * .8));justify-self:start}
-main>.shopify-section:has(.racket-fx){z-index:20}
+/* La raquette et les vitres sont placées au niveau de la page (pas dans leur section), pour que les bandeaux pleins passent entre les deux */
+main>.shopify-section:has(.racket-fx){position:static;z-index:auto}
 /* Fond terrain de padel (dessiné par theme.js, même perspective que les vitres) : filet et lignes s'effacent après la bannière, le sol reste */
 .court-bg{display:none}
 html.racket-live .hero2{min-height:calc(100vh - var(--sticky-h))}
@@ -241,6 +242,8 @@ html.racket-live .court-bg{display:block;position:fixed;left:0;right:0;top:var(-
 html.racket-live .court-lines{transition:opacity .2s linear}
 /* Le terrain reste fixe derrière toute la page, comme les vitres : les sections passent devant */
 html.racket-live main>.shopify-section:not(:has(.racket-fx)){position:relative;z-index:1}
+/* Bandeaux à fond plein (beige, crème, blanc, marine) et pied de page : par-dessus le terrain et les vitres, sous la raquette et la balle */
+html main>.shopify-section:has(> [class*="scheme-"]:not(.scheme-none)),.footer{position:relative;z-index:16}
 html.racket-live .court-bg svg{display:block;width:100%;height:100%}
 html.racket-live .hero2>.wrap{position:relative;z-index:1}
 .arch>.arch-racket{position:absolute;z-index:3;top:-4%;right:-7%;width:34%;height:auto;object-fit:contain;border-radius:0;transform:rotate(14deg);filter:drop-shadow(0 18px 24px rgba(11,27,43,.28));pointer-events:none}
