@@ -24,11 +24,23 @@
             "how": "<p><strong>A – Longueur :</strong> du point le plus haut de l'épaule, à côté du col, jusqu'au bas du t-shirt.</p><p><strong>B – Largeur :</strong> t-shirt posé à plat, d'une couture sous la manche à l'autre.</p><p><strong>C – Longueur des manches :</strong> du centre du dos du col, le long de la couture de l'épaule, jusqu'au bord de la manche.</p>",
             "note": "Mesures fournies par le fabricant, t-shirt posé à plat. Elles peuvent varier jusqu'à 5 cm. Astuce : mesurez un t-shirt que vous avez déjà et comparez."
           }
+        },
+        "guide_brassiere": {
+          "type": "size_table",
+          "settings": {
+            "match": "Brassière",
+            "title": "Brassière de sport · mesures en centimètres, à plat",
+            "columns": "Taille | A | B | C | D",
+            "rows": "XS | 32 | 31 | 26 | 12\nS | 34 | 33 | 28 | 13\nM | 36 | 35 | 30 | 14\nL | 40 | 39 | 32 | 16\nXL | 44 | 43 | 34 | 18",
+            "how": "<p><strong>A – Demi-largeur poitrine :</strong> brassière posée à plat, d'un bord à l'autre au niveau de la poitrine.</p><p><strong>B – Demi-largeur bande :</strong> à plat, d'un bord à l'autre au niveau de la bande du bas.</p><p><strong>C – Longueur devant :</strong> du haut de la bretelle jusqu'au bas de la bande.</p><p><strong>D – Longueur côté :</strong> sur le côté, du dessous du bras jusqu'au bas de la bande.</p>",
+            "note": "A et B sont mesurées à plat : multipliez par 2 pour obtenir le tour complet. Mesures du fabricant, pouvant varier d'environ 2,5 cm (confection à la main)."
+          }
         }
       },
       "block_order": [
         "guide_sport",
-        "guide_lifestyle"
+        "guide_lifestyle",
+        "guide_brassiere"
       ],
       "settings": {}
     },

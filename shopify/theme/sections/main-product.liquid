@@ -97,7 +97,6 @@
           {%- if src contains '-back' -%}{%- assign view_label = 'Dos' -%}{%- elsif src contains '-front' -%}{%- assign view_label = 'Devant' -%}{%- elsif src contains '-left' -%}{%- assign view_label = 'Côté' -%}{%- elsif src contains '-right' -%}{%- assign view_label = 'Côté' -%}{%- endif -%}
           <button type="button" class="thumb{% if forloop.first %} on{% endif %}" data-thumb="{{ media.id }}" data-color="{{ media_color | escape }}" aria-label="{% if view_label != blank %}{{ view_label }}{% else %}Image {{ forloop.index }}{% endif %}">
             {{ media | image_url: width: 160 | image_tag: alt: '' }}
-            {%- if view_label != blank -%}<span class="thumb-label">{{ view_label }}</span>{%- endif -%}
           </button>
         {%- endfor -%}
         {%- if has_3d -%}

@@ -370,7 +370,6 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:2px solid var(--c-text
 .gallery-main.single .gal-nav{display:none}
 .gallery-main{touch-action:pan-y}
 .thumb{position:relative}
-.thumb-label{position:absolute;left:4px;right:4px;bottom:4px;padding:.1rem 0;border-radius:6px;background:color-mix(in srgb,var(--c-surface) 90%,transparent);font-size:.625rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--c-text);text-align:center}
 @media (min-width:900px){.gallery{position:sticky;top:calc(var(--sticky-h) + var(--s-4))}}
 /* Options et guide des tailles */
 .opt-legend{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);width:100%}
