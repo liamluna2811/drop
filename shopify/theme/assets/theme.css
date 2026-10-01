@@ -155,6 +155,10 @@ body>.nav{position:sticky;top:var(--topbar-h,38px);z-index:39}
 .legal-links{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);width:100%;padding-top:var(--s-5);border-top:1px solid rgba(255,255,255,.12);font-size:var(--fs-xs);letter-spacing:.04em}
 .legal-links a{color:var(--c-on-dark-muted);text-decoration:underline;text-underline-offset:3px}
 .legal-links a:hover{color:var(--c-on-dark)}
+.help-links{font-size:var(--fs-sm);letter-spacing:0}
+.help-links a{color:var(--c-on-dark);text-decoration:none;font-weight:600}
+.help-links a:hover{color:var(--c-accent)}
+.help-links+.legal-links{border-top:0;padding-top:0}
 
 /* 8. Cartes produit ------------------------------------------------------------- */
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-6) var(--s-4)}
