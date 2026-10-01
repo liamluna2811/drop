@@ -57,7 +57,7 @@
         "product_2": "unisex-sports-jersey",
         "product_3": "stainless-steel-water-bottle",
         "product_4": "visor",
-        "scheme": "alt",
+        "scheme": "none",
         "eyebrow": "La sélection",
         "title": "Produits phares"
       }
@@ -123,7 +123,7 @@
         "a6"
       ],
       "settings": {
-        "scheme": "bg"
+        "scheme": "none"
       }
     },
     "history": {
@@ -170,13 +170,13 @@
       ],
       "settings": {
         "sources": "<p>Sources : <a href=\"https://www.redbull.com/gb-en/history-of-padel\" rel=\"noopener\" target=\"_blank\">Red Bull, History of padel</a> · <a href=\"https://www.ltapadel.org.uk/what-we-do/what-is-the-history-of-padel/\" rel=\"noopener\" target=\"_blank\">LTA Padel, History of padel</a> · <a href=\"https://vvanat.fr/blog/paddle-quelle-federation/\" rel=\"noopener\" target=\"_blank\">La FFT et le padel</a></p>",
-        "scheme": "alt"
+        "scheme": "none"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "scheme": "bg"
+        "scheme": "none"
       }
     },
     "duo": {

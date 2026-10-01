@@ -329,15 +329,25 @@
       '<polygon points="0,' + H + ' ' + W + ',' + H + ' ' + W + ',' + 0.86 * H + ' ' + Rn + ' ' + Ln + ' 0,' + 0.86 * H + '" fill="url(#court-floor)"/>' +
       ln([0, H], [gw, 0.86 * H], 3, white) + ln([W, H], [W - gw, 0.86 * H], 3, white) +
       ln(P(-5, 1), Ln, 3, white) + ln(P(5, 1), Rn, 3, white) +
-      ln(P(-5, zServ), P(5, zServ), 3, white) + ln(P(0, zServ), P(0, 0.33), 3, white) + ln(Ln, Rn, 3, white);
+      '<g class="court-lines">' + ln(P(-5, zServ), P(5, zServ), 3, white) + ln(P(0, zServ), P(0, 0.33), 3, white) + ln(Ln, Rn, 3, white);
     if (box.dataset.net === '1') {
       var nh = (Ln[1] - vy) * 0.55, ny = Ln[1] - nh;
       s += '<rect x="' + Ln[0] + '" y="' + ny + '" width="' + (Rn[0] - Ln[0]) + '" height="' + nh + '" fill="url(#court-net)"/>' +
         ln([Ln[0], ny], [Rn[0], ny], 4, '#fff') + ln([Ln[0], ny - 2], [Rn[0], ny - 2], 1, 'rgba(11,27,43,.25)') +
         ln(Ln, [Ln[0], ny - 3], 3, 'rgba(11,27,43,.3)') + ln(Rn, [Rn[0], ny - 3], 3, 'rgba(11,27,43,.3)');
     }
-    box.innerHTML = s + '</svg>';
+    box.innerHTML = s + '</g></svg>';
+    fade();
   }
+  // Après la bannière, le filet et les lignes de service s'effacent : il ne reste que le sol et ses bords
+  var hero = box.closest('.shopify-section') || box.parentNode;
+  function fade() {
+    var g = box.querySelector('.court-lines');
+    if (!g) return;
+    var end = hero.offsetTop + hero.offsetHeight - window.innerHeight;
+    g.style.opacity = Math.max(0, Math.min(1, 1 - (window.scrollY - end) / (window.innerHeight * 0.5)));
+  }
+  window.addEventListener('scroll', fade, { passive: true });
   var t;
   function later() { clearTimeout(t); t = setTimeout(draw, 120); }
   window.addEventListener('resize', later);

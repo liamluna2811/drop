@@ -234,10 +234,13 @@ html.racket-live .hero2 h1{font-size:clamp(3rem,5.6vw,6.25rem)}
 html.racket-live .hero2 .lead{font-size:clamp(1.05rem,1.25vw,1.3rem);max-width:40ch}
 html.racket-live .hero2 .arch{width:100%;max-width:min(640px,calc((100vh - var(--sticky-h) - 60px) * .8));justify-self:start}
 main>.shopify-section:has(.racket-fx){z-index:20}
-/* Fond terrain de padel derrière la bannière (dessiné par theme.js, même perspective que les vitres) */
+/* Fond terrain de padel (dessiné par theme.js, même perspective que les vitres) : filet et lignes s'effacent après la bannière, le sol reste */
 .court-bg{display:none}
 html.racket-live .hero2{min-height:calc(100vh - var(--sticky-h))}
-html.racket-live .court-bg{display:block;position:absolute;left:0;right:0;top:0;height:calc(100vh - var(--sticky-h));z-index:0;pointer-events:none}
+html.racket-live .court-bg{display:block;position:fixed;left:0;right:0;top:var(--sticky-h);height:calc(100vh - var(--sticky-h));z-index:0;pointer-events:none}
+html.racket-live .court-lines{transition:opacity .2s linear}
+/* Le terrain reste fixe derrière toute la page, comme les vitres : les sections passent devant */
+html.racket-live main>.shopify-section:not(:has(.racket-fx)){position:relative;z-index:1}
 html.racket-live .court-bg svg{display:block;width:100%;height:100%}
 html.racket-live .hero2>.wrap{position:relative;z-index:1}
 .arch>.arch-racket{position:absolute;z-index:3;top:-4%;right:-7%;width:34%;height:auto;object-fit:contain;border-radius:0;transform:rotate(14deg);filter:drop-shadow(0 18px 24px rgba(11,27,43,.28));pointer-events:none}
