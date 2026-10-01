@@ -564,6 +564,9 @@
 (function () {
   var box = document.querySelector('[data-court]');
   if (!box) return;
+  // Le terrain est fixe : on le place en tête de page pour que la balle puisse passer entre lui et les sections
+  var hero = box.closest('.shopify-section') || box.parentNode;
+  document.body.insertBefore(box, document.body.firstChild);
   function draw() {
     if (!document.documentElement.classList.contains('racket-live')) return;
     var W = box.clientWidth, H = box.clientHeight;
@@ -592,7 +595,6 @@
     fade();
   }
   // Après la bannière, le filet et les lignes de service s'effacent : il ne reste que le sol et ses bords
-  var hero = box.closest('.shopify-section') || box.parentNode;
   function fade() {
     var g = box.querySelector('.court-lines');
     if (!g) return;

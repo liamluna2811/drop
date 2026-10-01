@@ -1,7 +1,9 @@
 // Raquette de padel Bandeja Club en 3D, animée au défilement (page d'accueil).
 // Dimensions réalistes en cm : 26 cm de large, environ 46 cm de long, 3,8 cm d'épaisseur.
-// Au chargement : gros plan sur le côté droit. En descendant : la raquette tourne, recule
-// et sort par la droite, ce qui laisse apparaître le site. En remontant : elle revient.
+// Au chargement : gros plan sur le côté droit, sans balle. Premiers coups de molette (page figée) :
+// la balle arrive de la gauche, la raquette pivote vers la gauche et la frappe, la balle repart,
+// puis la raquette pivote vers la droite et sort. Ensuite seulement, le site défile et la balle
+// descend en rebondissant d'une vitre à l'autre, derrière les blocs du site. En remontant : tout revient.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
@@ -236,24 +238,29 @@ function buildRacket(logoImg, options) {
 function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-// Position de la raquette.
-// r (0 → 1) : redressement pendant que la bannière est figée (premiers coups de molette) ;
-// t (0 → 1) : ensuite, pendant le défilement normal : elle rétrécit (0 → 0,7) puis sort par la droite (0,7 → 1).
-function pose(r, t, view) {
-  r = ease(Math.min(1, Math.max(0, r)));
-  t = Math.min(1, Math.max(0, t));
-  var a = ease(Math.min(1, t / 0.7));
-  var b = t <= 0.7 ? 0 : ease((t - 0.7) / 0.3);
+// Position de la raquette pendant la phase figée, r (0 → 1) : suite de positions clés.
+var HIT = 0.42;                              // moment où la balle touche la raquette
+function keys(view) {
   var top = (view.headPx || 115) / view.pxPerCm;       // hauteur du bandeau + en-tête, en cm
   var s0 = Math.min(1.35, ((2 * view.hh - top) * 1.04) / 56, (view.hw * 0.92) / 60) * (view.size || 1);
-  return {
-    s: lerp(s0, s0 * 0.55, a),
-    x: view.hw * 0.57 + r * view.hw * 0.11 + b * view.hw * 0.8,
-    y: -top / 2 + r * view.hh * 0.08 + a * view.hh * 0.04, z: r * 4,
-    rx: lerp(-0.1, 0.08, r),
-    ry: lerp(-0.34, -0.42, r) - b * 0.9,
-    rz: lerp(0.78, -0.12, r) - a * 0.15 - b * 0.3
-  };
+  var hw = view.hw, hh = view.hh, y0 = -top / 2;
+  return [
+    { r: 0,    s: s0,        x: hw * 0.57, y: y0,             z: 0, rx: -0.10, ry: -0.34, rz: 0.78 },  // position de base
+    { r: 0.30, s: s0,        x: hw * 0.60, y: y0,             z: 0, rx: -0.12, ry: -0.18, rz: 0.92 },  // armé : léger recul
+    { r: HIT,  s: s0 * 0.96, x: hw * 0.50, y: y0 + hh * 0.05, z: 5, rx: 0.02,  ry: -0.78, rz: 0.22 },  // frappe : pivote vers la gauche
+    { r: 0.55, s: s0 * 0.94, x: hw * 0.47, y: y0 + hh * 0.07, z: 5, rx: 0.06,  ry: -0.95, rz: 0.02 },  // accompagnement
+    { r: 0.74, s: s0 * 0.9,  x: hw * 0.63, y: y0 + hh * 0.04, z: 2, rx: 0.02,  ry: 0.55,  rz: -0.22 }, // pivote vers la droite
+    { r: 1,    s: s0 * 0.8,  x: hw * 1.75, y: y0,             z: 0, rx: 0,     ry: 0.95,  rz: -0.45 }  // sort par la droite
+  ];
+}
+function pose(r, view) {
+  r = Math.min(1, Math.max(0, r));
+  var k = keys(view), i = 1;
+  while (i < k.length - 1 && r > k[i].r) i++;
+  var a = k[i - 1], b = k[i], u = ease((r - a.r) / (b.r - a.r || 1));
+  var o = {};
+  ['s', 'x', 'y', 'z', 'rx', 'ry', 'rz'].forEach(function (f) { o[f] = lerp(a[f], b[f], u); });
+  return o;
 }
 
 // Balle de padel : feutre jaune-vert et couture blanche
@@ -312,7 +319,6 @@ export function mount(host, options) {
 
   var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;
   var lastTri = 0, lastDir = 0;
-  var BALL_IN = 0.26;                       // impact : juste après que la raquette s'est relevée
   function setPose(obj, s, bob, wob) {
     obj.position.set(s.x, s.y + bob, s.z);
     obj.rotation.set(s.rx + wob, s.ry + wob * 0.8, s.rz);
@@ -322,60 +328,62 @@ export function mount(host, options) {
     obj.updateMatrixWorld(true);
     return obj.userData.face.clone().applyMatrix4(obj.matrixWorld);
   }
-  function heroRange() { return window.innerHeight * (options.range || 0.9); }
-
   // y = position de défilement (lissée)
-  var PIN = 0.6;                            // la bannière reste figée pendant 60 % d'écran de défilement (voir theme.css)
+  var PIN = 1;                              // la bannière reste figée pendant un écran de défilement (voir theme.css)
   function phases(y) {
     var pin = window.innerHeight * PIN;
-    return { pin: pin, r: Math.min(1, Math.max(0, y / pin)), t: Math.min(1, Math.max(0, (y - pin) / heroRange())) };
+    return { pin: pin, r: Math.min(1, Math.max(0, y / pin)) };
+  }
+  function edges() {
+    var rb = 3.3 * 0.5, inset = ((view.glassPx || 0) + 6) / view.pxPerCm;
+    return { l: -view.hw + rb + inset, r: view.hw - rb - inset, floor: -view.hh + rb + 8 / view.pxPerCm };
+  }
+  var wasAtWall = false;
+  function bounce(side, yCm) {
+    window.dispatchEvent(new CustomEvent('bc:ballbounce', { detail: { side: side, y: window.innerHeight / 2 - yCm * view.pxPerCm } }));
   }
   function apply(y, time) {
     if (!racket) return;
     var ph = phases(y);
-    var s = pose(ph.r, ph.t, view);
+    var s = pose(ph.r, view);
     var idle = (1 - Math.min(1, ph.r * 3)) * 0.035;
-    racket.visible = ph.t < 0.999;
+    racket.visible = ph.r < 0.999;
     if (racket.visible) setPose(racket, s, Math.sin(time / 1400) * idle * 12, Math.sin(time / 1700) * idle);
     if (ball) {
       if (!contact) {
-        var sc = pose(1, 0, view); setPose(dummy, sc, 0, 0); dummy.userData = racket.userData;
+        var sc = pose(HIT, view); setPose(dummy, sc, 0, 0); dummy.userData = racket.userData;
         contact = faceCenter(dummy); contact.z += 3.3 * sc.s; contactScale = sc.s;
       }
-      var bp, bs;
-      if (y <= ph.pin) {
-        // Pendant le redressement : la balle part du bord gauche et arrive sur la face au moment où la raquette est droite
-        var k0 = Math.min(1, Math.max(0, (ph.r - 0.15) / 0.85));
-        var tt = ease(k0);
-        bp = new THREE.Vector3(-view.hw - 6, view.hh * 0.3, 0).lerp(contact, tt);
-        bp.y += Math.sin(tt * Math.PI) * view.hh * 0.18;
+      var e = edges(), wallY = contact.y + view.hh * 0.22, bp, bs;
+      if (ph.r <= HIT) {
+        // La balle arrive de la gauche dès le premier coup de molette et touche la face au moment de la frappe
+        var k0 = ph.r / HIT, tt = ease(k0);
+        bp = new THREE.Vector3(-view.hw - 6, view.hh * 0.32, 0).lerp(contact, tt);
+        bp.y += Math.sin(tt * Math.PI) * view.hh * 0.16;
         bs = contactScale;
-        ball.visible = k0 > 0;
+        ball.visible = ph.r > 0.002;
+      } else if (y <= ph.pin) {
+        // Frappée : la balle repart vers la vitre de gauche, en cloche, et rapetisse en s'éloignant
+        var k1 = (ph.r - HIT) / (1 - HIT), u = 1 - Math.pow(1 - k1, 1.6);
+        bp = new THREE.Vector3(lerp(contact.x, e.l, u), lerp(contact.y, wallY, u) + Math.sin(u * Math.PI) * view.hh * 0.14, lerp(contact.z, 0, u));
+        bs = lerp(contactScale, 0.5, u);
+        ball.visible = true;
+        var atWall = k1 > 0.985;
+        if (atWall && !wasAtWall) bounce('left', bp.y);
+        wasAtWall = atWall;
       } else {
-        // Après l'impact : la balle descend avec la page en rebondissant d'un bord de l'écran à l'autre
+        // Le site défile : la balle descend avec la page en rebondissant d'une vitre à l'autre
+        wasAtWall = true;
         var total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight - ph.pin);
         var q = Math.min(1, Math.max(0, (y - ph.pin) / total));
-        var rb = 3.3 * 0.5;
-        // Bords de rebond : bord intérieur des vitres latérales (ou bord de l'écran sans vitres)
-        var inset = ((view.glassPx || 0) + 6) / view.pxPerCm;
-        var edgeL = -view.hw + rb + inset, edgeR = view.hw - rb - inset;
-        var k = ease(Math.min(1, q / 0.05));
-        bs = lerp(contactScale, 0.5, k);
-        var crossings = 7;
-        var v = (contact.x - edgeL) / (edgeR - edgeL) - q * crossings * k;
-        var f = ((v % 2) + 2) % 2;
-        var tri = f <= 1 ? f : 2 - f;
-        // Signale chaque rebond contre une vitre (pour un éventuel effet sur les vitres)
+        var crossings = 7, v = q * crossings;
+        var f = ((v % 2) + 2) % 2, tri = f <= 1 ? f : 2 - f;
         var dir = tri > lastTri ? 1 : tri < lastTri ? -1 : lastDir;
-        if (lastDir && dir !== lastDir && k > 0.5 && (tri < 0.06 || tri > 0.94)) {
-          var side = tri < 0.5 ? 'left' : 'right';
-          var sy = window.innerHeight / 2 - (lerp(contact.y, -view.hh + rb + 8 / view.pxPerCm, Math.min(1, q * 1.02))) * view.pxPerCm;
-          window.dispatchEvent(new CustomEvent('bc:ballbounce', { detail: { side: side, y: sy } }));
-        }
+        var by = lerp(wallY, e.floor, Math.min(1, q * 1.02));
+        if (lastDir && dir !== lastDir && (tri < 0.06 || tri > 0.94)) bounce(tri < 0.5 ? 'left' : 'right', by);
         lastTri = tri; lastDir = dir;
-        var x = edgeL + tri * (edgeR - edgeL);
-        var floor = -view.hh + rb + 8 / view.pxPerCm;
-        bp = new THREE.Vector3(x, lerp(contact.y, floor, Math.min(1, q * 1.02)), lerp(contact.z, 0, k));
+        bp = new THREE.Vector3(e.l + tri * (e.r - e.l), by, 0);
+        bs = 0.5;
         ball.visible = true;
       }
       ball.position.copy(bp);
@@ -387,12 +395,14 @@ export function mount(host, options) {
 
   var curY = 0, tgtY = 0, running = false;
   function frame(time) {
+    tgtY = window.scrollY;                  // relu à chaque image : le défilement doux peut finir sans dernier événement
     curY += (tgtY - curY) * 0.14;
     if (Math.abs(tgtY - curY) < 0.5) curY = tgtY;
-    var ph = phases(curY), p = ph.t;
+    var ph = phases(curY), p = ph.r;
     var keep = !!ball || p < 0.999;
     host.style.visibility = keep ? 'visible' : 'hidden';
-    if (!ball) host.style.opacity = String(Math.min(1, (1 - Math.min(1, p)) / 0.12));
+    // Une fois le site en mouvement, la balle passe derrière les blocs du site (voir theme.css)
+    document.documentElement.classList.toggle('ball-behind', curY > ph.pin + 2);
     if (keep) apply(curY, time);
     var idle = ph.r < 0.34;                   // petit flottement de la raquette en haut de page
     if (curY !== tgtY || idle) { requestAnimationFrame(frame); } else { running = false; }

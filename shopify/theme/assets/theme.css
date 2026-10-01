@@ -262,9 +262,9 @@ body>.nav{position:sticky;top:var(--topbar-h,38px);z-index:39}
 .racket-fx{position:fixed;inset:0;width:100vw;height:100vh;height:100svh;z-index:20;pointer-events:none;display:none}
 html.racket-live .racket-fx{display:block}
 /* Bannière quand la raquette 3D est affichée (ordinateur) : texte à gauche, grande arche au milieu,
-   raquette devant le bord droit de l'arche. La bannière reste figée pendant 60 % d'écran de défilement :
-   ces premiers coups de molette servent uniquement à redresser la raquette (voir racket-3d.js, PIN). */
-html.racket-live main>.shopify-section:has(.hero2)::after{content:"";display:block;height:60vh}
+   raquette devant le bord droit de l'arche. La bannière reste figée pendant un écran de défilement :
+   ces premiers coups de molette servent à la frappe (la balle arrive, la raquette frappe puis sort, voir racket-3d.js, PIN). */
+html.racket-live main>.shopify-section:has(.hero2)::after{content:"";display:block;height:100vh}
 html.racket-live .hero2{position:sticky;top:var(--sticky-h);padding:clamp(.75rem,2vh,1.5rem) 0}
 html.racket-live .hero2>.wrap{max-width:none;padding:0 14vw 0 3vw}
 html.racket-live .hero2-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.25rem,2vw,2.25rem);min-height:calc(100vh - var(--sticky-h) - 40px)}
@@ -279,6 +279,8 @@ main>.shopify-section:has(.racket-fx){position:static;z-index:auto}
 html.racket-live .hero2{min-height:calc(100vh - var(--sticky-h))}
 html.racket-live .court-bg{display:block;position:fixed;left:0;right:0;top:var(--sticky-h);height:calc(100vh - var(--sticky-h));z-index:0;pointer-events:none}
 html.racket-live .court-lines{transition:opacity .2s linear}
+/* Dès que le site défile, la balle passe sous les sections (au-dessus du terrain, déplacé en tête de page par theme.js) */
+html.ball-behind .racket-fx{z-index:0}
 /* Le terrain reste fixe derrière toute la page, comme les vitres : les sections passent devant */
 html.racket-live main>.shopify-section:not(:has(.racket-fx)){position:relative;z-index:1}
 /* Bandeaux à fond plein (beige, crème, blanc, marine) et pied de page : par-dessus le terrain et les vitres, sous la raquette et la balle */
