@@ -5,7 +5,7 @@
   <div class="drawer-body" id="cartItems"></div>
   <div class="drawer-foot">
     {%- unless customer -%}
-    <p class="welcome-note"><strong>−10 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>
+    <p class="welcome-note"><strong>−15 % sur ta première commande</strong> : <a href="{{ routes.account_login_url }}">connecte-toi ou crée ton compte</a> avant de payer.</p>
     {%- endunless -%}
     {%- render 'cart-summary' -%}
     <div class="total"><span>Total</span><strong id="cartTotal">{{ cart.total_price | money }}</strong></div>

@@ -71,7 +71,7 @@
         "type": "text",
         "id": "announcement",
         "label": "Bandeau d'annonce (visiteurs non connectés)",
-        "default": "−10 % sur ta première commande en créant ton compte"
+        "default": "−15 % sur ta première commande en créant ton compte"
       },
       {
         "type": "text",
