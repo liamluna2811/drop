@@ -55,9 +55,11 @@ def club_soleil(ink, rays=False):
         ang+=w
     # disque intérieur
     if rays:
-        for i in range(150):
-            a=i*2*math.pi/150; r0=196 if i%2 else 176; r1=R2-22-(i%3)*10
-            b+=f'<line x1="{c+r0*math.cos(a):.1f}" y1="{c+r0*math.sin(a):.1f}" x2="{c+r1*math.cos(a):.1f}" y2="{c+r1*math.sin(a):.1f}" stroke="{ink}" stroke-width="{2.6 if i%2 else 3.6}" stroke-linecap="round"/>'
+        n=60
+        for i in range(n):   # rayons évasés : fins près du logo, qui s'élargissent vers l'extérieur
+            a=i*2*math.pi/n; r0=172; r1=R2-24 if i%2==0 else R2-70
+            w0,w1=0.0025,(0.016 if i%2==0 else 0.012)
+            b+=f'<path d="M{P(c+r0*math.cos(a-w0),c+r0*math.sin(a-w0))} L{P(c+r1*math.cos(a-w1),c+r1*math.sin(a-w1))} L{P(c+r1*math.cos(a+w1),c+r1*math.sin(a+w1))} L{P(c+r0*math.cos(a+w0),c+r0*math.sin(a+w0))}Z" fill="{ink}"/>'
         b+=f'<circle cx="{c}" cy="{c}" r="160" fill="none" stroke="{ink}" stroke-width="5"/>'
         b+=logo(c,c,232,ink,LIME)
     else:
