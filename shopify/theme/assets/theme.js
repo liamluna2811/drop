@@ -271,7 +271,7 @@
   s.onload = function () {
     if (!window.RacketFX) return;
     root.classList.add('racket-live');
-    var ok = window.RacketFX.mount(el, { logo: el.dataset.logo });
+    var ok = window.RacketFX.mount(el, { logo: el.dataset.logo, guard: el.dataset.guard === '1', ball: el.dataset.ball === '1' });
     if (!ok) root.classList.remove('racket-live');
   };
   document.head.appendChild(s);

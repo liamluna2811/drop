@@ -194,13 +194,18 @@ function buildRacket(logoImg, options) {
   group.add(head);
 
   if (options.guard) {
-    // Protection de cadre citron sur le haut de la tête
-    var arc = [];
-    for (var a = 150; a >= 30; a -= 3) { var t = a * Math.PI / 180; arc.push(new THREE.Vector3(13.05 * Math.cos(t), 1.5 + 15.55 * Math.sin(t), 0)); }
-    var guard = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(arc), 80, depth / 2 + 0.45, 14, false),
-      new THREE.MeshPhysicalMaterial({ color: LIME, roughness: 0.5, clearcoat: 0.4 }));
-    guard.scale.set(1, 1, 1);
-    group.add(guard);
+    // Protection de cadre citron : bande fine qui épouse le haut de la tête (de 28° à 152°)
+    var outer = [], inner = [];
+    for (var ga = 28; ga <= 152; ga += 2) {
+      var gt = ga * Math.PI / 180;
+      outer.push(new THREE.Vector2(13.62 * Math.cos(gt), 1.5 + 16.12 * Math.sin(gt)));
+      inner.push(new THREE.Vector2(12.9 * Math.cos(gt), 1.5 + 15.4 * Math.sin(gt)));
+    }
+    var gShape = new THREE.Shape(outer.concat(inner.reverse()));
+    var gDepth = depth + bevel * 2 + 0.3;
+    var gGeo = new THREE.ExtrudeGeometry(gShape, { depth: gDepth, bevelEnabled: true, bevelThickness: 0.25, bevelSize: 0.18, bevelSegments: 4, curveSegments: 8 });
+    gGeo.translate(0, 0, -gDepth / 2);
+    group.add(new THREE.Mesh(gGeo, new THREE.MeshPhysicalMaterial({ color: LIME, roughness: 0.55, clearcoat: 0.35, clearcoatRoughness: 0.4 })));
   }
   // Bague entre le cadre et le manche
   var collar = new THREE.Mesh(new THREE.CylinderGeometry(1.95, 1.75, 1.6, 24), rimMat);
@@ -228,12 +233,29 @@ function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) 
 function lerp(a, b, t) { return a + (b - a) * t; }
 
 // Position de la raquette selon l'avancée p (0 = haut de page, 1 = sortie)
+// 0 → 0,75 : la raquette rétrécit et glisse doucement ; 0,75 → 1 : elle sort par la droite.
 function pose(p) {
-  var e = ease(Math.min(1, Math.max(0, p)));
+  p = Math.min(1, Math.max(0, p));
+  var a = ease(Math.min(1, p / 0.75));
+  var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
   return {
-    x: lerp(4, 42, e), y: lerp(-2, 10, e), z: lerp(0, -30, e),
-    rx: lerp(-0.22, 0.25, e), ry: lerp(-0.62, -0.62 + Math.PI * 1.15, e), rz: lerp(0.42, -0.5, e)
+    s: lerp(1.45, 0.62, a),
+    x: lerp(3, 11, a) + b * 48, y: lerp(-6, 4, a) + b * 6, z: 0,
+    rx: lerp(-0.2, 0.05, a), ry: lerp(-0.62, -0.22, a) - b * 0.9, rz: lerp(0.38, 0.12, a) - b * 0.5
   };
+}
+
+// Balle de padel : feutre jaune-vert et couture blanche
+function ballMesh() {
+  var cv = document.createElement('canvas'); cv.width = 512; cv.height = 256;
+  var g = cv.getContext('2d');
+  g.fillStyle = '#d7ef3f'; g.fillRect(0, 0, 512, 256);
+  for (var i = 0; i < 2600; i++) { g.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.12) + ')'; g.fillRect(Math.random() * 512, Math.random() * 256, 2, 2); }
+  g.strokeStyle = '#f7f7ee'; g.lineWidth = 9; g.beginPath();
+  for (var x = 0; x <= 512; x += 4) { var y = 128 + 62 * Math.sin(x / 512 * Math.PI * 4); if (x === 0) g.moveTo(x, y); else g.lineTo(x, y); }
+  g.stroke();
+  var tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace;
+  return new THREE.Mesh(new THREE.SphereGeometry(3.3, 48, 32), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.95 }));
 }
 
 export function mount(host, options) {
@@ -269,12 +291,40 @@ export function mount(host, options) {
     camera.aspect = w / h; camera.updateProjectionMatrix();
   }
 
+  var ball = null, dummy = new THREE.Object3D(), contact = null;
+  var BALL_IN = 0.32;                       // moment de l'impact (avancée)
+  var START = new THREE.Vector3(-70, 34, 30), END = new THREE.Vector3(-95, 48, -160);
+  function setPose(obj, s, bob, wob) {
+    obj.position.set(s.x, s.y + bob, s.z);
+    obj.rotation.set(s.rx + wob, s.ry + wob * 0.8, s.rz);
+    obj.scale.setScalar(s.s);
+  }
+  function faceCenter(obj) {
+    // Centre de la face, côté caméra, dans le repère du monde
+    obj.updateMatrixWorld(true);
+    return new THREE.Vector3(0, 10.5, 2.4).applyMatrix4(obj.matrixWorld);
+  }
   function apply(p, time) {
     if (!racket) return;
     var s = pose(p);
     var idle = options.still ? 0 : (1 - Math.min(1, p * 4)) * 0.04;
-    racket.position.set(s.x, s.y + Math.sin(time / 1400) * idle * 20, s.z);
-    racket.rotation.set(s.rx + Math.sin(time / 1700) * idle, s.ry + Math.sin(time / 2100) * idle, s.rz);
+    setPose(racket, s, Math.sin(time / 1400) * idle * 20, Math.sin(time / 1700) * idle);
+    if (ball) {
+      if (!contact) { setPose(dummy, pose(BALL_IN), 0, 0); contact = faceCenter(dummy).add(new THREE.Vector3(0, 0, 3.6)); }
+      var bp;
+      if (p <= BALL_IN) {
+        var t = ease(p / BALL_IN);
+        bp = START.clone().lerp(faceCenter(racket).add(new THREE.Vector3(0, 0, 3.6 * s.s)), t);
+        bp.y += Math.sin(t * Math.PI) * 10;              // légère courbe
+      } else {
+        var u = Math.min(1, (p - BALL_IN) / (0.9 - BALL_IN));
+        bp = contact.clone().lerp(END, 1 - Math.pow(1 - u, 2));
+        bp.y += Math.sin(u * Math.PI) * 14;
+      }
+      ball.position.copy(bp);
+      ball.rotation.set(p * 18, p * 11, 0);
+      ball.visible = p < 0.9;
+    }
     renderer.render(scene, camera);
   }
 
@@ -297,10 +347,11 @@ export function mount(host, options) {
   function start(logoImg) {
     racket = buildRacket(logoImg, options);
     scene.add(racket);
+    if (options.ball && !options.still) { ball = ballMesh(); scene.add(ball); }
     resize();
     if (options.still) {
       var s = options.pose || { x: 0, y: 0, z: 0, rx: -0.18, ry: -0.5, rz: 0.32 };
-      racket.position.set(s.x, s.y, s.z); racket.rotation.set(s.rx, s.ry, s.rz);
+      racket.position.set(s.x, s.y, s.z); racket.rotation.set(s.rx, s.ry, s.rz); racket.scale.setScalar(s.s || 1);
       renderer.render(scene, camera);
       if (options.onReady) options.onReady(renderer.domElement);
       return;
