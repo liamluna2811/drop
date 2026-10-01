@@ -197,7 +197,9 @@
       "type": "racket-3d",
       "settings": {
         "enabled": true,
-        "width": 60
+        "guard": true,
+        "ball": true,
+        "size": 100
       }
     }
   },

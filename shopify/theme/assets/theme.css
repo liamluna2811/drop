@@ -215,8 +215,13 @@ font{vertical-align:baseline!important}
 .spirit-media .spirit-logo{width:min(260px,60%);border-radius:0;opacity:.9}
 
 /* 9d. Raquette 3D (accueil) --------------------------------------------------------- */
-.racket-fx{position:fixed;top:0;right:0;width:min(var(--racket-w,58vw),1000px);height:100vh;height:100svh;z-index:20;pointer-events:none;display:none}
+.racket-fx{position:fixed;inset:0;width:100vw;height:100vh;height:100svh;z-index:20;pointer-events:none;display:none}
 html.racket-live .racket-fx{display:block}
+/* Bannière quand la raquette 3D est affichée (ordinateur) : l'arche disparaît, le texte se centre dans la moitié gauche */
+html.racket-live .hero2 .arch{display:none}
+html.racket-live .hero2>.wrap{max-width:none;padding:0}
+html.racket-live .hero2-grid{grid-template-columns:50% 50%;min-height:calc(100vh - var(--header-h) - 40px)}
+html.racket-live .hero2-text{justify-self:center;width:min(560px,100% - 4rem)}
 main>.shopify-section:has(.racket-fx){z-index:20}
 .arch>.arch-racket{position:absolute;z-index:3;top:-4%;right:-7%;width:34%;height:auto;object-fit:contain;border-radius:0;transform:rotate(14deg);filter:drop-shadow(0 18px 24px rgba(11,27,43,.28));pointer-events:none}
 html.racket-live .arch>.arch-racket{display:none}

@@ -226,22 +226,28 @@ function buildRacket(logoImg, options) {
 
   // Recentre l'ensemble (milieu de la raquette à l'origine)
   group.children.forEach(function (m) { m.position.y += 9; });
+  var box = new THREE.Box3().setFromObject(group), c = box.getCenter(new THREE.Vector3());
+  group.children.forEach(function (m) { m.position.x -= c.x; m.position.y -= c.y; });
+  group.userData.face = new THREE.Vector3(0, 10.5 - c.y, depth / 2 + bevel);
+  group.userData.height = box.max.y - box.min.y;
   return group;
 }
 
 function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-// Position de la raquette selon l'avancée p (0 = haut de page, 1 = sortie)
-// 0 → 0,75 : la raquette rétrécit et glisse doucement ; 0,75 → 1 : elle sort par la droite.
-function pose(p) {
+// Position de la raquette selon l'avancée p (0 = haut de page, 1 = sortie), dans la zone visible.
+// 0 → 0,75 : la raquette, entière et inclinée vers la droite, rétrécit doucement ; 0,75 → 1 : elle sort par la droite.
+function pose(p, view) {
   p = Math.min(1, Math.max(0, p));
   var a = ease(Math.min(1, p / 0.75));
   var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
+  var s0 = Math.min(0.72, (2 * view.hh * 0.84) / 67) * (view.size || 1);
   return {
-    s: lerp(1.45, 0.62, a),
-    x: lerp(3, 11, a) + b * 48, y: lerp(-6, 4, a) + b * 6, z: 0,
-    rx: lerp(-0.2, 0.05, a), ry: lerp(-0.62, -0.22, a) - b * 0.9, rz: lerp(0.38, 0.12, a) - b * 0.5
+    s: lerp(s0, s0 * 0.6, a),
+    x: view.hw * 0.5 + lerp(0, view.hw * 0.12, a) + b * view.hw * 0.95,
+    y: lerp(-1, 2, a), z: 0,
+    rx: -0.12, ry: lerp(-0.5, -0.25, a) - b * 0.9, rz: lerp(-0.32, -0.16, a) - b * 0.4
   };
 }
 
@@ -279,70 +285,92 @@ export function mount(host, options) {
   scene.add(new THREE.AmbientLight(0xffffff, 0.25));
 
   var camera = new THREE.PerspectiveCamera(30, 1, 1, 500);
-  camera.position.set(0, 0, options.still ? 128 : 88);
+  var DIST = options.still ? 128 : 100;
+  camera.position.set(0, 0, DIST);
   camera.lookAt(0, 0, 0);
 
   var racket = null;
-  var current = 0, target = 0, running = false, t0 = performance.now();
 
+  var view = { hw: 40, hh: 27, pxPerCm: 15, size: options.size || 1 };
   function resize() {
     var w = host.clientWidth || 1, h = host.clientHeight || 1;
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.updateProjectionMatrix();
+    view.hh = DIST * Math.tan(camera.fov * Math.PI / 360);
+    view.hw = view.hh * camera.aspect;
+    view.pxPerCm = h / (2 * view.hh);
   }
 
-  var ball = null, dummy = new THREE.Object3D(), contact = null;
-  var BALL_IN = 0.32;                       // moment de l'impact (avancée)
-  var START = new THREE.Vector3(-70, 34, 30), END = new THREE.Vector3(-95, 48, -160);
+  var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;
+  var BALL_IN = 0.3;                        // moment de l'impact (avancée de la bannière)
   function setPose(obj, s, bob, wob) {
     obj.position.set(s.x, s.y + bob, s.z);
     obj.rotation.set(s.rx + wob, s.ry + wob * 0.8, s.rz);
     obj.scale.setScalar(s.s);
   }
   function faceCenter(obj) {
-    // Centre de la face, côté caméra, dans le repère du monde
     obj.updateMatrixWorld(true);
-    return new THREE.Vector3(0, 10.5, 2.4).applyMatrix4(obj.matrixWorld);
+    return obj.userData.face.clone().applyMatrix4(obj.matrixWorld);
   }
-  function apply(p, time) {
+  function heroRange() { return window.innerHeight * (options.range || 0.9); }
+
+  // y = position de défilement (lissée)
+  function apply(y, time) {
     if (!racket) return;
-    var s = pose(p);
-    var idle = options.still ? 0 : (1 - Math.min(1, p * 4)) * 0.04;
-    setPose(racket, s, Math.sin(time / 1400) * idle * 20, Math.sin(time / 1700) * idle);
+    var p = Math.min(1, Math.max(0, y / heroRange()));
+    var s = pose(p, view);
+    var idle = (1 - Math.min(1, p * 4)) * 0.035;
+    racket.visible = p < 0.999;
+    if (racket.visible) setPose(racket, s, Math.sin(time / 1400) * idle * 12, Math.sin(time / 1700) * idle);
     if (ball) {
-      if (!contact) { setPose(dummy, pose(BALL_IN), 0, 0); contact = faceCenter(dummy).add(new THREE.Vector3(0, 0, 3.6)); }
-      var bp;
+      if (!contact) {
+        var sc = pose(BALL_IN, view); setPose(dummy, sc, 0, 0); dummy.userData = racket.userData;
+        contact = faceCenter(dummy); contact.z += 3.3 * sc.s; contactScale = sc.s;
+      }
+      var bp, bs;
       if (p <= BALL_IN) {
+        // Arrivée depuis la gauche de l'écran, en légère cloche, jusqu'à la face de la raquette
         var t = ease(p / BALL_IN);
-        bp = START.clone().lerp(faceCenter(racket).add(new THREE.Vector3(0, 0, 3.6 * s.s)), t);
-        bp.y += Math.sin(t * Math.PI) * 10;              // légère courbe
+        var target = faceCenter(racket); target.z += 3.3 * s.s;
+        bp = new THREE.Vector3(-view.hw - 6, view.hh * 0.3, 0).lerp(target, t);
+        bp.y += Math.sin(t * Math.PI) * view.hh * 0.18;
+        bs = s.s;
       } else {
-        var u = Math.min(1, (p - BALL_IN) / (0.9 - BALL_IN));
-        bp = contact.clone().lerp(END, 1 - Math.pow(1 - u, 2));
-        bp.y += Math.sin(u * Math.PI) * 14;
+        // Après le rebond : descente dans la marge droite, en petits rebonds, jusqu'en bas de la page
+        var yC = BALL_IN * heroRange();
+        var total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight - yC);
+        var q = Math.min(1, Math.max(0, (y - yC) / total));
+        var r = 3.3 * 0.45;
+        var marginX = view.hw - 34 / view.pxPerCm;
+        var k = ease(Math.min(1, q / 0.06));
+        bs = lerp(contactScale, 0.45, k);
+        var floor = -view.hh + r + 8 / view.pxPerCm;
+        var x = lerp(contact.x, marginX, k);
+        var baseY = lerp(contact.y, floor, Math.min(1, q * 1.02));
+        var hop = Math.abs(Math.sin(q * Math.PI * 16)) * 2.4 * (1 - q * 0.6) * k;
+        bp = new THREE.Vector3(x, baseY + hop, lerp(contact.z, 0, k));
       }
       ball.position.copy(bp);
-      ball.rotation.set(p * 18, p * 11, 0);
-      ball.visible = p < 0.9;
+      ball.scale.setScalar(bs);
+      ball.rotation.set(y / 90, y / 140, 0);
+      ball.visible = p > 0.015;
     }
     renderer.render(scene, camera);
   }
 
-  function progress() {
-    var range = window.innerHeight * (options.range || 0.9);
-    return Math.min(1, Math.max(0, window.scrollY / range));
-  }
-
+  var curY = 0, tgtY = 0, running = false;
   function frame(time) {
-    current += (target - current) * 0.12;
-    if (Math.abs(target - current) < 0.0005) current = target;
-    var visible = current < 0.999;
-    host.style.opacity = String(Math.min(1, (1 - current) / 0.12));
-    host.style.visibility = visible ? 'visible' : 'hidden';
-    if (visible) apply(current, time);
-    if (visible || current !== target) { requestAnimationFrame(frame); } else { running = false; }
+    curY += (tgtY - curY) * 0.14;
+    if (Math.abs(tgtY - curY) < 0.5) curY = tgtY;
+    var p = curY / heroRange();
+    var keep = !!ball || p < 0.999;
+    host.style.visibility = keep ? 'visible' : 'hidden';
+    if (!ball) host.style.opacity = String(Math.min(1, (1 - Math.min(1, p)) / 0.12));
+    if (keep) apply(curY, time);
+    var idle = p < 0.25;                      // petit flottement de la raquette en haut de page
+    if (curY !== tgtY || idle) { requestAnimationFrame(frame); } else { running = false; }
   }
-  function wake() { target = progress(); if (!running) { running = true; requestAnimationFrame(frame); } }
+  function wake() { tgtY = window.scrollY; if (!running) { running = true; requestAnimationFrame(frame); } }
 
   function start(logoImg) {
     racket = buildRacket(logoImg, options);
@@ -356,9 +384,9 @@ export function mount(host, options) {
       if (options.onReady) options.onReady(renderer.domElement);
       return;
     }
-    target = current = progress();
+    curY = tgtY = window.scrollY;
     window.addEventListener('scroll', wake, { passive: true });
-    window.addEventListener('resize', function () { resize(); wake(); });
+    window.addEventListener('resize', function () { resize(); contact = null; wake(); });
     document.addEventListener('visibilitychange', function () { if (!document.hidden) wake(); });
     running = true; requestAnimationFrame(frame);
     if (options.onReady) options.onReady(renderer.domElement);
