@@ -1,0 +1,15 @@
+SOLEIL, PADEL & APÉRO : fichiers prêts à imprimer (Printful)
+
+Fichiers :
+- apero_dos_tshirt-clair.png : dos, pour t-shirt clair (textes bleu nuit)
+- apero_dos_tshirt-fonce.png : dos, pour t-shirt foncé (textes crème, « & apéro. » en jaune)
+- apero_coeur_tshirt-clair.png / -fonce.png : logo + « Bandeja Club » pour la poitrine
+
+Réglages dans Printful :
+- Dos : PNG transparent 3150 × 4158 px à 300 dpi, soit 10,5 × 13,9 in (26,7 × 35,2 cm).
+  Placement « Dos », centré horizontalement, en haut de la zone d'impression.
+  Si le modèle de t-shirt a une zone plus petite, réduisez la taille en gardant les proportions.
+- Cœur : PNG transparent 1050 px de large (3,5 in, environ 9 cm).
+  Placement « Poitrine gauche ».
+- Version « clair » pour Sable, Ivoire, Blanc et les couleurs claires.
+- Version « fonce » pour Terracotta, Vert forêt, Noir, Bleu marine et les couleurs foncées.
