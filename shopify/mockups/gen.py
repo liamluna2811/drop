@@ -200,20 +200,53 @@ footer{background:var(--ink);color:#fff;padding:3rem 0}.f-top{display:flex;justi
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}.reveal.in{opacity:1;transform:none}@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.nav{padding:0 1.2rem}.universe{min-height:420px}.badge{left:.5rem}}
 '''
-items=P+P
-bodyD=HEADER.replace("%s","logo-mark.png")+f'''<section class="hero"><div class="wrap"><div class="reveal"><span class="eyebrow">Padel · Textiles et accessoires</span><h1>Joue<br>comme<br><u>tu vis.</u></h1><p class="lead">T-shirts, brassières et accessoires pour les joueurs de padel. {PRINT_TXT}</p><div class="acts"><a class="button" href="#">Voir la collection</a><a class="button sec" href="#">Nos univers</a></div></div>
-<div class="media reveal"><img src="{HERO_IMG}" alt=""><div class="badge">Imprimé à la demande</div></div></div></section>
-<div class="marquee" aria-label="Aperçu des produits"><div class="mq-track">{marq(items)}</div></div>
-<section class="section"><div class="wrap"><div class="sh reveal"><span class="eyebrow">Les univers</span><h2>Lifestyle, sport et accessoires</h2></div>
+WORDS=["BANDEJA","VÍBORA","SMASH","CHIQUITA","GLOBO","REMATE"]
+FLAG=CDN+"unisex-classic-tee-white-front-6abd528811764.jpg?v=1790792357"
+FOUR=[P[0],P[1],P[5],P[6]]
+ICON.update({
+ "shirt":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 3 7l2 4 3-1v10h8V10l3 1 2-4-5-3a4 4 0 0 1-8 0z"/></svg>',
+ "wind":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h10a3 3 0 1 0-3-3M3 15h14a3 3 0 1 1-3 3M3 12h6"/></svg>',
+ "thread":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 20 4M14 4h6v6M4 14v6h6"/></svg>',
+ "shield":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>',
+})
+ARGS=[
+ ("shirt","T-shirts Lifestyle en coton","100 % coton (170 à 180 g/m²), renforts au col et aux épaules, double couture aux manches et à l'ourlet."),
+ ("wind","T-shirts de sport respirants","Maille 100 % polyester respirante (140 g/m²), coupe décontractée et longueur allongée."),
+ ("thread","Logo brodé","Le logo est brodé sur les T-shirts « BandejaClub » (Lifestyle et sport), et en broderie 3D sur la visière."),
+ ("print","Imprimé à la demande","Chaque pièce est imprimée après ta commande."),
+ ("truck","Livraison offerte dès 60 €","En France et en Europe."),
+ ("shield","Garantie de 2 ans","Garantie légale de conformité de l'Union européenne, indiquée sur chaque fiche produit."),
+]
+HIST=[
+ ("1969","Acapulco, Mexique","Enrique Corcuera aménage sur son terrain un petit court de 20 m sur 10 m, fermé par des murs pour que les balles ne finissent pas chez le voisin. C'est la naissance du padel."),
+ ("1974","Marbella, Espagne","Le prince Alfonso de Hohenlohe fait construire deux courts dans son club et introduit le padel en Espagne, sur la Costa del Sol."),
+ ("1991","Fédération internationale","Création de la Fédération internationale de padel. Son premier président, Julio Alegría, établit les règles du jeu au niveau international."),
+ ("2014","France","La Fédération française de tennis reçoit du ministère des Sports la délégation pour organiser le padel en France."),
+]
+cssD+='''
+.mq-words{display:flex;gap:3rem;width:max-content;animation:scroll 40s linear infinite;font-family:'Archivo Black',sans-serif;font-size:1.3rem;letter-spacing:.04em;color:var(--ink);padding:.2rem 0}.mq-words span::after{content:"•";margin-left:3rem;color:var(--soft)}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}@media(max-width:900px){.four{grid-template-columns:repeat(2,1fr)}}
+.args{display:grid;gap:1.4rem;grid-template-columns:repeat(3,1fr)}@media(max-width:900px){.args{grid-template-columns:1fr}}
+.arg{background:var(--bg);border-radius:var(--r);padding:1.8rem}.arg svg{width:30px;height:30px;margin-bottom:1rem}.arg h3{font-family:'Inter',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0;margin-bottom:.4rem}.arg p{color:var(--soft);font-size:.95rem;margin:0}
+.hist{display:grid;gap:3rem}@media(min-width:900px){.hist{grid-template-columns:.8fr 1.2fr;gap:5rem;align-items:start}.hist-intro{position:sticky;top:110px}}
+.hist-intro h2{font-size:clamp(2rem,3.6vw,3rem);margin-bottom:1rem}.hist-intro p{color:var(--soft);max-width:38ch}
+.tl{list-style:none;border-left:1px solid var(--line);margin-left:.4rem}.tl li{position:relative;padding:0 0 2.4rem 2rem}.tl li:last-child{padding-bottom:0}.tl li::before{content:"";position:absolute;left:-6px;top:.6rem;width:11px;height:11px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 2px var(--ink)}
+.tl .y{font-family:'Archivo Black',sans-serif;font-size:2rem;line-height:1}.tl h3{font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--soft);margin:.5rem 0 .4rem}.tl p{margin:0;max-width:52ch}
+.src{margin-top:2.5rem;font-size:.78rem;color:var(--soft)}.src a{text-decoration:underline}
+'''
+SRC='<p class="src">Sources : <a href="https://www.redbull.com/gb-en/history-of-padel" rel="noopener">Red Bull, History of padel</a> · <a href="https://www.ltapadel.org.uk/what-we-do/what-is-the-history-of-padel/" rel="noopener">LTA Padel, History of padel</a> · <a href="https://vvanat.fr/blog/paddle-quelle-federation/" rel="noopener">La FFT et le padel</a></p>'
+bodyD=HEADER.replace("%s","logo-mark.png")+f'''<section class="hero"><div class="wrap"><div class="reveal"><span class="eyebrow">Padel · Textiles et accessoires</span><h1>Joue<br>comme<br><u>tu vis.</u></h1><p class="lead">T-shirts, brassières et accessoires pour les joueurs de padel. {PRINT_TXT}</p><div class="acts"><a class="button" href="#">Voir la collection</a><a class="button sec" href="#histoire">L'histoire du padel</a></div></div>
+<div class="media reveal"><img src="{FLAG}" alt="T-shirt Lifestyle Padel « j'ai Padel »"><div class="badge">Imprimé à la demande</div></div></div></section>
+<div class="marquee" aria-hidden="true"><div class="mq-words">{"".join(f"<span>{w}</span>" for w in WORDS*4)}</div></div>
+<section class="section"><div class="wrap"><div class="sh reveal"><span class="eyebrow">Les univers</span><h2>Lifestyle, sport et accessoires</h2><p>Tous les produits se trouvent dans leur catégorie.</p></div>
 <div class="universes">{"".join(f'<a class="universe reveal" href="#"><img src="{c[1]}" alt=""><div><h3>{c[0]}</h3><span class="button">Voir {c[0].lower()}</span></div></a>' for c in CATS)}</div></div></section>
-<section class="section alt"><div class="wrap"><div class="sh reveal"><span class="eyebrow">La collection</span><h2>Les designs Bandeja Club</h2></div>
-<div class="grid">{"".join(card(p) for p in P)}</div><div class="center"><a class="link-arrow" href="#">Voir tous les produits</a></div></div></section>
-<section class="section" style="padding:3rem 0"><div class="wrap"><div class="trust">
-<div>{ICON["truck"]}<strong>Livraison offerte dès 60 €</strong><span>En France et en Europe.</span></div>
-<div>{ICON["print"]}<strong>Imprimé à la demande</strong><span>Fabriqué après ta commande.</span></div>
-<div>{ICON["return"]}<strong>Rétractation sous 14 jours</strong><span>Produits standards (hors personnalisés).</span></div>
-<div>{ICON["lock"]}<strong>Paiement sécurisé</strong><span>Via la boutique Shopify.</span></div></div></div></section>
-<section class="section alt news"><div class="wrap"><span class="eyebrow">Newsletter</span><h2>Reste informé.</h2><p style="color:var(--soft);margin-top:.6rem">Reçois par email les nouveautés Bandeja Club.</p><form onsubmit="return false"><input type="email" placeholder="ton@email.com" aria-label="Adresse email"><button class="button">Je m'inscris</button></form></div></section>
+<section class="section alt"><div class="wrap"><div class="sh reveal"><span class="eyebrow">Un aperçu</span><h2>Quelques pièces</h2></div>
+<div class="four">{"".join(card(p) for p in FOUR)}</div><div class="center"><a class="link-arrow" href="#">Voir toutes les catégories</a></div></div></section>
+<section class="section"><div class="wrap"><div class="sh reveal"><span class="eyebrow">Pourquoi Bandeja Club</span><h2>Ce que tu trouves chez nous</h2></div>
+<div class="args">{"".join(f'<div class="arg reveal">{ICON[a[0]]}<h3>{a[1]}</h3><p>{a[2]}</p></div>' for a in ARGS)}</div></div></section>
+<section class="section alt" id="histoire"><div class="wrap"><div class="hist"><div class="hist-intro reveal"><span class="eyebrow">Histoire</span><h2>D'Acapulco à la France</h2><p>Le padel est un sport récent. Voici quelques dates qui ont compté.</p></div>
+<div class="reveal"><ol class="tl">{"".join(f'<li><span class="y">{h[0]}</span><h3>{h[1]}</h3><p>{h[2]}</p></li>' for h in HIST)}</ol>{SRC}</div></div></div></section>
+<section class="section news"><div class="wrap"><span class="eyebrow">Newsletter</span><h2>Reste informé.</h2><p style="color:var(--soft);margin-top:.6rem">Reçois par email les nouveautés Bandeja Club.</p><form onsubmit="return false"><input type="email" placeholder="ton@email.com" aria-label="Adresse email"><button class="button">Je m'inscris</button></form></div></section>
 {FOOT.replace('<footer><div class="f-top">','<footer><div class="wrap"><div class="f-top">').replace('</footer>','</div></footer>')}
 <script>(function(){{var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){{els.forEach(function(e){{e.classList.add('in')}});return}}var o=new IntersectionObserver(function(es){{es.forEach(function(e){{if(e.isIntersecting){{e.target.classList.add('in');o.unobserve(e.target)}}}})}},{{threshold:.12}});els.forEach(function(e){{o.observe(e)}})}})();</script>'''
 open('mockups/D-inspire-pilates.html','w').write(page("Maquette D · C inspiré du site Pilates",cssD,bodyD))
