@@ -81,29 +81,92 @@
     }).join('');
   }
 
-  // Animation d'ajout : une copie de la photo du produit vole jusqu'à l'icône du panier
-  function flyToCart(img) {
+  // Détourage du t-shirt : sur une photo à fond uni, le fond est retiré dans le navigateur
+  // (remplissage depuis les bords). Renvoie une image PNG transparente, ou null si la photo ne s'y prête pas.
+  function cutout(src) {
+    return new Promise(function (resolve) {
+      var im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onerror = function () { resolve(null); };
+      im.onload = function () {
+        try {
+          var W = 300, H = Math.round(W * im.naturalHeight / im.naturalWidth) || W;
+          var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+          var cx = cv.getContext('2d'); cx.drawImage(im, 0, 0, W, H);
+          var d = cx.getImageData(0, 0, W, H), px = d.data, n = W * H;
+          // Couleur du fond = moyenne du contour ; il doit être uni
+          var border = [], i, x, y;
+          for (x = 0; x < W; x++) { border.push(x, (H - 1) * W + x); }
+          for (y = 0; y < H; y++) { border.push(y * W, y * W + W - 1); }
+          var r = 0, g = 0, b = 0;
+          border.forEach(function (k) { r += px[k * 4]; g += px[k * 4 + 1]; b += px[k * 4 + 2]; });
+          r /= border.length; g /= border.length; b /= border.length;
+          var dist = function (k) { return Math.abs(px[k * 4] - r) + Math.abs(px[k * 4 + 1] - g) + Math.abs(px[k * 4 + 2] - b); };
+          var uniform = border.filter(function (k) { return dist(k) < 30; }).length / border.length;
+          if (uniform < 0.9) return resolve(null);           // photo avec décor ou mannequin : pas de détourage
+          // Remplissage depuis les bords : tout ce qui ressemble au fond devient transparent
+          var TOL = 34, seen = new Uint8Array(n), stack = border.slice(), removed = 0;
+          while (stack.length) {
+            var k = stack.pop();
+            if (seen[k]) continue;
+            seen[k] = 1;
+            if (dist(k) > TOL) continue;
+            px[k * 4 + 3] = 0; removed++;
+            x = k % W; y = (k - x) / W;
+            if (x > 0) stack.push(k - 1); if (x < W - 1) stack.push(k + 1);
+            if (y > 0) stack.push(k - W); if (y < H - 1) stack.push(k + W);
+          }
+          if (removed / n > 0.88 || removed / n < 0.15) return resolve(null);   // le t-shirt a été « mangé » : abandon
+          // Bords adoucis : pixels proches du fond voisins d'un pixel retiré
+          for (i = 0; i < n; i++) {
+            if (!px[i * 4 + 3]) continue;
+            x = i % W; y = (i - x) / W;
+            var edge = (x > 0 && !px[(i - 1) * 4 + 3]) || (x < W - 1 && !px[(i + 1) * 4 + 3]) || (y > 0 && !px[(i - W) * 4 + 3]) || (y < H - 1 && !px[(i + W) * 4 + 3]);
+            if (edge) px[i * 4 + 3] = Math.min(255, Math.round(255 * Math.max(0.35, (dist(i) - TOL) / TOL)));
+          }
+          cx.putImageData(d, 0, 0);
+          // Recadrage au plus près du t-shirt
+          var x0 = W, y0 = H, x1 = 0, y1 = 0;
+          for (i = 0; i < n; i++) if (px[i * 4 + 3] > 40) { x = i % W; y = (i - x) / W; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+          if (x1 <= x0 || y1 <= y0) return resolve(null);
+          var out = document.createElement('canvas'); out.width = x1 - x0 + 1; out.height = y1 - y0 + 1;
+          out.getContext('2d').drawImage(cv, x0, y0, out.width, out.height, 0, 0, out.width, out.height);
+          resolve({ url: out.toDataURL('image/png'), ratio: out.height / out.width });
+        } catch (e) { resolve(null); }   // image d'un autre domaine sans autorisation : pas de détourage
+      };
+      im.src = src;
+    });
+  }
+  // Petite version de l'image Shopify (plus rapide à détourer)
+  function small(src) {
+    try { var u = new URL(src, location.href); u.searchParams.set('width', '400'); return u.toString(); } catch (e) { return src; }
+  }
+
+  // Animation d'ajout : le t-shirt détouré (sinon la photo) vole jusqu'à l'icône du panier
+  function flyToCart(img, cut) {
     var target = $('#openCart');
     if (!img || !target || !img.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return Promise.resolve();
     var a = img.getBoundingClientRect(), b = target.getBoundingClientRect();
     if (!a.width || !b.width) return Promise.resolve();
-    var size = Math.min(a.width, a.height, 260);
-    var x0 = a.left + a.width / 2 - size / 2, y0 = Math.max(a.top + a.height / 2 - size / 2, 8);
+    var size = Math.min(a.width, a.height, 260) * (cut ? 0.8 : 1);
+    var h = cut ? size * cut.ratio : size;
+    var x0 = a.left + a.width / 2 - size / 2, y0 = Math.max(a.top + a.height / 2 - h / 2, 8);
     if (a.bottom < 60 || a.top > window.innerHeight - 60) {
       // Photo hors de l'écran (achat depuis la barre du bas sur mobile) : départ du bas de l'écran
-      size = 120; x0 = window.innerWidth / 2 - size / 2; y0 = window.innerHeight - size - 90;
+      size = 120; h = cut ? size * cut.ratio : size; x0 = window.innerWidth / 2 - size / 2; y0 = window.innerHeight - h - 90;
     }
-    var dx = b.left + b.width / 2 - (x0 + size / 2), dy = b.top + b.height / 2 - (y0 + size / 2);
-    var end = 26 / size;
+    var dx = b.left + b.width / 2 - (x0 + size / 2), dy = b.top + b.height / 2 - (y0 + h / 2);
+    var end = 26 / Math.max(size, h);
     var fly = document.createElement('img');
-    fly.className = 'fly-img'; fly.alt = '';
-    fly.src = img.currentSrc || img.src;
-    fly.style.cssText = 'left:' + x0 + 'px;top:' + y0 + 'px;width:' + size + 'px;height:' + size + 'px';
+    fly.className = 'fly-img' + (cut ? ' cut' : ''); fly.alt = '';
+    fly.src = cut ? cut.url : (img.currentSrc || img.src);
+    fly.style.cssText = 'left:' + x0 + 'px;top:' + y0 + 'px;width:' + size + 'px;height:' + h + 'px';
     document.body.appendChild(fly);
+    var r0 = cut ? '0' : '16px', r1 = cut ? '0' : '40%', r2 = cut ? '0' : '50%';
     var anim = fly.animate([
-      { transform: 'translate(0,0) scale(1)', opacity: 1, borderRadius: '16px' },
-      { transform: 'translate(' + dx * 0.45 + 'px,' + (dy * 0.45 - 90) + 'px) scale(.55) rotate(-10deg)', opacity: 1, borderRadius: '40%', offset: 0.45 },
-      { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + end + ') rotate(-20deg)', opacity: 0.35, borderRadius: '50%' }
+      { transform: 'translate(0,0) scale(1)', opacity: 1, borderRadius: r0 },
+      { transform: 'translate(' + dx * 0.45 + 'px,' + (dy * 0.45 - 90) + 'px) scale(.55) rotate(-10deg)', opacity: 1, borderRadius: r1, offset: 0.45 },
+      { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + end + ') rotate(-20deg)', opacity: 0.35, borderRadius: r2 }
     ], { duration: 800, easing: 'cubic-bezier(.45,0,.25,1)' });
     return new Promise(function (res) {
       var done = function () { fly.remove(); res(); };
@@ -240,6 +303,26 @@
       syncSticky();
     });
 
+    // T-shirt détouré pour l'animation d'ajout : préparé à l'avance pour la couleur choisie
+    var cuts = {};
+    var prepareCut = function () {
+      var key = selectedColor() || '_';
+      if (cuts[key]) return cuts[key];
+      var cands = slides.filter(function (sl) { return !sl.hidden && sl.querySelector('img'); }).map(function (sl) { return sl.querySelector('img'); });
+      var rank = function (im) {
+        var u = (im.getAttribute('src') || '').toLowerCase();
+        return /-front-and-back|-left-front|-right-front/.test(u) ? 2 : /-front[-.]/.test(u) ? 0 : /-back/.test(u) ? 3 : 1;
+      };
+      cands.sort(function (p, q) { return rank(p) - rank(q); });
+      cuts[key] = cands.slice(0, 4).reduce(function (prev, im) {
+        return prev.then(function (found) { return found || cutout(small(im.currentSrc || im.src)); });
+      }, Promise.resolve(null));
+      return cuts[key];
+    };
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 800); };
+    idle(prepareCut);
+    form.addEventListener('change', function () { idle(prepareCut); });
+
     // Galerie : flèches et balayage entre les images visibles (couleur choisie)
     var galMain = document.querySelector('.gallery-main');
     var stepMedia = function (dir) {
@@ -318,7 +401,8 @@
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
         .then(function (res) {
           if (!res.ok) { err.textContent = res.d.description || 'Impossible d\'ajouter ce produit.'; err.hidden = false; return; }
-          return Promise.all([getCart(), flyToCart(document.querySelector('.slide.on img'))]).then(function (r) {
+          var waitCut = Promise.race([prepareCut(), new Promise(function (r) { setTimeout(function () { r(null); }, 400); })]);
+          return Promise.all([getCart(), waitCut.then(function (cut) { return flyToCart(document.querySelector('.slide.on img'), cut); })]).then(function (r) {
             render(r[0]);
             var cb = $('#openCart');
             if (cb) { cb.classList.remove('bump'); void cb.offsetWidth; cb.classList.add('bump'); }
