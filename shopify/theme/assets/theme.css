@@ -304,7 +304,7 @@ html.racket-live .arch>.arch-racket{display:none}
   .glass-etch{display:none;position:absolute;left:50%;top:63%;font-family:var(--font-display);font-size:calc(var(--glass-w) * .085);letter-spacing:.06em;white-space:nowrap;color:rgba(11,27,43,.16)}
   .glass-l .glass-etch{transform:translate(-50%,-50%) perspective(500px) rotateY(38deg)}
   .glass-r .glass-etch{transform:translate(-50%,-50%) perspective(500px) rotateY(-38deg)}
-  html.racket-live .hero2>.wrap{padding-left:calc(var(--glass-w) + 1.5vw);padding-right:calc(var(--glass-w) + 8vw)}
+  html.racket-live .hero2>.wrap{padding-left:calc(var(--glass-w) + 1.5vw);padding-right:calc(var(--glass-w) + 8vw + max(0px,(1800px - 100vw) * .4))}
 }
 @media (min-width:1560px){.glass-etch{display:block}}
 

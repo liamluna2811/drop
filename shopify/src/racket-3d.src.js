@@ -242,15 +242,16 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 var HIT = 0.42;                              // moment où la balle touche la raquette
 function keys(view) {
   var top = (view.headPx || 115) / view.pxPerCm;       // hauteur du bandeau + en-tête, en cm
-  var s0 = Math.min(1.35, ((2 * view.hh - top) * 1.04) / 56, (view.hw * 0.92) / 60) * (view.size || 1);
+  var s0 = Math.min(1.35, ((2 * view.hh - top) * 1.04) / 56, (view.hw * 0.92) / 60) * (view.size || 1) * (view.fit || 1);
   var hw = view.hw, hh = view.hh, y0 = -top / 2;
+  var dx = view.baseDx || 0;                // décalage pour que la tête ne recouvre pas l'arche (calculé dans resize)
   return [
-    { r: 0,    s: s0,        x: hw * 0.57, y: y0,             z: 0, rx: -0.10, ry: -0.34, rz: 0.78 },  // position de base
-    { r: 0.30, s: s0,        x: hw * 0.60, y: y0,             z: 0, rx: -0.12, ry: -0.18, rz: 0.92 },  // armé : léger recul
-    { r: HIT,  s: s0 * 0.96, x: hw * 0.50, y: y0 + hh * 0.05, z: 5, rx: 0.02,  ry: -0.78, rz: 0.22 },  // frappe : pivote vers la gauche
-    { r: 0.55, s: s0 * 0.94, x: hw * 0.47, y: y0 + hh * 0.07, z: 5, rx: 0.06,  ry: -0.95, rz: 0.02 },  // accompagnement
-    { r: 0.74, s: s0 * 0.9,  x: hw * 0.63, y: y0 + hh * 0.04, z: 2, rx: 0.02,  ry: 0.55,  rz: -0.22 }, // pivote vers la droite
-    { r: 1,    s: s0 * 0.8,  x: hw * 1.75, y: y0,             z: 0, rx: 0,     ry: 0.95,  rz: -0.45 }  // sort par la droite
+    { r: 0,    s: s0,        x: hw * 0.62 + dx, y: y0 + hh * 0.04, z: 0, rx: -0.08, ry: -0.30, rz: 0.32 },  // position de base
+    { r: 0.30, s: s0,        x: hw * 0.64 + dx, y: y0 + hh * 0.04, z: 0, rx: -0.10, ry: -0.16, rz: 0.42 },  // armé : léger recul
+    { r: HIT,  s: s0 * 0.96, x: hw * 0.56 + dx, y: y0 + hh * 0.06, z: 5, rx: 0.02,  ry: -0.78, rz: 0.18 },  // frappe : pivote vers la gauche
+    { r: 0.55, s: s0 * 0.94, x: hw * 0.54 + dx, y: y0 + hh * 0.07, z: 5, rx: 0.06,  ry: -0.95, rz: 0.02 },  // accompagnement
+    { r: 0.74, s: s0 * 0.9,  x: hw * 0.66 + dx, y: y0 + hh * 0.04, z: 2, rx: 0.02,  ry: 0.55,  rz: -0.22 }, // pivote vers la droite
+    { r: 1,    s: s0 * 0.8,  x: hw * 1.75 + dx, y: y0,             z: 0, rx: 0,     ry: 0.95,  rz: -0.45 }  // sort par la droite
   ];
 }
 function pose(r, view) {
@@ -315,6 +316,26 @@ export function mount(host, options) {
     view.headPx = (parseFloat(rootStyle.getPropertyValue('--sticky-h')) || 110) + 6;
     var glass = document.querySelector('.glass-side');
     view.glassPx = glass && getComputedStyle(glass).display !== 'none' ? glass.getBoundingClientRect().width : 0;
+    // Position de base : la tête de la raquette commence juste à droite de l'arche, sans la recouvrir
+    view.baseDx = 0; view.fit = 1;
+    var arch = document.querySelector('.hero2 .arch');
+    if (racket && arch) {
+      var archRight = (arch.getBoundingClientRect().right - w / 2) / view.pxPerCm + 0.8;
+      var rightEdge = view.hw - 0.5;
+      var head = racket.children[0];
+      var measure = function () {
+        setPose(racket, keys(view)[0], 0, 0); racket.updateMatrixWorld(true);
+        return new THREE.Box3().setFromObject(head);
+      };
+      // Si la place manque entre l'arche et le bord de l'écran, la raquette est un peu réduite
+      for (var pass = 0; pass < 3; pass++) {
+        var b = measure();
+        view.baseDx += archRight - b.min.x;
+        var hb = measure(), room = rightEdge - archRight, headW = hb.max.x - hb.min.x;
+        if (headW <= room * 1.001) break;
+        view.fit *= Math.max(0.55, room / headW);
+      }
+    }
   }
 
   var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;
