@@ -290,3 +290,42 @@
   window.addEventListener('resize', measure);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 })();
+
+// Vitres de l'accueil : montants qui glissent au défilement et éclat à chaque rebond de la balle
+(function () {
+  var walls = [].slice.call(document.querySelectorAll('.glass-wall'));
+  if (!walls.length || !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var NS = 'http://www.w3.org/2000/svg', ticking = false;
+  function depth() {
+    ticking = false;
+    var y = window.scrollY;
+    walls.forEach(function (svg) {
+      var g = svg.querySelector('g'); if (!g) return;
+      if (!svg.__posts) svg.__posts = [0, 1, 2].map(function () { var p = document.createElementNS(NS, 'polyline'); g.appendChild(p); return p; });
+      svg.__posts.forEach(function (p, i) {
+        var t = ((y / 900 + i / 3) % 1 + 1) % 1;   // 0 → 1 en boucle
+        var x = 95 - 80 * t;                        // du fond vers l'avant du terrain
+        p.setAttribute('points', x + ',' + (300 + 56 * x / 100) + ' ' + x + ',' + (1000 - 140 * x / 100));
+        p.style.opacity = String(0.25 + 0.75 * t);
+      });
+      var etch = svg.parentNode.querySelector('.glass-etch');
+      if (etch) etch.style.marginTop = (-(y % 900) / 900 * 24) + 'px';
+      var mesh = svg.querySelector('pattern');
+      if (mesh) mesh.setAttribute('patternTransform', 'rotate(45) translate(0 ' + (y / 40 % 7) + ')');
+    });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(depth); } }, { passive: true });
+  depth();
+  window.addEventListener('bc:ballbounce', function (e) {
+    var side = document.querySelector(e.detail.side === 'left' ? '.glass-l' : '.glass-r');
+    if (!side || getComputedStyle(side).display === 'none') return;
+    var r = side.getBoundingClientRect();
+    var hit = document.createElement('span');
+    hit.className = 'glass-hit';
+    hit.style.left = (e.detail.side === 'left' ? r.right : r.left) + 'px';
+    hit.style.top = e.detail.y + 'px';
+    document.body.appendChild(hit);
+    setTimeout(function () { hit.remove(); }, 850);
+    side.classList.remove('shake'); void side.offsetWidth; side.classList.add('shake');
+  });
+})();

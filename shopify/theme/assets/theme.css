@@ -255,6 +255,28 @@ html.racket-live .arch>.arch-racket{display:none}
 }
 @media (min-width:1560px){.glass-etch{display:block}}
 
+/* Intégration des vitres : fondu, effet de vrai verre, montants qui glissent au défilement, éclat au rebond de la balle */
+@media (min-width:1240px){
+  .glass-l{-webkit-mask-image:linear-gradient(to right,#000 45%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 10%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,#000 45%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 10%,#000 82%,transparent 100%);mask-composite:intersect}
+  .glass-r{-webkit-mask-image:linear-gradient(to left,#000 45%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 10%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to left,#000 45%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 10%,#000 82%,transparent 100%);mask-composite:intersect}
+  .glass-side::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px) saturate(1.15);-webkit-backdrop-filter:blur(6px) saturate(1.15);background:rgba(251,248,240,.18)}
+  .glass-l::before{clip-path:polygon(0 30%,100% 35.6%,100% 86%,0 100%)}
+  .glass-r::before{clip-path:polygon(100% 30%,0 35.6%,0 86%,100% 100%)}
+  .glass-wall stop{stop-color:#fbf8f0}
+  .glass-wall stop:nth-child(1){stop-opacity:.45}
+  .glass-wall stop:nth-child(2){stop-opacity:.12}
+  .glass-wall stop:nth-child(3){stop-opacity:.4}
+  .glass-wall g{stroke:rgba(11,27,43,.42);stroke-width:2}
+  .glass-wall pattern path{stroke:#0b1b2b;opacity:.32}
+  .glass-etch{color:rgba(255,255,255,.75)!important;text-shadow:0 0 1px rgba(11,27,43,.25),0 1px 0 rgba(11,27,43,.08)}
+  .glass-side.shake{animation:glassShake .28s ease-out}
+}
+.glass-hit{position:fixed;z-index:25;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#fff 0 7%,rgba(212,255,58,.95) 14%,rgba(212,255,58,.35) 34%,rgba(212,255,58,0) 60%);animation:glassHit .8s ease-out forwards}
+.glass-hit::after{content:"";position:absolute;inset:40px;border-radius:50%;border:3px solid rgba(212,255,58,.95);box-shadow:0 0 0 1px rgba(11,27,43,.18);animation:glassRing .8s ease-out forwards}
+@keyframes glassHit{0%{transform:scale(.5);opacity:1}60%{opacity:.9}100%{transform:scale(1.2);opacity:0}}
+@keyframes glassRing{from{transform:scale(.5);opacity:1}to{transform:scale(2.4);opacity:0}}
+@keyframes glassShake{25%{transform:translateX(2px)}50%{transform:translateX(-2px)}75%{transform:translateX(1px)}}
+
 /* 10. Fiche produit ------------------------------------------------------------------ */
 .product{display:grid;gap:clamp(1.5rem,5vw,4rem);align-items:start}
 @media (min-width:900px){.product{grid-template-columns:1.1fr .9fr}}
