@@ -5,13 +5,14 @@ GPSR = ("Conformément au règlement général sur la sécurité des produits (G
         "proposés sont sûrs et conformes aux normes européennes. Pour toute question sur la sécurité d'un produit, "
         "écris-nous à gramonapro83@gmail.com.")
 POD = "Imprimé à la demande, après ta commande."
+FAB = "Fabricant : Printful, support@printful.com, Raina bulvaris 25, Riga, LV-1050, Lettonie."
 
 def page(hook, intro, specs, extra=None, legal=None):
     h = f'<p><strong>{hook}</strong></p>\n<p>{intro}</p>\n'
     h += '<h3>Caractéristiques</h3>\n<ul>\n' + ''.join(f'<li>{s}</li>\n' for s in specs) + '</ul>\n'
     if extra:
         h += f'<p><em>{extra}</em></p>\n'
-    leg = legal or []
+    leg = [FAB] + (legal or [])
     h += ('<details>\n<summary>Informations légales et sécurité</summary>\n'
           + ''.join(f'<p>{l}</p>\n' for l in leg) + f'<p>{GPSR}</p>\n</details>')
     return h
@@ -32,7 +33,7 @@ JER_INTRO = ("Un maillot en maille de polyester respirante, pensé pour bouger :
 JER_SPECS = ["100 % polyester respirant (maille)", "Grammage : 140 g/m²", "Coupe décontractée, longueur allongée",
              "Tissu élastique et résistant", "Manches raglan courtes", "Coutures latérales",
              "Encolure ronde classique avec bordure au col"]
-JER_LEGAL = ["Fabricant : Printful, support@printful.com, Raina bulvaris 25, Riga, LV-1050, Lettonie.", "Produit brut provenant de Chine.", "Restrictions d'âge : pour adultes. Garantie UE : 2 ans.",
+JER_LEGAL = ["Produit brut provenant de Chine.", "Restrictions d'âge : pour adultes. Garantie UE : 2 ans.",
              "Conformité : respecte les exigences en matière d'inflammabilité et de teneur en cadmium, bisphénols et phtalates."]
 
 DESIGNS = {
