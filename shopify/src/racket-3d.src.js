@@ -64,9 +64,18 @@ function buildShape() {
   return shape;
 }
 
-// Texture de la face : carbone, bande citron, logo et « BANDEJA CLUB »
+// Styles de face disponibles
+var STYLES = {
+  carbone: { base: '#12161d', weave: ['#1b212b', '#181d26'], band: LIME, text: '#f6f4ee', clubBg: LIME, clubText: NAVY, logo: 'light', rim: NAVY, gloss: 0.10 },
+  creme:   { base: '#efeadd', weave: ['#e6e0d1', '#ebe6d8'], band: LIME, text: NAVY, clubBg: NAVY, clubText: LIME, logo: 'dark', rim: NAVY, gloss: 0.18 },
+  citron:  { base: '#d4ff3a', weave: ['#c9f330', '#cff835'], band: NAVY, text: NAVY, clubBg: NAVY, clubText: LIME, logo: 'dark', rim: NAVY, gloss: 0.15 },
+  marine:  { base: '#0e2238', weave: ['#13294a', '#102540'], band: null, grid: 'rgba(212,255,58,0.22)', text: '#f6f4ee', clubBg: LIME, clubText: NAVY, logo: 'light', rim: '#08131f', gloss: 0.12, edge: LIME }
+};
+
+// Texture de la face : fond, bande, logo et « BANDEJA CLUB »
 var BOUNDS = { minX: -13.6, maxX: 13.6, minY: -21.6, maxY: 17.6 };
-function faceTexture(logoImg, back) {
+function faceTexture(logoImg, st) {
+  st = st || STYLES.carbone;
   var W = 1024, H = Math.round(W * (BOUNDS.maxY - BOUNDS.minY) / (BOUNDS.maxX - BOUNDS.minX));
   var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
   var g = cv.getContext('2d');
@@ -75,25 +84,39 @@ function faceTexture(logoImg, back) {
   var py = function (y) { return (BOUNDS.maxY - y) * sy; };
 
   // Carbone (sergé)
-  g.fillStyle = '#12161d'; g.fillRect(0, 0, W, H);
+  g.fillStyle = st.base; g.fillRect(0, 0, W, H);
   var cell = 8;
   for (var j = 0; j < H / cell; j++) {
     for (var i = 0; i < W / cell; i++) {
-      if (((i + j) % 4) < 2) { g.fillStyle = (i % 2) ? '#1b212b' : '#181d26'; g.fillRect(i * cell, j * cell, cell, cell); }
+      if (((i + j) % 4) < 2) { g.fillStyle = (i % 2) ? st.weave[0] : st.weave[1]; g.fillRect(i * cell, j * cell, cell, cell); }
     }
+  }
+  if (st.grid) {
+    // Quadrillage façon vitre et grillage de terrain
+    g.strokeStyle = st.grid; g.lineWidth = 2;
+    for (var gx = -13; gx <= 13; gx += 2.6) { g.beginPath(); g.moveTo(px(gx), 0); g.lineTo(px(gx), H); g.stroke(); }
+    for (var gy = -21; gy <= 17; gy += 2.6) { g.beginPath(); g.moveTo(0, py(gy)); g.lineTo(W, py(gy)); g.stroke(); }
+  }
+  if (st.edge) {
+    // Liseré citron le long du bord de la tête
+    g.save(); g.strokeStyle = st.edge; g.lineWidth = 0.45 * sx;
+    g.beginPath(); g.ellipse(px(0), py(1.5), 12.1 * sx, 14.6 * sy, 0, Math.PI * 1.06, Math.PI * 1.94 + 0.001, false); g.stroke();
+    g.restore();
   }
   // Reflet doux
   var grad = g.createLinearGradient(0, 0, W, H);
-  grad.addColorStop(0, 'rgba(255,255,255,0.10)'); grad.addColorStop(0.5, 'rgba(255,255,255,0)'); grad.addColorStop(1, 'rgba(255,255,255,0.05)');
+  grad.addColorStop(0, 'rgba(255,255,255,' + st.gloss + ')'); grad.addColorStop(0.5, 'rgba(255,255,255,0)'); grad.addColorStop(1, 'rgba(255,255,255,0.05)');
   g.fillStyle = grad; g.fillRect(0, 0, W, H);
 
   // Bande citron diagonale
+  if (st.band) {
   g.save();
   g.beginPath();
   g.moveTo(px(-14), py(-3.2)); g.bezierCurveTo(px(-4), py(-0.2), px(5), py(5.5), px(14), py(12.5));
   g.lineTo(px(14), py(9.6)); g.bezierCurveTo(px(5), py(2.6), px(-4), py(-2.8), px(-14), py(-5.6));
-  g.closePath(); g.fillStyle = LIME; g.globalAlpha = 0.92; g.fill();
+  g.closePath(); g.fillStyle = st.band; g.globalAlpha = 0.92; g.fill();
   g.restore();
+  }
 
   // Logo
   if (logoImg && logoImg.complete && logoImg.naturalWidth) {
@@ -104,19 +127,19 @@ function faceTexture(logoImg, back) {
   // Inscription
   g.textAlign = 'center'; g.textBaseline = 'middle';
   g.font = '400 ' + Math.round(3.4 * sy) + 'px "Archivo Black", "Arial Black", sans-serif';
-  g.fillStyle = '#f6f4ee';
+  g.fillStyle = st.text;
   g.fillText('BANDEJA', px(0), py(-4.6));
   var clubSize = Math.round(2.6 * sy);
   g.font = '400 ' + clubSize + 'px "Archivo Black", "Arial Black", sans-serif';
   var cw = g.measureText('CLUB').width + clubSize * 0.7, ch = clubSize * 1.3;
   var cx0 = px(0) - cw / 2, cy0 = py(-8.4) - ch / 2, rr = clubSize * 0.25;
-  g.fillStyle = LIME;
+  g.fillStyle = st.clubBg;
   g.beginPath();
   g.moveTo(cx0 + rr, cy0); g.lineTo(cx0 + cw - rr, cy0); g.quadraticCurveTo(cx0 + cw, cy0, cx0 + cw, cy0 + rr);
   g.lineTo(cx0 + cw, cy0 + ch - rr); g.quadraticCurveTo(cx0 + cw, cy0 + ch, cx0 + cw - rr, cy0 + ch);
   g.lineTo(cx0 + rr, cy0 + ch); g.quadraticCurveTo(cx0, cy0 + ch, cx0, cy0 + ch - rr);
   g.lineTo(cx0, cy0 + rr); g.quadraticCurveTo(cx0, cy0, cx0 + rr, cy0); g.fill();
-  g.fillStyle = NAVY;
+  g.fillStyle = st.clubText;
   g.fillText('CLUB', px(0), py(-8.4) + clubSize * 0.04);
 
   var tex = new THREE.CanvasTexture(cv);
@@ -137,7 +160,9 @@ function gripTexture() {
   return tex;
 }
 
-function buildRacket(logoImg) {
+function buildRacket(logoImg, options) {
+  options = options || {};
+  var st = STYLES[options.style] || STYLES.carbone;
   var group = new THREE.Group();
   var depth = 3.1, bevel = 0.35;
   var geo = new THREE.ExtrudeGeometry(buildShape(), {
@@ -163,11 +188,20 @@ function buildRacket(logoImg) {
   uv.needsUpdate = true;
   geo.computeVertexNormals();
 
-  var faceMat = new THREE.MeshPhysicalMaterial({ map: faceTexture(logoImg), roughness: 0.42, metalness: 0.1, clearcoat: 0.9, clearcoatRoughness: 0.18 });
-  var rimMat = new THREE.MeshPhysicalMaterial({ color: NAVY, roughness: 0.32, metalness: 0.25, clearcoat: 1, clearcoatRoughness: 0.12 });
+  var faceMat = new THREE.MeshPhysicalMaterial({ map: faceTexture(logoImg, st), roughness: 0.42, metalness: 0.1, clearcoat: 0.9, clearcoatRoughness: 0.18 });
+  var rimMat = new THREE.MeshPhysicalMaterial({ color: st.rim, roughness: 0.32, metalness: 0.25, clearcoat: 1, clearcoatRoughness: 0.12 });
   var head = new THREE.Mesh(geo, [faceMat, rimMat]);
   group.add(head);
 
+  if (options.guard) {
+    // Protection de cadre citron sur le haut de la tête
+    var arc = [];
+    for (var a = 150; a >= 30; a -= 3) { var t = a * Math.PI / 180; arc.push(new THREE.Vector3(13.05 * Math.cos(t), 1.5 + 15.55 * Math.sin(t), 0)); }
+    var guard = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(arc), 80, depth / 2 + 0.45, 14, false),
+      new THREE.MeshPhysicalMaterial({ color: LIME, roughness: 0.5, clearcoat: 0.4 }));
+    guard.scale.set(1, 1, 1);
+    group.add(guard);
+  }
   // Bague entre le cadre et le manche
   var collar = new THREE.Mesh(new THREE.CylinderGeometry(1.95, 1.75, 1.6, 24), rimMat);
   collar.position.y = -21.6; group.add(collar);
@@ -261,7 +295,7 @@ export function mount(host, options) {
   function wake() { target = progress(); if (!running) { running = true; requestAnimationFrame(frame); } }
 
   function start(logoImg) {
-    racket = buildRacket(logoImg);
+    racket = buildRacket(logoImg, options);
     scene.add(racket);
     resize();
     if (options.still) {
@@ -281,10 +315,12 @@ export function mount(host, options) {
 
   var fontReady = (document.fonts && document.fonts.load) ? document.fonts.load('80px "Archivo Black"').catch(function () {}) : Promise.resolve();
   var logoReady = new Promise(function (resolve) {
-    if (!options.logo) return resolve(null);
+    var st = STYLES[options.style] || STYLES.carbone;
+    var src = st.logo === 'dark' ? (options.logoDark || options.logo) : options.logo;
+    if (!src) return resolve(null);
     var img = new Image(); img.crossOrigin = 'anonymous';
     img.onload = function () { resolve(img); }; img.onerror = function () { resolve(null); };
-    img.src = options.logo;
+    img.src = src;
   });
   Promise.all([fontReady, logoReady]).then(function (r) { start(r[1]); });
   return { renderer: renderer };
