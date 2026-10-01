@@ -383,6 +383,8 @@ html.racket-live .arch>.arch-racket{display:none}
 .slide[hidden],.thumb[hidden],.thumbs[hidden]{display:none!important}
 .product-info h1{font-size:clamp(1.875rem,4vw,2.75rem);margin-bottom:var(--s-4)}
 .price.big{font-size:1.5rem;margin-bottom:var(--s-5)}
+.price.big:has(+ .price-note){margin-bottom:var(--s-1)}
+.price-note{margin-bottom:var(--s-5);font-size:var(--fs-sm);color:var(--c-text-muted)}
 .opt{border:0;margin-bottom:var(--s-5)}
 .opt legend{font-weight:700;font-size:var(--fs-sm);margin-bottom:var(--s-2)}
 .opt-values{display:flex;flex-wrap:wrap;gap:var(--s-2)}
