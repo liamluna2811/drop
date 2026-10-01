@@ -9,7 +9,7 @@
     {%- endunless -%}
     {%- render 'cart-summary' -%}
     <div class="total"><span>Total</span><strong id="cartTotal">{{ cart.total_price | money }}</strong></div>
-    <p class="ship">Livraison uniquement en France et dans l'Union européenne, offerte dès {{ settings.free_shipping_threshold | default: 60 }} €. Frais calculés au paiement.</p>
+    <p class="ship">Livraison uniquement en France et dans l'Union européenne, frais calculés au paiement. −10 % dès {{ settings.free_shipping_threshold | default: 60 }} € d'achat.</p>
     <a class="btn full" id="checkout" href="{{ routes.cart_url }}">Commander</a>
   </div>
 </aside>

@@ -77,12 +77,12 @@
         "type": "text",
         "id": "announcement_customer",
         "label": "Bandeau d'annonce (clients connectés)",
-        "default": "Livraison offerte dès 60 € en France et dans l'UE"
+        "default": "−10 % sur ta commande dès 60 € d'achat"
       },
       {
         "type": "number",
         "id": "free_shipping_threshold",
-        "label": "Seuil de livraison offerte (en euros)",
+        "label": "Seuil de la réduction de 10 % (en euros)",
         "default": 60
       }
     ]

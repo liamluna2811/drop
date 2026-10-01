@@ -101,8 +101,8 @@
           "type": "argument",
           "settings": {
             "icon": "truck",
-            "title": "Livraison offerte dès 60 €",
-            "text": "En France et dans l'Union européenne."
+            "title": "−10 % dès 60 € d'achat",
+            "text": "Livraison en France et dans l'Union européenne, frais calculés au paiement."
           }
         },
         "a6": {
@@ -214,7 +214,7 @@
       "type": "marquee",
       "settings": {
         "scheme": "alt",
-        "words": "IMPRIMÉ À LA DEMANDE,LIVRAISON OFFERTE DÈS 60 €,FRANCE ET UE"
+        "words": "IMPRIMÉ À LA DEMANDE,−10 % DÈS 60 €,FRANCE ET UE"
       }
     }
   },
