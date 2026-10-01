@@ -164,7 +164,8 @@ body>.nav{position:sticky;top:var(--topbar-h,38px);z-index:39}
 .badge::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c-accent);box-shadow:0 0 0 2px var(--c-text)}
 @media (max-width:900px){.badge{left:.5rem}}
 .marquee{background:var(--c-surface-alt);color:var(--c-text);border-block:1px solid var(--c-border);overflow:hidden;padding:var(--s-4) 0;white-space:nowrap}
-.marquee-track{display:inline-flex;gap:var(--s-7);font-family:var(--font-display);font-size:1.25rem;letter-spacing:.04em;animation:scroll 40s linear infinite}
+.marquee-track{display:flex;width:max-content;font-family:var(--font-display);font-size:1.25rem;letter-spacing:.04em;animation:scroll 120s linear infinite}
+.marquee-group{display:flex;flex:none;gap:var(--s-7);padding-right:var(--s-7)}
 .marquee-track span::after{content:"•";margin-left:var(--s-7);color:var(--c-text-muted)}
 .marquee-rev .marquee-track{animation-direction:reverse}
 .marquee.scheme-dark{border-color:transparent}
