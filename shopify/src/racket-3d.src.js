@@ -237,17 +237,19 @@ function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) 
 function lerp(a, b, t) { return a + (b - a) * t; }
 
 // Position de la raquette selon l'avancée p (0 = haut de page, 1 = sortie), dans la zone visible.
-// 0 → 0,75 : la raquette, entière et inclinée vers la droite, rétrécit doucement ; 0,75 → 1 : elle sort par la droite.
+// Tête en haut à gauche, manche vers le bas à droite. 0 → 0,75 : elle rétrécit doucement ; 0,75 → 1 : elle sort par la droite.
 function pose(p, view) {
   p = Math.min(1, Math.max(0, p));
   var a = ease(Math.min(1, p / 0.75));
   var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
-  var s0 = Math.min(0.72, (2 * view.hh * 0.84) / 67) * (view.size || 1);
+  // Taille : la raquette (environ 62 cm en diagonale) doit tenir dans la moitié droite et dans la hauteur
+  var top = 80 / view.pxPerCm;                         // hauteur de l'en-tête (≈ 80 px) en cm
+  var s0 = Math.min(1.15, ((2 * view.hh - top) * 0.9) / 56, (view.hw * 1.15) / 52) * (view.size || 1);
   return {
-    s: lerp(s0, s0 * 0.6, a),
-    x: view.hw * 0.5 + lerp(0, view.hw * 0.12, a) + b * view.hw * 0.95,
-    y: lerp(-1, 2, a), z: 0,
-    rx: -0.12, ry: lerp(-0.5, -0.25, a) - b * 0.9, rz: lerp(-0.32, -0.16, a) - b * 0.4
+    s: lerp(s0, s0 * 0.55, a),
+    x: view.hw * 0.24 + lerp(0, view.hw * 0.25, a) + b * view.hw * 1.05,
+    y: -top / 2 + lerp(0, 1.5, a), z: 0,
+    rx: -0.1, ry: lerp(-0.32, -0.18, a) - b * 0.9, rz: lerp(0.78, 0.6, a) - b * 0.3
   };
 }
 
@@ -336,19 +338,23 @@ export function mount(host, options) {
         bp.y += Math.sin(t * Math.PI) * view.hh * 0.18;
         bs = s.s;
       } else {
-        // Après le rebond : descente dans la marge droite, en petits rebonds, jusqu'en bas de la page
+        // Après l'impact : la balle descend avec la page en rebondissant d'un bord de l'écran à l'autre (comme contre les vitres)
         var yC = BALL_IN * heroRange();
         var total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight - yC);
         var q = Math.min(1, Math.max(0, (y - yC) / total));
-        var r = 3.3 * 0.45;
-        var marginX = view.hw - 34 / view.pxPerCm;
-        var k = ease(Math.min(1, q / 0.06));
-        bs = lerp(contactScale, 0.45, k);
+        var r = 3.3 * 0.5;
+        var edgeL = -view.hw + r + 6 / view.pxPerCm, edgeR = view.hw - r - 6 / view.pxPerCm;
+        var k = ease(Math.min(1, q / 0.05));
+        bs = lerp(contactScale, 0.5, k);
+        // Onde triangle entre les deux bords, en partant du point d'impact vers la gauche
+        var crossings = 7;
+        var v = (contact.x - edgeL) / (edgeR - edgeL) - q * crossings * k;
+        var f = ((v % 2) + 2) % 2;
+        var tri = f <= 1 ? f : 2 - f;
+        var x = edgeL + tri * (edgeR - edgeL);
         var floor = -view.hh + r + 8 / view.pxPerCm;
-        var x = lerp(contact.x, marginX, k);
         var baseY = lerp(contact.y, floor, Math.min(1, q * 1.02));
-        var hop = Math.abs(Math.sin(q * Math.PI * 16)) * 2.4 * (1 - q * 0.6) * k;
-        bp = new THREE.Vector3(x, baseY + hop, lerp(contact.z, 0, k));
+        bp = new THREE.Vector3(x, baseY, lerp(contact.z, 0, k));
       }
       ball.position.copy(bp);
       ball.scale.setScalar(bs);
