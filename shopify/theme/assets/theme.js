@@ -212,8 +212,10 @@
 
   function getCart() { return fetch('/cart.js', { headers: { Accept: 'application/json' } }).then(function (r) { return r.json(); }); }
   function change(key, qty) {
+    // La réponse de /cart/change.js ne contient pas toujours les réductions automatiques recalculées :
+    // on relit le panier complet pour afficher le bon sous-total, les réductions et le total
     return fetch('/cart/change.js', { method: 'POST', headers: json, body: JSON.stringify({ id: key, quantity: qty }) })
-      .then(function (r) { return r.json(); }).then(render);
+      .then(function (r) { return r.json(); }).then(getCart).then(render);
   }
 
   document.addEventListener('click', function (e) {
