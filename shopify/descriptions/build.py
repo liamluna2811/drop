@@ -36,8 +36,8 @@ JER_LEGAL = ["Produit brut provenant de Chine.", "Restrictions d'âge : pour adu
              "Conformité : respecte les exigences en matière d'inflammabilité et de teneur en cadmium, bisphénols et phtalates."]
 
 DESIGNS = {
- "drive": ("Côté drive : je prends tout à droite.", "Le t-shirt des joueurs de droite."),
- "reves": ("Côté revés : je finis les points.", "Le t-shirt des joueurs de gauche."),
+ "drive": ("Côté drive : je prends tout à droite.", ""),
+ "reves": ("Côté revés : je finis les points.", ""),
  "lob": ("Lob. Vitre. Point.", "La seule tactique qui compte."),
  "jai": ("Pas ce soir, j'ai padel.", "Pour décliner toutes les invitations, avec le sourire."),
  "club": ("Le logo Bandeja Club, brodé.", "Le t-shirt du club, tout simplement."),
@@ -46,11 +46,11 @@ DESIGNS = {
 def tee(d):
     hook, line = DESIGNS[d]
     specs = (["Logo brodé"] if d == "club" else []) + TEE_SPECS
-    return page(f"{hook} {line}", TEE_INTRO, specs, TEE_NOTE, TEE_LEGAL)
+    return page(f"{hook} {line}".strip(), TEE_INTRO, specs, TEE_NOTE, TEE_LEGAL)
 def jer(d):
     hook, line = DESIGNS[d]
     specs = (["Logo brodé"] if d == "club" else []) + JER_SPECS
-    return page(f"{hook} {line}", JER_INTRO, specs, None, JER_LEGAL)
+    return page(f"{hook} {line}".strip(), JER_INTRO, specs, None, JER_LEGAL)
 
 P = {
  "unisex-classic-tee":   ("T-shirt Lifestyle Padel \"côté drive\"", tee("drive")),
