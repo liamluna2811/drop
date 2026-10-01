@@ -4,6 +4,36 @@
   Chargée uniquement sur ordinateur (écran de 900 px et plus) et si « réduire les animations » n'est pas activé.
   Sinon, une image fixe de la raquette s'affiche sur la photo de la bannière (réglage de la bannière).
 {%- endcomment -%}
+{%- if section.settings.glass -%}
+  <div class="glass-side glass-l" aria-hidden="true">
+    <svg class="glass-wall" viewBox="0 0 100 1000" preserveAspectRatio="none" focusable="false">
+      <defs><pattern id="glass-mesh-l" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V7M0 0H7" stroke="#1a1f26" stroke-width="1.1" fill="none" opacity=".75"/></pattern>
+      <linearGradient id="glass-fill-l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6e8f0" stop-opacity=".6"/><stop offset=".5" stop-color="#f0f8fc" stop-opacity=".3"/><stop offset="1" stop-color="#d6e8f0" stop-opacity=".55"/></linearGradient></defs>
+      <polygon points="0,0 100,140 100,356 0,300" fill="url(#glass-mesh-l)"/>
+      <polygon points="0,300 100,356 100,860 0,1000" fill="url(#glass-fill-l)"/>
+      <polygon points="18,330 30,340 30,880 18,920" fill="#ffffff" opacity=".45"/>
+      <g fill="none" stroke="#1a1f26" stroke-width="3" vector-effect="non-scaling-stroke">
+        <polyline points="0,0 100,140"/><polyline points="0,300 100,356"/><polyline points="0,1000 100,860"/>
+        <polyline points="82,115 82,885"/><polyline points="100,140 100,860"/>
+      </g>
+    </svg>
+    <span class="glass-etch">BANDEJA CLUB</span>
+  </div>
+  <div class="glass-side glass-r" aria-hidden="true">
+    <svg class="glass-wall" viewBox="0 0 100 1000" preserveAspectRatio="none" focusable="false">
+      <defs><pattern id="glass-mesh-r" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V7M0 0H7" stroke="#1a1f26" stroke-width="1.1" fill="none" opacity=".75"/></pattern>
+      <linearGradient id="glass-fill-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6e8f0" stop-opacity=".6"/><stop offset=".5" stop-color="#f0f8fc" stop-opacity=".3"/><stop offset="1" stop-color="#d6e8f0" stop-opacity=".55"/></linearGradient></defs>
+      <polygon points="0,0 100,140 100,356 0,300" fill="url(#glass-mesh-r)"/>
+      <polygon points="0,300 100,356 100,860 0,1000" fill="url(#glass-fill-r)"/>
+      <polygon points="18,330 30,340 30,880 18,920" fill="#ffffff" opacity=".45"/>
+      <g fill="none" stroke="#1a1f26" stroke-width="3" vector-effect="non-scaling-stroke">
+        <polyline points="0,0 100,140"/><polyline points="0,300 100,356"/><polyline points="0,1000 100,860"/>
+        <polyline points="82,115 82,885"/><polyline points="100,140 100,860"/>
+      </g>
+    </svg>
+    <span class="glass-etch">BANDEJA CLUB</span>
+  </div>
+{%- endif -%}
 {%- if section.settings.enabled -%}
   <div class="racket-fx" data-racket data-src="{{ 'racket-3d.js' | asset_url }}" data-logo="{{ 'logo-mark-light.png' | asset_url }}" data-guard="{% if section.settings.guard %}1{% endif %}" data-ball="{% if section.settings.ball %}1{% endif %}" data-size="{{ section.settings.size }}" aria-hidden="true"></div>
 {%- endif -%}
@@ -12,6 +42,7 @@
   "name": "Raquette 3D",
   "settings": [
     { "type": "checkbox", "id": "enabled", "label": "Afficher la raquette 3D (ordinateur)", "default": true },
+    { "type": "checkbox", "id": "glass", "label": "Vitres de padel sur les côtés (grands écrans)", "default": true },
     { "type": "checkbox", "id": "guard", "label": "Protection de cadre citron", "default": true },
     { "type": "checkbox", "id": "ball", "label": "Balle de padel qui rebondit sur la raquette", "default": true },
     { "type": "range", "id": "size", "label": "Taille de la raquette", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 100 },

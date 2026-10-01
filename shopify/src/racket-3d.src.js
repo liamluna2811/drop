@@ -304,7 +304,10 @@ export function mount(host, options) {
     view.hh = DIST * Math.tan(camera.fov * Math.PI / 360);
     view.hw = view.hh * camera.aspect;
     view.pxPerCm = h / (2 * view.hh);
-    view.headPx = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sticky-h')) || 110) + 6;
+    var rootStyle = getComputedStyle(document.documentElement);
+    view.headPx = (parseFloat(rootStyle.getPropertyValue('--sticky-h')) || 110) + 6;
+    var glass = document.querySelector('.glass-side');
+    view.glassPx = glass && getComputedStyle(glass).display !== 'none' ? glass.getBoundingClientRect().width : 0;
   }
 
   var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;
@@ -352,7 +355,9 @@ export function mount(host, options) {
         var total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight - ph.pin);
         var q = Math.min(1, Math.max(0, (y - ph.pin) / total));
         var rb = 3.3 * 0.5;
-        var edgeL = -view.hw + rb + 6 / view.pxPerCm, edgeR = view.hw - rb - 6 / view.pxPerCm;
+        // Bords de rebond : bord intérieur des vitres latérales (ou bord de l'écran sans vitres)
+        var inset = ((view.glassPx || 0) + 6) / view.pxPerCm;
+        var edgeL = -view.hw + rb + inset, edgeR = view.hw - rb - inset;
         var k = ease(Math.min(1, q / 0.05));
         bs = lerp(contactScale, 0.5, k);
         var crossings = 7;
