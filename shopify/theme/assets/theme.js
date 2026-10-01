@@ -793,3 +793,45 @@
     if (e.target.closest('[data-search-close]') || e.target === dlg) dlg.close();
   });
 })();
+
+// Recherche en direct : à chaque lettre, les produits correspondants (3 au plus, puis « Voir plus »)
+(function () {
+  var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+  [].forEach.call(document.querySelectorAll('input[data-predictive]'), function (input) {
+    var form = input.closest('form'), box = form && form.parentNode.querySelector('[data-ps-box]');
+    if (!box || !window.fetch) return;
+    var timer, ctrl, last = '';
+    function clear() { box.innerHTML = ''; last = ''; }
+    function run() {
+      var q = input.value.trim();
+      if (q === last) return;
+      last = q;
+      if (!q) { clear(); return; }
+      if (ctrl && ctrl.abort) ctrl.abort();
+      ctrl = window.AbortController ? new AbortController() : null;
+      var url = root + 'search/suggest?q=' + encodeURIComponent(q) +
+        '&resources[type]=product&resources[limit]=4&resources[options][unavailable_products]=last&section_id=predictive-search';
+      fetch(url, ctrl ? { signal: ctrl.signal } : {}).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+        if (input.value.trim() !== q) return;
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var res = doc.querySelector('[data-ps-results]');
+        box.innerHTML = res ? res.outerHTML : '';
+      }).catch(function () {});
+    }
+    input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(run, 180); });
+    // Flèche bas : passer du champ aux résultats ; Échap dans la page : effacer
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { var a = box.querySelector('a'); if (a) { e.preventDefault(); a.focus(); } }
+    });
+    box.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      var links = [].slice.call(box.querySelectorAll('a')), i = links.indexOf(document.activeElement);
+      if (i < 0) return;
+      e.preventDefault();
+      if (e.key === 'ArrowDown' && links[i + 1]) links[i + 1].focus();
+      else if (e.key === 'ArrowUp') (links[i - 1] || input).focus();
+    });
+    var dlg = input.closest('dialog');
+    if (dlg) dlg.addEventListener('close', function () { input.value = ''; clear(); });
+  });
+})();

@@ -51,11 +51,12 @@
 <dialog class="search-pop" data-search aria-label="Rechercher">
   <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
     <label class="visually-hidden" for="HeaderSearch">Rechercher</label>
-    <input id="HeaderSearch" class="search-input" type="search" name="q" placeholder="T-shirt, brassière, gourde…" autocomplete="off">
+    <input id="HeaderSearch" class="search-input" type="search" name="q" data-predictive placeholder="T-shirt, brassière, gourde…" autocomplete="off">
     <input type="hidden" name="options[prefix]" value="last">
     <button class="btn" type="submit">{% render 'icon', name: 'search' %}<span>Rechercher</span></button>
     <button class="search-close" type="button" data-search-close aria-label="Fermer la recherche">{% render 'icon', name: 'close' %}</button>
   </form>
+  <div class="ps-box" data-ps-box aria-live="polite"></div>
 </dialog>
 {%- comment -%} Menu mobile : panneau latéral avec les mêmes liens que le menu principal {%- endcomment -%}
 <dialog class="mnav" id="MobileMenu" aria-label="Menu" data-menu>

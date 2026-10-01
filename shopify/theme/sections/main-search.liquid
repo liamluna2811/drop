@@ -5,10 +5,11 @@
   </div>
   <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
     <label class="visually-hidden" for="SearchQ">Rechercher</label>
-    <input id="SearchQ" class="search-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="off">
+    <input id="SearchQ" class="search-input" type="search" name="q" data-predictive value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="off">
     <input type="hidden" name="options[prefix]" value="last">
     <button class="btn" type="submit">{% render 'icon', name: 'search' %}<span>Rechercher</span></button>
   </form>
+  <div class="ps-box ps-page" data-ps-box aria-live="polite"></div>
 
   {%- if search.performed -%}
     {%- paginate search.results by 24 -%}

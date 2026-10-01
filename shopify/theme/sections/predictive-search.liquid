@@ -1,0 +1,30 @@
+{%- comment -%}
+  Résultats de la recherche en direct (barre de recherche de l'en-tête et page de recherche).
+  Rendu par Shopify à la demande : /search/suggest?q=…&section_id=predictive-search
+  Trois produits au plus ; « Voir plus » s'il y en a davantage.
+{%- endcomment -%}
+{%- if predictive_search.performed -%}
+  {%- assign prods = predictive_search.resources.products -%}
+  <div class="ps" data-ps-results>
+    {%- if prods.size > 0 -%}
+      <ul class="ps-list" role="list">
+        {%- for p in prods limit: 3 -%}
+          <li>
+            <a class="ps-item" href="{{ p.url }}">
+              <span class="ps-img">{%- if p.featured_media -%}{{ p.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+              <span class="ps-text">
+                <span class="ps-title">{{ p.title }}</span>
+                <span class="ps-price">{% if p.price_varies %}dès {% endif %}{{ p.price_min | money }}</span>
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if prods.size > 3 -%}
+        <a class="btn ghost full ps-more" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&options%5Bprefix%5D=last">Voir plus</a>
+      {%- endif -%}
+    {%- else -%}
+      <p class="ps-empty">Aucun produit pour « {{ predictive_search.terms | escape }} ».</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
