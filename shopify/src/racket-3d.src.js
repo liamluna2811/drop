@@ -248,7 +248,7 @@ function pose(r, t, view) {
   var s0 = Math.min(1.35, ((2 * view.hh - top) * 1.04) / 56, (view.hw * 0.92) / 60) * (view.size || 1);
   return {
     s: lerp(s0, s0 * 0.55, a),
-    x: view.hw * 0.6 + r * view.hw * 0.09 + b * view.hw * 0.8,
+    x: view.hw * 0.57 + r * view.hw * 0.11 + b * view.hw * 0.8,
     y: -top / 2 + r * view.hh * 0.08 + a * view.hh * 0.04, z: r * 4,
     rx: lerp(-0.1, 0.08, r),
     ry: lerp(-0.34, -0.42, r) - b * 0.9,

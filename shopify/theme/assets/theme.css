@@ -228,11 +228,11 @@ html.racket-live .racket-fx{display:block}
 html.racket-live main>.shopify-section:has(.hero2)::after{content:"";display:block;height:60vh}
 html.racket-live .hero2{position:sticky;top:var(--sticky-h);padding:clamp(.75rem,2vh,1.5rem) 0}
 html.racket-live .hero2>.wrap{max-width:none;padding:0 14vw 0 3vw}
-html.racket-live .hero2-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,2.5vw,3rem);min-height:calc(100vh - var(--sticky-h) - 40px)}
+html.racket-live .hero2-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.25rem,2vw,2.25rem);min-height:calc(100vh - var(--sticky-h) - 40px)}
 html.racket-live .hero2-text{justify-self:end;width:min(620px,100%)}
 html.racket-live .hero2 h1{font-size:clamp(3rem,5.6vw,6.25rem)}
 html.racket-live .hero2 .lead{font-size:clamp(1.05rem,1.25vw,1.3rem);max-width:40ch}
-html.racket-live .hero2 .arch{width:100%;max-width:min(640px,calc((100vh - var(--sticky-h) - 60px) * .8))}
+html.racket-live .hero2 .arch{width:100%;max-width:min(640px,calc((100vh - var(--sticky-h) - 60px) * .8));justify-self:start}
 main>.shopify-section:has(.racket-fx){z-index:20}
 .arch>.arch-racket{position:absolute;z-index:3;top:-4%;right:-7%;width:34%;height:auto;object-fit:contain;border-radius:0;transform:rotate(14deg);filter:drop-shadow(0 18px 24px rgba(11,27,43,.28));pointer-events:none}
 html.racket-live .arch>.arch-racket{display:none}
