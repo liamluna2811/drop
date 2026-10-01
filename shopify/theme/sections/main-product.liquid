@@ -24,7 +24,9 @@
           {%- endfor -%}
         {%- endif -%}
         <div class="slide{% if forloop.first %} on{% endif %}" data-media-id="{{ media.id }}" data-color="{{ media_color | escape }}">
-          {{ media | image_url: width: 1000 | image_tag: widths: '500, 1000', alt: media.alt | default: product.title, loading: 'eager' }}
+          {%- if src contains '-back' -%}{%- assign slide_view = 'dos' -%}{%- elsif src contains '-front' -%}{%- assign slide_view = 'devant' -%}{%- else -%}{%- assign slide_view = '' -%}{%- endif -%}
+          {%- capture slide_alt -%}{% render 'media-alt', media: media, product: product, color: media_color, view: slide_view %}{%- endcapture -%}
+          {{ media | image_url: width: 1000 | image_tag: widths: '500, 750, 1000', sizes: '(min-width: 900px) 55vw, 100vw', alt: slide_alt, loading: 'eager' }}
         </div>
       {%- else -%}
         <div class="slide on">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>

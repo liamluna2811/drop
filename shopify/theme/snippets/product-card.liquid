@@ -1,67 +1,93 @@
-{%- assign color_option = nil -%}
-{%- for option in product.options_with_values -%}
-  {%- assign oname = option.name | downcase -%}
-  {%- if oname == 'couleur' or oname == 'color' or oname == 'colour' -%}{%- assign color_option = option -%}{%- endif -%}
-{%- endfor -%}
+{%- comment -%}
+  Carte produit.
+  - Photo : celle de la première couleur proposée (sinon l'image principale).
+  - Deuxième photo au survol : une autre vue de la même couleur.
+  - Pastilles : couleurs disponibles (5 au maximum, puis « +N »).
+{%- endcomment -%}
+{%- liquid
+  assign color_option = nil
+  for option in product.options_with_values
+    assign oname = option.name | downcase
+    if oname == 'couleur' or oname == 'color' or oname == 'colour'
+      assign color_option = option
+    endif
+  endfor
+
+  assign card_media = product.featured_media
+  assign alt_media = nil
+  assign first_color = ''
+  assign first_color_name = ''
+  if color_option
+    assign first_color_name = color_option.values.first
+    assign first_color = first_color_name | handleize
+  endif
+
+  if first_color != ''
+    assign c_mid = '-' | append: first_color | append: '-'
+    assign c_end = '-' | append: first_color | append: '.'
+    assign found = false
+    for media in product.media
+      assign src = media.preview_image.src | split: '?' | first | downcase
+      if src contains c_mid or src contains c_end
+        assign longer = false
+        for other in color_option.values
+          assign o_slug = other | handleize
+          if o_slug.size > first_color.size and o_slug contains first_color
+            assign o_mid = '-' | append: o_slug | append: '-'
+            assign o_end = '-' | append: o_slug | append: '.'
+            if src contains o_mid or src contains o_end
+              assign longer = true
+            endif
+          endif
+        endfor
+        unless longer
+          if found == false
+            assign card_media = media
+            assign found = true
+          elsif alt_media == nil
+            assign alt_media = media
+            break
+          endif
+        endunless
+      endif
+    endfor
+  elsif product.media.size > 1
+    assign alt_media = product.media[1]
+  endif
+
+  assign card_view = ''
+  assign card_src = card_media.preview_image.src | downcase
+  if card_src contains '-back'
+    assign card_view = 'dos'
+  elsif card_src contains '-front'
+    assign card_view = 'devant'
+  endif
+-%}
 <article class="card">
-  <a class="card-img" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+  <a class="card-media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
     {%- if product.tags.size > 0 -%}<span class="tag">{{ product.tags.first }}</span>{%- endif -%}
-    {%- assign card_media = product.featured_media -%}
-    {%- assign first_color = '' -%}
-    {%- if color_option -%}{%- assign first_color = color_option.values.first | handleize -%}{%- endif -%}
-    {%- assign found = false -%}
-    {%- if first_color != '' -%}
-      {%- assign c_mid = '-' | append: first_color | append: '-' -%}
-      {%- assign c_end = '-' | append: first_color | append: '.' -%}
-      {%- for media in product.media -%}
-        {%- assign src = media.preview_image.src | split: '?' | first | downcase -%}
-        {%- if src contains c_mid or src contains c_end -%}
-          {%- assign longer = false -%}
-          {%- for other in color_option.values -%}
-            {%- assign o_slug = other | handleize -%}
-            {%- if o_slug.size > first_color.size and o_slug contains first_color -%}
-              {%- assign o_mid = '-' | append: o_slug | append: '-' -%}
-              {%- assign o_end = '-' | append: o_slug | append: '.' -%}
-              {%- if src contains o_mid or src contains o_end -%}{%- assign longer = true -%}{%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- unless longer -%}
-            {%- assign card_media = media -%}
-            {%- assign found = true -%}
-            {%- break -%}
-          {%- endunless -%}
-        {%- endif -%}
-      {%- endfor -%}
-    {%- endif -%}
-    {%- unless found -%}
-      {%- for media in product.media -%}
-        {%- assign src = media.preview_image.src | downcase -%}
-        {%- if src contains '-white-' or src contains '-white.' or src contains '-blanc-' or src contains '-blanc.' -%}
-          {%- assign card_media = media -%}
-          {%- break -%}
-        {%- endif -%}
-      {%- endfor -%}
-    {%- endunless -%}
     {%- if card_media -%}
-      {{ card_media | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 700', alt: card_media.alt | default: product.title }}
+      {%- capture main_alt -%}{% render 'media-alt', media: card_media, product: product, color: first_color_name, view: card_view %}{%- endcapture -%}
+      {%- capture main_class -%}card-img-main{% if alt_media %} has-alt{% endif %}{%- endcapture -%}
+      {{ card_media | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 450, 600, 800', sizes: '(min-width: 1100px) 23vw, (min-width: 750px) 31vw, 48vw', alt: main_alt, class: main_class }}
+      {%- if alt_media -%}
+        {{ alt_media | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 450, 600, 800', sizes: '(min-width: 1100px) 23vw, (min-width: 750px) 31vw, 48vw', alt: '', class: 'card-img-alt' }}
+      {%- endif -%}
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
     {%- endif -%}
   </a>
   <div class="card-body">
-    <div class="card-top">
-      <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-      <span class="price">{{ product.price | money }}</span>
-    </div>
-    {%- if product.description != blank -%}<p class="desc">{{ product.description | strip_html | truncate: 110 }}</p>{%- endif -%}
+    <h3 class="card-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <span class="price">{% if product.price_varies %}dès {% endif %}{{ product.price_min | money }}</span>
     {%- if color_option -%}
-      <div class="swatches">
-        {%- for value in color_option.values -%}
+      <div class="swatches" aria-label="Couleurs disponibles">
+        {%- for value in color_option.values limit: 5 -%}
           {%- assign v = product.variants | where: 'option1', value | first -%}
-          <a class="sw" href="{{ product.url }}?variant={{ v.id }}" aria-label="{{ value | escape }}" title="{{ value | escape }}" style="background:#cccccc;background:{% render 'color-hex', name: value %}"></a>
+          <a class="sw" href="{{ product.url }}?variant={{ v.id }}" title="{{ value | escape }}" style="background:#cccccc;background:{% render 'color-hex', name: value %}"><span class="visually-hidden">{{ value }}</span></a>
         {%- endfor -%}
+        {%- if color_option.values.size > 5 -%}<span class="sw-more">+{{ color_option.values.size | minus: 5 }}</span>{%- endif -%}
       </div>
     {%- endif -%}
-    <a class="add" href="{{ product.url }}">Choisir ma taille</a>
   </div>
 </article>

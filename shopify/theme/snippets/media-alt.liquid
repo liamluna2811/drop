@@ -1,0 +1,21 @@
+{%- comment -%}
+  Texte alternatif d'une image produit.
+  Les images envoyées par Printful ont souvent « Product mockup » comme texte : on le remplace par le nom du produit.
+  Paramètres : media, product, color (facultatif), view (facultatif, ex. « devant »)
+{%- endcomment -%}
+{%- liquid
+  assign raw = media.alt | strip
+  assign low = raw | downcase
+  if raw == blank or low contains 'mockup'
+    assign out = product.title
+    if color != blank
+      assign out = out | append: ', ' | append: color
+    endif
+    if view != blank
+      assign out = out | append: ', ' | append: view
+    endif
+  else
+    assign out = raw
+  endif
+-%}
+{{- out | strip_html | escape -}}

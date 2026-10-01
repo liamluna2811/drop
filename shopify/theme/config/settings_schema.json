@@ -8,11 +8,83 @@
     "theme_support_url": "https://help.shopify.com/"
   },
   {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Le vert citron sert uniquement d'accent (boutons importants, pastilles, surlignage). Garde un texte marine sur les fonds clairs et sur le citron."
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Fond (crème)",
+        "default": "#F6F4EE"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Cartes et panneaux",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_surface_alt",
+        "label": "Fond secondaire (sections alternées)",
+        "default": "#ECE8DD"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texte (bleu marine)",
+        "default": "#0B1B2B"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Texte secondaire",
+        "default": "#4F5D6B"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (vert citron)",
+        "default": "#D4FF3A"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Fond sombre (bandeau, pied de page)",
+        "default": "#0B1B2B"
+      },
+      {
+        "type": "color",
+        "id": "color_on_dark",
+        "label": "Texte sur fond sombre",
+        "default": "#F6F4EE"
+      }
+    ]
+  },
+  {
     "name": "Boutique",
     "settings": [
-      { "type": "text", "id": "announcement", "label": "Bandeau d'annonce (visiteurs non connectés)", "default": "−10 % sur ta première commande en créant ton compte" },
-      { "type": "text", "id": "announcement_customer", "label": "Bandeau d'annonce (clients connectés)", "default": "Livraison offerte dès 60 € en France et en Europe" },
-      { "type": "number", "id": "free_shipping_threshold", "label": "Seuil de livraison offerte (en euros)", "default": 60 }
+      {
+        "type": "text",
+        "id": "announcement",
+        "label": "Bandeau d'annonce (visiteurs non connectés)",
+        "default": "−10 % sur ta première commande en créant ton compte"
+      },
+      {
+        "type": "text",
+        "id": "announcement_customer",
+        "label": "Bandeau d'annonce (clients connectés)",
+        "default": "Livraison offerte dès 60 € en France et en Europe"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Seuil de livraison offerte (en euros)",
+        "default": 60
+      }
     ]
   }
 ]
