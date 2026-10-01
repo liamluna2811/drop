@@ -389,7 +389,8 @@
     c._colors = list(c.dataset.colors);
     c._sizes = list(c.dataset.sizes);
     c._combos = list(c.dataset.combos).map(function (x) { var p = x.split('/'); return { c: p[0], s: p[1] }; });
-    try { c._imgs = JSON.parse(c.dataset.imgs || '{}'); } catch (e) { c._imgs = {}; }
+    c._imgs = {};   // [[couleur, photo, photo au survol, id de variante], …]
+    try { JSON.parse(c.dataset.imgs || '[]').forEach(function (r) { c._imgs[r[0]] = r.slice(1); }); } catch (e) {}
     var main = c.querySelector('.card-img-main'), alt = c.querySelector('.card-img-alt');
     c._orig = {
       main: main && { src: main.getAttribute('src'), srcset: main.getAttribute('srcset') },

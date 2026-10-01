@@ -107,7 +107,7 @@
           endif
         endfor
         if img1 != ''
-          assign f_imgs = f_imgs | append: ',"' | append: key | append: '":["' | append: img1 | append: '","' | append: img2 | append: '",' | append: cid | append: ']'
+          assign f_imgs = f_imgs | append: ',["' | append: key | append: '","' | append: img1 | append: '","' | append: img2 | append: '",' | append: cid | append: ']'
         endif
       endfor
     endif
@@ -152,7 +152,7 @@
     assign card_view = 'devant'
   endif
 -%}
-<article class="card"{% if filterable %} data-card data-price="{{ product.price_min }}" data-title="{{ product.title | downcase | escape }}" data-date="{{ product.published_at | date: '%s' }}" data-colors="{{ f_colors }}" data-sizes="{{ f_sizes | escape }}" data-combos="{{ f_combos | escape }}" data-url="{{ product.url }}" data-imgs="{{ '{' | append: f_imgs | append: '}' | escape }}"{% endif %}>
+<article class="card"{% if filterable %} data-card data-price="{{ product.price_min }}" data-title="{{ product.title | downcase | escape }}" data-date="{{ product.published_at | date: '%s' }}" data-colors="{{ f_colors }}" data-sizes="{{ f_sizes | escape }}" data-combos="{{ f_combos | escape }}" data-url="{{ product.url }}" data-imgs="[{{ f_imgs | escape }}]"{% endif %}>
   <a class="card-media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
     {%- capture badge -%}{% render 'product-badge', product: product %}{%- endcapture -%}
     {%- if badge != blank -%}<span class="tag">{{ badge }}</span>{%- endif -%}
