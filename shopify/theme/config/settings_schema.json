@@ -77,7 +77,7 @@
         "type": "text",
         "id": "announcement_customer",
         "label": "Bandeau d'annonce (clients connectés)",
-        "default": "Livraison offerte dès 60 € en France et en Europe"
+        "default": "Livraison offerte dès 60 € en France et dans l'UE"
       },
       {
         "type": "number",
