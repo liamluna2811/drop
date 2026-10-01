@@ -217,11 +217,15 @@ font{vertical-align:baseline!important}
 /* 9d. Raquette 3D (accueil) --------------------------------------------------------- */
 .racket-fx{position:fixed;inset:0;width:100vw;height:100vh;height:100svh;z-index:20;pointer-events:none;display:none}
 html.racket-live .racket-fx{display:block}
-/* Bannière quand la raquette 3D est affichée (ordinateur) : texte à gauche, arche au milieu, raquette dans le tiers droit */
-html.racket-live .hero2>.wrap{max-width:none;padding:0 32vw 0 4vw}
-html.racket-live .hero2-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(1.5rem,3vw,3.5rem);min-height:calc(100vh - var(--header-h) - 40px)}
-html.racket-live .hero2-text{justify-self:end;width:min(540px,100%)}
-html.racket-live .hero2 .arch{width:100%;max-width:min(380px,calc((100vh - 220px) * .8))}
+/* Bannière quand la raquette 3D est affichée (ordinateur) : texte à gauche, grande arche au milieu,
+   raquette devant le bord droit de l'arche. Espaces resserrés, éléments agrandis. */
+html.racket-live .hero2{padding:clamp(1rem,2.5vh,2rem) 0}
+html.racket-live .hero2>.wrap{max-width:none;padding:0 18vw 0 4vw}
+html.racket-live .hero2-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(1.5rem,3vw,3rem);min-height:calc(100vh - var(--header-h) - 70px)}
+html.racket-live .hero2-text{justify-self:end;width:min(620px,100%)}
+html.racket-live .hero2 h1{font-size:clamp(3rem,5.6vw,6.25rem)}
+html.racket-live .hero2 .lead{font-size:clamp(1.05rem,1.25vw,1.3rem);max-width:40ch}
+html.racket-live .hero2 .arch{width:100%;max-width:min(520px,calc((100vh - var(--header-h) - 110px) * .8))}
 main>.shopify-section:has(.racket-fx){z-index:20}
 .arch>.arch-racket{position:absolute;z-index:3;top:-4%;right:-7%;width:34%;height:auto;object-fit:contain;border-radius:0;transform:rotate(14deg);filter:drop-shadow(0 18px 24px rgba(11,27,43,.28));pointer-events:none}
 html.racket-live .arch>.arch-racket{display:none}

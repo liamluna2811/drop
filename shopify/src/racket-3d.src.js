@@ -188,7 +188,7 @@ function buildRacket(logoImg, options) {
   uv.needsUpdate = true;
   geo.computeVertexNormals();
 
-  var faceMat = new THREE.MeshPhysicalMaterial({ map: faceTexture(logoImg, st), roughness: 0.42, metalness: 0.1, clearcoat: 0.9, clearcoatRoughness: 0.18 });
+  var faceMat = new THREE.MeshPhysicalMaterial({ map: faceTexture(logoImg, st), roughness: 0.5, metalness: 0.05, clearcoat: 0.55, clearcoatRoughness: 0.3, envMapIntensity: 0.55 });
   var rimMat = new THREE.MeshPhysicalMaterial({ color: st.rim, roughness: 0.32, metalness: 0.25, clearcoat: 1, clearcoatRoughness: 0.12 });
   var head = new THREE.Mesh(geo, [faceMat, rimMat]);
   group.add(head);
@@ -237,20 +237,23 @@ function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) 
 function lerp(a, b, t) { return a + (b - a) * t; }
 
 // Position de la raquette selon l'avancée p (0 = haut de page, 1 = sortie), dans la zone visible.
-// Tête en haut à gauche, manche vers le bas à droite. 0 → 0,75 : elle rétrécit doucement ; 0,75 → 1 : elle sort par la droite.
+// 0 → 0,2  : la raquette, posée devant le bord de l'arche, se relève vers le haut et dégage l'arche ;
+// 0,2 → 0,75 : elle rétrécit doucement en glissant vers la droite ; 0,75 → 1 : elle sort par la droite.
+var RAISE = 0.2;
 function pose(p, view) {
   p = Math.min(1, Math.max(0, p));
-  var a = ease(Math.min(1, p / 0.75));
-  var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
-  // Taille : la raquette (environ 62 cm en diagonale) doit tenir dans la moitié droite et dans la hauteur
   var top = 80 / view.pxPerCm;                         // hauteur de l'en-tête (≈ 80 px) en cm
-  // La raquette occupe le tiers droit de l'écran (de 68 % à 100 % de la largeur), à côté de l'arche
-  var s0 = Math.min(1.15, ((2 * view.hh - top) * 0.88) / 56, (view.hw * 0.6) / 60) * (view.size || 1);
+  var s0 = Math.min(1.25, ((2 * view.hh - top) * 0.96) / 56, (view.hw * 0.8) / 60) * (view.size || 1);
+  var r = ease(Math.min(1, p / RAISE));                 // relevé
+  var a = p <= RAISE ? 0 : ease(Math.min(1, (p - RAISE) / (0.75 - RAISE)));
+  var b = p <= 0.75 ? 0 : ease((p - 0.75) / 0.25);
   return {
     s: lerp(s0, s0 * 0.55, a),
-    x: view.hw * 0.66 + lerp(0, view.hw * 0.1, a) + b * view.hw * 0.75,
-    y: -top / 2 + lerp(0, 1.5, a), z: 0,
-    rx: -0.1, ry: lerp(-0.32, -0.18, a) - b * 0.9, rz: lerp(0.78, 0.6, a) - b * 0.3
+    x: view.hw * 0.62 + r * view.hw * 0.12 + b * view.hw * 0.75,
+    y: -top / 2 + r * view.hh * 0.1 + a * view.hh * 0.04, z: r * 4,
+    rx: lerp(-0.1, 0.08, r),
+    ry: lerp(-0.34, -0.42, r) - b * 0.9,
+    rz: lerp(0.78, -0.12, r) - a * 0.15 - b * 0.3
   };
 }
 
@@ -305,7 +308,7 @@ export function mount(host, options) {
   }
 
   var ball = null, dummy = new THREE.Object3D(), contact = null, contactScale = 1;
-  var BALL_IN = 0.3;                        // moment de l'impact (avancée de la bannière)
+  var BALL_IN = 0.26;                       // impact : juste après que la raquette s'est relevée
   function setPose(obj, s, bob, wob) {
     obj.position.set(s.x, s.y + bob, s.z);
     obj.rotation.set(s.rx + wob, s.ry + wob * 0.8, s.rz);
