@@ -432,12 +432,32 @@
       }
     }
 
+    function addToCart(items) {
+      return fetch('/cart/add.js', { method: 'POST', headers: json, body: JSON.stringify({ items: items }) })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); });
+    }
+    function setCountry() {
+      var t = window.theme || {}, list = t.sellTo || [];
+      var code = list.indexOf(t.country) > -1 ? t.country : (list.indexOf('FR') > -1 ? 'FR' : list[0]);
+      if (!code) return Promise.resolve();
+      var body = new URLSearchParams({ form_type: 'localization', _method: 'put', country_code: code, return_to: location.pathname });
+      return fetch((window.Shopify && Shopify.routes && Shopify.routes.root || '/') + 'localization', { method: 'POST', body: body, credentials: 'same-origin' })
+        .catch(function () {});
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (btn.disabled) return;
       btn.disabled = true;
-      fetch('/cart/add.js', { method: 'POST', headers: json, body: JSON.stringify({ items: [{ id: +$('#variantId').value, quantity: +$('#quantity').value || 1 }] }) })
-        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      var items = [{ id: +$('#variantId').value, quantity: +$('#quantity').value || 1 }];
+      addToCart(items)
+        .then(function (res) {
+          // Refus « épuisé » alors que le stock est là : le pays retenu pour la session (adresse absente
+          // du compte, géolocalisation hors France/UE) n'est pas desservi. On rattache le panier à un pays
+          // desservi puis on réessaie une fois ; l'adresse réelle est contrôlée au paiement.
+          if (!res.ok && res.status === 422) return setCountry().then(function () { return addToCart(items); });
+          return res;
+        })
         .then(function (res) {
           if (!res.ok) { err.textContent = res.d.description || 'Impossible d\'ajouter ce produit.'; err.hidden = false; return; }
           var waitCut = Promise.race([prepareCut(), new Promise(function (r) { setTimeout(function () { r(null); }, 400); })]);
