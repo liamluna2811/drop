@@ -1,0 +1,67 @@
+{%- comment -%}
+  Animation de fond de la page d'accueil : terrain de padel en perspective et joueur stylisé.
+  Le défilement fait avancer le bras et la raquette (préparation → frappe), puis la balle part vers la vitre.
+  - Navigateurs récents : animation CSS liée au défilement (animation-timeline: scroll()).
+  - Autres navigateurs : secours léger en JavaScript (theme.js, requestAnimationFrame).
+  - « Réduire les animations » activé : illustration fixe.
+{%- endcomment -%}
+{%- if section.settings.enabled -%}
+<div class="court-bg" aria-hidden="true" style="--court-h: {{ section.settings.height }}vh; --court-o: {{ section.settings.opacity | divided_by: 100.0 }};">
+  <div class="court-sticky">
+    <svg class="court-svg" data-court viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <defs>
+        <pattern id="court-mesh" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <path d="M0 0V14M0 0H14" stroke="currentColor" stroke-width="1" fill="none"/>
+        </pattern>
+      </defs>
+      <g class="court-lines">
+        <!-- Sol -->
+        <polygon class="court-floor" points="400,340 800,340 1130,790 70,790"/>
+        <!-- Grillage au-dessus de la vitre du fond -->
+        <rect class="court-detail court-mesh" x="400" y="120" width="400" height="50"/>
+        <!-- Vitre du fond -->
+        <rect class="court-glass" x="400" y="170" width="400" height="170"/>
+        <path class="court-detail" d="M500 170V340M600 170V340M700 170V340"/>
+        <!-- Côtés : vitre près du fond, puis grillage -->
+        <polygon class="court-glass" points="400,120 400,340 250,544 250,160"/>
+        <polygon class="court-detail court-mesh" points="250,160 250,544 70,790 70,208"/>
+        <polygon class="court-glass" points="800,120 800,340 950,544 950,160"/>
+        <polygon class="court-detail court-mesh" points="950,160 950,544 1130,790 1130,208"/>
+        <path d="M400 120H800M250 160V544M950 160V544"/>
+        <!-- Lignes du terrain -->
+        <path class="court-detail" d="M334 430H866M180 640H1020M600 430V640"/>
+        <!-- Filet -->
+        <polygon class="court-detail court-mesh" points="283,423 917,423 917,500 283,500"/>
+        <path class="court-net-top" d="M283 423H917M283 423V500M917 423V500"/>
+      </g>
+      <!-- Joueur -->
+      <g class="court-player">
+        <circle cx="560" cy="470" r="24"/>
+        <path class="limb torso" d="M560 498 552 600"/>
+        <path class="limb leg" d="M552 600 520 680 500 760"/>
+        <path class="limb leg" d="M558 600 600 675 630 755"/>
+        <path class="limb arm-free" d="M546 516 502 560 482 522"/>
+        <g class="court-arm">
+          <path class="limb arm" d="M575 515 630 470 670 425"/>
+          <path class="limb grip" d="M670 425 692 398"/>
+          <ellipse class="racket" cx="720" cy="365" rx="34" ry="44" transform="rotate(40 720 365)"/>
+        </g>
+      </g>
+      <!-- Balle -->
+      <circle class="court-ball" cx="751" cy="403" r="11"/>
+    </svg>
+  </div>
+</div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Animation de fond",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Afficher l'animation du terrain de padel", "default": true },
+    { "type": "range", "id": "opacity", "label": "Intensité", "min": 10, "max": 60, "step": 5, "unit": "%", "default": 35 },
+    { "type": "range", "id": "height", "label": "Hauteur couverte (en % d'écran)", "min": 120, "max": 300, "step": 10, "unit": "%", "default": 220 },
+    { "type": "paragraph", "content": "Laisse « Couleur de fond : Transparente » sur les premières sections pour voir l'animation derrière elles. Les visiteurs qui ont activé « réduire les animations » voient une illustration fixe." }
+  ],
+  "presets": [{ "name": "Animation de fond" }]
+}
+{% endschema %}

@@ -259,3 +259,22 @@
   els.forEach(function (e) { io.observe(e); });
   setTimeout(showAll, 4000);
 })();
+
+// Animation de fond de l'accueil : secours JavaScript quand le navigateur ne gère pas animation-timeline
+(function () {
+  var svg = document.querySelector('[data-court]');
+  if (!svg) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()')) return;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.9)));
+    svg.style.setProperty('--p', p.toFixed(4));
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();

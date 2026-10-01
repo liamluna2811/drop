@@ -15,7 +15,7 @@
     endif
   endif
 -%}
-<section class="hero2">
+<section class="hero2 scheme-{{ section.settings.scheme }}">
   <div class="wrap hero2-grid">
     <div class="hero2-text reveal">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -42,6 +42,7 @@
 {
   "name": "Bannière d'accueil",
   "settings": [
+    {"type": "select", "id": "scheme", "label": "Couleur de fond", "default": "none", "options": [{"value": "none", "label": "Transparente (laisse voir l'animation de fond)"}, {"value": "bg", "label": "Crème"}, {"value": "alt", "label": "Beige"}, {"value": "surface", "label": "Blanc"}, {"value": "dark", "label": "Bleu marine"}]},
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Padel · Textiles et accessoires" },
     { "type": "text", "id": "title_1", "label": "Titre, ligne 1", "default": "Joue" },
     { "type": "text", "id": "title_2", "label": "Titre, ligne 2", "default": "comme" },

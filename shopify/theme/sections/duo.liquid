@@ -1,0 +1,49 @@
+<section class="section-d duo scheme-{{ section.settings.scheme }}">
+  <div class="wrap">
+    <div class="sh reveal">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <div class="duo-grid">
+      {%- assign duo_left = section.settings.product_left -%}
+      {%- assign duo_right = section.settings.product_right -%}
+      {%- if duo_left != blank -%}
+        <div class="duo-item reveal">
+          {%- if section.settings.label_left != blank -%}<span class="duo-label">{{ section.settings.label_left }}</span>{%- endif -%}
+          {% render 'product-card', product: duo_left %}
+        </div>
+      {%- endif -%}
+      {%- if duo_right != blank -%}
+        <div class="duo-item reveal">
+          {%- if section.settings.label_right != blank -%}<span class="duo-label">{{ section.settings.label_right }}</span>{%- endif -%}
+          {% render 'product-card', product: duo_right %}
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <div class="center duo-cta"><a class="btn ghost" href="{{ section.settings.button_url | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Le duo",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Couleur de fond", "default": "none", "options": [{ "value": "none", "label": "Transparente (laisse voir l'animation de fond)" }, { "value": "bg", "label": "Crème" }, { "value": "alt", "label": "Beige" }, { "value": "surface", "label": "Blanc" }, { "value": "dark", "label": "Bleu marine" }] },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Le duo" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Côté drive, côté revés" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Un t-shirt pour le joueur de droite, un pour le joueur de gauche. À porter ensemble sur le court." },
+    { "type": "header", "content": "T-shirt de gauche" },
+    { "type": "product", "id": "product_left", "label": "Produit" },
+    { "type": "text", "id": "label_left", "label": "Étiquette", "default": "Côté drive" },
+    { "type": "header", "content": "T-shirt de droite" },
+    { "type": "product", "id": "product_right", "label": "Produit" },
+    { "type": "text", "id": "label_right", "label": "Étiquette", "default": "Côté revés" },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Voir la collection Lifestyle" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton" }
+  ],
+  "presets": [{ "name": "Le duo" }]
+}
+{% endschema %}

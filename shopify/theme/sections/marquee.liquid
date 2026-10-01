@@ -1,5 +1,5 @@
 {%- assign words = section.settings.words | split: ',' -%}
-<div class="marquee" aria-hidden="true">
+<div class="marquee scheme-{{ section.settings.scheme }}" aria-hidden="true">
   <div class="marquee-track">
     {%- for i in (1..2) -%}{%- for w in words -%}<span>{{ w | strip }}</span>{%- endfor -%}{%- endfor -%}
   </div>
@@ -8,6 +8,7 @@
 {
   "name": "Bandeau défilant",
   "settings": [
+    {"type": "select", "id": "scheme", "label": "Couleur de fond", "default": "alt", "options": [{"value": "none", "label": "Transparente (laisse voir l'animation de fond)"}, {"value": "bg", "label": "Crème"}, {"value": "alt", "label": "Beige"}, {"value": "surface", "label": "Blanc"}, {"value": "dark", "label": "Bleu marine"}]},
     { "type": "text", "id": "words", "label": "Mots (séparés par des virgules)", "default": "BANDEJA,VÍBORA,SMASH,CHIQUITA,GLOBO,REMATE" }
   ],
   "presets": [{ "name": "Bandeau défilant" }]

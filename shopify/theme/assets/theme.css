@@ -199,6 +199,56 @@ font{vertical-align:baseline!important}
 .newsletter input{min-height:48px;padding:.8rem 1.3rem;border-radius:var(--radius-pill);border:1px solid var(--c-text);background:var(--c-surface);width:min(340px,100%)}
 .nl-msg{width:100%;margin-top:var(--s-4)!important;font-weight:600;color:var(--c-text)!important}
 
+/* 9b. Accueil : le duo, l'esprit de la marque ------------------------------------- */
+.duo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4);max-width:900px;margin:0 auto}
+@media (min-width:750px){.duo-grid{gap:var(--s-6)}}
+.duo-item{position:relative}
+.duo-label{position:absolute;z-index:3;top:var(--s-3);right:var(--s-3);background:var(--c-text);color:var(--c-bg);font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .7rem;border-radius:var(--radius-pill)}
+.duo-cta{margin-top:var(--s-7)}
+.spirit-grid{display:grid;gap:var(--s-7);align-items:center}
+@media (min-width:900px){.spirit-grid{grid-template-columns:1.2fr .8fr}}
+.spirit-text h2{margin-bottom:var(--s-4)}
+.spirit-body{max-width:56ch;margin-bottom:var(--s-6)}
+.spirit-body p+p{margin-top:var(--s-3)}
+.spirit-media{display:grid;place-items:center}
+.spirit-media img{border-radius:var(--radius);max-height:460px;width:auto;object-fit:cover}
+.spirit-media .spirit-logo{width:min(260px,60%);border-radius:0;opacity:.9}
+
+/* 9c. Animation de fond (terrain de padel) ---------------------------------------- */
+@property --p{syntax:'<number>';inherits:true;initial-value:0}
+main{position:relative}
+main>.shopify-section{position:relative;z-index:1}
+.court-bg{position:absolute;left:0;right:0;top:0;height:var(--court-h,220vh);z-index:0;pointer-events:none;overflow:clip}
+.court-sticky{position:sticky;top:0;height:100vh;height:100svh}
+.court-svg{display:block;width:100%;height:100%;color:var(--c-text);opacity:var(--court-o,.35);--b:clamp(0,calc((var(--p) - .68) / .32),1)}
+.court-lines{fill:none;stroke:var(--c-text);stroke-width:1.5;stroke-opacity:.45}
+.court-floor{fill:var(--c-surface-alt);fill-opacity:.7;stroke-opacity:.6}
+.court-glass{fill:var(--c-surface);fill-opacity:.35}
+.court-mesh{fill:url(#court-mesh);stroke-opacity:.35;color:var(--c-text)}
+.court-net-top{stroke-width:3;stroke-opacity:.6}
+.court-player{fill:var(--c-text);fill-opacity:.55;stroke:var(--c-text);stroke-opacity:.55;stroke-linecap:round;stroke-linejoin:round}
+.court-player .limb{fill:none}
+.court-player .torso{stroke-width:34}
+.court-player .leg{stroke-width:24}
+.court-player .arm,.court-player .arm-free{stroke-width:17}
+.court-player .grip{stroke-width:8}
+.court-player .racket{fill:var(--c-text);fill-opacity:.55;stroke:none}
+.court-arm{transform-origin:575px 515px;transform:rotate(calc(-95deg + var(--p) * 155deg))}
+.court-ball{fill:var(--c-accent);stroke:var(--c-text);stroke-width:2;transform-origin:751px 403px;transform:translate(calc(var(--b) * -281px),calc(var(--b) * -153px)) scale(calc(1 - var(--b) * .62));opacity:calc(var(--b) * 40)}
+@supports (animation-timeline: scroll()){
+  .court-svg{animation:court-progress linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+}
+@keyframes court-progress{from{--p:0}to{--p:1}}
+@media (max-width:749px){
+  /* Version simplifiée : terrain entier, en petit, au milieu de l'écran */
+  .court-sticky{display:flex;align-items:center}
+  .court-svg{height:auto;aspect-ratio:3/2;opacity:calc(var(--court-o,.35) * .8)}
+  .court-detail{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .court-svg{animation:none!important;--p:.6!important}
+}
+
 /* 10. Fiche produit ------------------------------------------------------------------ */
 .product{display:grid;gap:clamp(1.5rem,5vw,4rem);align-items:start}
 @media (min-width:900px){.product{grid-template-columns:1.1fr .9fr}}
@@ -353,6 +403,26 @@ input:focus-visible+.sw,input:focus-visible+.size{outline:2px solid var(--c-text
   .cookie-banner{left:var(--s-2);right:var(--s-2);bottom:var(--s-2)}
   .cookie-inner{padding:var(--s-4)}
 }
+
+/* 16b. Couleurs de fond des sections (réglage « Couleur de fond ») ------------------- */
+.scheme-none{background:transparent}
+.scheme-bg{background:var(--c-bg)}
+.scheme-alt{background:var(--c-surface-alt)}
+.scheme-surface{background:var(--c-surface)}
+.scheme-dark{background:var(--c-dark);color:var(--c-on-dark)}
+.scheme-dark .eyebrow,.scheme-dark p,.scheme-dark .src,.scheme-dark .hist-intro p,.scheme-dark .arg p,.scheme-dark .tl h3{color:var(--c-on-dark-muted)}
+.scheme-dark h1,.scheme-dark h2,.scheme-dark h3,.scheme-dark .card-title,.scheme-dark .price,.scheme-dark .tl p{color:var(--c-on-dark)}
+.scheme-dark .btn{background:var(--c-accent);border-color:var(--c-accent);color:var(--c-text)}
+.scheme-dark .btn:hover{background:var(--c-on-dark);border-color:var(--c-on-dark);color:var(--c-text)}
+.scheme-dark .btn.ghost{background:transparent;border-color:var(--c-on-dark);color:var(--c-on-dark)}
+.scheme-dark .btn.ghost:hover{background:var(--c-on-dark);color:var(--c-text)}
+.scheme-dark .arg{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+.scheme-dark .tl{border-color:rgba(255,255,255,.3)}
+.scheme-dark .tl li::before{box-shadow:0 0 0 2px var(--c-on-dark)}
+.scheme-dark .newsletter input,.scheme-dark input{background:transparent;border-color:var(--c-on-dark);color:var(--c-on-dark)}
+.scheme-dark .duo-label{background:var(--c-accent);color:var(--c-text)}
+.scheme-dark .link-arrow{color:var(--c-on-dark)}
+.scheme-surface .arg{background:var(--c-bg)}
 
 /* 17. Animations ----------------------------------------------------------------------------- */
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}

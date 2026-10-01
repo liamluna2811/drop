@@ -1,4 +1,4 @@
-<section class="section-d">
+<section class="section-d scheme-{{ section.settings.scheme }}">
   <div class="wrap">
     <div class="sh reveal">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -27,6 +27,7 @@
 {
   "name": "Univers (catégories)",
   "settings": [
+    {"type": "select", "id": "scheme", "label": "Couleur de fond", "default": "none", "options": [{"value": "none", "label": "Transparente (laisse voir l'animation de fond)"}, {"value": "bg", "label": "Crème"}, {"value": "alt", "label": "Beige"}, {"value": "surface", "label": "Blanc"}, {"value": "dark", "label": "Bleu marine"}]},
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Les univers" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Lifestyle, sport et accessoires" },
     { "type": "text", "id": "text", "label": "Texte", "default": "Tous les produits se trouvent dans leur catégorie." }

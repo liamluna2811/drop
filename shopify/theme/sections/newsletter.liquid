@@ -1,10 +1,10 @@
-<section class="section newsletter" id="newsletter">
+<section class="newsletter scheme-{{ section.settings.scheme }}" id="newsletter">
   <h2>{{ section.settings.title }}</h2>
   <p>{{ section.settings.text }}</p>
   {%- form 'customer', id: 'nlForm' -%}
     <input type="hidden" name="contact[tags]" value="newsletter">
     <input type="email" name="contact[email]" required placeholder="ton@email.com" aria-label="Adresse email" autocomplete="email">
-    <button class="btn dark" type="submit">{{ section.settings.button }}</button>
+    <button class="btn" type="submit">{{ section.settings.button }}</button>
     {%- if form.posted_successfully? -%}
       <p class="nl-msg" role="status">Bienvenue au club ! Merci pour ton inscription.</p>
     {%- endif -%}
@@ -17,6 +17,7 @@
 {
   "name": "Newsletter",
   "settings": [
+    {"type": "select", "id": "scheme", "label": "Couleur de fond", "default": "alt", "options": [{"value": "none", "label": "Transparente (laisse voir l'animation de fond)"}, {"value": "bg", "label": "Crème"}, {"value": "alt", "label": "Beige"}, {"value": "surface", "label": "Blanc"}, {"value": "dark", "label": "Bleu marine"}]},
     { "type": "text", "id": "title", "label": "Titre", "default": "Reste informé." },
     { "type": "textarea", "id": "text", "label": "Texte", "default": "Reçois par email les nouveautés Bandeja Club." },
     { "type": "text", "id": "button", "label": "Bouton", "default": "Je m'inscris" }

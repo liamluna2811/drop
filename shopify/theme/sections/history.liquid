@@ -1,4 +1,4 @@
-<section class="section-d alt" id="histoire">
+<section class="section-d scheme-{{ section.settings.scheme }}" id="histoire">
   <div class="wrap">
     <div class="hist">
       <div class="hist-intro reveal">
@@ -25,6 +25,7 @@
 {
   "name": "Histoire du padel",
   "settings": [
+    {"type": "select", "id": "scheme", "label": "Couleur de fond", "default": "alt", "options": [{"value": "none", "label": "Transparente (laisse voir l'animation de fond)"}, {"value": "bg", "label": "Crème"}, {"value": "alt", "label": "Beige"}, {"value": "surface", "label": "Blanc"}, {"value": "dark", "label": "Bleu marine"}]},
     { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Histoire" },
     { "type": "text", "id": "title", "label": "Titre", "default": "D'Acapulco à la France" },
     { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Le padel est un sport récent. Voici quelques dates qui ont compté." },
