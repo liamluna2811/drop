@@ -1,0 +1,11 @@
+{%- comment -%}
+  Renvoie le texte du badge d'un produit : étiquette (tag) commençant par « badge: ».
+  Exemple : l'étiquette « badge:Nouveau » affiche « Nouveau ». Les autres étiquettes ne s'affichent jamais.
+{%- endcomment -%}
+{%- for tag in product.tags -%}
+  {%- assign t = tag | downcase -%}
+  {%- if t contains 'badge:' -%}
+    {%- assign parts = tag | split: ':' -%}
+    {%- if parts.size > 1 -%}{{- tag | remove_first: parts.first | remove_first: ':' | strip | escape -}}{%- break -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

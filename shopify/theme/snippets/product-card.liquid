@@ -65,7 +65,8 @@
 -%}
 <article class="card">
   <a class="card-media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
-    {%- if product.tags.size > 0 -%}<span class="tag">{{ product.tags.first }}</span>{%- endif -%}
+    {%- capture badge -%}{% render 'product-badge', product: product %}{%- endcapture -%}
+    {%- if badge != blank -%}<span class="tag">{{ badge }}</span>{%- endif -%}
     {%- if card_media -%}
       {%- capture main_alt -%}{% render 'media-alt', media: card_media, product: product, color: first_color_name, view: card_view %}{%- endcapture -%}
       {%- capture main_class -%}card-img-main{% if alt_media %} has-alt{% endif %}{%- endcapture -%}
