@@ -129,8 +129,9 @@
         assign c_key = ''
         assign s_key = ''
         if color_option
+          assign v_color = variant.options[c_idx]
           capture lbl
-            render 'color-label', name: variant.options[c_idx]
+            render 'color-label', name: v_color
           endcapture
           assign c_key = lbl | strip | handleize
         endif
