@@ -35,12 +35,48 @@
             "how": "<p><strong>A – Demi-largeur poitrine :</strong> brassière posée à plat, d'un bord à l'autre au niveau de la poitrine.</p><p><strong>B – Demi-largeur bande :</strong> à plat, d'un bord à l'autre au niveau de la bande du bas.</p><p><strong>C – Longueur devant :</strong> du haut de la bretelle jusqu'au bas de la bande.</p><p><strong>D – Longueur côté :</strong> sur le côté, du dessous du bras jusqu'au bas de la bande.</p>",
             "note": "A et B sont mesurées à plat : multipliez par 2 pour obtenir le tour complet. Mesures du fabricant, pouvant varier d'environ 2,5 cm (confection à la main)."
           }
+        },
+        "apercu_perso": {
+          "type": "perso_preview",
+          "settings": {
+            "match": "personnalisé",
+            "view": "front-and-back",
+            "nth": 1,
+            "note": "Aperçu indicatif",
+            "mask": true,
+            "photo_name_text": "NAME",
+            "photo_num_text": "12",
+            "name_font": "montserrat",
+            "name_ph": "Ton prénom",
+            "name_upper": false,
+            "name_x": 35.4,
+            "name_y": 12.4,
+            "name_size": 3.4,
+            "name_ls": 0,
+            "name_rot": 0,
+            "num_font": "montserrat",
+            "num_ph": "10",
+            "num_x": 35.9,
+            "num_y": 25.1,
+            "num_size": 17.5,
+            "slot2": true,
+            "name2_x": 64.8,
+            "name2_y": 50.4,
+            "name2_size": 3.6,
+            "num2_x": 64.8,
+            "num2_y": 45.9,
+            "num2_size": 2.8,
+            "dark_colors": "Black",
+            "ink_dark": "#111111",
+            "ink_light": "#ffffff"
+          }
         }
       },
       "block_order": [
         "guide_sport",
         "guide_lifestyle",
-        "guide_brassiere"
+        "guide_brassiere",
+        "apercu_perso"
       ],
       "settings": {}
     },

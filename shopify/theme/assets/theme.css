@@ -402,12 +402,17 @@ html.racket-live .arch>.arch-racket{display:none}
 .perso-live{position:absolute;inset:0;z-index:1;pointer-events:none;--ink:var(--ink-dark)}
 .perso-live.dark{--ink:var(--ink-light)}
 .perso-live[hidden]{display:none}
-.pl-txt{position:absolute;left:calc(var(--x) * 1%);top:calc(var(--y) * 1%);transform:translate(-50%,-50%) rotate(calc(var(--rot) * 1deg));font-size:calc(var(--fs) * 1cqw);letter-spacing:calc(var(--ls) * .01em);line-height:1.1;white-space:nowrap;color:var(--ink);transition:opacity .2s}
+.pl-item{position:absolute;left:calc(var(--x) * 1%);top:calc(var(--y) * 1%);transform:translate(-50%,-50%) rotate(calc(var(--rot) * 1deg));font-size:calc(var(--fs) * 1cqw);letter-spacing:calc(var(--ls) * .01em);line-height:1;white-space:nowrap}
+.pl-txt{position:relative;color:var(--ink);transition:opacity .2s}
+.pl-mask{padding:.06em .1em;border-radius:.1em;color:transparent;visibility:hidden}
+.perso-live.has-nom .pl-mask.pl-nom,.perso-live.has-num .pl-mask.pl-num{visibility:visible}
 .pl-txt.ph{opacity:.4}
 .pl-manuscrite{font-family:Pacifico,cursive}
 .pl-baton{font-family:var(--font-display)}
 .pl-classique{font-family:Cinzel,serif;font-weight:700}
 .pl-italique{font-family:Fraunces,serif;font-style:italic;font-weight:800}
+.pl-montserrat{font-family:Montserrat,sans-serif;font-weight:800}
+.pl-montserrat.pl-num{font-weight:900}
 .perso-live-note{position:absolute;left:var(--s-3);bottom:var(--s-3);padding:.2rem .6rem;border-radius:var(--radius-pill);background:color-mix(in srgb,var(--c-surface) 85%,transparent);color:var(--c-text);font-size:var(--fs-xs);font-weight:600}
 .perso-mini{position:relative;width:min(100%,240px);aspect-ratio:1;margin:var(--s-4) auto 0;border-radius:var(--radius-sm);overflow:hidden;background:var(--c-surface-alt);container-type:inline-size}
 .perso-mini:empty{display:none}

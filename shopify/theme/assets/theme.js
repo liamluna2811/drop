@@ -466,12 +466,15 @@
       pNum.addEventListener('input', function () { pNum.value = pNum.value.replace(/\D/g, '').slice(0, 2); showPerso(); });
       pNom.addEventListener('input', showPerso);
 
-      // Aperçu en direct sur la photo (bloc « Aperçu du nom sur la photo »)
+      // Aperçu en direct sur la photo (bloc « Aperçu nom sur photo »)
       var live = document.querySelector('[data-perso-live]');
       if (live) {
-        var lNom = live.querySelector('[data-pl-nom]'), lNum = live.querySelector('[data-pl-num]'), mini = perso.querySelector('[data-perso-mini]');
-        var view = live.dataset.view === 'back' ? /-back-(?!2-)/ : /-front[-.]/;
-        var skip = /front-and-back|left-front|right-front/;
+        var items = [].slice.call(live.querySelectorAll('.pl-item:not(.pl-mask)'));
+        var masks = [].slice.call(live.querySelectorAll('[data-pl-mask]'));
+        var mini = perso.querySelector('[data-perso-mini]');
+        var vw = live.dataset.view;
+        var view = vw === 'back' ? /-back-(?!2-)/ : vw === 'front-and-back' ? /front-and-back/ : /-front[-.]/;
+        var skip = vw === 'front-and-back' ? /$^/ : /front-and-back|left-front|right-front/;
         var nth = +live.dataset.nth || 1, seen = {};
         slides.forEach(function (sl) {
           var im = sl.querySelector('img'), u = im ? (im.getAttribute('src') || '').toLowerCase() : '';
@@ -480,17 +483,65 @@
           if (seen[c] === nth) sl.setAttribute('data-pl-target', '');
         });
         var darks = (live.dataset.dark || '').toLowerCase().split(/[,\n]/).map(function (x) { return x.trim(); }).filter(Boolean);
-        var put = function (el, val) { el.textContent = val || el.dataset.ph; el.classList.toggle('ph', !val); };
+        var target = function () { return slides.filter(function (sl) { return !sl.hidden && sl.hasAttribute('data-pl-target'); })[0]; };
+
+        // Cache du texte d'exemple : couleur du tissu relevée autour de chaque zone (médiane du contour)
+        var tints = {};
+        var paint = function (cols) { masks.forEach(function (m, i) { if (cols[i]) { m.style.background = cols[i]; m.style.boxShadow = '0 0 .08em .04em ' + cols[i]; } }); };
+        var sample = function (img) {
+          if (!masks.length || !img) return;
+          var key = img.currentSrc || img.src;
+          if (tints[key]) return paint(tints[key]);
+          if (tints[key] === false) return;
+          tints[key] = false;
+          var lr = live.getBoundingClientRect();
+          if (!lr.width) { delete tints[key]; return; }
+          var boxes = masks.map(function (m) {
+            var r = m.getBoundingClientRect();
+            return [(r.left - lr.left) / lr.width, (r.top - lr.top) / lr.height, (r.right - lr.left) / lr.width, (r.bottom - lr.top) / lr.height];
+          });
+          var pic = new Image();
+          pic.crossOrigin = 'anonymous';
+          pic.onload = function () {
+            try {
+              var W = 320, H = Math.round(W * pic.naturalHeight / pic.naturalWidth) || W;
+              var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+              var g = cv.getContext('2d'); g.drawImage(pic, 0, 0, W, H);
+              var px = g.getImageData(0, 0, W, H).data;
+              var cols = boxes.map(function (bx) {
+                var ex = (bx[2] - bx[0]) * .12 + .006, ey = (bx[3] - bx[1]) * .25 + .006;
+                var x0 = Math.max(0, Math.round((bx[0] - ex) * W)), x1 = Math.min(W - 1, Math.round((bx[2] + ex) * W));
+                var y0 = Math.max(0, Math.round((bx[1] - ey) * H)), y1 = Math.min(H - 1, Math.round((bx[3] + ey) * H));
+                var r = [], gg = [], bb = [];
+                var add = function (x, y) { var o = (y * W + x) * 4; r.push(px[o]); gg.push(px[o + 1]); bb.push(px[o + 2]); };
+                for (var x = x0; x <= x1; x++) { add(x, y0); add(x, y1); }
+                for (var y = y0; y <= y1; y++) { add(x0, y); add(x1, y); }
+                var med = function (a) { a.sort(function (p, q) { return p - q; }); return a[a.length >> 1]; };
+                return 'rgb(' + med(r) + ',' + med(gg) + ',' + med(bb) + ')';
+              });
+              tints[key] = cols; paint(cols);
+            } catch (e) { /* image non lisible (autre domaine) : pas de cache */ }
+          };
+          pic.src = key;
+        };
+
         plSync = function () {
           var on = slides.filter(function (sl) { return sl.classList.contains('on'); })[0];
-          live.hidden = !(on && on.hasAttribute('data-pl-target'));
+          var show = !!(on && on.hasAttribute('data-pl-target'));
+          live.hidden = !show;
           live.classList.toggle('dark', darks.indexOf(selectedColor().toLowerCase()) > -1);
-          put(lNom, pNom.value.replace(/\s+/g, ' ').trim());
-          put(lNum, pNum.value.trim());
+          var vals = { nom: pNom.value.replace(/\s+/g, ' ').trim(), num: pNum.value.trim() };
+          items.forEach(function (it) {
+            var t = it.querySelector('[data-pl]'), v = vals[t.dataset.pl];
+            t.textContent = v || t.dataset.ph || '';
+            t.classList.toggle('ph', !v);
+          });
+          live.classList.toggle('has-nom', !!vals.nom);
+          live.classList.toggle('has-num', !!vals.num);
+          if (show) sample(on.querySelector('img'));
           // Vignette sous les champs (mobile : la grande photo n'est plus à l'écran pendant la saisie)
           if (mini) {
-            var t = slides.filter(function (sl) { return !sl.hidden && sl.hasAttribute('data-pl-target'); })[0];
-            var im = t && t.querySelector('img');
+            var t = target(), im = t && t.querySelector('img');
             if (!im) { mini.innerHTML = ''; return; }
             var copy = live.cloneNode(true);
             copy.hidden = false; copy.removeAttribute('data-perso-live');
@@ -498,7 +549,8 @@
             if (note) copy.removeChild(note);
             var zoom = document.createElement('div');
             zoom.className = 'perso-mini-zoom';
-            zoom.style.transformOrigin = lNom.style.getPropertyValue('--x') + '% ' + lNom.style.getPropertyValue('--y') + '%';
+            var first = items[0];
+            if (first) zoom.style.transformOrigin = first.style.getPropertyValue('--x') + '% ' + first.style.getPropertyValue('--y') + '%';
             var pic = document.createElement('img');
             pic.src = im.currentSrc || im.src; pic.alt = '';
             zoom.appendChild(pic); zoom.appendChild(copy);
@@ -508,7 +560,7 @@
           }
         };
         var goTarget = function () {
-          var t = slides.filter(function (sl) { return !sl.hidden && sl.hasAttribute('data-pl-target'); })[0];
+          var t = target();
           if (t && !t.classList.contains('on')) showMedia(t.dataset.mediaId);
         };
         [pNom, pNum].forEach(function (el) {

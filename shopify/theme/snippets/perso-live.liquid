@@ -1,0 +1,58 @@
+{%- comment -%}
+  Aperçu en direct du nom et du numéro sur la photo produit (bloc « Aperçu nom sur photo » de la section main-product).
+  Paramètre : live (le bloc). 1er passage : caches du texte d'exemple de la photo ; 2e passage : textes du client.
+{%- endcomment -%}
+{%- liquid
+  assign fams = ''
+  for f in (1..2)
+    if f == 1
+      assign fk = live.settings.name_font
+    else
+      assign fk = live.settings.num_font
+    endif
+    case fk
+      when 'manuscrite'
+        assign fq = 'family=Pacifico'
+      when 'classique'
+        assign fq = 'family=Cinzel:wght@700'
+      when 'italique'
+        assign fq = 'family=Fraunces:ital,opsz,wght@1,9..144,800'
+      when 'montserrat'
+        assign fq = 'family=Montserrat:wght@800;900'
+      else
+        assign fq = ''
+    endcase
+    if fq != blank
+      unless fams contains fq
+        assign fams = fams | append: '&' | append: fq
+      endunless
+    endif
+  endfor
+-%}
+{%- if fams != blank -%}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ fams | remove_first: '&' }}&display=swap">{%- endif -%}
+<div class="perso-live" data-perso-live data-view="{{ live.settings.view }}" data-nth="{{ live.settings.nth }}" data-dark="{{ live.settings.dark_colors | escape }}" style="--ink-dark:{{ live.settings.ink_dark }};--ink-light:{{ live.settings.ink_light }}" hidden aria-hidden="true">
+  {%- comment -%} 1er passage : caches du texte d'exemple de la photo ; 2e passage : textes du client (toujours au-dessus des caches) {%- endcomment -%}
+  {%- for pass in (1..2) -%}
+    {%- if pass == 1 -%}{%- unless live.settings.mask -%}{%- continue -%}{%- endunless -%}{%- endif -%}
+    {%- for slot in (1..2) -%}
+      {%- if slot == 2 and live.settings.slot2 == false -%}{%- continue -%}{%- endif -%}
+      {%- if slot == 2 -%}{%- assign sx = '2' -%}{%- else -%}{%- assign sx = '' -%}{%- endif -%}
+      {%- for kind in (1..2) -%}
+        {%- if kind == 1 -%}
+          {%- assign base = 'name' | append: sx -%}{%- assign k = 'nom' -%}{%- assign font = live.settings.name_font -%}{%- assign ph = live.settings.name_ph -%}{%- assign photo = live.settings.photo_name_text -%}{%- assign ls = live.settings.name_ls -%}{%- assign rot = live.settings.name_rot -%}
+        {%- else -%}
+          {%- assign base = 'num' | append: sx -%}{%- assign k = 'num' -%}{%- assign font = live.settings.num_font -%}{%- assign ph = live.settings.num_ph -%}{%- assign photo = live.settings.photo_num_text -%}{%- assign ls = 0 -%}{%- assign rot = 0 -%}
+        {%- endif -%}
+        {%- if pass == 1 and photo == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign kx = base | append: '_x' -%}{%- assign ky = base | append: '_y' -%}{%- assign ks = base | append: '_size' -%}
+        {%- capture pos -%}--x:{{ live.settings[kx] }};--y:{{ live.settings[ky] }};--fs:{{ live.settings[ks] }};--ls:{{ ls }};--rot:{{ rot }}{% if kind == 1 and live.settings.name_upper %};text-transform:uppercase{% endif %}{%- endcapture -%}
+        {%- if pass == 1 -%}
+          <span class="pl-item pl-mask pl-{{ font }} pl-{{ k }}" data-pl-mask style="{{ pos }}">{{ photo }}</span>
+        {%- else -%}
+          <span class="pl-item pl-{{ font }} pl-{{ k }}" style="{{ pos }}"><span class="pl-txt" data-pl="{{ k }}" data-ph="{% unless live.settings.mask %}{{ ph | escape }}{% endunless %}"></span></span>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  {%- if live.settings.note != blank -%}<span class="perso-live-note">{{ live.settings.note }}</span>{%- endif -%}
+</div>
