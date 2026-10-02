@@ -86,6 +86,13 @@
         return /^(colou?r|couleur)$/i.test(o.name) ? colorLabel(o.value) : o.value;
       });
       var variant = opts.length ? '<small>' + esc(opts.join(' · ')) + '</small>' : '';
+      // Personnalisation : propriétés visibles (celles qui commencent par « _ » sont internes)
+      var props = i.properties || {};
+      variant += Object.keys(props).filter(function (k) { return k.charAt(0) !== '_' && props[k] !== '' && props[k] != null; }).map(function (k) {
+        var v = String(props[k]);
+        var val = /^https?:\/\//.test(v) ? '<a href="' + esc(v) + '" target="_blank" rel="noopener">voir</a>' : esc(v);
+        return '<small class="props">' + esc(k) + ' : ' + val + '</small>';
+      }).join('');
       return '<div class="line" data-key="' + esc(i.key) + '" data-qty="' + i.quantity + '">' +
         '<a class="thumb" href="' + esc(i.url) + '">' + img + '</a>' +
         '<div><h4>' + esc(i.product_title) + '</h4>' + variant +
@@ -450,7 +457,15 @@
       e.preventDefault();
       if (btn.disabled) return;
       btn.disabled = true;
-      var items = [{ id: +$('#variantId').value, quantity: +$('#quantity').value || 1 }];
+      var item = { id: +$('#variantId').value, quantity: +$('#quantity').value || 1 };
+      // Champs « properties[…] » (ex. texte ou image de personnalisation ajoutés par une application)
+      var props = {};
+      new FormData(form).forEach(function (v, k) {
+        var m = /^properties\[(.+)\]$/.exec(k);
+        if (m && v !== '' && !(typeof File !== 'undefined' && v instanceof File)) props[m[1]] = v;
+      });
+      if (Object.keys(props).length) item.properties = props;
+      var items = [item];
       addToCart(items)
         .then(function (res) {
           // Refus « épuisé » alors que le stock est là : le pays retenu pour la session (adresse absente
