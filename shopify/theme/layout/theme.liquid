@@ -4,21 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.documentElement.className+=" js";</script>
-  {%- liquid
-    # Fiches produit : titre et description Google propres à la boutique (champs bandeja.seo_title / bandeja.seo_description)
-    assign seo_t = blank
-    assign seo_d = page_description
-    if template.name == 'product'
-      if product.metafields.bandeja.seo_title != blank
-        assign seo_t = product.metafields.bandeja.seo_title.value
-      endif
-      if product.metafields.bandeja.seo_description != blank
-        assign seo_d = product.metafields.bandeja.seo_description.value
-      endif
-    endif
-  -%}
-  <title>{% if seo_t != blank %}{{ seo_t }}{% else %}{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}{% endif %}</title>
-  {% if seo_d != blank %}<meta name="description" content="{{ seo_d | escape }}">{% endif %}
+  <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
   {% render 'theme-head' %}
   {{ content_for_header }}
