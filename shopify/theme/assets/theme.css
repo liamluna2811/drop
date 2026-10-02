@@ -804,6 +804,20 @@ shopify-account{
 @media (max-width:860px){.hello{display:none}.nav-actions{gap:var(--s-1)}}
 /* Petits écrans : les favoris restent accessibles depuis le menu, pour laisser la place au compte et au panier */
 @media (max-width:520px){.nav .fav-link{display:none}}
+/* En-tête mobile : le logo ne doit jamais chevaucher les icônes (compte, recherche, panier) */
+@media (max-width:520px){
+  .nav{padding:0 .75rem;gap:.25rem}
+  .nav .logo{min-width:0;gap:.4rem;font-size:.9rem}
+  .nav .logo-mark{height:28px}
+  .nav .logo span{margin-left:.15em}
+  .nav-actions{flex:none;gap:0}
+  .nav .search-btn,.nav .acct-fallback,.nav .acct-icon{width:40px;height:40px}
+  .nav .cart-btn{width:42px;height:42px;margin-left:.25rem}
+}
+@media (max-width:374px){
+  .nav .logo-mark{display:none}
+  .nav .logo{font-size:.85rem}
+}
 
 /* Panier : sous-total et réductions au-dessus du total */
 .cart-sum{display:grid;gap:.35rem;margin-bottom:var(--s-2);font-size:var(--fs-sm)}
