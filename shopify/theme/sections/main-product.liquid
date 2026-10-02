@@ -217,7 +217,9 @@
         {%- if section.settings[k] != blank -%}<li>{{ section.settings[k] }}</li>{%- endif -%}
       {%- endfor -%}
     </ul>
-    <div class="product-desc rte">{{ product.description }}</div>
+    {%- comment -%} Description propre à la boutique (champ bandeja.description), sinon la description du produit {%- endcomment -%}
+    {%- assign desc = product.metafields.bandeja.description.value | default: product.description -%}
+    <div class="product-desc rte">{{ desc }}</div>
   </div>
 
   {%- if has_guide -%}
