@@ -413,6 +413,9 @@ html.racket-live .arch>.arch-racket{display:none}
 .pl-italique{font-family:Fraunces,serif;font-style:italic;font-weight:800}
 .pl-montserrat{font-family:Montserrat,sans-serif;font-weight:800}
 .pl-montserrat.pl-num{font-weight:900}
+.pl-montserrat-fin{font-family:Montserrat,sans-serif;font-weight:700}
+.pl-montserrat-fin.pl-num{font-weight:600}
+.pl-outline .pl-txt{color:transparent;-webkit-text-stroke:.045em var(--ink)}
 .perso-live-note{position:absolute;left:var(--s-3);bottom:var(--s-3);padding:.2rem .6rem;border-radius:var(--radius-pill);background:color-mix(in srgb,var(--c-surface) 85%,transparent);color:var(--c-text);font-size:var(--fs-xs);font-weight:600}
 .perso-mini{position:relative;width:min(100%,240px);aspect-ratio:1;margin:var(--s-4) auto 0;border-radius:var(--radius-sm);overflow:hidden;background:var(--c-surface-alt);container-type:inline-size}
 .perso-mini:empty{display:none}

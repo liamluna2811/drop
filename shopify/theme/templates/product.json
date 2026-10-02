@@ -39,7 +39,7 @@
         "apercu_perso": {
           "type": "perso_preview",
           "settings": {
-            "match": "personnalisé",
+            "match": "bandejasun",
             "view": "front-and-back",
             "nth": 1,
             "note": "Aperçu indicatif",
@@ -70,13 +70,50 @@
             "ink_dark": "#111111",
             "ink_light": "#ffffff"
           }
+        },
+        "apercu_club": {
+          "type": "perso_preview",
+          "settings": {
+            "match": "bandejaclub",
+            "view": "front-and-back",
+            "nth": 1,
+            "note": "Aperçu indicatif",
+            "mask": true,
+            "photo_name_text": "NAME",
+            "photo_num_text": "12",
+            "name_font": "montserrat-fin",
+            "name_ph": "Ton prénom",
+            "name_upper": false,
+            "name_x": 35.8,
+            "name_y": 32.2,
+            "name_size": 4.8,
+            "name_ls": 25,
+            "name_rot": 0,
+            "num_font": "montserrat-fin",
+            "num_ph": "10",
+            "num_outline": true,
+            "num_x": 35.4,
+            "num_y": 38.8,
+            "num_size": 4.5,
+            "slot2": true,
+            "name2_x": 71.8,
+            "name2_y": 55.1,
+            "name2_size": 1.6,
+            "num2_x": 71.9,
+            "num2_y": 58.3,
+            "num2_size": 2.8,
+            "dark_colors": "Black",
+            "ink_dark": "#111111",
+            "ink_light": "#FFFFFF"
+          }
         }
       },
       "block_order": [
         "guide_sport",
         "guide_lifestyle",
         "guide_brassiere",
-        "apercu_perso"
+        "apercu_perso",
+        "apercu_club"
       ],
       "settings": {}
     },

@@ -19,6 +19,8 @@
         assign fq = 'family=Fraunces:ital,opsz,wght@1,9..144,800'
       when 'montserrat'
         assign fq = 'family=Montserrat:wght@800;900'
+      when 'montserrat-fin'
+        assign fq = 'family=Montserrat:wght@600;700'
       else
         assign fq = ''
     endcase
@@ -49,7 +51,7 @@
         {%- if pass == 1 -%}
           <span class="pl-item pl-mask pl-{{ font }} pl-{{ k }}" data-pl-mask style="{{ pos }}">{{ photo }}</span>
         {%- else -%}
-          <span class="pl-item pl-{{ font }} pl-{{ k }}" style="{{ pos }}"><span class="pl-txt" data-pl="{{ k }}" data-ph="{% unless live.settings.mask %}{{ ph | escape }}{% endunless %}"></span></span>
+          <span class="pl-item pl-{{ font }} pl-{{ k }}{% if kind == 2 and live.settings.num_outline %} pl-outline{% endif %}" style="{{ pos }}"><span class="pl-txt" data-pl="{{ k }}" data-ph="{% unless live.settings.mask %}{{ ph | escape }}{% endunless %}"></span></span>
         {%- endif -%}
       {%- endfor -%}
     {%- endfor -%}
