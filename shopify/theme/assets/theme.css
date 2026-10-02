@@ -394,6 +394,7 @@ html.racket-live .arch>.arch-racket{display:none}
 .perso-row{clear:both;display:grid;grid-template-columns:minmax(0,1fr) 6.5rem;gap:var(--s-3);align-items:start}
 .perso-row .field{align-content:start}
 .perso-fields input:user-invalid{border-color:#b3261e}
+.perso-disclaimer{margin-top:var(--s-3)}
 .perso-preview{margin:var(--s-3) 0;font-size:var(--fs-sm)}
 .perso-preview strong{white-space:pre-wrap}
 .perso-check{display:flex;gap:.6rem;align-items:flex-start;font-size:var(--fs-sm);cursor:pointer}

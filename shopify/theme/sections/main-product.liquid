@@ -191,6 +191,7 @@
             </div>
           </div>
           {%- if live -%}<div class="perso-mini" data-perso-mini aria-hidden="true"></div>{%- endif -%}
+          {%- if live and section.settings.perso_preview_note != blank -%}<p class="fine perso-disclaimer">{{ section.settings.perso_preview_note }}</p>{%- endif -%}
           <p class="perso-preview" aria-live="polite">Sera imprimé : <strong data-perso-preview>…</strong></p>
           <label class="perso-check">
             <input type="checkbox" required>
@@ -282,6 +283,7 @@
     { "type": "checkbox", "id": "perso_fields", "label": "Champs « Nom » et « Numéro » à remplir", "default": true, "info": "Sur les mêmes produits. Le nom et le numéro arrivent dans la commande Shopify (et dans le panier) : à recopier dans la commande Printful « Requires personalization »." },
     { "type": "text", "id": "perso_title", "label": "Titre des champs", "default": "Personnalise ton t-shirt" },
     { "type": "text", "id": "perso_name_label", "label": "Libellé du nom", "default": "Nom ou prénom" },
+    { "type": "text", "id": "perso_preview_note", "label": "Mention sous l'aperçu sur la photo", "default": "Ceci est un simple aperçu, pas l'impression réelle : la police, la taille et la position peuvent légèrement varier sur ton t-shirt.", "info": "Affichée seulement sur les produits qui ont un bloc « Aperçu nom sur photo »." },
     { "type": "range", "id": "perso_name_max", "label": "Nombre de caractères maximum du nom", "min": 4, "max": 16, "step": 1, "default": 10 },
     { "type": "text", "id": "perso_number_label", "label": "Libellé du numéro", "default": "Numéro" },
     { "type": "richtext", "id": "perso_note", "label": "Avertissement affiché au-dessus du bouton", "info": "Affiché uniquement sur les produits de la collection « Personnalisation » (ou portant le tag « personnalise »). Obligatoire : le client doit savoir avant de commander qu'il n'a pas de droit de rétractation.", "default": "<p><strong>Produit personnalisé :</strong> fabriqué selon tes choix, il n'est ni repris ni échangé (pas de droit de rétractation, article L221-28, 3° du Code de la consommation), sauf défaut. Vérifie l'orthographe, le contenu et l'aperçu avant de commander.</p>" }
