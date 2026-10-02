@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-clubs",
+      "blocks": {
+        "how": {
+          "type": "card",
+          "settings": {
+            "title": "Comment ça marche",
+            "text": "<p>1. Tu décris ton projet avec ce formulaire.</p><p>2. Nous te répondons par email avec une proposition de visuel et de prix.</p><p>3. Après ton accord, chaque pièce est fabriquée à la demande puis livrée.</p>"
+          }
+        },
+        "delays": {
+          "type": "card",
+          "settings": {
+            "title": "Délais",
+            "text": "<p>Fabrication en 2 à 5 jours ouvrés, puis livraison en 5 à 20 jours ouvrés en France et dans l'Union européenne (estimations de notre atelier partenaire). Pour un tournoi ou un événement, prévois de la marge.</p>"
+          }
+        },
+        "legal": {
+          "type": "card",
+          "settings": {
+            "title": "Bon à savoir",
+            "text": "<p>Les pièces au logo de ton club sont fabriquées selon tes choix : elles ne bénéficient pas du droit de rétractation (article L221-28, 3° du Code de la consommation), mais restent couvertes par la garantie légale de conformité.</p>"
+          }
+        }
+      },
+      "block_order": ["how", "delays", "legal"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

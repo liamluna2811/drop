@@ -12,14 +12,14 @@
           "type": "qa",
           "settings": {
             "question": "Comment sont fabriqués vos articles ?",
-            "answer": "<p>Chaque pièce est imprimée à la demande, après ta commande.</p>"
+            "answer": "<p>Chaque pièce est fabriquée à la demande, après ta commande.</p>"
           }
         },
         "q_delais": {
           "type": "qa",
           "settings": {
             "question": "Quels sont les délais de fabrication et de livraison ?",
-            "answer": ""
+            "answer": "<p>Chaque pièce est fabriquée à la demande, après ta commande : comptez 2 à 5 jours ouvrés de fabrication, puis 5 à 20 jours ouvrés de livraison en France et dans l'Union européenne (estimations de notre atelier partenaire). Tu reçois un email avec le lien de suivi dès l'expédition.</p>"
           }
         },
         "q_livraison": {

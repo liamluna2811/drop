@@ -385,6 +385,7 @@ html.racket-live .arch>.arch-racket{display:none}
 .price.big{font-size:1.5rem;margin-bottom:var(--s-5)}
 .price.big:has(+ .price-note){margin-bottom:var(--s-1)}
 .price-note{margin-bottom:var(--s-5);font-size:var(--fs-sm);color:var(--c-text-muted)}
+.price-note:has(+ .price-note){margin-bottom:var(--s-1)}
 .app-block{margin-bottom:var(--s-4)}
 .perso-note{margin-bottom:var(--s-4);padding:var(--s-3) var(--s-4);border:1px solid var(--c-border);border-left:4px solid var(--c-accent);border-radius:var(--radius-sm);background:var(--c-surface);font-size:var(--fs-sm)}
 .perso-note p{margin:0}

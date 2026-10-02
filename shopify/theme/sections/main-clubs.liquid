@@ -1,0 +1,108 @@
+<section class="section contact clubs">
+  <div class="section-head">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1 class="h2">{{ section.settings.title }}</h1>
+    <p class="lead">{{ section.settings.intro }}</p>
+  </div>
+
+  <div class="contact-grid">
+    {%- form 'contact', id: 'club-form', class: 'contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-ok" role="status">Merci, ta demande est bien partie. Nous te répondons par email avec une proposition pour ton club.</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div class="form-error" role="alert">
+          <strong>La demande n'a pas pu être envoyée :</strong>
+          <ul>{%- for field in form.errors -%}<li>{%- if field == 'form' -%}{{ form.errors.messages[field] }}{%- else -%}{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}{%- endif -%}</li>{%- endfor -%}</ul>
+        </div>
+      {%- endif -%}
+
+      <input type="hidden" name="contact[Sujet]" value="Demande club ou équipe">
+
+      <div class="field-row">
+        <div class="field">
+          <label for="club-name">Nom et prénom</label>
+          <input id="club-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name }}" required>
+        </div>
+        <div class="field">
+          <label for="club-email">Email</label>
+          <input id="club-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email }}" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="club-club">Club ou équipe</label>
+          <input id="club-club" name="contact[Club ou équipe]" type="text" required>
+        </div>
+        <div class="field">
+          <label for="club-city">Ville <span class="opt">(facultatif)</span></label>
+          <input id="club-city" name="contact[Ville]" type="text" autocomplete="address-level2">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="club-product">Produit souhaité</label>
+          <select id="club-product" name="contact[Produit souhaité]">
+            <option>T-shirt Lifestyle en coton</option>
+            <option>T-shirt de sport respirant</option>
+            <option>Les deux</option>
+            <option>Je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="club-qty">Nombre de pièces (environ)</label>
+          <input id="club-qty" name="contact[Nombre de pièces]" type="number" min="1" inputmode="numeric" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="club-tech">Logo</label>
+        <select id="club-tech" name="contact[Logo]">
+          <option>Brodé</option>
+          <option>Imprimé</option>
+          <option>Je ne sais pas encore</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="club-body">Ton projet</label>
+        <textarea id="club-body" name="contact[body]" rows="6" required placeholder="Tailles, couleurs, emplacement du logo, date souhaitée…">{{ form.body }}</textarea>
+      </div>
+
+      <p class="fine">Tu pourras nous envoyer ton logo en répondant à notre email. En envoyant ce formulaire, tu acceptes que ces informations soient utilisées pour répondre à ta demande. Plus de détails dans notre <a href="/pages/politique-de-confidentialite">politique de confidentialité</a>.</p>
+      <button class="btn" type="submit">Envoyer la demande</button>
+    {%- endform -%}
+
+    <aside class="contact-side" aria-label="Comment ça marche">
+      {%- for block in section.blocks -%}
+        <div class="info-card" {{ block.shopify_attributes }}>
+          <h2>{{ block.settings.title }}</h2>
+          <div class="rte">{{ block.settings.text }}</div>
+        </div>
+      {%- endfor -%}
+    </aside>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Clubs et équipes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre", "default": "Clubs et équipes" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Habille ton club aux couleurs de son logo." },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "T-shirts Lifestyle et t-shirts de sport avec le logo de ton club, brodé ou imprimé. Décris ton projet : nous te répondons par email avec une proposition." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Encart",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Titre" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Texte</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Clubs et équipes" }]
+}
+{% endschema %}

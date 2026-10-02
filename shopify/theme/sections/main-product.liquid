@@ -116,6 +116,7 @@
     <span hidden data-seen="{{ product.handle }}"></span>
     <p class="price big" id="productPrice">{{ current.price | money }}</p>
     {%- if section.settings.price_note != blank -%}<p class="price-note">{{ section.settings.price_note }}</p>{%- endif -%}
+    {%- if section.settings.delivery_note != blank -%}<p class="price-note delivery-note">{{ section.settings.delivery_note }}</p>{%- endif -%}
 
     {%- form 'product', product, id: 'product-form', class: 'product-form' -%}
       <input type="hidden" name="id" id="variantId" value="{{ current.id }}">
@@ -238,6 +239,7 @@
     { "type": "checkbox", "id": "sticky_atc", "label": "Barre « Ajouter au panier » fixe sur mobile", "default": true },
     { "type": "header", "content": "Avantages sous le bouton" },
     { "type": "text", "id": "price_note", "label": "Ligne sous le prix", "default": "Des frais de livraison peuvent s'appliquer, calculés au paiement." },
+    { "type": "text", "id": "delivery_note", "label": "Délais sous le prix", "default": "Fabriqué en 2 à 5 jours ouvrés, puis livré en 5 à 20 jours ouvrés (France et UE).", "info": "Estimations Printful : fabrication 2 à 5 jours ouvrés, livraison standard Europe 5 à 20 jours ouvrés." },
     { "type": "text", "id": "perk_1", "label": "Avantage 1", "default": "−10 % sur ta commande dès 60 € d'achat" },
     { "type": "text", "id": "perk_2", "label": "Avantage 2", "default": "Paiement 100 % sécurisé" },
     { "type": "text", "id": "perk_3", "label": "Avantage 3", "default": "Fabriqué à la demande, après ta commande" },
