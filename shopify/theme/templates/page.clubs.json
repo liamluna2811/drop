@@ -14,7 +14,7 @@
           "type": "card",
           "settings": {
             "title": "Délais",
-            "text": "<p>Fabrication en 2 à 5 jours ouvrés, puis livraison en 5 à 20 jours ouvrés en France et dans l'Union européenne (estimations de notre atelier partenaire). Pour un tournoi ou un événement, prévois de la marge.</p>"
+            "text": "<p>En France, compte en général 1 à 2 semaines entre la validation de la commande et la livraison. Dans le reste de l'Union européenne ou en période de forte demande, ce délai peut être plus long. Pour un tournoi ou un événement, prévois de la marge.</p>"
           }
         },
         "legal": {
@@ -25,9 +25,15 @@
           }
         }
       },
-      "block_order": ["how", "delays", "legal"],
+      "block_order": [
+        "how",
+        "delays",
+        "legal"
+      ],
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
