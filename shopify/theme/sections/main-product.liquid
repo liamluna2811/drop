@@ -30,6 +30,24 @@
     assign has_guide = true
   endif
 -%}
+{%- assign is_perso = false -%}
+{%- for t in product.tags -%}
+  {%- assign tl = t | downcase | strip -%}
+  {%- if tl == 'personnalise' or tl == 'personnalisé' -%}{%- assign is_perso = true -%}{%- endif -%}
+{%- endfor -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'personnalisation' -%}{%- assign is_perso = true -%}{%- endif -%}
+{%- endfor -%}
+{%- comment -%} Aperçu en direct du nom et du numéro sur la photo : premier bloc dont le mot-clé figure dans le titre (mot-clé vide = tous) {%- endcomment -%}
+{%- assign live = nil -%}
+{%- if is_perso and section.settings.perso_fields -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'perso_preview' -%}
+      {%- assign kw = block.settings.match | downcase | strip -%}
+      {%- if kw == blank or title_lc contains kw -%}{%- assign live = block -%}{%- break -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 {%- assign has_3d = false -%}
 {%- if product.tags contains '3d-bouteille' -%}{%- assign has_3d = true -%}{%- endif -%}
 <section class="section product" data-product-section>
@@ -62,6 +80,39 @@
       {%- else -%}
         <div class="slide on">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
       {%- endfor -%}
+      {%- if live -%}
+        {%- liquid
+          assign fams = ''
+          for f in (1..2)
+            if f == 1
+              assign fk = live.settings.name_font
+            else
+              assign fk = live.settings.num_font
+            endif
+            case fk
+              when 'manuscrite'
+                assign fq = 'family=Pacifico'
+              when 'classique'
+                assign fq = 'family=Cinzel:wght@700'
+              when 'italique'
+                assign fq = 'family=Fraunces:ital,opsz,wght@1,9..144,800'
+              else
+                assign fq = ''
+            endcase
+            if fq != blank
+              unless fams contains fq
+                assign fams = fams | append: '&' | append: fq
+              endunless
+            endif
+          endfor
+        -%}
+        {%- if fams != blank -%}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ fams | remove_first: '&' }}&display=swap">{%- endif -%}
+        <div class="perso-live" data-perso-live data-view="{{ live.settings.view }}" data-nth="{{ live.settings.nth }}" data-dark="{{ live.settings.dark_colors | escape }}" style="--ink-dark:{{ live.settings.ink_dark }};--ink-light:{{ live.settings.ink_light }}" hidden aria-hidden="true">
+          <span class="pl-txt pl-{{ live.settings.name_font }}" data-pl-nom data-ph="{{ live.settings.name_ph | escape }}" style="--x:{{ live.settings.name_x }};--y:{{ live.settings.name_y }};--fs:{{ live.settings.name_size }};--ls:{{ live.settings.name_ls }};--rot:{{ live.settings.name_rot }}{% if live.settings.name_upper %};text-transform:uppercase{% endif %}"></span>
+          <span class="pl-txt pl-{{ live.settings.num_font }}" data-pl-num data-ph="{{ live.settings.num_ph | escape }}" style="--x:{{ live.settings.num_x }};--y:{{ live.settings.num_y }};--fs:{{ live.settings.num_size }};--ls:0;--rot:0"></span>
+          {%- if live.settings.note != blank -%}<span class="perso-live-note">{{ live.settings.note }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
       {%- if product.media.size > 1 -%}
         <button type="button" class="gal-nav gal-prev" data-gal="-1" aria-label="Image précédente">{% render 'icon', name: 'chevron-left' %}</button>
         <button type="button" class="gal-nav gal-next" data-gal="1" aria-label="Image suivante">{% render 'icon', name: 'chevron-right' %}</button>
@@ -155,14 +206,6 @@
       {%- for block in section.blocks -%}
         {%- if block.type == '@app' -%}<div class="app-block">{% render block %}</div>{%- endif -%}
       {%- endfor -%}
-      {%- assign is_perso = false -%}
-      {%- for t in product.tags -%}
-        {%- assign tl = t | downcase | strip -%}
-        {%- if tl == 'personnalise' or tl == 'personnalisé' -%}{%- assign is_perso = true -%}{%- endif -%}
-      {%- endfor -%}
-      {%- for c in product.collections -%}
-        {%- if c.handle == 'personnalisation' -%}{%- assign is_perso = true -%}{%- endif -%}
-      {%- endfor -%}
       {%- if is_perso and section.settings.perso_fields -%}
         {%- assign perso_max = section.settings.perso_name_max | default: 10 -%}
         <fieldset class="perso-fields" data-perso>
@@ -179,6 +222,7 @@
               <small class="fine" id="perso-num-aide">De 0 à 99.</small>
             </div>
           </div>
+          {%- if live -%}<div class="perso-mini" data-perso-mini aria-hidden="true"></div>{%- endif -%}
           <p class="perso-preview" aria-live="polite">Sera imprimé : <strong data-perso-preview>…</strong></p>
           <label class="perso-check">
             <input type="checkbox" required>
@@ -276,6 +320,36 @@
   ],
   "blocks": [
     { "type": "@app" },
+    {
+      "type": "perso_preview",
+      "name": "Aperçu du nom sur la photo",
+      "settings": [
+        { "type": "paragraph", "content": "Affiche le nom et le numéro tapés par le client sur la photo du produit, en direct. Produits personnalisés uniquement. Utilise des photos Printful générées sans texte (décor seul)." },
+        { "type": "text", "id": "match", "label": "Mot-clé dans le titre du produit", "info": "Ex. « Signature ». Vide : tous les produits personnalisés." },
+        { "type": "select", "id": "view", "label": "Photo utilisée", "options": [{ "value": "front", "label": "Devant" }, { "value": "back", "label": "Dos" }], "default": "front" },
+        { "type": "range", "id": "nth", "label": "Laquelle (si plusieurs photos de cette vue par couleur)", "min": 1, "max": 4, "step": 1, "default": 1 },
+        { "type": "text", "id": "note", "label": "Mention sur la photo", "default": "Aperçu indicatif" },
+        { "type": "header", "content": "Nom" },
+        { "type": "select", "id": "name_font", "label": "Police", "options": [{ "value": "manuscrite", "label": "Manuscrite (Pacifico)" }, { "value": "baton", "label": "Bâton épais (Archivo Black)" }, { "value": "classique", "label": "Capitales classiques (Cinzel)" }, { "value": "italique", "label": "Italique (Fraunces)" }], "default": "manuscrite" },
+        { "type": "text", "id": "name_ph", "label": "Texte d'exemple (champ vide)", "default": "Ton prénom" },
+        { "type": "checkbox", "id": "name_upper", "label": "Majuscules", "default": false },
+        { "type": "range", "id": "name_x", "label": "Position horizontale (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "range", "id": "name_y", "label": "Position verticale (%)", "min": 0, "max": 100, "step": 1, "default": 30 },
+        { "type": "range", "id": "name_size", "label": "Taille (% de la largeur de la photo)", "min": 1, "max": 20, "step": 0.2, "default": 6 },
+        { "type": "range", "id": "name_ls", "label": "Espacement des lettres", "min": 0, "max": 40, "step": 1, "default": 0 },
+        { "type": "range", "id": "name_rot", "label": "Rotation (degrés)", "min": -15, "max": 15, "step": 0.5, "default": 0 },
+        { "type": "header", "content": "Numéro" },
+        { "type": "select", "id": "num_font", "label": "Police", "options": [{ "value": "manuscrite", "label": "Manuscrite (Pacifico)" }, { "value": "baton", "label": "Bâton épais (Archivo Black)" }, { "value": "classique", "label": "Capitales classiques (Cinzel)" }, { "value": "italique", "label": "Italique (Fraunces)" }], "default": "italique" },
+        { "type": "text", "id": "num_ph", "label": "Texte d'exemple (champ vide)", "default": "10" },
+        { "type": "range", "id": "num_x", "label": "Position horizontale (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "range", "id": "num_y", "label": "Position verticale (%)", "min": 0, "max": 100, "step": 1, "default": 20 },
+        { "type": "range", "id": "num_size", "label": "Taille (% de la largeur de la photo)", "min": 1, "max": 30, "step": 0.5, "default": 3 },
+        { "type": "header", "content": "Couleur du texte" },
+        { "type": "textarea", "id": "dark_colors", "label": "Couleurs de t-shirt foncées (une par ligne ou séparées par des virgules)", "default": "Black, French Navy, Navy, Red, Royal Blue, Forest Green, Dark Grey Heather" },
+        { "type": "color", "id": "ink_dark", "label": "Encre sur t-shirt clair", "default": "#14263B" },
+        { "type": "color", "id": "ink_light", "label": "Encre sur t-shirt foncé", "default": "#F7EBD3" }
+      ]
+    },
     {
       "type": "size_table",
       "name": "Tableau des tailles",

@@ -288,11 +288,13 @@
       }).catch(fail);
     };
 
+    var plSync = null;
     var showMedia = function (id) {
       if (!id) return;
       if (String(id) === '3d') load3D();
       slides.forEach(function (s) { s.classList.toggle('on', s.dataset.mediaId == id); });
       thumbs.forEach(function (t) { t.classList.toggle('on', t.dataset.thumb == id); });
+      if (typeof plSync === 'function') plSync();
     };
     thumbs.forEach(function (t) {
       t.addEventListener('click', function () { showMedia(t.dataset.thumb); });
@@ -463,6 +465,59 @@
       };
       pNum.addEventListener('input', function () { pNum.value = pNum.value.replace(/\D/g, '').slice(0, 2); showPerso(); });
       pNom.addEventListener('input', showPerso);
+
+      // Aperçu en direct sur la photo (bloc « Aperçu du nom sur la photo »)
+      var live = document.querySelector('[data-perso-live]');
+      if (live) {
+        var lNom = live.querySelector('[data-pl-nom]'), lNum = live.querySelector('[data-pl-num]'), mini = perso.querySelector('[data-perso-mini]');
+        var view = live.dataset.view === 'back' ? /-back-(?!2-)/ : /-front[-.]/;
+        var skip = /front-and-back|left-front|right-front/;
+        var nth = +live.dataset.nth || 1, seen = {};
+        slides.forEach(function (sl) {
+          var im = sl.querySelector('img'), u = im ? (im.getAttribute('src') || '').toLowerCase() : '';
+          if (!view.test(u) || skip.test(u)) return;
+          var c = colorOf(sl); seen[c] = (seen[c] || 0) + 1;
+          if (seen[c] === nth) sl.setAttribute('data-pl-target', '');
+        });
+        var darks = (live.dataset.dark || '').toLowerCase().split(/[,\n]/).map(function (x) { return x.trim(); }).filter(Boolean);
+        var put = function (el, val) { el.textContent = val || el.dataset.ph; el.classList.toggle('ph', !val); };
+        plSync = function () {
+          var on = slides.filter(function (sl) { return sl.classList.contains('on'); })[0];
+          live.hidden = !(on && on.hasAttribute('data-pl-target'));
+          live.classList.toggle('dark', darks.indexOf(selectedColor().toLowerCase()) > -1);
+          put(lNom, pNom.value.replace(/\s+/g, ' ').trim());
+          put(lNum, pNum.value.trim());
+          // Vignette sous les champs (mobile : la grande photo n'est plus à l'écran pendant la saisie)
+          if (mini) {
+            var t = slides.filter(function (sl) { return !sl.hidden && sl.hasAttribute('data-pl-target'); })[0];
+            var im = t && t.querySelector('img');
+            if (!im) { mini.innerHTML = ''; return; }
+            var copy = live.cloneNode(true);
+            copy.hidden = false; copy.removeAttribute('data-perso-live');
+            var note = copy.querySelector('.perso-live-note');
+            if (note) copy.removeChild(note);
+            var zoom = document.createElement('div');
+            zoom.className = 'perso-mini-zoom';
+            zoom.style.transformOrigin = lNom.style.getPropertyValue('--x') + '% ' + lNom.style.getPropertyValue('--y') + '%';
+            var pic = document.createElement('img');
+            pic.src = im.currentSrc || im.src; pic.alt = '';
+            zoom.appendChild(pic); zoom.appendChild(copy);
+            mini.innerHTML = '';
+            mini.appendChild(zoom);
+            if (note) mini.appendChild(note);
+          }
+        };
+        var goTarget = function () {
+          var t = slides.filter(function (sl) { return !sl.hidden && sl.hasAttribute('data-pl-target'); })[0];
+          if (t && !t.classList.contains('on')) showMedia(t.dataset.mediaId);
+        };
+        [pNom, pNum].forEach(function (el) {
+          el.addEventListener('focus', goTarget);
+          el.addEventListener('input', plSync);
+        });
+        form.addEventListener('change', function () { plSync(); });
+        plSync();
+      }
       showPerso();
     }
 
