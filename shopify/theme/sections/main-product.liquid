@@ -166,7 +166,7 @@
       {%- if is_perso and section.settings.perso_fields -%}
         {%- assign perso_max = section.settings.perso_name_max | default: 10 -%}
         <fieldset class="perso-fields" data-perso>
-          <legend class="opt-legend">{{ section.settings.perso_title }}</legend>
+          <legend>{{ section.settings.perso_title }}</legend>
           <div class="perso-row">
             <div class="field">
               <label for="perso-nom">{{ section.settings.perso_name_label }}</label>
