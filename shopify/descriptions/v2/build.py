@@ -85,18 +85,18 @@ P["t-shirt-lifestyle-padel-bandejaclub-personnalise"] = dict(
   hook="Ton nom et ton numéro, avec le médaillon Bandeja Club.",
   paras=["Devant, le petit médaillon Bandeja Club avec ton nom et ton numéro dessous. Au dos, le grand médaillon, ton nom en grand et ton numéro entre deux traits. Une vraie tenue de membre du club.",
          "Pour toi, pour ton partenaire ou pour habiller toute l'équipe : chacun choisit son nom et son numéro."],
-  why=["<strong>Unique</strong> : ton nom et ton numéro imprimés devant et au dos.",
+  why=["<strong>Unique</strong> : ton nom et ton numéro imprimés devant et au dos, que tu vois en direct sur la photo avant de commander.",
        "<strong>Une idée cadeau</strong> qui ne ressemble à aucune autre : un anniversaire, un tournoi gagné, un nouveau partenaire.", COTON_WHY[0], COTON_WHY[1]],
   carac=["Design, nom et numéro imprimés"] + CARAC_COTON, tail=[NOTE_BLANC, LEGAL_COTON], extra=PERSO,
-  seo=("T-shirt padel personnalisé nom et numéro – BandejaClub", "T-shirt padel personnalisé avec ton nom et ton numéro, médaillon Bandeja Club devant et dos. 100 % coton, fabriqué à la demande."))
+  seo=("T-shirt padel personnalisé nom et numéro – BandejaClub", "T-shirt padel personnalisé avec ton nom et ton numéro, médaillon Bandeja Club devant et dos. 100 % coton, aperçu en direct."))
 P["t-shirt-lifestyle-padel-bandejasun-personnalise"] = dict(
   hook="Ton nom au soleil, ton numéro façon maillot.",
   paras=["Au dos, ton nom et ton numéro en grand, comme sur un maillot, avec le logo Bandeja Club. Devant, ton numéro dans un soleil et ton nom souligné d'un trait orange, avec la mention « Padel au soleil ».",
          "Le t-shirt idéal pour les sessions d'été, les tournois entre amis ou pour offrir à ton partenaire."],
-  why=["<strong>Unique</strong> : ton nom et ton numéro imprimés devant et au dos.",
+  why=["<strong>Unique</strong> : ton nom et ton numéro imprimés devant et au dos, que tu vois en direct sur la photo avant de commander.",
        "<strong>Un look de maillot</strong> dans un t-shirt en coton qu'on porte aussi en dehors du terrain.", COTON_WHY[0], COTON_WHY[1]],
   carac=["Design, nom et numéro imprimés"] + CARAC_COTON, tail=[NOTE_BLANC, LEGAL_COTON], extra=PERSO,
-  seo=("T-shirt padel personnalisé nom et numéro – BandejaSun", "T-shirt padel personnalisé façon maillot : ton nom et ton numéro au dos, un soleil devant. 100 % coton, fabriqué à la demande."))
+  seo=("T-shirt padel personnalisé nom et numéro – BandejaSun", "T-shirt padel personnalisé façon maillot : ton nom et ton numéro au dos, un soleil devant. 100 % coton, aperçu en direct."))
 P["unisex-sports-jersey-1"] = dict(  # sport Padel
   hook="Le maillot pour jouer, pas seulement pour poser.",
   paras=["Conçu pour bouger, ce t-shirt de sport en maille respirante t'accompagne du premier échauffement au dernier point. Il affiche ton sport sans te ralentir.",
