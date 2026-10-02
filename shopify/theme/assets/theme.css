@@ -807,16 +807,17 @@ shopify-account{
 /* En-tête mobile : le logo ne doit jamais chevaucher les icônes (compte, recherche, panier) */
 @media (max-width:520px){
   .nav{padding:0 .75rem;gap:.25rem}
-  .nav .logo{min-width:0;gap:.4rem;font-size:.9rem}
-  .nav .logo-mark{height:28px}
+  .nav .logo{flex:0 1 auto;min-width:0;overflow:hidden;gap:.4rem;font-size:min(.9rem,4vw)}
+  .nav .logo-mark{height:28px;width:28px;min-width:0;flex:0 100 28px;object-fit:contain}
+  .nav .logo span{flex:none}
   .nav .logo span{margin-left:.15em}
-  .nav-actions{flex:none;gap:0}
+  .nav-actions{flex:none;gap:0;position:relative;z-index:1}
   .nav .search-btn,.nav .acct-fallback,.nav .acct-icon{width:40px;height:40px}
   .nav .cart-btn{width:42px;height:42px;margin-left:.25rem}
 }
 @media (max-width:374px){
   .nav .logo-mark{display:none}
-  .nav .logo{font-size:.85rem}
+  .nav .logo{font-size:min(.85rem,4.2vw)}
 }
 
 /* Panier : sous-total et réductions au-dessus du total */
