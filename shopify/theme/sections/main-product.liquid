@@ -322,12 +322,12 @@
     { "type": "@app" },
     {
       "type": "perso_preview",
-      "name": "Aperçu du nom sur la photo",
+      "name": "Aperçu nom sur photo",
       "settings": [
         { "type": "paragraph", "content": "Affiche le nom et le numéro tapés par le client sur la photo du produit, en direct. Produits personnalisés uniquement. Utilise des photos Printful générées sans texte (décor seul)." },
         { "type": "text", "id": "match", "label": "Mot-clé dans le titre du produit", "info": "Ex. « Signature ». Vide : tous les produits personnalisés." },
         { "type": "select", "id": "view", "label": "Photo utilisée", "options": [{ "value": "front", "label": "Devant" }, { "value": "back", "label": "Dos" }], "default": "front" },
-        { "type": "range", "id": "nth", "label": "Laquelle (si plusieurs photos de cette vue par couleur)", "min": 1, "max": 4, "step": 1, "default": 1 },
+        { "type": "range", "id": "nth", "label": "Photo n° (pour cette vue)", "info": "Si Printful a créé plusieurs photos de cette vue par couleur.", "min": 1, "max": 4, "step": 1, "default": 1 },
         { "type": "text", "id": "note", "label": "Mention sur la photo", "default": "Aperçu indicatif" },
         { "type": "header", "content": "Nom" },
         { "type": "select", "id": "name_font", "label": "Police", "options": [{ "value": "manuscrite", "label": "Manuscrite (Pacifico)" }, { "value": "baton", "label": "Bâton épais (Archivo Black)" }, { "value": "classique", "label": "Capitales classiques (Cinzel)" }, { "value": "italique", "label": "Italique (Fraunces)" }], "default": "manuscrite" },
@@ -345,7 +345,7 @@
         { "type": "range", "id": "num_y", "label": "Position verticale (%)", "min": 0, "max": 100, "step": 1, "default": 20 },
         { "type": "range", "id": "num_size", "label": "Taille (% de la largeur de la photo)", "min": 1, "max": 30, "step": 0.5, "default": 3 },
         { "type": "header", "content": "Couleur du texte" },
-        { "type": "textarea", "id": "dark_colors", "label": "Couleurs de t-shirt foncées (une par ligne ou séparées par des virgules)", "default": "Black, French Navy, Navy, Red, Royal Blue, Forest Green, Dark Grey Heather" },
+        { "type": "textarea", "id": "dark_colors", "label": "Couleurs de t-shirt foncées", "info": "Noms des couleurs (comme dans les variantes), séparés par des virgules.", "default": "Black, French Navy, Navy, Red, Royal Blue, Forest Green, Dark Grey Heather" },
         { "type": "color", "id": "ink_dark", "label": "Encre sur t-shirt clair", "default": "#14263B" },
         { "type": "color", "id": "ink_light", "label": "Encre sur t-shirt foncé", "default": "#F7EBD3" }
       ]
