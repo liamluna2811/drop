@@ -17,3 +17,12 @@
 - `soleil-devant` : petit médaillon côté cœur (partie fixe) ; calques texte NOM et « N° » dessous.
 - Même format que les dos (12 × 16 in, 300 dpi), à placer en haut de la zone « devant ». Planche : `perso-devant.jpg`.
 - Le médaillon réduit a des détails fins : à imprimer, pas à broder.
+
+## Devants, autre style (sans logo ni médaillon) — `../src/gen_perso2.py`
+| Modèle | Pour | Partie fixe | Calques texte Printful |
+|---|---|---|---|
+| `maillot-score` | Maillot | Tableau de score « COURT CENTRAL », 6-6 contre « LES AUTRES » | NUMÉRO (colonne N°), NOM (colonne JOUEUR, 9 caractères max) |
+| `maillot-terrain` | Maillot | Court vu du dessus, trajectoire de la bandeja, « TERRAIN » | NUMÉRO (dans le camp gauche), NOM (sous « TERRAIN ») |
+| `soleil-signature` | Club Soleil | Soleil levant, coup de pinceau orange, balle, « PADEL AU SOLEIL » | NUMÉRO (dans le soleil), Prénom en écriture manuscrite |
+| `soleil-billet` | Club Soleil | Billet « COURT CENTRAL » avec talon « ADMIS · 1 JOUEUR » | NOM (après « JOUEUR »), NUMÉRO (après « PLACE N° ») |
+Planche : `perso-devant-v2.jpg`. Polices des maquettes : Chango, Archivo Black, Pacifico, Fraunces italique.
