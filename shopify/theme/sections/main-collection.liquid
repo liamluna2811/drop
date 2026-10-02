@@ -14,10 +14,15 @@
     <nav class="coll-nav" aria-label="Univers">
       <a href="{{ routes.all_products_collection_url }}"{% if collection.handle == 'all' %} aria-current="page"{% endif %}>Tout</a>
       {%- for c in collections -%}
-        {%- if c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 0 -%}
+        {%- if c.handle != 'frontpage' and c.handle != 'all' and c.handle != 'personnalisation' and c.all_products_count > 0 -%}
           <a href="{{ c.url }}"{% if c.handle == collection.handle %} aria-current="page"{% endif %}>{{ c.title }}</a>
         {%- endif -%}
       {%- endfor -%}
+      {%- comment -%} Personnalisation : toujours en dernier, et visible même tant qu'elle est vide {%- endcomment -%}
+      {%- assign perso = collections['personnalisation'] -%}
+      {%- if perso.handle == 'personnalisation' -%}
+        <a href="{{ perso.url }}"{% if collection.handle == 'personnalisation' %} aria-current="page"{% endif %}>{{ perso.title }}</a>
+      {%- endif -%}
     </nav>
   {%- endif -%}
 
