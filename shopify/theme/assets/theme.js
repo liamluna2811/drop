@@ -563,11 +563,19 @@
           var t = target();
           if (t && !t.classList.contains('on')) showMedia(t.dataset.mediaId);
         };
+        // Dès que le client remplit (ou touche) un champ, on affiche la photo où l'aperçu apparaît
+        var filled = function () { return !!(pNom.value.trim() || pNum.value.trim()); };
         [pNom, pNum].forEach(function (el) {
           el.addEventListener('focus', goTarget);
-          el.addEventListener('input', plSync);
+          el.addEventListener('input', function () { goTarget(); plSync(); });
         });
-        form.addEventListener('change', function () { plSync(); });
+        // Changement de couleur : la galerie repart sur la photo de la variante ; si un champ est rempli, on revient à l'aperçu
+        form.addEventListener('change', function (e) {
+          if (e.target === pNom || e.target === pNum) return;
+          if (filled()) goTarget();
+          plSync();
+        });
+        if (filled()) goTarget();
         plSync();
       }
       showPerso();
