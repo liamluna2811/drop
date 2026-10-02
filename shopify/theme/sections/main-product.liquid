@@ -163,6 +163,29 @@
       {%- for c in product.collections -%}
         {%- if c.handle == 'personnalisation' -%}{%- assign is_perso = true -%}{%- endif -%}
       {%- endfor -%}
+      {%- if is_perso and section.settings.perso_fields -%}
+        {%- assign perso_max = section.settings.perso_name_max | default: 10 -%}
+        <fieldset class="perso-fields" data-perso>
+          <legend class="opt-legend">{{ section.settings.perso_title }}</legend>
+          <div class="perso-row">
+            <div class="field">
+              <label for="perso-nom">{{ section.settings.perso_name_label }}</label>
+              <input id="perso-nom" name="properties[Nom]" type="text" required maxlength="{{ perso_max }}" autocomplete="off" spellcheck="false" pattern="[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ'’ .\-]*" title="Lettres, espaces, tirets et apostrophes uniquement" aria-describedby="perso-nom-aide" data-perso-nom>
+              <small class="fine" id="perso-nom-aide">{{ perso_max }} caractères maximum, écrit exactement comme tu veux le voir imprimé.</small>
+            </div>
+            <div class="field">
+              <label for="perso-num">{{ section.settings.perso_number_label }}</label>
+              <input id="perso-num" name="properties[Numéro]" type="text" required inputmode="numeric" maxlength="2" pattern="[0-9]{1,2}" title="Un nombre de 0 à 99" autocomplete="off" aria-describedby="perso-num-aide" data-perso-num>
+              <small class="fine" id="perso-num-aide">De 0 à 99.</small>
+            </div>
+          </div>
+          <p class="perso-preview" aria-live="polite">Sera imprimé : <strong data-perso-preview>…</strong></p>
+          <label class="perso-check">
+            <input type="checkbox" required>
+            <span>J'ai vérifié l'orthographe du nom et le numéro.</span>
+          </label>
+        </fieldset>
+      {%- endif -%}
       {%- if is_perso and section.settings.perso_note != blank -%}
         <div class="perso-note" role="note">{{ section.settings.perso_note }}</div>
       {%- endif -%}
@@ -244,6 +267,11 @@
     { "type": "text", "id": "perk_2", "label": "Avantage 2", "default": "Paiement 100 % sécurisé" },
     { "type": "text", "id": "perk_3", "label": "Avantage 3", "default": "Fabriqué à la demande, après ta commande" },
     { "type": "header", "content": "Produits personnalisés" },
+    { "type": "checkbox", "id": "perso_fields", "label": "Champs « Nom » et « Numéro » à remplir", "default": true, "info": "Sur les mêmes produits. Le nom et le numéro arrivent dans la commande Shopify (et dans le panier) : à recopier dans la commande Printful « Requires personalization »." },
+    { "type": "text", "id": "perso_title", "label": "Titre des champs", "default": "Personnalise ton t-shirt" },
+    { "type": "text", "id": "perso_name_label", "label": "Libellé du nom", "default": "Nom ou prénom" },
+    { "type": "range", "id": "perso_name_max", "label": "Nombre de caractères maximum du nom", "min": 4, "max": 16, "step": 1, "default": 10 },
+    { "type": "text", "id": "perso_number_label", "label": "Libellé du numéro", "default": "Numéro" },
     { "type": "richtext", "id": "perso_note", "label": "Avertissement affiché au-dessus du bouton", "info": "Affiché uniquement sur les produits de la collection « Personnalisation » (ou portant le tag « personnalise »). Obligatoire : le client doit savoir avant de commander qu'il n'a pas de droit de rétractation.", "default": "<p><strong>Produit personnalisé :</strong> fabriqué selon tes choix, il n'est ni repris ni échangé (pas de droit de rétractation, article L221-28, 3° du Code de la consommation), sauf défaut. Vérifie l'orthographe, le contenu et l'aperçu avant de commander.</p>" }
   ],
   "blocks": [

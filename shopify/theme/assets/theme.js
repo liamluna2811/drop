@@ -453,6 +453,19 @@
         .catch(function () {});
     }
 
+    // Champs Nom / Numéro des produits personnalisés : aperçu du texte qui sera imprimé
+    var perso = form.querySelector('[data-perso]');
+    if (perso) {
+      var pNom = perso.querySelector('[data-perso-nom]'), pNum = perso.querySelector('[data-perso-num]'), pOut = perso.querySelector('[data-perso-preview]');
+      var showPerso = function () {
+        var n = pNom.value.replace(/\s+/g, ' ').trim(), d = pNum.value.trim();
+        pOut.textContent = (n || d) ? [n, d].filter(Boolean).join(' · ') : '…';
+      };
+      pNum.addEventListener('input', function () { pNum.value = pNum.value.replace(/\D/g, '').slice(0, 2); showPerso(); });
+      pNom.addEventListener('input', showPerso);
+      showPerso();
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (btn.disabled) return;
@@ -462,6 +475,7 @@
       var props = {};
       new FormData(form).forEach(function (v, k) {
         var m = /^properties\[(.+)\]$/.exec(k);
+        if (typeof v === 'string') v = v.replace(/\s+/g, ' ').trim();
         if (m && v !== '' && !(typeof File !== 'undefined' && v instanceof File)) props[m[1]] = v;
       });
       if (Object.keys(props).length) item.properties = props;
