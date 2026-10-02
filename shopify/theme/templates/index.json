@@ -93,8 +93,8 @@
           "type": "argument",
           "settings": {
             "icon": "print",
-            "title": "Imprimé à la demande",
-            "text": "Chaque pièce est imprimée après ta commande."
+            "title": "Fabriqué à la demande",
+            "text": "Chaque pièce est fabriquée après ta commande."
           }
         },
         "a5": {
