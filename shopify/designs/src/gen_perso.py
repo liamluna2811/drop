@@ -53,7 +53,22 @@ def carte(ink, nom, num):
     texte += f'<text class="ab" x="410" y="{y0+537}" font-size="96" fill="{ink}">{num}</text>'
     return fixe, texte
 
+# ---- devants : même zone 12 × 16 in, le cœur est à droite de l'image (gauche de la poitrine) ----
+def maillot_devant(ink, nom, num):
+    fixe = logo(770, 215, 250, ink, LIME)
+    fixe += f'<text class="cz" x="770" y="410" font-size="40" letter-spacing="6" fill="{ink}" text-anchor="middle">BANDEJA CLUB</text>'
+    texte = f'<text class="ab" x="230" y="390" font-size="300" fill="{ink}" text-anchor="middle">{num}</text>'
+    return fixe, texte
+
+def soleil_devant(ink, nom, num):
+    fixe = medallion(ink, 570, 30, 380)
+    fixe += f'<line x1="610" y1="600" x2="690" y2="600" stroke="{ink}" stroke-width="4"/><line x1="830" y1="600" x2="910" y2="600" stroke="{ink}" stroke-width="4"/>'
+    texte = f'<text class="cz" x="760" y="505" font-size="66" letter-spacing="6" fill="{ink}" text-anchor="middle">{nom}</text>'
+    texte += f'<text class="cz" x="760" y="617" font-size="56" fill="{ink}" text-anchor="middle">{num}</text>'
+    return fixe, texte
+
 MODELES = {'maillot': maillot, 'soleil': soleil, 'carte': carte}
+DEVANTS = {'maillot': maillot_devant, 'soleil': soleil_devant}
 EXEMPLES = {'maillot': ('DUPONT', '10'), 'soleil': ('MARTIN', 'N° 7'), 'carte': ('LÉA', '23')}
 
 if __name__ == '__main__':
@@ -65,4 +80,9 @@ if __name__ == '__main__':
             ex_fixe, ex_texte = f(ink, *EXEMPLES[k])
             open(f'{out}/{k}-dos-{v}.svg', 'w').write(svg(fixe))
             open(f'{out}/{k}-dos-{v}-exemple.svg', 'w').write(svg(ex_fixe + ex_texte))
+        if k in DEVANTS:
+            for v, ink in (('clair', INK), ('fonce', CREAM)):
+                g = DEVANTS[k]
+                open(f'{out}/{k}-devant-{v}.svg', 'w').write(svg(g(ink, '', '')[0]))
+                open(f'{out}/{k}-devant-{v}-exemple.svg', 'w').write(svg(''.join(g(ink, *EXEMPLES[k]))))
     print('ok')

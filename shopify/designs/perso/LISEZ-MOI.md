@@ -11,3 +11,9 @@
 - `apercu/` : rendu avec un nom et un numéro fictifs. `perso.jpg` : planche de maquettes.
 - Polices des maquettes : Archivo Black (maillot, carte), Cinzel (soleil). Dans Printful, choisir la police disponible la plus proche.
 - Source : `../src/gen_perso.py`.
+
+## Devants (`*-devant-*`)
+- `maillot-devant` : logo + « BANDEJA CLUB » côté cœur (partie fixe) ; calque texte NUMÉRO de l'autre côté de la poitrine.
+- `soleil-devant` : petit médaillon côté cœur (partie fixe) ; calques texte NOM et « N° » dessous.
+- Même format que les dos (12 × 16 in, 300 dpi), à placer en haut de la zone « devant ». Planche : `perso-devant.jpg`.
+- Le médaillon réduit a des détails fins : à imprimer, pas à broder.
