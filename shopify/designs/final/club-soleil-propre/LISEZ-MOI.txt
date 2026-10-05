@@ -1,0 +1,20 @@
+CLUB SOLEIL – VERSION PROPRE (sans effet usé) : fichiers prêts à imprimer (Printful)
+
+Fichiers :
+- club-soleil-60-rayons_dos_tshirt-fonce.png : dos, 60 rayons, pour t-shirt foncé (encre crème)
+- club-soleil-60-rayons_dos_tshirt-clair.png : dos, 60 rayons, pour t-shirt clair (encre bleu nuit)
+- club-soleil-40-rayons_dos_tshirt-fonce.png : dos, 40 rayons, pour t-shirt foncé
+- club-soleil-40-rayons_dos_tshirt-clair.png : dos, 40 rayons, pour t-shirt clair
+- club-soleil_coeur_tshirt-fonce.png / -clair.png : petit logo pour la poitrine
+
+Réglages dans Printful :
+- Dos : PNG transparent 3600 × 3600 px à 300 dpi, soit 12 × 12 in (30,5 cm).
+  Placement « Dos », centré horizontalement, en haut de la zone d'impression.
+  Si le modèle de t-shirt a une zone plus petite, réduisez la taille en gardant les proportions.
+- Cœur : PNG transparent 1050 px de large (3,5 in, environ 9 cm).
+  Placement « Poitrine gauche ».
+- Version « fonce » pour Noir, Bleu marine et toutes les couleurs foncées.
+- Version « clair » pour Ivoire, Blanc, Sable et toutes les couleurs claires.
+
+Différence avec le dossier « club-soleil » : l effet « usé » (petits trous dans l encre) est retiré.
+Mêmes tailles (3600 × 3600 px à 300 dpi pour le dos), même placement.
