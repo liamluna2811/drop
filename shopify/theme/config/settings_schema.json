@@ -83,7 +83,7 @@
         "type": "text",
         "id": "announcement_customer",
         "label": "Bandeau d'annonce (clients ayant déjà commandé)",
-        "default": "Livraison offerte dès 60 € d'achat (hors sac de sport et gourde)"
+        "default": "Livraison offerte dès 60 € d'achat"
       },
       {
         "type": "number",

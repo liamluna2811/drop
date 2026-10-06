@@ -70,7 +70,7 @@
           "type": "qa",
           "settings": {
             "question": "Combien coûte la livraison ?",
-            "answer": "<p>Les frais de livraison dépendent des articles commandés et s'affichent au paiement, avant de valider. Nous livrons uniquement en France (Monaco compris) et dans les pays de l'Union européenne. Dès 60 € d'achat, la livraison est offerte, sauf si ta commande contient le sac de sport ou la gourde.</p>"
+            "answer": "<p>Les frais de livraison dépendent des articles commandés et s'affichent au paiement, avant de valider. Nous livrons uniquement en France (Monaco compris) et dans les pays de l'Union européenne. Dès 60 € d'achat (après réductions), la livraison est offerte.</p>"
           }
         },
         "q_suivi": {

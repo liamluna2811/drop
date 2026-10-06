@@ -1,7 +1,6 @@
 {%- comment -%}
   Barre de progression vers la livraison offerte (seuil : réglage « free_shipping_threshold », 60 € par défaut).
   Le seuil s'applique au montant après réductions (comme le calcule Shopify).
-  Le sac de sport et la gourde ne sont pas concernés : si le panier en contient, on l'indique au lieu d'afficher la barre.
   Mise à jour en direct par theme.js quand le panier change.
 {%- endcomment -%}
 {%- liquid
@@ -16,19 +15,10 @@
   if pct > 100
     assign pct = 100
   endif
-  assign excluded = false
-  for item in cart.items
-    assign t = item.product.title | downcase
-    if t contains 'gourde' or t contains 'sac de sport'
-      assign excluded = true
-    endif
-  endfor
 -%}
-<div class="ship-progress{% if left <= 0 and excluded == false %} done{% endif %}" data-ship{% if cart.item_count == 0 or min == 0 %} hidden{% endif %}>
+<div class="ship-progress{% if left <= 0 %} done{% endif %}" data-ship{% if cart.item_count == 0 or min == 0 %} hidden{% endif %}>
   <p class="ship-msg" data-ship-msg>
-    {%- if excluded -%}La livraison offerte ne s'applique pas aux commandes contenant le sac de sport ou la gourde.
-    {%- elsif left > 0 -%}Plus que <strong>{{ left | money }}</strong> pour la livraison offerte
-    {%- else -%}<strong>Livraison offerte</strong> sur cette commande{%- endif -%}
+    {%- if left > 0 -%}Plus que <strong>{{ left | money }}</strong> pour la livraison offerte{%- else -%}<strong>Livraison offerte</strong> sur cette commande{%- endif -%}
   </p>
-  <div class="ship-bar" role="progressbar" aria-label="Progression vers la livraison offerte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}" data-ship-bar{% if excluded %} hidden{% endif %}><span style="width:{{ pct }}%"></span></div>
+  <div class="ship-bar" role="progressbar" aria-label="Progression vers la livraison offerte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}" data-ship-bar><span style="width:{{ pct }}%"></span></div>
 </div>
