@@ -83,12 +83,12 @@
         "type": "text",
         "id": "announcement_customer",
         "label": "Bandeau d'annonce (clients ayant déjà commandé)",
-        "default": "−10 % sur ta commande dès 60 € d'achat"
+        "default": "Livraison offerte dès 60 € d'achat (hors sac de sport et gourde)"
       },
       {
         "type": "number",
         "id": "free_shipping_threshold",
-        "label": "Seuil de la réduction de 10 % (en euros)",
+        "label": "Seuil de la livraison offerte (en euros)",
         "default": 60
       }
     ]

@@ -64,17 +64,21 @@
       sumEl.innerHTML = order.length ? '<div class="sum-row"><span>Sous-total</span><span>' + esc(fmt(cart.original_total_price)) + '</span></div>' +
         order.map(function (t) { return '<div class="sum-row disc"><span>' + esc(t) + '</span><span>−' + esc(fmt(disc[t])) + '</span></div>'; }).join('') : '';
     }
-    // Barre de progression vers la réduction de 10 % (dès 60 €)
-    // Le seuil porte sur le panier avant réductions de commande : on compare le sous-total des articles
-    var min = T.freeShipping || 0, sub = cart.items_subtotal_price != null ? cart.items_subtotal_price : total;
+    // Barre de progression vers la livraison offerte (dès 60 €, hors sac de sport et gourde)
+    // Shopify compare le seuil au montant après réductions (vérifié) : on utilise donc le total du panier
+    var min = T.freeShipping || 0, sub = total;
+    var excluded = (cart.items || []).some(function (i) { return /gourde|sac de sport/i.test(i.product_title || ''); });
     [].forEach.call(document.querySelectorAll('[data-ship]'), function (el) {
       el.hidden = !count || !min;
       var left = min - sub, pct = min ? Math.min(100, Math.round(sub * 100 / min)) : 100;
-      el.classList.toggle('done', left <= 0);
-      el.querySelector('[data-ship-msg]').innerHTML = left > 0
-        ? 'Plus que <strong>' + esc(fmt(left)) + '</strong> pour profiter de −10 %'
-        : '<strong>−10 %</strong> appliqués sur cette commande';
+      el.classList.toggle('done', left <= 0 && !excluded);
+      el.querySelector('[data-ship-msg]').innerHTML = excluded
+        ? 'La livraison offerte ne s\'applique pas aux commandes contenant le sac de sport ou la gourde.'
+        : left > 0
+          ? 'Plus que <strong>' + esc(fmt(left)) + '</strong> pour la livraison offerte'
+          : '<strong>Livraison offerte</strong> sur cette commande';
       var bar = el.querySelector('[data-ship-bar]');
+      bar.hidden = excluded;
       bar.setAttribute('aria-valuenow', pct);
       bar.firstElementChild.style.width = pct + '%';
     });

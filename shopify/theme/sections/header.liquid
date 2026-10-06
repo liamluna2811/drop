@@ -1,6 +1,6 @@
 <div class="topbar">
   <span class="topbar-text">
-    {%- comment -%} Client sans commande : offre de bienvenue (−15 %) ; client ayant déjà commandé : −10 % dès 60 € {%- endcomment -%}
+    {%- comment -%} Client sans commande : offre de bienvenue (−15 %) ; client ayant déjà commandé : livraison offerte dès 60 € {%- endcomment -%}
     {%- if customer and customer.orders_count == 0 -%}
       {{ settings.announcement_first | default: settings.announcement_customer }}
     {%- elsif customer -%}
@@ -113,7 +113,7 @@
     { "type": "text", "id": "logo_1", "label": "Logo (partie 1)", "default": "BANDEJA" },
     { "type": "text", "id": "logo_2", "label": "Logo (partie 2, surlignée)", "default": "CLUB" },
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
-    { "type": "text", "id": "menu_note", "label": "Phrase en bas du menu mobile", "default": "−10 % sur ta commande dès 60 € d'achat" }
+    { "type": "text", "id": "menu_note", "label": "Phrase en bas du menu mobile", "default": "Livraison offerte dès 60 € d'achat (hors sac de sport et gourde)" }
   ]
 }
 {% endschema %}

@@ -101,8 +101,8 @@
           "type": "argument",
           "settings": {
             "icon": "truck",
-            "title": "−10 % dès 60 € d'achat",
-            "text": "Livraison en France et dans l'Union européenne, frais calculés au paiement."
+            "title": "Livraison offerte dès 60 €",
+            "text": "En France et dans l'Union européenne, hors sac de sport et gourde. En dessous de 60 €, frais calculés au paiement."
           }
         },
         "a6": {
@@ -214,7 +214,7 @@
       "type": "marquee",
       "settings": {
         "scheme": "alt",
-        "words": "FABRIQUÉ À LA DEMANDE,−10 % DÈS 60 €,FRANCE ET UE"
+        "words": "FABRIQUÉ À LA DEMANDE,LIVRAISON OFFERTE DÈS 60 €,FRANCE ET UE"
       }
     }
   },
