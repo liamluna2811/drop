@@ -71,13 +71,13 @@
         "type": "text",
         "id": "announcement",
         "label": "Bandeau d'annonce (visiteurs non connectés)",
-        "default": "−15 % sur ta première commande en créant ton compte"
+        "default": "−15 % sur ta 1re commande en créant ton compte, jusqu'au lendemain minuit"
       },
       {
         "type": "text",
         "id": "announcement_first",
         "label": "Bandeau d'annonce (clients connectés sans commande)",
-        "default": "−15 % appliqués automatiquement sur ta première commande"
+        "default": "Bienvenue : −15 % sur ta 1re commande jusqu'au lendemain minuit après ton inscription"
       },
       {
         "type": "text",
