@@ -30,7 +30,8 @@
     'heather grey': 'Gris', 'sport grey': 'Gris', 'athletic heather': 'Gris', 'charcoal': 'Anthracite', 'dark heather': 'Anthracite', 'dark grey': 'Anthracite',
     'sand': 'Sable', 'natural': 'Sable', 'cream': 'Sable', 'beige': 'Sable', 'ivory': 'Sable' };
   var colorLabel = function (v) { return COLORS[String(v).toLowerCase().trim()] || v; };
-  var esc = function (s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; };
+  // Échappe aussi les guillemets : le résultat est utilisé dans des attributs (href, src, data-…)
+  var esc = function (s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;'); };
   var json = { 'Content-Type': 'application/json', Accept: 'application/json' };
 
   var drawer = $('#drawer'), overlay = $('#overlay');

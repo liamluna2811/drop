@@ -22,11 +22,11 @@
       <div class="field-row">
         <div class="field">
           <label for="club-name">Nom et prénom</label>
-          <input id="club-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name }}" required>
+          <input id="club-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name | escape }}" required>
         </div>
         <div class="field">
           <label for="club-email">Email</label>
-          <input id="club-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email }}" required>
+          <input id="club-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email | escape }}" required>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
 
       <div class="field">
         <label for="club-body">Ton projet</label>
-        <textarea id="club-body" name="contact[body]" rows="6" required placeholder="Tailles, couleurs, emplacement du logo, date souhaitée…">{{ form.body }}</textarea>
+        <textarea id="club-body" name="contact[body]" rows="6" required placeholder="Tailles, couleurs, emplacement du logo, date souhaitée…">{{ form.body | escape }}</textarea>
       </div>
 
       <p class="fine">Tu pourras nous envoyer ton logo en répondant à notre email. En envoyant ce formulaire, tu acceptes que ces informations soient utilisées pour répondre à ta demande. Plus de détails dans notre <a href="/pages/politique-de-confidentialite">politique de confidentialité</a>.</p>

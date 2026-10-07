@@ -24,7 +24,11 @@
               {%- for p in item.properties -%}
                 {%- assign first = p.first | slice: 0 -%}
                 {%- if p.last != blank and first != '_' -%}
-                  <small class="props">{{ p.first }} : {% if p.last contains '://' %}<a href="{{ p.last }}" target="_blank" rel="noopener">voir</a>{% else %}{{ p.last }}{% endif %}</small>
+                  {%- comment -%} Texte saisi par le client : toujours échappé ; lien seulement pour une adresse http(s) {%- endcomment -%}
+                  {%- assign pv = p.last | strip -%}
+                  {%- assign pv_8 = pv | downcase | slice: 0, 8 -%}
+                  {%- assign pv_7 = pv | downcase | slice: 0, 7 -%}
+                  <small class="props">{{ p.first | escape }} : {% if pv_8 == 'https://' or pv_7 == 'http://' %}<a href="{{ pv | escape }}" target="_blank" rel="noopener">voir</a>{% else %}{{ pv | escape }}{% endif %}</small>
                 {%- endif -%}
               {%- endfor -%}
               <div class="qty"><input type="number" class="qty-input" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantité {{ item.product.title | escape }}"></div>

@@ -20,11 +20,11 @@
       <div class="field-row">
         <div class="field">
           <label for="contact-name">Nom</label>
-          <input id="contact-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name }}" required>
+          <input id="contact-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name | escape }}" required>
         </div>
         <div class="field">
           <label for="contact-email">Email</label>
-          <input id="contact-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email }}" required>
+          <input id="contact-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email | escape }}" required>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
 
       <div class="field">
         <label for="contact-body">Message</label>
-        <textarea id="contact-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+        <textarea id="contact-body" name="contact[body]" rows="6" required>{{ form.body | escape }}</textarea>
       </div>
 
       <p class="fine">En envoyant ce formulaire, tu acceptes que ces informations soient utilisées pour répondre à ta demande. Plus de détails dans notre <a href="/pages/politique-de-confidentialite">politique de confidentialité</a>.</p>
