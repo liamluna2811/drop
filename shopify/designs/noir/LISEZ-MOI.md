@@ -1,27 +1,30 @@
 # Versions pour t-shirt noir
 
-Les modèles « Côté drive », « Côté revés », « Lob. Vitre. Point. », « J'ai padel » et « Padel Côte d'Azur » étaient imprimés en bleu nuit, une couleur qui se voit très mal sur le t-shirt noir. Ces fichiers sont la même chose redessinée en clair pour le noir : texte crème `#F1EBDD`, orange `#E8672E` conservé (balle, « POINT. », filet du terrain).
+Les modèles « Côté drive », « Côté revés », « Lob. Vitre. Point. », « J'ai padel » et « Padel Côte d'Azur » sont imprimés en bleu nuit, qui se voit très mal sur le t-shirt noir.
 
-## Fichiers (`impression/`)
+## Fichiers à utiliser : `impression/`
 
-| Fichier | Emplacement |
+Ce sont **les fichiers d'origine**, avec une seule modification : le bleu nuit `#1A2A49` est remplacé par un crème `#F1EBDD`.
+Tout le reste est identique : dessin, dimensions en pixels, cadrage, transparence (canal alpha inchangé, vérifié pixel par pixel) et orange `#E8622B`.
+Les bords lissés sont recalculés (mélange bleu nuit, orange, blanc → crème, orange, blanc) : pas de liseré bleu.
+
+| Fichier | Taille (px) |
 |---|---|
-| `cote-drive_devant_noir.png` / `cote-drive_dos_noir.png` | devant / dos |
-| `cote-reves_devant_noir.png` / `cote-reves_dos_noir.png` | devant / dos |
-| `lob-vitre-point_devant_noir.png` / `lob-vitre-point_dos_noir.png` | devant / dos |
-| `j-ai-padel_devant_noir.png` / `j-ai-padel_dos_noir.png` | devant / dos |
-| `padel-cote-d-azur_devant_noir.png` / `padel-cote-d-azur_dos_noir.png` | devant / dos |
+| `cote-drive_devant_noir.png` | 2000 × 1906 |
+| `cote-drive_dos_noir.png` | 2000 × 952 |
+| `cote-reves_devant_noir.png` | 2000 × 1988 |
+| `cote-reves_dos_noir.png` | 2000 × 1089 |
+| `lob-vitre-point_devant_noir.png` | 1961 × 2000 |
+| `lob-vitre-point_dos_noir.png` | 1700 × 2000 |
+| `j-ai-padel_devant_noir.png` | 1494 × 2000 |
+| `j-ai-padel_dos_noir.png` | 2000 × 1164 |
+| `padel-cote-d-azur_devant_noir.png` | 1363 × 2000 |
+| `padel-cote-d-azur_dos_noir.png` | 2000 × 964 |
 
-- PNG à fond transparent, recadrés au dessin (marge de 60 px), 300 dpi, comme les fichiers de `designs/final/`.
-- Taille d'impression à 300 dpi : drive devant 9,0 × 8,3 in · dos 11,2 × 4,6 in ; revés devant 9,7 × 8,5 in · dos 9,5 × 4,6 in ; lob devant 10,1 × 9,2 in · dos 9,5 × 11,7 in ; j'ai padel devant 10,0 × 12,6 in · dos 11,3 × 6,2 in ; Côte d'Azur devant 7,6 × 10,8 in · dos 9,1 × 4,4 in.
-- Dans Printful : centrer horizontalement, placer en haut de la zone, et régler la largeur sur celle de la version bleu nuit actuelle pour garder la même taille.
-- Le texte est crème : sur un fond d'aperçu blanc ou à damier clair, il se voit mal. C'est normal, il est fait pour le noir.
-- `apercus/` : rendu sur la photo Printful du t-shirt noir, l'ancien visuel effacé. Indicatif.
+Dans Printful : même placement et même taille que la version bleu nuit.
 
-## Ce qui change par rapport aux originaux
+`planche-originaux-recolores.jpg` : aperçu des 10 fichiers sur fond noir.
 
-Les fichiers d'origine n'étaient pas dans le dépôt : les visuels ont été redessinés d'après les photos Printful. Textes, pictos et mise en page sont les mêmes. Les polices sont les plus proches disponibles en libre : Anton (gros titres), Archivo Expanded (petites capitales), Newsreader italique et droit (phrases). Elles sont sous licence SIL Open Font, utilisables commercialement.
+## À ne pas utiliser : `redessine-a-ne-pas-utiliser/`
 
-## Source
-
-`source/designs-fonce.html` + `source/print.js` (rendu avec Chromium : `node print.js designs-fonce.html dossier drive-f,drive-b,…`).
+Première tentative redessinée à partir des photos, avant d'avoir les fichiers d'origine. Polices et proportions différentes : ne pas l'envoyer à Printful.
