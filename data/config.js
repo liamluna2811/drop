@@ -7,8 +7,9 @@ window.VL_CONFIG = {
   agent: 'Brimstone',
 
   // Capacité référencée : `en` est le nom anglais officiel (pour retrouver
-  // l'icône), `bind` la touche par défaut.
-  ability: { name: 'Incendiaire', en: 'Incendiary', bind: 'Q', color: '#ff4655' },
+  // l'icône), `bind` la touche par défaut. `color` : lineups côté attaque,
+  // `colorDefense` : lineups côté défense.
+  ability: { name: 'Incendiaire', en: 'Incendiary', bind: 'Q', color: '#ff4655', colorDefense: '#3d9bff' },
 
   sides: { attack: 'Attaque', defense: 'Défense' },
 

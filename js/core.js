@@ -157,16 +157,22 @@ const VL = (() => {
 
   /* ---------- Capacité ---------- */
 
-  const ability = { name: 'Capacité', bind: '?', color: '#ff4655', ...config.ability };
+  const ability = { name: 'Capacité', bind: '?', color: '#ff4655', colorDefense: '#3d9bff', ...config.ability };
+
+  // Rouge pour l'attaque, bleu pour la défense.
+  function abilityColor(side) {
+    return side === 'defense' ? ability.colorDefense : ability.color;
+  }
 
   // Pastille d'icône de la capacité : icône officielle si dispo, sinon la touche.
-  function abilityBadge(agent, extraClass = '') {
+  function abilityBadge(agent, side, extraClass = '') {
     const ab = ability;
     const icon = agent?.abilityIcon;
     const inner = icon
       ? `<img src="${escapeHtml(icon)}" alt="" draggable="false">`
       : `<span>${escapeHtml(ab.bind)}</span>`;
-    return `<span class="ab-badge ${extraClass}" style="--ab:${ab.color}" title="${escapeHtml(ab.name)}">${inner}</span>`;
+    const title = `${ab.name}${side === 'defense' ? ' (défense)' : ''}`;
+    return `<span class="ab-badge ${extraClass}" style="--ab:${abilityColor(side)}" title="${escapeHtml(title)}">${inner}</span>`;
   }
 
   /* ---------- Lineups : fichier + brouillons ---------- */
@@ -316,7 +322,7 @@ const VL = (() => {
 
   return {
     config, slug, escapeHtml, param, round,
-    getMaps, getMap, getAgent, mapRotation, impactFor, playerBadge, ability, abilityBadge,
+    getMaps, getMap, getAgent, mapRotation, impactFor, playerBadge, ability, abilityColor, abilityBadge,
     allLineups, lineupsForMap, getLineup, isDraft, discardDraft, inFile, saveLineup, deleteLineup,
     draftCount, clearDrafts, newId, exportLineupsFile,
     toast, renderDraftBar, imgOrPlaceholder,

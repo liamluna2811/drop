@@ -75,7 +75,7 @@
     <section class="lu-hero">
       <div class="lu-hero-bg" style="${map.splash ? `background-image:url('${esc(map.splash)}')` : ''}"></div>
       <div class="lu-hero-inner">
-        ${VL.abilityBadge(agent)}
+        ${VL.abilityBadge(agent, lineup.side)}
         <div>
           <div class="hero-kicker">${esc(map.name)} · ${esc(ab.name)} (${esc(ab.bind)})</div>
           <h1 style="margin-top:10px">${esc(lineup.title)}</h1>
@@ -112,8 +112,8 @@
         <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte">
           <div class="mini-map-rot" style="--rot:${rot}deg">
             ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
-            ${spot && impact ? `<svg class="mini-map-line" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="${spot.x}" y1="${spot.y}" x2="${impact.x}" y2="${impact.y}"/></svg>` : ''}
-            ${impact ? `<span class="mini-map-spot" style="${pt(impact)}" title="Impact de la molly">${VL.abilityBadge(agent)}</span>` : ''}
+            ${spot && impact ? `<svg class="mini-map-line" style="--ab:${VL.abilityColor(lineup.side)}" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="${spot.x}" y1="${spot.y}" x2="${impact.x}" y2="${impact.y}"/></svg>` : ''}
+            ${impact ? `<span class="mini-map-spot" style="${pt(impact)}" title="Impact de la molly">${VL.abilityBadge(agent, lineup.side)}</span>` : ''}
             ${spot ? `<span class="mini-map-spot" style="${pt(spot)}">${VL.playerBadge()}</span>` : ''}
           </div>
         </a>

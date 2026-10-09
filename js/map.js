@@ -212,10 +212,10 @@
       return;
     }
     listEl.innerHTML = items.map(l => `
-      <a class="lineup-item ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="--ab:${VL.ability.color}">
+      <a class="lineup-item ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="--ab:${VL.abilityColor(l.side)}">
         <div class="lineup-thumb">
           ${VL.imgOrPlaceholder(l.result?.image || l.aim?.image || l.position?.image, '')}
-          ${VL.abilityBadge(agent)}
+          ${VL.abilityBadge(agent, l.side)}
         </div>
         <div>
           <h3>${esc(l.title)}</h3>
@@ -226,8 +226,8 @@
 
   function renderMarkers() {
     markersEl.innerHTML = filtered().filter(l => l.spot).map(l => `
-      <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.spot.x}%;top:${l.spot.y}%;--ab:${VL.ability.color}" aria-label="${esc(l.title)}">
-        ${VL.abilityBadge(agent)}
+      <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.spot.x}%;top:${l.spot.y}%;--ab:${VL.abilityColor(l.side)}" aria-label="${esc(l.title)}">
+        ${VL.abilityBadge(agent, l.side)}
         <span class="marker-label">${esc(l.title)}</span>
       </a>`).join('');
   }
