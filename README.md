@@ -35,7 +35,7 @@ Range tes captures dans `assets/lineups/<map>/`, par exemple `assets/lineups/asc
 
 | Fichier | Rôle |
 | --- | --- |
-| `data/lineups.js` | Toutes tes lineups. Contient deux exemples à supprimer. |
+| `data/lineups.js` | Toutes tes lineups |
 | `data/config.js` | Agent, capacité (nom, couleur), types de lancer, tags, maps masquées, images locales |
 | `assets/lineups/` | Tes captures d'écran |
 | `index.html` / `map.html` / `lineup.html` | Les 3 pages du site |

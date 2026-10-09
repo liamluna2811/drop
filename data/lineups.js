@@ -21,41 +21,5 @@
  *   "result":   { "image": "assets/lineups/ascent/default-a-res.jpg", "note": "Couvre le default" },
  *   "notes": "Infos complémentaires"
  * }
- *
- * Les deux lineups ci-dessous sont des EXEMPLES pour visualiser le rendu :
- * supprime-les quand tu ajoutes les tiennes.
  */
-window.LINEUPS = [
-  {
-    "id": "exemple-ascent-molly-a",
-    "map": "ascent",
-    "title": "EXEMPLE — Molly default A",
-    "site": "A",
-    "side": "attack",
-    "throwType": "Saut + lancer",
-    "difficulty": 1,
-    "tags": ["Post-plant", "Exemple"],
-    "from": { "x": 30, "y": 62 },
-    "to": { "x": 22, "y": 30 },
-    "position": { "image": "", "note": "Exemple : colle-toi dans le coin du mur à gauche en sortant du lobby A." },
-    "aim": { "image": "", "note": "Exemple : place ton viseur sur l'angle du toit, au-dessus de la fenêtre." },
-    "result": { "image": "", "note": "Exemple : la molly tombe sur le spot de plant par défaut." },
-    "notes": "Ceci est une lineup d'exemple, les infos ne sont pas réelles."
-  },
-  {
-    "id": "exemple-ascent-molly-b",
-    "map": "ascent",
-    "title": "EXEMPLE — Molly post-plant B",
-    "site": "B",
-    "side": "attack",
-    "throwType": "Lancer normal",
-    "difficulty": 0,
-    "tags": ["Post-plant", "Exemple"],
-    "from": { "x": 72, "y": 70 },
-    "to": { "x": 74, "y": 52 },
-    "position": { "image": "", "note": "" },
-    "aim": { "image": "", "note": "" },
-    "result": { "image": "", "note": "" },
-    "notes": "Ceci est une lineup d'exemple."
-  }
-];
+window.LINEUPS = [];
