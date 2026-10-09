@@ -84,6 +84,12 @@
     <div class="lu-layout">
       <div class="lu-col">
         ${renderStep(0)}
+        <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte">
+          <div class="mini-map-rot" style="--rot:${rot}deg">
+            ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
+            ${lineup.spot ? `<span class="mini-map-spot" style="${pt(lineup.spot)}">${VL.abilityBadge(agent)}</span>` : ''}
+          </div>
+        </a>
         ${lineup.notes ? `<div class="card"><h3>Notes</h3><p class="notes">${esc(lineup.notes)}</p></div>` : ''}
 
         ${siblings.length > 1 ? `
@@ -98,19 +104,11 @@
       <aside class="lu-col">
         ${renderStep(2)}
 
-        <div class="lu-meta">
-          <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte">
-            <div class="mini-map-rot" style="--rot:${rot}deg">
-              ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
-              ${lineup.spot ? `<span class="mini-map-spot" style="${pt(lineup.spot)}">${VL.abilityBadge(agent)}</span>` : ''}
-            </div>
-          </a>
-          <dl class="info-list card">
-            <div><dt>Site</dt><dd>${esc(lineup.site || '—')}</dd></div>
-            <div><dt>Côté</dt><dd>${esc(config.sides[lineup.side] || '—')}</dd></div>
-            <div><dt>Lancer</dt><dd>${esc(lineup.throwType || '—')}</dd></div>
-          </dl>
-        </div>
+        <dl class="info-list card">
+          <div><dt>Site</dt><dd>${esc(lineup.site || '—')}</dd></div>
+          <div><dt>Côté</dt><dd>${esc(config.sides[lineup.side] || '—')}</dd></div>
+          <div><dt>Lancer</dt><dd>${esc(lineup.throwType || '—')}</dd></div>
+        </dl>
       </aside>
     </div>`;
 

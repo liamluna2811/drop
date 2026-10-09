@@ -904,7 +904,7 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
   mask-image: linear-gradient(to bottom, #000, transparent);
 }
 
-.lu-hero-inner { max-width: 1840px; margin: 0 auto; display: flex; align-items: center; gap: 18px; }
+.lu-hero-inner { margin: 0 auto; display: flex; align-items: center; gap: 18px; }
 .lu-hero .ab-badge { --size: 56px; border-width: 3px; }
 .lu-hero h1 { font-size: clamp(26px, 2.6vw, 40px); font-weight: 700; }
 .lu-hero .hero-kicker { font-size: 11px; }
@@ -914,12 +914,13 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 /* Lecture de gauche à droite : 1 Positionnement | 2 Visée (en grand, au
    centre) | 3 Résultat + carte + infos. Tout tient sur un écran sans défiler. */
 .lu-layout {
-  --img-max: calc(100vh - var(--header-h) - 250px);
-  max-width: 1840px;
-  margin: 0 auto;
-  padding: 20px clamp(16px, 2.5vw, 40px) 24px;
+  /* Hauteur disponible pour la visée : écran moins en-têtes et texte. */
+  --img-max: max(320px, calc(100vh - var(--header-h) - 290px));
+  padding: 20px clamp(16px, 2vw, 40px) 24px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  /* La visée prend toute la hauteur possible (ratio ~16:10), dans la limite
+     de 62 % de la largeur ; les colonnes 1 et 3 se partagent le reste. */
+  grid-template-columns: minmax(260px, 1fr) min(calc(var(--img-max) * 1.64), 62vw) minmax(260px, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -955,7 +956,7 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .lu-col { display: grid; gap: 18px; align-content: start; min-width: 0; }
 
 /* Étapes secondaires (1 et 3) plus compactes */
-.lu-col .step-media > img { max-height: calc(var(--img-max) * 0.55); }
+.lu-col .step-media > img { max-height: calc(var(--img-max) * 0.6); }
 .lu-col .step h2 { font-size: 20px; }
 .lu-col .step-num { font-size: 24px; }
 .lu-col .step p { font-size: 14px; }
@@ -979,7 +980,6 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
   letter-spacing: 0.1em;
 }
 
-.lu-meta { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 12px; align-items: stretch; }
 
 .card {
   border: 1px solid var(--line);
@@ -990,6 +990,7 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 
 .mini-map {
   display: block;
+  width: min(100%, 300px, calc(var(--img-max) * 0.4));
   aspect-ratio: 1;
   border-radius: var(--radius);
   overflow: hidden;
@@ -1092,6 +1093,7 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 @media (max-width: 1100px) {
   .lu-layout { grid-template-columns: 1fr; --img-max: none; }
   .lu-col .step-media > img { max-height: none; }
+  .mini-map { width: min(100%, 300px); }
 }
 
 @media (max-width: 900px) {
