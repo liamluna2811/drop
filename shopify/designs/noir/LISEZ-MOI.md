@@ -11,8 +11,10 @@ Les modèles « Côté drive », « Côté revés », « Lob. Vitre. Point. » e
 | `lob-vitre-point_devant_noir.png` / `lob-vitre-point_dos_noir.png` | devant / dos |
 | `j-ai-padel_devant_noir.png` / `j-ai-padel_dos_noir.png` | devant / dos |
 
-- PNG transparents, 3600 × 4800 px : zone d'impression complète 12 × 16 in à 300 dpi.
-- Le visuel est en haut et centré, comme sur les versions actuelles. Dans Printful, garder le fichier en pleine zone (ne pas le réduire) pour retrouver la même taille.
+- PNG à fond transparent, recadrés au dessin (marge de 60 px), 300 dpi, comme les fichiers de `designs/final/`.
+- Taille d'impression à 300 dpi : drive devant 9,0 × 8,3 in · dos 11,2 × 4,6 in ; revés devant 9,7 × 8,5 in · dos 9,5 × 4,6 in ; lob devant 10,1 × 9,2 in · dos 9,5 × 11,7 in ; j'ai padel devant 10,0 × 12,6 in · dos 11,3 × 6,2 in.
+- Dans Printful : centrer horizontalement, placer en haut de la zone, et régler la largeur sur celle de la version bleu nuit actuelle pour garder la même taille.
+- Le texte est crème : sur un fond d'aperçu blanc ou à damier clair, il se voit mal. C'est normal, il est fait pour le noir.
 - `apercus/` : rendu sur la photo Printful du t-shirt noir, l'ancien visuel effacé. Indicatif.
 
 ## Ce qui change par rapport aux originaux
