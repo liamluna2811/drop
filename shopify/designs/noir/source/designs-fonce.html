@@ -1,0 +1,99 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/print.css">
+<style>
+/* Fichiers d'impression pour t-shirt foncé : zone 12 × 16 in (1200 × 1600 px ici, rendu ×3 = 3600 × 4800 px à 300 dpi), fond transparent. */
+:root{--ink:#F1EBDD;--ac:#E8672E}
+html,body{margin:0;background:transparent}
+.zone{position:relative;width:1200px;height:1600px;display:none;flex-direction:column;align-items:center;color:var(--ink);text-align:center}
+.small{font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:700;text-transform:uppercase;letter-spacing:.32em;margin-right:-.32em}
+.big{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:.86;letter-spacing:-.005em}
+.it{font-family:'Newsreader',serif;font-style:italic;font-weight:600}
+svg{display:block}
+</style></head><body>
+
+<!-- CÔTÉ DRIVE · devant -->
+<div class="zone" id="drive-f">
+  <div class="small" style="font-size:44px;margin-top:70px">Côté</div>
+  <div class="big" style="font-size:430px;margin-top:34px">Drive</div>
+  <svg class="ball" width="120" height="120" viewBox="0 0 100 100" style="margin-top:70px"><use href="#ball"/></svg>
+  <div class="it" style="font-size:78px;margin-top:70px">Je prends tout à droite.</div>
+</div>
+
+<!-- CÔTÉ DRIVE · dos -->
+<div class="zone" id="drive-b">
+  <div class="big" style="font-size:300px;margin-top:160px">À toi&nbsp;!</div>
+  <div class="it" style="font-size:62px;margin-top:30px">Balle au milieu ? Toujours pour le revés.</div>
+</div>
+
+<!-- CÔTÉ REVÉS · devant -->
+<div class="zone" id="reves-f">
+  <div class="small" style="font-size:44px;margin-top:70px">Côté</div>
+  <div class="big" style="font-size:430px;margin-top:34px">Revés</div>
+  <svg width="120" height="120" viewBox="0 0 100 100" style="margin-top:70px"><use href="#ball"/></svg>
+  <div class="it" style="font-size:78px;margin-top:70px">Je finis les points.</div>
+</div>
+
+<!-- CÔTÉ REVÉS · dos -->
+<div class="zone" id="reves-b">
+  <div class="big" style="font-size:300px;margin-top:160px">À moi&nbsp;!</div>
+  <div class="it" style="font-size:62px;margin-top:30px">Même quand c'était pour le drive.</div>
+</div>
+
+<!-- LOB. VITRE. POINT. · devant -->
+<div class="zone" id="lob-f">
+  <div style="text-align:left;margin-top:70px;display:inline-block">
+    <div class="big" style="font-size:300px;line-height:.9">Lob.</div>
+    <div class="big" style="font-size:300px;line-height:.9;color:transparent;-webkit-text-stroke:7px var(--ink)">Vitre.</div>
+    <div class="big" style="font-size:300px;line-height:.9;color:var(--ac)">Point.</div>
+    <div class="small" style="font-size:36px;margin-top:40px;letter-spacing:.2em">La seule tactique qui compte</div>
+  </div>
+</div>
+
+<!-- LOB. VITRE. POINT. · dos : plan de jeu -->
+<div class="zone" id="lob-b">
+  <div class="small" style="font-size:46px;margin-top:70px">Plan de jeu n°1</div>
+  <svg width="500" height="900" viewBox="0 0 500 900" style="margin-top:44px;overflow:visible">
+    <g fill="none" stroke="var(--ink)" stroke-width="9">
+      <rect x="40" y="20" width="420" height="860"/>
+      <line x1="40" y1="190" x2="460" y2="190"/><line x1="40" y1="710" x2="460" y2="710"/>
+      <line x1="250" y1="190" x2="250" y2="710"/>
+    </g>
+    <line x1="0" y1="450" x2="500" y2="450" stroke="var(--ac)" stroke-width="13"/>
+    <circle cx="170" cy="380" r="22" fill="var(--ink)"/><circle cx="330" cy="380" r="22" fill="var(--ink)"/>
+    <path d="M375 45 C 330 230, 215 420, 225 790" fill="none" stroke="var(--ac)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 26"/>
+    <svg x="340" y="10" width="72" height="72" viewBox="0 0 100 100"><use href="#ball"/></svg>
+    <circle cx="225" cy="805" r="22" fill="var(--ac)"/>
+  </svg>
+  <div class="it" style="font-size:76px;margin-top:70px">Simple. Efficace. Énervant.</div>
+</div>
+
+<!-- J'AI PADEL · devant -->
+<div class="zone" id="jp-f">
+  <div class="small" style="font-size:46px;margin-top:70px">Pas ce soir,</div>
+  <div class="big" style="font-size:330px;margin-top:40px">J’ai</div>
+  <div class="big" style="font-size:440px;margin-top:6px">Padel</div>
+  <div style="display:flex;align-items:center;gap:70px;margin-top:70px">
+    <svg width="160" height="295" viewBox="0 0 130 240"><g fill="none" stroke="var(--ink)" stroke-width="7" stroke-linejoin="round">
+      <path d="M65 8 C 108 8 124 42 122 82 C 120 128 92 150 74 160 L 74 214 L 56 214 L 56 160 C 38 150 10 128 8 82 C 6 42 22 8 65 8 Z"/>
+      <path d="M56 214 L 56 232 L 74 232 L 74 214"/></g>
+      <g fill="var(--ink)"><circle cx="50" cy="48" r="5"/><circle cx="66" cy="44" r="5"/><circle cx="82" cy="48" r="5"/><circle cx="42" cy="66" r="5"/><circle cx="58" cy="64" r="5"/><circle cx="74" cy="64" r="5"/><circle cx="90" cy="66" r="5"/><circle cx="50" cy="84" r="5"/><circle cx="66" cy="84" r="5"/><circle cx="82" cy="84" r="5"/><circle cx="58" cy="102" r="5"/><circle cx="74" cy="102" r="5"/></g></svg>
+    <svg width="120" height="120" viewBox="0 0 100 100"><use href="#ball"/></svg>
+  </div>
+  <div class="it" style="font-size:72px;margin-top:50px">— désolé.</div>
+</div>
+
+<!-- J'AI PADEL · dos -->
+<div class="zone" id="jp-b">
+  <div class="small" style="font-size:44px;margin-top:70px">Et demain</div>
+  <div class="big" style="font-size:300px;margin-top:30px">Non plus.</div>
+  <svg width="100" height="100" viewBox="0 0 100 100" style="margin-top:50px"><use href="#ball"/></svg>
+  <div class="it" style="font-size:62px;margin-top:44px">Réservé : mardi, jeudi, samedi.</div>
+</div>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <g id="ball"><circle cx="50" cy="50" r="48" fill="var(--ac)"/>
+    <g fill="none" stroke="#FFF7EC" stroke-width="5" stroke-linecap="round"><path d="M22 28 C 36 40 36 60 22 72"/><path d="M78 28 C 64 40 64 60 78 72"/></g></g>
+</defs></svg>
+<script>var id=location.hash.slice(1)||'drive-f';document.getElementById(id).style.display='flex';
+if(location.search.indexOf('bg')>-1)document.body.style.background='#111';</script>
+</body></html>
