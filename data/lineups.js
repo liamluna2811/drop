@@ -131,11 +131,11 @@ window.LINEUPS = [
       "Retake"
     ],
     "spot": {
-      "x": 29.3,
-      "y": 28.9
+      "x": 30.8,
+      "y": 33.9
     },
     "impact": {
-      "x": 35.2,
+      "x": 34.8,
       "y": 26.1
     },
     "position": {
