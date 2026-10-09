@@ -15,7 +15,7 @@
 
   const [{ map: apiMap }, agent] = await Promise.all([VL.getMap(lineup.map), VL.getAgent()]);
   const map = apiMap || { slug: lineup.map, name: lineup.map, minimap: '', splash: '' };
-  const ab = VL.ability(lineup.ability);
+  const ab = VL.ability;
   const mapUrl = `map.html?map=${encodeURIComponent(map.slug)}`;
 
   document.title = `${lineup.title} — ${map.name}`;
@@ -45,7 +45,7 @@
     <section class="lu-hero">
       <div class="lu-hero-bg" style="${map.splash ? `background-image:url('${esc(map.splash)}')` : ''}"></div>
       <div class="lu-hero-inner">
-        ${VL.abilityBadge(lineup.ability, agent)}
+        ${VL.abilityBadge(agent)}
         <div>
           <div class="hero-kicker">${esc(map.name)} · ${esc(ab.name)} (${esc(ab.bind)})</div>
           <h1 style="margin-top:10px">${esc(lineup.title)}</h1>
@@ -95,14 +95,13 @@
               ${lineup.from && lineup.to ? `<line class="show" x1="${lineup.from.x}" y1="${lineup.from.y}" x2="${lineup.to.x}" y2="${lineup.to.y}" style="--ab:${ab.color}"/>` : ''}
             </svg>
             <span class="pos-dot" style="${pt(lineup.from)}"></span>
-            <span style="position:absolute;${pt(lineup.to)}">${VL.abilityBadge(lineup.ability, agent)}</span>
+            <span style="position:absolute;${pt(lineup.to)}">${VL.abilityBadge(agent)}</span>
           </a>
         </div>
 
         <div class="card">
           <h3>Infos</h3>
           <dl class="info-list">
-            <div><dt>Capacité</dt><dd style="color:${ab.color}">${esc(ab.name)}</dd></div>
             <div><dt>Site</dt><dd>${esc(lineup.site || '—')}</dd></div>
             <div><dt>Côté</dt><dd>${esc(config.sides[lineup.side] || '—')}</dd></div>
             <div><dt>Lancer</dt><dd>${esc(lineup.throwType || '—')}</dd></div>

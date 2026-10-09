@@ -14,7 +14,7 @@ Il faut une connexion internet : les images des maps, les minimaps, les noms des
 1. Ouvre une map, puis clique sur **Ajouter** (ou sur l'icône crayon).
 2. Clique sur la carte à l'endroit **où tu te places** (point bleu).
 3. Clique à l'endroit **où la capacité atterrit** (point rouge).
-4. Remplis le formulaire : titre, capacité, site, côté, type de lancer, difficulté, tags, les 3 captures avec leurs descriptions, et des notes.
+4. Remplis le formulaire : titre, site, côté, type de lancer, difficulté, tags, les 3 captures avec leurs descriptions, et des notes.
 5. **Enregistrer** : la lineup apparaît tout de suite. Elle est gardée comme brouillon dans le navigateur.
 
 En mode édition, un clic sur une lineup existante (sur la carte ou dans la liste) l'ouvre pour la modifier. La page d'une lineup a aussi un bouton **Modifier**.
@@ -36,7 +36,7 @@ Range tes captures dans `assets/lineups/<map>/`, par exemple `assets/lineups/asc
 | Fichier | Rôle |
 | --- | --- |
 | `data/lineups.js` | Toutes tes lineups. Contient deux exemples à supprimer. |
-| `data/config.js` | Agent, capacités (noms, couleurs), types de lancer, tags, maps masquées, images locales |
+| `data/config.js` | Agent, capacité (nom, couleur), types de lancer, tags, maps masquées, images locales |
 | `assets/lineups/` | Tes captures d'écran |
 | `index.html` / `map.html` / `lineup.html` | Les 3 pages du site |
 | `js/`, `css/` | Le code |
@@ -44,6 +44,5 @@ Range tes captures dans `assets/lineups/<map>/`, par exemple `assets/lineups/asc
 ## Astuces
 
 - Sur la carte : **molette** pour zoomer, **glisser** pour te déplacer, bouton ↻ pour pivoter la carte (pour la voir dans le même sens qu'en jeu, côté attaque ou défense).
-- Filtres par capacité, site, côté et recherche texte.
+- Filtres par site, côté et recherche texte.
 - Sur une page lineup : touches **← / →** pour passer à la lineup précédente ou suivante, clic sur une capture pour l'agrandir.
-- Pour utiliser le site avec un autre agent, change `agent` et `abilities` dans `data/config.js`.

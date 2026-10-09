@@ -3,17 +3,12 @@
  */
 window.VL_CONFIG = {
   // Agent dont on référence les lineups (nom anglais, utilisé pour récupérer
-  // le portrait et les icônes de capacités sur valorant-api.com).
+  // le portrait et l'icône de la capacité sur valorant-api.com).
   agent: 'Brimstone',
 
-  // Capacités : `key` est la valeur stockée dans les lineups, `en` le nom
-  // anglais officiel (pour retrouver l'icône), `bind` la touche par défaut.
-  abilities: [
-    { key: 'stim',       name: 'Balise stimulante', en: 'Stim Beacon',    bind: 'C', color: '#f5a524' },
-    { key: 'incendiary', name: 'Incendiaire',       en: 'Incendiary',     bind: 'Q', color: '#ff4655' },
-    { key: 'smoke',      name: 'Fumigène céleste',  en: 'Sky Smoke',      bind: 'E', color: '#8fb3d9' },
-    { key: 'orbital',    name: 'Frappe orbitale',   en: 'Orbital Strike', bind: 'X', color: '#ffd84d' },
-  ],
+  // Capacité référencée : `en` est le nom anglais officiel (pour retrouver
+  // l'icône), `bind` la touche par défaut.
+  ability: { name: 'Incendiaire', en: 'Incendiary', bind: 'Q', color: '#ff4655' },
 
   sides: { attack: 'Attaque', defense: 'Défense' },
 

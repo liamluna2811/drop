@@ -8,7 +8,7 @@ const VL = (() => {
   const API = 'https://valorant-api.com/v1';
   const KEYS = {
     maps: 'vl.cache.maps.v1',
-    agent: 'vl.cache.agent.v1',
+    agent: 'vl.cache.agent.v2',
     drafts: 'vl.drafts.v1',
   };
   const CACHE_TTL = 3 * 24 * 3600 * 1000;
@@ -127,33 +127,27 @@ const VL = (() => {
     agentPromise ??= cachedFetch(KEYS.agent, `${API}/agents?isPlayableCharacter=true`, data => {
       const agent = data.find(a => a.displayName.toLowerCase() === String(config.agent).toLowerCase());
       if (!agent) return null;
-      const icons = {};
-      for (const ab of config.abilities || []) {
-        const match = agent.abilities.find(x => x.displayName.toLowerCase() === ab.en.toLowerCase());
-        if (match?.displayIcon) icons[ab.key] = match.displayIcon;
-      }
+      const en = String(config.ability?.en).toLowerCase();
+      const match = agent.abilities.find(x => x.displayName.toLowerCase() === en);
       return {
         name: agent.displayName,
         portrait: agent.fullPortrait || agent.displayIcon,
         icon: agent.displayIcon,
         colors: agent.backgroundGradientColors || [],
-        icons,
+        abilityIcon: match?.displayIcon || '',
       };
     }).catch(() => null);
     return agentPromise;
   }
 
-  /* ---------- Capacités ---------- */
+  /* ---------- Capacité ---------- */
 
-  function ability(key) {
-    return (config.abilities || []).find(a => a.key === key)
-      || { key, name: key || 'Inconnue', bind: '?', color: '#8b97a6' };
-  }
+  const ability = { name: 'Capacité', bind: '?', color: '#ff4655', ...config.ability };
 
-  // Pastille d'icône de capacité : icône officielle si dispo, sinon la touche.
-  function abilityBadge(key, agent, extraClass = '') {
-    const ab = ability(key);
-    const icon = agent?.icons?.[key];
+  // Pastille d'icône de la capacité : icône officielle si dispo, sinon la touche.
+  function abilityBadge(agent, extraClass = '') {
+    const ab = ability;
+    const icon = agent?.abilityIcon;
     const inner = icon
       ? `<img src="${escapeHtml(icon)}" alt="" draggable="false">`
       : `<span>${escapeHtml(ab.bind)}</span>`;
@@ -214,9 +208,9 @@ const VL = (() => {
     store(KEYS.drafts, { upserts: {}, deleted: [] });
   }
 
-  function newId(mapSlug, title, abilityKey) {
+  function newId(mapSlug, title) {
     const rand = Math.random().toString(36).slice(2, 6);
-    return [mapSlug, abilityKey, slug(title).slice(0, 40), rand].filter(Boolean).join('-');
+    return [mapSlug, slug(title).slice(0, 40), rand].filter(Boolean).join('-');
   }
 
   function exportLineupsFile() {

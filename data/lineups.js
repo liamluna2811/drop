@@ -6,10 +6,9 @@
  *
  * Format d'une lineup :
  * {
- *   "id": "ascent-incendiary-a-default-k3f9",   // unique, généré automatiquement
+ *   "id": "ascent-molly-default-a-k3f9",       // unique, généré automatiquement
  *   "map": "ascent",                             // nom anglais de la map en minuscules
  *   "title": "Molly default A",
- *   "ability": "incendiary",                     // stim | incendiary | smoke | orbital
  *   "site": "A",                                 // A | B | C | Mid
  *   "side": "attack",                            // attack | defense
  *   "throwType": "Saut + lancer",
@@ -31,7 +30,6 @@ window.LINEUPS = [
     "id": "exemple-ascent-molly-a",
     "map": "ascent",
     "title": "EXEMPLE — Molly default A",
-    "ability": "incendiary",
     "site": "A",
     "side": "attack",
     "throwType": "Saut + lancer",
@@ -45,15 +43,14 @@ window.LINEUPS = [
     "notes": "Ceci est une lineup d'exemple, les infos ne sont pas réelles."
   },
   {
-    "id": "exemple-ascent-stim-b",
+    "id": "exemple-ascent-molly-b",
     "map": "ascent",
-    "title": "EXEMPLE — Stim pour l'exécution B",
-    "ability": "stim",
+    "title": "EXEMPLE — Molly post-plant B",
     "site": "B",
     "side": "attack",
     "throwType": "Lancer normal",
     "difficulty": 0,
-    "tags": ["Exécution", "Exemple"],
+    "tags": ["Post-plant", "Exemple"],
     "from": { "x": 72, "y": 70 },
     "to": { "x": 74, "y": 52 },
     "position": { "image": "", "note": "" },

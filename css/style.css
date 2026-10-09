@@ -440,9 +440,6 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
 .map-count strong.zero { color: var(--dim); }
 .map-count span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
 
-.ab-dots { display: flex; gap: 4px; }
-.ab-dot { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; color: var(--ab); }
-.ab-dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ab); }
 
 .map-card-top { position: absolute; top: 14px; left: 16px; right: 16px; display: flex; justify-content: space-between; }
 .map-card .coords { font-size: 11px; color: rgba(236, 232, 225, 0.6); letter-spacing: 0.1em; }

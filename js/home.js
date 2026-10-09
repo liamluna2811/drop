@@ -34,9 +34,6 @@
 
   function card(map, i) {
     const list = byMap.get(map.slug) || [];
-    const counts = VL.config.abilities
-      .map(ab => ({ ab, n: list.filter(l => l.ability === ab.key).length }))
-      .filter(x => x.n);
     const bg = map.splash
       ? `<img class="map-card-bg" src="${VL.escapeHtml(map.splash)}" alt="" loading="lazy">`
       : '<div class="map-card-fallback"></div>';
@@ -52,7 +49,6 @@
           <div class="map-count">
             <strong class="${list.length ? '' : 'zero'}">${list.length}</strong>
             <span>lineup${list.length > 1 ? 's' : ''}</span>
-            <div class="ab-dots">${counts.map(({ ab, n }) => `<span class="ab-dot" style="--ab:${ab.color}" title="${VL.escapeHtml(ab.name)}">${n}</span>`).join('')}</div>
           </div>
         </div>
       </a>`;

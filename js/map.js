@@ -164,7 +164,7 @@
 
   const filtersKey = `vl.filters.${mapSlug}`;
   const filters = (() => {
-    try { return { abilities: [], site: '', side: '', q: '', ...JSON.parse(sessionStorage.getItem(filtersKey)) }; } catch { return { abilities: [], site: '', side: '', q: '' }; }
+    try { return { site: '', side: '', q: '', ...JSON.parse(sessionStorage.getItem(filtersKey)) }; } catch { return { site: '', side: '', q: '' }; }
   })();
   const saveFilters = () => { try { sessionStorage.setItem(filtersKey, JSON.stringify(filters)); } catch {} };
 
@@ -174,20 +174,13 @@
   function filtered() {
     const q = filters.q.trim().toLowerCase();
     return lineups.filter(l =>
-      (!filters.abilities.length || filters.abilities.includes(l.ability))
-      && (!filters.site || l.site === filters.site)
+      (!filters.site || l.site === filters.site)
       && (!filters.side || l.side === filters.side)
       && (!q || [l.title, l.notes, l.throwType, ...(l.tags || [])].join(' ').toLowerCase().includes(q)));
   }
 
   function renderFilters() {
     const countBy = key => lineups.reduce((acc, l) => ({ ...acc, [l[key]]: (acc[l[key]] || 0) + 1 }), {});
-    const abCount = countBy('ability');
-    $('#f-ability').innerHTML = config.abilities.map(ab => `
-      <button type="button" data-ability="${ab.key}" style="--ab:${ab.color}" aria-pressed="${filters.abilities.includes(ab.key)}" title="${esc(ab.name)}">
-        ${VL.abilityBadge(ab.key, agent)}${esc(ab.name.split(' ')[0])} <span class="count">${abCount[ab.key] || 0}</span>
-      </button>`).join('');
-
     const siteCount = countBy('site');
     const mapSites = (map.sites.match(/\b[A-C]\b/g) || ['A', 'B']);
     const sites = [...new Set([...mapSites, ...config.sites.filter(s => siteCount[s])])];
@@ -200,23 +193,14 @@
     $('#f-q').value = filters.q;
   }
 
-  $('#f-ability').onclick = e => {
-    const b = e.target.closest('[data-ability]');
-    if (!b) return;
-    const k = b.dataset.ability;
-    filters.abilities = filters.abilities.includes(k) ? filters.abilities.filter(x => x !== k) : [...filters.abilities, k];
-    update();
-  };
   $('#f-site').onclick = e => { const b = e.target.closest('[data-site]'); if (b) { filters.site = b.dataset.site; update(); } };
   $('#f-side').onclick = e => { const b = e.target.closest('[data-side]'); if (b) { filters.side = b.dataset.side; update(); } };
   $('#f-q').oninput = e => { filters.q = e.target.value; saveFilters(); renderList(); renderMarkers(); };
 
   function chipsFor(l) {
-    const ab = VL.ability(l.ability);
     return [
       l.site && `<span class="chip chip-strong">${esc(l.site)}</span>`,
       l.side && `<span class="chip">${esc(config.sides[l.side] || l.side)}</span>`,
-      `<span class="chip" style="color:${ab.color}">${esc(ab.name)}</span>`,
       VL.isDraft(l.id) && '<span class="chip chip-draft">brouillon</span>',
     ].filter(Boolean).join('');
   }
@@ -233,10 +217,10 @@
       return;
     }
     listEl.innerHTML = items.map(l => `
-      <a class="lineup-item ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="--ab:${VL.ability(l.ability).color}">
+      <a class="lineup-item ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="--ab:${VL.ability.color}">
         <div class="lineup-thumb">
           ${VL.imgOrPlaceholder(l.result?.image || l.aim?.image || l.position?.image, '')}
-          ${VL.abilityBadge(l.ability, agent)}
+          ${VL.abilityBadge(agent)}
         </div>
         <div>
           <h3>${esc(l.title)}</h3>
@@ -248,16 +232,16 @@
   function renderMarkers() {
     const items = filtered();
     markersEl.innerHTML = items.map(l => {
-      const ab = VL.ability(l.ability);
+      const ab = VL.ability;
       return `
         <span class="pos-dot ${showAllTraj || l.id === activeId ? 'show' : ''}" data-dot="${esc(l.id)}" style="left:${l.from?.x}%;top:${l.from?.y}%"></span>
         <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.to?.x}%;top:${l.to?.y}%;--ab:${ab.color}" aria-label="${esc(l.title)}">
-          ${VL.abilityBadge(l.ability, agent)}
+          ${VL.abilityBadge(agent)}
           <span class="marker-label">${esc(l.title)}</span>
         </a>`;
     }).join('');
     trajEl.innerHTML = items.filter(l => l.from && l.to).map(l => `
-      <line data-line="${esc(l.id)}" class="${showAllTraj || l.id === activeId ? 'show' : ''}" x1="${l.from.x}" y1="${l.from.y}" x2="${l.to.x}" y2="${l.to.y}" style="--ab:${VL.ability(l.ability).color}"/>`).join('');
+      <line data-line="${esc(l.id)}" class="${showAllTraj || l.id === activeId ? 'show' : ''}" x1="${l.from.x}" y1="${l.from.y}" x2="${l.to.x}" y2="${l.to.y}" style="--ab:${VL.ability.color}"/>`).join('');
   }
 
   function setActive(id) {
@@ -400,10 +384,6 @@
         <label for="f-title">Titre *</label>
         <input class="input" id="f-title" name="title" required placeholder="Ex : Molly default A depuis Lobby" value="${esc(l?.title || '')}">
       </div>
-      <div class="field">
-        <span class="label">Capacité *</span>
-        ${radioChips('ability', config.abilities.map(ab => ({ value: ab.key, color: ab.color, html: `${VL.abilityBadge(ab.key, agent)}${esc(ab.name)}` })), l?.ability || 'incendiary')}
-      </div>
       <div class="row-2">
         <div class="field">
           <span class="label">Site</span>
@@ -470,13 +450,11 @@
   function readForm() {
     const f = form.elements;
     const title = f.title.value.trim();
-    const abilityKey = f.ability.value;
     const step = key => ({ image: f[`${key}.image`].value.trim(), note: f[`${key}.note`].value.trim() });
     return {
-      id: editingLineup?.id || VL.newId(mapSlug, title, abilityKey),
+      id: editingLineup?.id || VL.newId(mapSlug, title),
       map: mapSlug,
       title,
-      ability: abilityKey,
       site: f.site.value,
       side: f.side.value,
       throwType: f.throwType.value.trim(),
