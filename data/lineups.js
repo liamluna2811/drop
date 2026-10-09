@@ -12,6 +12,7 @@
  *   "site": "A",                                 // A | B | C | Mid
  *   "side": "attack",                            // attack | defense
  *   "throwType": "Saut + lancer",
+ *   "fuse": 3.3,                                 // temps avant explosion, en secondes
  *   "tags": ["Post-plant"],
  *   "spot": { "x": 42.1, "y": 61.3 },            // emplacement du joueur (% de la minimap)
  *   "impact": { "x": 30.5, "y": 22.8 },          // facultatif : impact de la molly, sinon celui
@@ -31,6 +32,7 @@ window.LINEUPS = [
     "site": "A",
     "side": "attack",
     "throwType": "Lancer normal",
+    "fuse": 8,
     "tags": [
       "Post-plant"
     ],
@@ -63,6 +65,7 @@ window.LINEUPS = [
     "site": "A",
     "side": "attack",
     "throwType": "Lancer normal",
+    "fuse": 3,
     "tags": [
       "Post-plant"
     ],
@@ -95,6 +98,7 @@ window.LINEUPS = [
     "site": "A",
     "side": "attack",
     "throwType": "Lancer normal",
+    "fuse": 3.3,
     "tags": [
       "Post-plant"
     ],
@@ -127,6 +131,7 @@ window.LINEUPS = [
     "site": "A",
     "side": "defense",
     "throwType": "Lancer normal",
+    "fuse": 4.3,
     "tags": [
       "Retake"
     ],
@@ -163,6 +168,7 @@ window.LINEUPS = [
     "site": "A",
     "side": "defense",
     "throwType": "Lancer normal",
+    "fuse": 3,
     "tags": [
       "Anti-plant"
     ],

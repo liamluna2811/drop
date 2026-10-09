@@ -38,6 +38,7 @@
 
   const pt = p => `left:${p.x}%;top:${p.y}%`;
   const rot = VL.mapRotation(map.slug);
+  const fuse = VL.formatFuse(lineup.fuse);
   const spot = lineup.spot;
   const impact = VL.impactFor(lineup);
 
@@ -83,6 +84,7 @@
             ${lineup.site ? `<span class="chip chip-red">Site ${esc(lineup.site)}</span>` : ''}
             ${lineup.side ? `<span class="chip chip-strong">${esc(config.sides[lineup.side] || lineup.side)}</span>` : ''}
             ${lineup.throwType ? `<span class="chip chip-strong">${esc(lineup.throwType)}</span>` : ''}
+            ${fuse ? `<span class="chip chip-fuse" title="Temps avant explosion">${VL.STOPWATCH}${fuse}</span>` : ''}
             ${(lineup.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
             ${VL.isDraft(lineup.id) ? '<span class="chip chip-draft">brouillon non exporté</span>' : ''}
             ${VL.isDraft(lineup.id) && VL.inFile(lineup.id) ? '<button type="button" class="chip chip-draft" data-act="discard-draft" title="Supprimer ce brouillon et revenir à la version du fichier lineups.js">↺ Revenir à la version du fichier</button>' : ''}
@@ -124,6 +126,12 @@
 
       <aside class="lu-col">
         ${renderStep(2)}
+
+        ${fuse ? `
+        <div class="fuse-card card">
+          ${VL.STOPWATCH}
+          <div><small>Temps avant explosion</small><strong>${fuse}</strong></div>
+        </div>` : ''}
 
         <dl class="info-list card">
           <div><dt>Site</dt><dd>${esc(lineup.site || '—')}</dd></div>

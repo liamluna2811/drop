@@ -197,6 +197,7 @@
     return [
       l.site && `<span class="chip chip-strong">${esc(l.site)}</span>`,
       l.side && `<span class="chip">${esc(config.sides[l.side] || l.side)}</span>`,
+      VL.formatFuse(l.fuse) && `<span class="chip chip-fuse">${VL.STOPWATCH}${VL.formatFuse(l.fuse)}</span>`,
       VL.isDraft(l.id) && '<span class="chip chip-draft">brouillon</span>',
     ].filter(Boolean).join('');
   }
@@ -413,10 +414,16 @@
           ${radioChips('side', Object.entries(config.sides).map(([value, label]) => ({ value, label })), l?.side || 'attack')}
         </div>
       </div>
-      <div class="field">
-        <label for="f-throw">Type de lancer</label>
-        <input class="input" id="f-throw" name="throwType" list="throw-list" placeholder="Choisir ou écrire…" value="${esc(l ? l.throwType || '' : config.throwTypes[0])}">
-        <datalist id="throw-list">${config.throwTypes.map(t => `<option value="${esc(t)}">`).join('')}</datalist>
+      <div class="row-2">
+        <div class="field">
+          <label for="f-throw">Type de lancer</label>
+          <input class="input" id="f-throw" name="throwType" list="throw-list" placeholder="Choisir ou écrire…" value="${esc(l ? l.throwType || '' : config.throwTypes[0])}">
+          <datalist id="throw-list">${config.throwTypes.map(t => `<option value="${esc(t)}">`).join('')}</datalist>
+        </div>
+        <div class="field">
+          <label for="f-fuse">Temps avant explosion (secondes)</label>
+          <input class="input" id="f-fuse" name="fuse" inputmode="decimal" placeholder="Ex : 3,30" value="${esc(l?.fuse ? String(l.fuse).replace('.', ',') : '')}">
+        </div>
       </div>
       <div class="field">
         <label for="f-tags">Tags</label>
@@ -500,6 +507,7 @@
       site: f.site.value,
       side: f.side.value,
       throwType: f.throwType.value.trim(),
+      ...(parseFloat(f.fuse.value.replace(',', '.')) > 0 ? { fuse: parseFloat(f.fuse.value.replace(',', '.')) } : {}),
       tags: f.tags.value.split(',').map(t => t.trim()).filter(Boolean),
       spot: draftSpot,
       ...(draftImpact ? { impact: draftImpact } : {}),

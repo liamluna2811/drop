@@ -190,6 +190,13 @@ h1, h2, h3, .display {
 .chip-strong { color: var(--text); background: var(--panel-2); }
 .chip-red { color: #fff; border-color: transparent; background: var(--red); }
 .chip-draft { color: var(--cyan); border-color: rgba(79, 209, 232, 0.4); }
+.chip-fuse { color: #ffd84d; border-color: rgba(255, 216, 77, 0.45); }
+.ico-timer { width: 14px; height: 14px; flex: none; }
+
+.fuse-card { display: flex; align-items: center; gap: 14px; border-color: rgba(255, 216, 77, 0.35); }
+.fuse-card .ico-timer { width: 34px; height: 34px; color: #ffd84d; }
+.fuse-card small { display: block; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.fuse-card strong { display: block; font: 700 30px/1.1 var(--font-display); color: #ffd84d; }
 .chip .ab-badge { --size: 18px; margin-left: -6px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
