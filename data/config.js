@@ -29,7 +29,12 @@ window.VL_CONFIG = {
   // Orientation de base de chaque minimap, en degrés dans le sens horaire
   // (0, 90, 180 ou 270), pour avoir le spawn attaquant en bas.
   mapRotation: {
+    abyss: 90,
+    ascent: 90,
+    corrode: 90,
     haven: 90,
+    icebox: 270,
+    split: 90,
   },
 
   // Maps à masquer de l'accueil (nom anglais en minuscules, ex: 'abyss').
