@@ -9,6 +9,7 @@
   const layer = $('#layer');
   const markersEl = $('#markers');
   const placingEl = $('#placing');
+  const impactsEl = $('#impacts');
   const listEl = $('#list');
   const dialog = $('#editor');
   const form = $('#editor-form');
@@ -215,7 +216,7 @@
       <a class="lineup-item ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="--ab:${VL.abilityColor(l.side)}">
         <div class="lineup-thumb">
           ${VL.imgOrPlaceholder(l.result?.image || l.aim?.image || l.position?.image, '')}
-          ${VL.abilityBadge(agent, l.side)}
+          ${VL.abilityBadge(agent, l)}
         </div>
         <div>
           <h3>${esc(l.title)}</h3>
@@ -227,17 +228,27 @@
   function renderMarkers() {
     markersEl.innerHTML = filtered().filter(l => l.spot).map(l => `
       <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.spot.x}%;top:${l.spot.y}%;--ab:${VL.abilityColor(l.side)}" aria-label="${esc(l.title)}">
-        ${VL.abilityBadge(agent, l.side)}
+        ${VL.abilityBadge(agent, l)}
         <span class="marker-label">${esc(l.title)}</span>
       </a>`).join('');
+
+    // Impact de la molly + trait pointillé, visibles au survol d'un emplacement.
+    const withImpact = filtered().filter(l => l.spot && VL.impactFor(l));
+    impactsEl.innerHTML = `
+      <svg class="impact-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        ${withImpact.map(l => { const i = VL.impactFor(l); return `<line data-impact="${esc(l.id)}" class="${l.id === activeId ? 'show' : ''}" x1="${l.spot.x}" y1="${l.spot.y}" x2="${i.x}" y2="${i.y}" style="--ab:${VL.abilityColor(l.side)}"/>`; }).join('')}
+      </svg>
+      ${withImpact.map(l => { const i = VL.impactFor(l); return `<span class="impact-mark ${l.id === activeId ? 'show' : ''}" data-impact="${esc(l.id)}" style="left:${i.x}%;top:${i.y}%">${VL.abilityBadge(agent, l)}</span>`; }).join('')}`;
   }
 
   function setActive(id) {
     activeId = id;
     const sel = v => `[data-id="${CSS.escape(v)}"]`;
     document.querySelectorAll('.marker.active, .lineup-item.active').forEach(el => el.classList.remove('active'));
+    impactsEl.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
     if (!id) return;
     document.querySelectorAll(sel(id)).forEach(el => el.classList.add('active'));
+    impactsEl.querySelectorAll(`[data-impact="${CSS.escape(id)}"]`).forEach(el => el.classList.add('show'));
   }
 
   for (const host of [markersEl, listEl]) {
@@ -576,6 +587,8 @@
   });
 
   /* ---------- Démarrage ---------- */
+
+  $('#legend-types').innerHTML = `<span class="legend-type">${VL.typeIcon('plant')}Post-plant</span><span class="legend-type">${VL.typeIcon('retake')}Retake</span>`;
 
   fitLayer();
   applyView();
