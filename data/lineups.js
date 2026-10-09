@@ -22,4 +22,38 @@
  *   "notes": "Infos complémentaires"
  * }
  */
-window.LINEUPS = [];
+window.LINEUPS = [
+  {
+    "id": "haven-molly-default-a-depuis-a-long",
+    "map": "haven",
+    "title": "Molly default A depuis A Long",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "difficulty": 0,
+    "tags": [
+      "Post-plant"
+    ],
+    "from": {
+      "x": 16,
+      "y": 52
+    },
+    "to": {
+      "x": 25,
+      "y": 30
+    },
+    "position": {
+      "image": "assets/lineups/haven/a-long-default-position.webp",
+      "note": "Place-toi à l'endroit montré sur la capture, à A Long, contre les sacs de sable à côté de la barrière."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/a-long-default-visee.webp",
+      "note": "Place le haut de la flamme sur le coin de la montagne, puis lancer normal."
+    },
+    "result": {
+      "image": "assets/lineups/haven/a-long-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A."
+    },
+    "notes": ""
+  }
+];
