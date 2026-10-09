@@ -48,5 +48,33 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-default-a-depuis-short-a",
+    "map": "haven",
+    "title": "Molly default A depuis Short A",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 47,
+      "y": 33
+    },
+    "position": {
+      "image": "assets/lineups/haven/a-short-default-position.webp",
+      "note": "Colle-toi contre le poteau en bois, à gauche de l'arche, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/a-short-default-visee.webp",
+      "note": "Place ton viseur sur le pylône, juste au-dessus des caisses, puis lancer normal."
+    },
+    "result": {
+      "image": "assets/lineups/haven/a-short-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A."
+    },
+    "notes": ""
   }
 ];
