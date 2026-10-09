@@ -170,7 +170,8 @@ const VL = (() => {
     const byId = new Map();
     for (const l of baseLineups()) if (!d.deleted.includes(l.id)) byId.set(l.id, l);
     for (const [id, l] of Object.entries(d.upserts)) byId.set(id, l);
-    return [...byId.values()];
+    // Anciens brouillons : l'emplacement du joueur s'appelait `from`.
+    return [...byId.values()].map(({ from, to, ...l }) => ({ ...l, spot: l.spot || from }));
   }
 
   function lineupsForMap(mapSlug) {

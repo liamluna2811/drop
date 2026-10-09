@@ -88,11 +88,7 @@
           <h3>Sur la carte</h3>
           <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte" style="display:block">
             ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
-            <svg class="traj" viewBox="0 0 100 100" preserveAspectRatio="none">
-              ${lineup.from && lineup.to ? `<line class="show" x1="${lineup.from.x}" y1="${lineup.from.y}" x2="${lineup.to.x}" y2="${lineup.to.y}" style="--ab:${ab.color}"/>` : ''}
-            </svg>
-            <span class="pos-dot" style="${pt(lineup.from)}"></span>
-            <span style="position:absolute;${pt(lineup.to)}">${VL.abilityBadge(agent)}</span>
+            <span style="position:absolute;${pt(lineup.spot)}">${VL.abilityBadge(agent)}</span>
           </a>
         </div>
 

@@ -13,8 +13,7 @@
  *   "side": "attack",                            // attack | defense
  *   "throwType": "Saut + lancer",
  *   "tags": ["Post-plant"],
- *   "from": { "x": 42.1, "y": 61.3 },            // position du joueur (% de la minimap)
- *   "to":   { "x": 30.5, "y": 22.8 },            // point d'impact (% de la minimap)
+ *   "spot": { "x": 42.1, "y": 61.3 },            // emplacement du joueur (% de la minimap)
  *   "position": { "image": "assets/lineups/ascent/default-a-pos.jpg", "note": "Coin du mur..." },
  *   "aim":      { "image": "assets/lineups/ascent/default-a-aim.jpg", "note": "Viser le haut de l'antenne" },
  *   "result":   { "image": "assets/lineups/ascent/default-a-res.jpg", "note": "Couvre le default" },
@@ -32,13 +31,9 @@ window.LINEUPS = [
     "tags": [
       "Post-plant"
     ],
-    "from": {
+    "spot": {
       "x": 16,
       "y": 52
-    },
-    "to": {
-      "x": 25,
-      "y": 30
     },
     "position": {
       "image": "assets/lineups/haven/a-long-default-position.webp",

@@ -29,7 +29,6 @@
 
       <div class="map-layer" id="layer">
         <img class="minimap-img" id="minimap" alt="" draggable="false">
-        <svg class="traj" id="traj" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
         <div id="callouts"></div>
         <div id="markers"></div>
         <div id="placing"></div>
@@ -44,7 +43,6 @@
         <div class="tool-group">
           <button type="button" data-tool="rotate" title="Pivoter la carte de 90°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></button>
           <button type="button" data-tool="callouts" title="Afficher les noms des zones" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></svg></button>
-          <button type="button" data-tool="traj" title="Afficher toutes les trajectoires" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"><path d="M5 19C8 9 14 6 19 5"/></svg></button>
         </div>
         <div class="tool-group">
           <button type="button" data-tool="edit" title="Mode édition : ajouter / modifier des lineups" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></svg></button>
@@ -57,14 +55,12 @@
       </div>
 
       <div class="edit-banner" role="status">
-        <span class="edit-num" id="edit-step">1</span>
         <span id="edit-text">Clique sur la carte à l'endroit où tu te places.</span>
         <button class="btn btn-sm btn-ghost" type="button" id="edit-cancel">Quitter</button>
       </div>
 
       <div class="legend">
-        <span><i style="background:var(--cyan)"></i>Position du joueur</span>
-        <span><i style="background:var(--red)"></i>Impact de la molly</span>
+        <span><i style="background:var(--red)"></i>Emplacement du joueur</span>
       </div>
     </section>
 

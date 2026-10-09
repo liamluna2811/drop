@@ -523,26 +523,6 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
   padding: 20px;
 }
 
-.traj {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.traj line {
-  stroke: var(--ab, var(--red));
-  stroke-width: 2;
-  stroke-dasharray: 6 5;
-  vector-effect: non-scaling-stroke;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.traj line.show { opacity: 0.9; animation: dash 1s linear infinite; }
-@keyframes dash { to { stroke-dashoffset: -11; } }
 
 .callout {
   position: absolute;
@@ -596,23 +576,6 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
 
 .marker:hover .marker-label, .marker.active .marker-label { opacity: 1; }
 
-.pos-dot {
-  position: absolute;
-  z-index: 1;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--cyan);
-  border: 2px solid #0b1118;
-  box-shadow: 0 0 0 2px var(--cyan);
-  transform: translate(-50%, -50%) rotate(var(--rot-inv)) scale(var(--z-inv));
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-}
-
-.pos-dot.show { opacity: 1; }
-
 /* Points en cours de placement (mode édition) */
 .placing {
   position: absolute;
@@ -621,8 +584,7 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
   pointer-events: none;
 }
 
-.placing-from { width: 16px; height: 16px; border-radius: 50%; background: var(--cyan); border: 3px solid #0b1118; box-shadow: 0 0 0 2px var(--cyan), 0 0 18px var(--cyan); }
-.placing-to { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--red); background: rgba(255, 70, 85, 0.3); box-shadow: 0 0 18px var(--red); animation: pulse 1.2s ease-in-out infinite; }
+.placing-spot { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--red); background: rgba(255, 70, 85, 0.3); box-shadow: 0 0 18px var(--red); animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 8px rgba(255, 70, 85, 0.15), 0 0 18px var(--red); } }
 
 .viewer-tools {
@@ -714,7 +676,6 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
 .viewer.editing .edit-banner { display: flex; }
 .viewer.editing .viewer-title { opacity: 0; }
 .viewer-title { transition: opacity 0.2s; }
-.edit-num { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--red); color: #fff; font-weight: 700; font-size: 12px; flex: none; }
 
 /* Sidebar */
 
@@ -1017,7 +978,6 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 
 .mini-map img { width: 100%; height: 100%; object-fit: contain; }
 .mini-map .ab-badge { --size: 24px; position: absolute; transform: translate(-50%, -50%); border-width: 2px; box-shadow: 0 0 0 2px #0b1118; }
-.mini-map .pos-dot { opacity: 1; transform: translate(-50%, -50%); }
 
 .info-list { margin: 0; display: grid; gap: 10px; }
 .info-list div { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }

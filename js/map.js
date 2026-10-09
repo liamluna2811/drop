@@ -8,7 +8,6 @@
   const viewer = $('#viewer');
   const layer = $('#layer');
   const markersEl = $('#markers');
-  const trajEl = $('#traj');
   const placingEl = $('#placing');
   const listEl = $('#list');
   const dialog = $('#editor');
@@ -136,12 +135,10 @@
   /* ---------- Barre d'outils ---------- */
 
   const tools = Object.fromEntries([...document.querySelectorAll('[data-tool]')].map(b => [b.dataset.tool, b]));
-  let showAllTraj = !!prefs.traj;
   let showCallouts = prefs.callouts !== false;
 
   function syncToggles() {
     tools.callouts.setAttribute('aria-pressed', showCallouts);
-    tools.traj.setAttribute('aria-pressed', showAllTraj);
     layer.classList.toggle('hide-callouts', !showCallouts);
   }
 
@@ -155,7 +152,6 @@
     applyView(true);
   };
   tools.callouts.onclick = () => { showCallouts = !showCallouts; prefs.callouts = showCallouts; savePrefs(); syncToggles(); };
-  tools.traj.onclick = () => { showAllTraj = !showAllTraj; prefs.traj = showAllTraj; savePrefs(); syncToggles(); renderMarkers(); };
   tools.edit.onclick = () => setEditing(!editing);
 
   /* ================================================================
@@ -209,7 +205,7 @@
     const items = filtered();
     $('#count').textContent = `(${items.length}${items.length !== lineups.length ? ` / ${lineups.length}` : ''})`;
     if (!lineups.length) {
-      listEl.innerHTML = `<div class="empty">Aucune lineup sur ${esc(map.name)} pour l'instant.<br><br>Clique sur <b>Ajouter</b> puis place ta position et le point d'impact sur la carte.</div>`;
+      listEl.innerHTML = `<div class="empty">Aucune lineup sur ${esc(map.name)} pour l'instant.<br><br>Clique sur <b>Ajouter</b> puis clique sur la carte à l'endroit où le joueur se place.</div>`;
       return;
     }
     if (!items.length) {
@@ -230,29 +226,19 @@
   }
 
   function renderMarkers() {
-    const items = filtered();
-    markersEl.innerHTML = items.map(l => {
-      const ab = VL.ability;
-      return `
-        <span class="pos-dot ${showAllTraj || l.id === activeId ? 'show' : ''}" data-dot="${esc(l.id)}" style="left:${l.from?.x}%;top:${l.from?.y}%"></span>
-        <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.to?.x}%;top:${l.to?.y}%;--ab:${ab.color}" aria-label="${esc(l.title)}">
-          ${VL.abilityBadge(agent)}
-          <span class="marker-label">${esc(l.title)}</span>
-        </a>`;
-    }).join('');
-    trajEl.innerHTML = items.filter(l => l.from && l.to).map(l => `
-      <line data-line="${esc(l.id)}" class="${showAllTraj || l.id === activeId ? 'show' : ''}" x1="${l.from.x}" y1="${l.from.y}" x2="${l.to.x}" y2="${l.to.y}" style="--ab:${VL.ability.color}"/>`).join('');
+    markersEl.innerHTML = filtered().filter(l => l.spot).map(l => `
+      <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.spot.x}%;top:${l.spot.y}%;--ab:${VL.ability.color}" aria-label="${esc(l.title)}">
+        ${VL.abilityBadge(agent)}
+        <span class="marker-label">${esc(l.title)}</span>
+      </a>`).join('');
   }
 
   function setActive(id) {
     activeId = id;
     const sel = v => `[data-id="${CSS.escape(v)}"]`;
     document.querySelectorAll('.marker.active, .lineup-item.active').forEach(el => el.classList.remove('active'));
-    if (!showAllTraj) document.querySelectorAll('.pos-dot.show, .traj line.show').forEach(el => el.classList.remove('show'));
     if (!id) return;
     document.querySelectorAll(sel(id)).forEach(el => el.classList.add('active'));
-    document.querySelector(`[data-dot="${CSS.escape(id)}"]`)?.classList.add('show');
-    document.querySelector(`[data-line="${CSS.escape(id)}"]`)?.classList.add('show');
   }
 
   for (const host of [markersEl, listEl]) {
@@ -283,35 +269,24 @@
      ================================================================ */
 
   let editing = false;
-  let placing = null;        // { from, to } pendant le placement des points
+  let placing = false;       // en attente d'un clic pour placer le joueur
   let editingLineup = null;  // lineup en cours d'édition (null = nouvelle)
-  let replacing = false;     // replacement des points d'une lineup déjà dans le formulaire
-  let draftPoints = null;    // points retenus pour le formulaire
+  let replacing = false;     // replacement du point d'une lineup déjà dans le formulaire
+  let draftSpot = null;      // emplacement retenu pour le formulaire
 
   function setEditing(on) {
     editing = on;
     viewer.classList.toggle('editing', on);
     tools.edit.setAttribute('aria-pressed', on);
     if (on) startPlacing();
-    else { placing = null; replacing = false; renderPlacing(); }
+    else { placing = false; replacing = false; placingEl.innerHTML = ''; }
   }
 
   function startPlacing() {
-    placing = { from: null, to: null };
-    renderPlacing();
-  }
-
-  function renderPlacing() {
-    const pts = placing || {};
-    placingEl.innerHTML = [
-      pts.from && `<span class="placing placing-from" style="left:${pts.from.x}%;top:${pts.from.y}%"></span>`,
-      pts.to && `<span class="placing placing-to" style="left:${pts.to.x}%;top:${pts.to.y}%"></span>`,
-    ].filter(Boolean).join('');
-    const step = !pts.from ? 1 : 2;
-    $('#edit-step').textContent = step;
-    $('#edit-text').innerHTML = step === 1
-      ? '<b>Position</b> — clique là où le joueur se place.' + (replacing ? '' : ' <span class="muted">(ou clique sur une lineup existante pour la modifier)</span>')
-      : '<b>Impact</b> — clique là où la capacité atterrit.';
+    placing = true;
+    placingEl.innerHTML = '';
+    $('#edit-text').innerHTML = '<b>Emplacement</b> — clique là où le joueur se place.'
+      + (replacing ? '' : ' <span class="muted">(ou clique sur une lineup existante pour la modifier)</span>');
   }
 
   $('#edit-cancel').onclick = () => {
@@ -323,28 +298,22 @@
     editingLineup = null;
     if (!editing) setEditing(true);
     else startPlacing();
-    VL.toast('Place la position du joueur puis le point d\'impact sur la carte.');
+    VL.toast('Clique sur la carte à l\'endroit où le joueur se place.');
   };
 
   viewer.addEventListener('click', e => {
     if (!editing || !placing || e.target.closest('.viewer-tools, .edit-banner, .marker')) return;
     const pt = clientToPct(e.clientX, e.clientY);
     if (pt.x < 0 || pt.x > 100 || pt.y < 0 || pt.y > 100) return;
-    if (!placing.from) {
-      placing.from = pt;
-      renderPlacing();
-      return;
-    }
-    placing.to = pt;
-    renderPlacing();
-    draftPoints = { ...placing };
-    placing = null;
+    placing = false;
+    draftSpot = pt;
+    placingEl.innerHTML = `<span class="placing placing-spot" style="left:${pt.x}%;top:${pt.y}%"></span>`;
     if (replacing) {
       replacing = false;
       updateCoordsBox();
       dialog.showModal();
     } else {
-      openEditor(null, draftPoints);
+      openEditor(null, pt);
     }
   });
 
@@ -423,17 +392,16 @@
   }
 
   function updateCoordsBox() {
-    const p = draftPoints;
-    $('#coords-box').innerHTML = p?.from && p?.to
-      ? `<span><i style="background:var(--cyan)"></i>Position <b>${p.from.x} / ${p.from.y}</b></span>
-         <span><i style="background:var(--red)"></i>Impact <b>${p.to.x} / ${p.to.y}</b></span>
+    const p = draftSpot;
+    $('#coords-box').innerHTML = p
+      ? `<span><i style="background:var(--red)"></i>Emplacement du joueur <b>${p.x} / ${p.y}</b></span>
          <span class="muted">— « Replacer sur la carte » pour modifier</span>`
-      : '<span>⚠ Points non placés — utilise « Replacer sur la carte ».</span>';
+      : '<span>⚠ Emplacement non placé — utilise « Replacer sur la carte ».</span>';
   }
 
-  function openEditor(lineup, points) {
+  function openEditor(lineup, spot) {
     editingLineup = lineup || null;
-    draftPoints = lineup ? { from: lineup.from, to: lineup.to } : points || null;
+    draftSpot = lineup ? lineup.spot || null : spot || null;
     $('#editor-title').textContent = lineup ? 'Modifier la lineup' : 'Nouvelle lineup';
     form.querySelector('[data-act=delete]').hidden = !lineup;
     buildForm(lineup);
@@ -453,8 +421,7 @@
       side: f.side.value,
       throwType: f.throwType.value.trim(),
       tags: f.tags.value.split(',').map(t => t.trim()).filter(Boolean),
-      from: draftPoints?.from,
-      to: draftPoints?.to,
+      spot: draftSpot,
       position: step('position'),
       aim: step('aim'),
       result: step('result'),
@@ -515,7 +482,7 @@
     e.preventDefault();
     const lineup = readForm();
     if (!lineup.title) { VL.toast('Donne un titre à la lineup.', 'err'); form.elements.title.focus(); return; }
-    if (!lineup.from || !lineup.to) { VL.toast('Place la position et l\'impact sur la carte.', 'err'); return; }
+    if (!lineup.spot) { VL.toast('Place l\'emplacement du joueur sur la carte.', 'err'); return; }
     try {
       VL.saveLineup(lineup);
     } catch (err) {
@@ -539,8 +506,7 @@
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && editing && !dialog.open) {
-      if (placing?.from) startPlacing();
-      else setEditing(false);
+      setEditing(false);
     }
   });
 
