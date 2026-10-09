@@ -344,8 +344,19 @@
             <button class="btn btn-ghost" type="button" data-browse="${key}">Parcourir</button>
           </div>
           <textarea class="input" name="${key}.note" rows="2" placeholder="${hint}…">${esc(l?.[key]?.note || '')}</textarea>
+          ${key === 'aim' ? `
+          <div class="target-row">
+            <button class="btn btn-sm btn-ghost" type="button" data-act="pick-target">◎ Placer le point de visée</button>
+            <span class="muted" id="target-label"></span>
+            <button class="btn btn-sm btn-ghost" type="button" data-act="clear-target" id="target-clear">Effacer</button>
+          </div>` : ''}
         </div>
-      </div>`).join('');
+      </div>
+      ${key === 'aim' ? `
+      <div class="target-picker" id="target-picker" hidden>
+        <p class="hint">Clique exactement sur le point de référence (viseur, haut de la flamme…) : il sera entouré et zoomé sur la page de la lineup.</p>
+        <div class="target-frame" id="target-frame"></div>
+      </div>` : ''}`).join('');
 
     $('#editor-body').innerHTML = `
       <div class="field">
@@ -381,7 +392,27 @@
       <p class="hint muted" style="margin:0;font-size:12px">Les images sont lues depuis le dossier du site : après « Parcourir », copie le fichier dans <code>assets/lineups/${esc(mapSlug)}/</code>.</p>`;
 
     STEPS.forEach(([key]) => updatePreview(key));
+    updateTarget();
     updateCoordsBox();
+  }
+
+  // Point visé sur la capture de visée (en % de l'image).
+  let aimTarget = null;
+
+  function aimSrc() {
+    const val = form.elements['aim.image'].value.trim();
+    return VL.localPreviews[val] || val;
+  }
+
+  function updateTarget() {
+    $('#target-label').textContent = aimTarget ? `Point placé (${aimTarget.x} / ${aimTarget.y})` : 'Point de visée non placé';
+    $('#target-clear').hidden = !aimTarget;
+    const picker = $('#target-picker');
+    if (picker.hidden) return;
+    const src = aimSrc();
+    $('#target-frame').innerHTML = src
+      ? `<img src="${esc(src)}" alt="Capture de visée" draggable="false">${aimTarget ? `<span class="aim-ring" style="left:${aimTarget.x}%;top:${aimTarget.y}%"></span>` : ''}`
+      : '<div class="img-ph">Ajoute d\'abord la capture de visée</div>';
   }
 
   function updatePreview(key) {
@@ -400,6 +431,7 @@
 
   function openEditor(lineup, spot) {
     editingLineup = lineup || null;
+    aimTarget = lineup?.aim?.target || null;
     draftSpot = lineup ? lineup.spot || null : spot || null;
     $('#editor-title').textContent = lineup ? 'Modifier la lineup' : 'Nouvelle lineup';
     form.querySelector('[data-act=delete]').hidden = !lineup;
@@ -422,7 +454,7 @@
       tags: f.tags.value.split(',').map(t => t.trim()).filter(Boolean),
       spot: draftSpot,
       position: step('position'),
-      aim: step('aim'),
+      aim: { ...step('aim'), ...(aimTarget ? { target: aimTarget } : {}) },
       result: step('result'),
       notes: f.notes.value.trim(),
     };
@@ -430,7 +462,7 @@
 
   form.addEventListener('input', e => {
     const m = e.target.name?.match(/^(\w+)\.image$/);
-    if (m) updatePreview(m[1]);
+    if (m) { updatePreview(m[1]); if (m[1] === 'aim') updateTarget(); }
   });
 
   form.addEventListener('click', e => {
@@ -447,6 +479,20 @@
 
     const act = e.target.closest('[data-act]')?.dataset.act;
     if (act === 'close') dialog.close();
+    if (act === 'pick-target') {
+      $('#target-picker').hidden = !$('#target-picker').hidden;
+      updateTarget();
+    }
+    if (act === 'clear-target') {
+      aimTarget = null;
+      updateTarget();
+    }
+    const frameImg = e.target.closest('#target-frame img');
+    if (frameImg) {
+      const r = frameImg.getBoundingClientRect();
+      aimTarget = { x: VL.round(((e.clientX - r.left) / r.width) * 100), y: VL.round(((e.clientY - r.top) / r.height) * 100) };
+      updateTarget();
+    }
     if (act === 'replace') {
       replacing = true;
       dialog.close();
@@ -475,6 +521,7 @@
     VL.localPreviews[path] = URL.createObjectURL(file);
     form.elements[`${key}.image`].value = path;
     updatePreview(key);
+    if (key === 'aim') updateTarget();
   });
 
   form.addEventListener('submit', e => {

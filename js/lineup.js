@@ -39,13 +39,28 @@
   const pt = p => `left:${p.x}%;top:${p.y}%`;
   const rot = VL.mapRotation(map.slug);
 
+  // Image d'étape ; pour la visée, cercle sur le viseur + encart zoomé.
+  function media(src, label, target) {
+    if (!src) return VL.imgOrPlaceholder('', `Capture « ${label} » à ajouter`);
+    const ring = target ? `<span class="aim-ring" style="left:${target.x}%;top:${target.y}%"></span>` : '';
+    const zoom = target ? `
+      <span class="aim-zoom ${target.x < 50 ? 'right' : 'left'} ${target.y < 50 ? 'bottom' : 'top'}" style="--tx:${target.x};--ty:${target.y}">
+        <img src="${esc(src)}" alt="" draggable="false"><i></i><small>Zoom visée</small>
+      </span>` : '';
+    return `
+      <div class="media-frame">
+        <img src="${esc(src)}" alt="${esc(label)}" onload="this.parentNode.style.setProperty('--ratio', this.naturalWidth / this.naturalHeight)" onerror="this.closest('.step-media').innerHTML = VL.imgOrPlaceholder('', 'Image introuvable')">
+        ${ring}${zoom}
+      </div>`;
+  }
+
   function renderStep(i) {
     const [key, label] = STEPS[i];
     const step = lineup[key] || {};
     return `
       <article class="step step-${key}" style="--i:${i}">
-        <div class="step-media" data-zoom="${esc(step.image || '')}" data-caption="${i + 1}. ${label}">
-          ${VL.imgOrPlaceholder(step.image, `Capture « ${label} » à ajouter`)}
+        <div class="step-media" data-zoom="${esc(step.image || '')}" data-caption="${i + 1}. ${label}"${step.target ? ` data-tx="${step.target.x}" data-ty="${step.target.y}"` : ''}>
+          ${media(step.image, label, step.target)}
         </div>
         <div class="step-text">
           <h2><span class="step-num">0${i + 1}</span>${label}${key === 'aim' ? '<span class="step-key">Étape clé</span>' : ''}</h2>
@@ -71,8 +86,15 @@
           </div>
         </div>
         <div class="lu-hero-actions">
+          ${siblings.length > 1 ? `
+          <a class="btn btn-ghost btn-icon" href="lineup.html?id=${encodeURIComponent(prev.id)}" title="Précédente : ${esc(prev.title)} (←)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </a>
+          <a class="btn btn-ghost btn-icon" href="lineup.html?id=${encodeURIComponent(next.id)}" title="Suivante : ${esc(next.title)} (→)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </a>` : ''}
           <a class="btn btn-ghost" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>Carte
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z M9 3v15 M15 6v15"/></svg>Carte
           </a>
           <a class="btn" href="${mapUrl}&edit=${encodeURIComponent(lineup.id)}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>Modifier
@@ -91,12 +113,6 @@
           </div>
         </a>
         ${lineup.notes ? `<div class="card"><h3>Notes</h3><p class="notes">${esc(lineup.notes)}</p></div>` : ''}
-
-        ${siblings.length > 1 ? `
-          <nav class="lu-nav">
-            <a href="lineup.html?id=${encodeURIComponent(prev.id)}"><small>← Précédente</small><span>${esc(prev.title)}</span></a>
-            <a class="next" href="lineup.html?id=${encodeURIComponent(next.id)}"><small>Suivante →</small><span>${esc(next.title)}</span></a>
-          </nav>` : ''}
       </div>
 
       ${renderStep(1)}
@@ -115,10 +131,12 @@
   // Lightbox
   const lightbox = document.getElementById('lightbox');
   app.addEventListener('click', e => {
-    const media = e.target.closest('[data-zoom]');
-    if (!media || !media.dataset.zoom || !media.querySelector('img')) return;
-    lightbox.querySelector('img').src = media.dataset.zoom;
-    lightbox.querySelector('figcaption').textContent = media.dataset.caption;
+    const box = e.target.closest('[data-zoom]');
+    if (!box || !box.dataset.zoom || !box.querySelector('img')) return;
+    const { tx, ty } = box.dataset;
+    lightbox.querySelector('.lightbox-frame').innerHTML = `<img src="${esc(box.dataset.zoom)}" alt="">`
+      + (tx ? `<span class="aim-ring" style="left:${tx}%;top:${ty}%"></span>` : '');
+    lightbox.querySelector('figcaption').textContent = box.dataset.caption;
     lightbox.classList.add('open');
   });
   lightbox.addEventListener('click', () => lightbox.classList.remove('open'));

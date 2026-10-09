@@ -864,6 +864,12 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .step-fields h3 { font-size: 15px; display: flex; align-items: center; gap: 8px; }
 .step-fields .inputs { display: grid; gap: 8px; }
 .file-row { display: flex; gap: 6px; }
+.target-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 13px; }
+.target-picker { display: grid; gap: 8px; margin-top: -8px; }
+.target-picker .hint { margin: 0; font-size: 13px; color: var(--muted); }
+.target-frame { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line-2); cursor: crosshair; }
+.target-frame img { display: block; width: 100%; height: auto; }
+.target-frame .aim-ring { width: 36px; height: 36px; }
 .file-row .input { flex: 1; min-width: 0; }
 .file-row input[type='file'] { display: none; }
 
@@ -937,16 +943,87 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
   cursor: zoom-in;
 }
 
-.step-media:has(> img) { aspect-ratio: auto; }
+.step-media:has(.media-frame) { aspect-ratio: auto; display: flex; justify-content: center; }
 .step-media > .img-ph { width: 100%; height: 100%; }
-.step-media > img {
-  width: 100%;
-  height: auto;
-  max-height: var(--img-max);
-  object-fit: contain;
-  transition: transform 0.5s;
+
+/* Cadre ajusté à l'image (sans bandes noires) : les repères en % tombent juste. */
+.media-frame {
+  --h-max: var(--img-max);
+  position: relative;
+  width: min(100%, calc(var(--h-max) * var(--ratio, 1.6)));
 }
-.step-media:hover > img { transform: scale(1.02); }
+.media-frame > img { display: block; width: 100%; height: auto; }
+
+/* Viseur mis en évidence */
+.aim-ring {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  translate: -50% -50%;
+  border: 2.5px solid var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.55), 0 0 18px rgba(255, 70, 85, 0.8), inset 0 0 0 2px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.aim-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  animation: ring 1.6s ease-out infinite;
+}
+@keyframes ring { from { transform: scale(1); opacity: 0.9; } to { transform: scale(2.2); opacity: 0; } }
+
+.aim-zoom {
+  --z: 3;
+  position: absolute;
+  width: 26%;
+  aspect-ratio: 1;
+  margin: 12px;
+  overflow: hidden;
+  border: 2px solid var(--red);
+  border-radius: 6px;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+.aim-zoom.left { left: 0; }
+.aim-zoom.right { right: 0; }
+.aim-zoom.top { top: 0; }
+.aim-zoom.bottom { bottom: 0; }
+.aim-zoom img {
+  position: absolute;
+  max-width: none;
+  width: calc(100% * var(--z) / 0.26);
+  left: calc(50% - var(--tx) * var(--z) / 0.26 * 1%);
+  top: calc(50% - var(--ty) * var(--z) / (0.26 * var(--ratio, 1.6)) * 1%);
+}
+.aim-zoom i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 36%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.aim-zoom small {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3px 6px;
+  background: rgba(11, 17, 24, 0.85);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
 
 .step h2 { display: flex; align-items: baseline; gap: 10px; font-size: 24px; }
 .step-num { font: 700 30px/1 var(--font-display); color: transparent; -webkit-text-stroke: 1.2px var(--red); }
@@ -956,7 +1033,7 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .lu-col { display: grid; gap: 18px; align-content: start; min-width: 0; }
 
 /* Étapes secondaires (1 et 3) plus compactes */
-.lu-col .step-media > img { max-height: calc(var(--img-max) * 0.6); }
+.lu-col .media-frame { --h-max: calc(var(--img-max) * 0.6); }
 .lu-col .step h2 { font-size: 20px; }
 .lu-col .step-num { font-size: 24px; }
 .lu-col .step p { font-size: 14px; }
@@ -1011,22 +1088,6 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .notes { white-space: pre-line; color: var(--muted); margin: 0; font-size: 14px; }
 .card h3 { font-size: 13px; color: var(--muted); letter-spacing: 0.14em; margin-bottom: 8px; }
 
-.lu-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.lu-nav a {
-  display: grid;
-  gap: 2px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  font-size: 13px;
-  transition: border-color 0.15s;
-  min-width: 0;
-}
-
-.lu-nav a:hover { border-color: var(--red); }
-.lu-nav a small { color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; font-size: 10px; }
-.lu-nav a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lu-nav a.next { text-align: right; }
 
 /* Lightbox */
 
@@ -1043,7 +1104,9 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 
 .lightbox.open { display: grid; animation: fade 0.2s; }
 @keyframes fade { from { opacity: 0; } }
-.lightbox img { max-width: 100%; max-height: calc(100vh - 100px); border-radius: var(--radius); box-shadow: 0 30px 80px #000; }
+.lightbox-frame { position: relative; display: inline-block; }
+.lightbox-frame img { display: block; max-width: calc(100vw - 80px); max-height: calc(100vh - 110px); border-radius: var(--radius); box-shadow: 0 30px 80px #000; }
+.lightbox > div { text-align: center; }
 .lightbox figcaption { margin-top: 12px; text-align: center; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; }
 
 /* ================================================================
@@ -1091,8 +1154,7 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
    ================================================================ */
 
 @media (max-width: 1100px) {
-  .lu-layout { grid-template-columns: 1fr; --img-max: none; }
-  .lu-col .step-media > img { max-height: none; }
+  .lu-layout { grid-template-columns: 1fr; --img-max: 10000px; }
   .mini-map { width: min(100%, 300px); }
 }
 

@@ -15,7 +15,8 @@
  *   "tags": ["Post-plant"],
  *   "spot": { "x": 42.1, "y": 61.3 },            // emplacement du joueur (% de la minimap)
  *   "position": { "image": "assets/lineups/ascent/default-a-pos.jpg", "note": "Coin du mur..." },
- *   "aim":      { "image": "assets/lineups/ascent/default-a-aim.jpg", "note": "Viser le haut de l'antenne" },
+ *   "aim":      { "image": "assets/lineups/ascent/default-a-aim.jpg", "note": "Viser le haut de l'antenne",
+ *                 "target": { "x": 54.2, "y": 27.1 } },   // point de visée (% de l'image), entouré et zoomé
  *   "result":   { "image": "assets/lineups/ascent/default-a-res.jpg", "note": "Couvre le default" },
  *   "notes": "Infos complémentaires"
  * }
@@ -41,7 +42,11 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/haven/a-long-default-visee.webp",
-      "note": "Place le haut de la flamme sur le coin de la montagne, puis lancer normal."
+      "note": "Place le haut de la flamme sur le coin de la montagne, puis lancer normal.",
+      "target": {
+        "x": 49.4,
+        "y": 86.8
+      }
     },
     "result": {
       "image": "assets/lineups/haven/a-long-default-resultat.webp",
@@ -69,7 +74,11 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/haven/a-short-default-visee.webp",
-      "note": "Place ton viseur sur le pylône, juste au-dessus des caisses, puis lancer normal."
+      "note": "Place ton viseur sur l'arbre, juste au-dessus des caisses, puis lancer normal.",
+      "target": {
+        "x": 53.5,
+        "y": 43.6
+      }
     },
     "result": {
       "image": "assets/lineups/haven/a-short-default-resultat.webp",
