@@ -155,11 +155,11 @@ const VL = (() => {
     return `<span class="player-badge ${extraClass}" title="Emplacement du joueur"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg></span>`;
   }
 
-  // Temps avant explosion : 3 -> « 3 s », 3.3 -> « 3,30 s ».
+  // Temps avant explosion : 3 -> « 3 s », 3.5 -> « 3,5 s ».
   function formatFuse(sec) {
     const n = Number(sec);
     if (!(n > 0)) return '';
-    return `${Number.isInteger(n) ? n : n.toFixed(2).replace('.', ',')} s`;
+    return `${String(Math.round(n * 100) / 100).replace('.', ',')} s`;
   }
 
   const STOPWATCH = '<svg class="ico-timer" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 13.5V9.5M9.5 2.5h5M18.5 6.5l1.5-1.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';

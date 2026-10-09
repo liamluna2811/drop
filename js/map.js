@@ -422,7 +422,7 @@
         </div>
         <div class="field">
           <label for="f-fuse">Temps avant explosion (secondes)</label>
-          <input class="input" id="f-fuse" name="fuse" inputmode="decimal" placeholder="Ex : 3,30" value="${esc(l?.fuse ? String(l.fuse).replace('.', ',') : '')}">
+          <input class="input" id="f-fuse" name="fuse" inputmode="decimal" placeholder="Ex : 3,5" value="${esc(l?.fuse ? String(l.fuse).replace('.', ',') : '')}">
         </div>
       </div>
       <div class="field">
