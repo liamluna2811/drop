@@ -24,8 +24,6 @@ window.VL_CONFIG = {
     'Clic droit (lancer court)',
   ],
 
-  difficulties: ['Facile', 'Moyen', 'Difficile'],
-
   tagSuggestions: ['Post-plant', 'Retake', 'Exécution', 'Anti-défuse', 'Clear de coin', 'Spawn', 'Rapide', 'Safe'],
 
   // Maps à masquer de l'accueil (nom anglais en minuscules, ex: 'abyss').

@@ -12,7 +12,6 @@
  *   "site": "A",                                 // A | B | C | Mid
  *   "side": "attack",                            // attack | defense
  *   "throwType": "Saut + lancer",
- *   "difficulty": 1,                             // 0 facile, 1 moyen, 2 difficile
  *   "tags": ["Post-plant"],
  *   "from": { "x": 42.1, "y": 61.3 },            // position du joueur (% de la minimap)
  *   "to":   { "x": 30.5, "y": 22.8 },            // point d'impact (% de la minimap)
@@ -30,7 +29,6 @@ window.LINEUPS = [
     "site": "A",
     "side": "attack",
     "throwType": "Lancer normal",
-    "difficulty": 0,
     "tags": [
       "Post-plant"
     ],

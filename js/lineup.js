@@ -36,9 +36,6 @@
     ['result', 'Résultat'],
   ];
 
-  const difficulty = Number(lineup.difficulty ?? 0);
-  const diffBars = config.difficulties.map((_, i) => `<i class="${i <= difficulty ? 'on' : ''}"></i>`).join('');
-
   const pt = p => p ? `left:${p.x}%;top:${p.y}%` : 'display:none';
 
   app.innerHTML = `
@@ -105,7 +102,6 @@
             <div><dt>Site</dt><dd>${esc(lineup.site || '—')}</dd></div>
             <div><dt>Côté</dt><dd>${esc(config.sides[lineup.side] || '—')}</dd></div>
             <div><dt>Lancer</dt><dd>${esc(lineup.throwType || '—')}</dd></div>
-            <div><dt>Difficulté</dt><dd><span class="diff">${diffBars}</span>${esc(config.difficulties[difficulty] || '')}</dd></div>
           </dl>
         </div>
 

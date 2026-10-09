@@ -14,7 +14,7 @@ Il faut une connexion internet : les images des maps, les minimaps, les noms des
 1. Ouvre une map, puis clique sur **Ajouter** (ou sur l'icône crayon).
 2. Clique sur la carte à l'endroit **où tu te places** (point bleu).
 3. Clique à l'endroit **où la capacité atterrit** (point rouge).
-4. Remplis le formulaire : titre, site, côté, type de lancer, difficulté, tags, les 3 captures avec leurs descriptions, et des notes.
+4. Remplis le formulaire : titre, site, côté, type de lancer, tags, les 3 captures avec leurs descriptions, et des notes.
 5. **Enregistrer** : la lineup apparaît tout de suite. Elle est gardée comme brouillon dans le navigateur.
 
 En mode édition, un clic sur une lineup existante (sur la carte ou dans la liste) l'ouvre pour la modifier. La page d'une lineup a aussi un bouton **Modifier**.

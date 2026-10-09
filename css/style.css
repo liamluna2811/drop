@@ -1024,9 +1024,6 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .info-list dt { color: var(--muted); }
 .info-list dd { margin: 0; font-weight: 600; text-align: right; }
 
-.diff { display: inline-flex; gap: 3px; vertical-align: middle; margin-right: 6px; }
-.diff i { width: 14px; height: 5px; border-radius: 1px; background: var(--panel-2); }
-.diff i.on { background: var(--red); }
 
 .notes { white-space: pre-line; color: var(--muted); margin: 0; }
 

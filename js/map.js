@@ -394,16 +394,10 @@
           ${radioChips('side', Object.entries(config.sides).map(([value, label]) => ({ value, label })), l?.side || 'attack')}
         </div>
       </div>
-      <div class="row-2">
-        <div class="field">
-          <label for="f-throw">Type de lancer</label>
-          <input class="input" id="f-throw" name="throwType" list="throw-list" placeholder="Choisir ou écrire…" value="${esc(l?.throwType || '')}">
-          <datalist id="throw-list">${config.throwTypes.map(t => `<option value="${esc(t)}">`).join('')}</datalist>
-        </div>
-        <div class="field">
-          <span class="label">Difficulté</span>
-          ${radioChips('difficulty', config.difficulties.map((label, value) => ({ value, label })), l?.difficulty ?? 0)}
-        </div>
+      <div class="field">
+        <label for="f-throw">Type de lancer</label>
+        <input class="input" id="f-throw" name="throwType" list="throw-list" placeholder="Choisir ou écrire…" value="${esc(l?.throwType || '')}">
+        <datalist id="throw-list">${config.throwTypes.map(t => `<option value="${esc(t)}">`).join('')}</datalist>
       </div>
       <div class="field">
         <label for="f-tags">Tags</label>
@@ -458,7 +452,6 @@
       site: f.site.value,
       side: f.side.value,
       throwType: f.throwType.value.trim(),
-      difficulty: Number(f.difficulty.value || 0),
       tags: f.tags.value.split(',').map(t => t.trim()).filter(Boolean),
       from: draftPoints?.from,
       to: draftPoints?.to,
