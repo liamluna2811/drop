@@ -85,5 +85,37 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-default-a-depuis-a-long-entree",
+    "map": "haven",
+    "title": "Molly default A depuis l'entrée de A Long",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 66.5,
+      "y": 32.5
+    },
+    "position": {
+      "image": "assets/lineups/haven/a-long-entree-default-position.webp",
+      "note": "Colle-toi contre le mur, juste à droite du gros bloc de pierre, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/a-long-entree-default-visee.webp",
+      "note": "Place ton viseur entre les deux cercles sculptés sur la poutre en bois, puis lancer normal.",
+      "target": {
+        "x": 54.4,
+        "y": 39.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/a-long-entree-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A."
+    },
+    "notes": ""
   }
 ];
