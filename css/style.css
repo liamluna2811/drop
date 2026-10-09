@@ -230,6 +230,23 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
   color: var(--text);
 }
 .ab-type svg { width: 74%; height: 74%; }
+
+/* Lettre du site, coin bas gauche */
+.ab-site {
+  position: absolute;
+  left: -22%;
+  bottom: -22%;
+  width: max(12px, 52%);
+  height: max(12px, 52%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #0b1118;
+  border: 1.5px solid var(--ab);
+  color: var(--text);
+  font: 700 max(8px, calc(var(--size) * 0.3)) / 1 var(--font-body);
+}
+.marker .ab-site, .impact-mark .ab-site { width: 18px; height: 18px; left: -7px; bottom: -7px; border-width: 2px; font-size: 10px; }
 .marker .ab-type, .impact-mark .ab-type { width: 18px; height: 18px; right: -7px; bottom: -7px; border-width: 2px; }
 .legend-type { display: inline-flex; align-items: center; gap: 6px; }
 .legend-type .ab-type { position: static; width: 16px; height: 16px; --ab: var(--muted); }

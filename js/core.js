@@ -192,7 +192,8 @@ const VL = (() => {
   }
 
   // Pastille de la molly : icône officielle (sinon la touche), couleur selon le
-  // côté, et petit symbole du type (post-plant, retake…) dans le coin.
+  // côté, lettre du site en bas à gauche et symbole du type (post-plant,
+  // retake…) en bas à droite.
   function abilityBadge(agent, lineup, extraClass = '') {
     const ab = ability;
     const side = lineup?.side;
@@ -201,8 +202,10 @@ const VL = (() => {
     const inner = icon
       ? `<img src="${escapeHtml(icon)}" alt="" draggable="false">`
       : `<span>${escapeHtml(ab.bind)}</span>`;
-    const title = [ab.name, side === 'defense' ? 'défense' : '', TYPE_ICONS[type]?.label || ''].filter(Boolean).join(' · ');
-    return `<span class="ab-badge ${extraClass}" style="--ab:${abilityColor(side)}" title="${escapeHtml(title)}">${inner}${typeIcon(type)}</span>`;
+    const site = lineup?.site;
+    const siteMark = site ? `<span class="ab-site">${escapeHtml(site === 'Mid' ? 'M' : site)}</span>` : '';
+    const title = [ab.name, site ? `site ${site}` : '', side === 'defense' ? 'défense' : '', TYPE_ICONS[type]?.label || ''].filter(Boolean).join(' · ');
+    return `<span class="ab-badge ${extraClass}" style="--ab:${abilityColor(side)}" title="${escapeHtml(title)}">${inner}${siteMark}${typeIcon(type)}</span>`;
   }
 
   /* ---------- Lineups : fichier + brouillons ---------- */
