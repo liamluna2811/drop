@@ -85,6 +85,7 @@
             ${lineup.throwType ? `<span class="chip chip-strong">${esc(lineup.throwType)}</span>` : ''}
             ${(lineup.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
             ${VL.isDraft(lineup.id) ? '<span class="chip chip-draft">brouillon non exporté</span>' : ''}
+            ${VL.isDraft(lineup.id) && VL.inFile(lineup.id) ? '<button type="button" class="chip chip-draft" data-act="discard-draft" title="Supprimer ce brouillon et revenir à la version du fichier lineups.js">↺ Revenir à la version du fichier</button>' : ''}
           </div>
         </div>
         <div class="lu-hero-actions">
@@ -131,6 +132,12 @@
         </dl>
       </aside>
     </div>`;
+
+  app.querySelector('[data-act=discard-draft]')?.addEventListener('click', () => {
+    if (!confirm('Abandonner le brouillon de cette lineup et revenir à la version du fichier ?')) return;
+    VL.discardDraft(lineup.id);
+    location.reload();
+  });
 
   // Lightbox
   const lightbox = document.getElementById('lightbox');

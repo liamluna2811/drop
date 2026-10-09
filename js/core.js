@@ -208,6 +208,17 @@ const VL = (() => {
     if (!store(KEYS.drafts, d)) throw new Error('Impossible d\'enregistrer (stockage du navigateur indisponible ou plein).');
   }
 
+  // Abandonne le brouillon d'une lineup : on revient à la version du fichier.
+  function discardDraft(id) {
+    const d = drafts();
+    delete d.upserts[id];
+    store(KEYS.drafts, d);
+  }
+
+  function inFile(id) {
+    return baseLineups().some(l => l.id === id);
+  }
+
   function deleteLineup(id) {
     const d = drafts();
     delete d.upserts[id];
@@ -306,7 +317,7 @@ const VL = (() => {
   return {
     config, slug, escapeHtml, param, round,
     getMaps, getMap, getAgent, mapRotation, impactFor, playerBadge, ability, abilityBadge,
-    allLineups, lineupsForMap, getLineup, isDraft, saveLineup, deleteLineup,
+    allLineups, lineupsForMap, getLineup, isDraft, discardDraft, inFile, saveLineup, deleteLineup,
     draftCount, clearDrafts, newId, exportLineupsFile,
     toast, renderDraftBar, imgOrPlaceholder,
     localPreviews: {},
