@@ -41,11 +41,11 @@ window.LINEUPS = [
       "note": "Place-toi à l'endroit montré sur la capture, à A Long, contre les sacs de sable à côté de la barrière."
     },
     "aim": {
-      "image": "assets/lineups/haven/a-long-default-visee.webp",
-      "note": "Place le haut de la flamme sur le coin de la montagne, puis lancer normal.",
+      "image": "assets/lineups/haven/a-long-default-visee-2.webp",
+      "note": "Place le bas de la flamme sur la poutre, puis lancer normal.",
       "target": {
-        "x": 49.4,
-        "y": 86.8
+        "x": 60.3,
+        "y": 89.4
       }
     },
     "result": {
