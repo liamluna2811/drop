@@ -1,6 +1,6 @@
 # Versions pour t-shirt noir
 
-Les modèles « Côté drive », « Côté revés », « Lob. Vitre. Point. » et « J'ai padel » étaient imprimés en bleu nuit, une couleur qui se voit très mal sur le t-shirt noir. Ces fichiers sont la même chose redessinée en clair pour le noir : texte crème `#F1EBDD`, orange `#E8672E` conservé (balle, « POINT. », filet du terrain).
+Les modèles « Côté drive », « Côté revés », « Lob. Vitre. Point. », « J'ai padel » et « Padel Côte d'Azur » étaient imprimés en bleu nuit, une couleur qui se voit très mal sur le t-shirt noir. Ces fichiers sont la même chose redessinée en clair pour le noir : texte crème `#F1EBDD`, orange `#E8672E` conservé (balle, « POINT. », filet du terrain).
 
 ## Fichiers (`impression/`)
 
@@ -10,16 +10,17 @@ Les modèles « Côté drive », « Côté revés », « Lob. Vitre. Point. » e
 | `cote-reves_devant_noir.png` / `cote-reves_dos_noir.png` | devant / dos |
 | `lob-vitre-point_devant_noir.png` / `lob-vitre-point_dos_noir.png` | devant / dos |
 | `j-ai-padel_devant_noir.png` / `j-ai-padel_dos_noir.png` | devant / dos |
+| `padel-cote-d-azur_devant_noir.png` / `padel-cote-d-azur_dos_noir.png` | devant / dos |
 
 - PNG à fond transparent, recadrés au dessin (marge de 60 px), 300 dpi, comme les fichiers de `designs/final/`.
-- Taille d'impression à 300 dpi : drive devant 9,0 × 8,3 in · dos 11,2 × 4,6 in ; revés devant 9,7 × 8,5 in · dos 9,5 × 4,6 in ; lob devant 10,1 × 9,2 in · dos 9,5 × 11,7 in ; j'ai padel devant 10,0 × 12,6 in · dos 11,3 × 6,2 in.
+- Taille d'impression à 300 dpi : drive devant 9,0 × 8,3 in · dos 11,2 × 4,6 in ; revés devant 9,7 × 8,5 in · dos 9,5 × 4,6 in ; lob devant 10,1 × 9,2 in · dos 9,5 × 11,7 in ; j'ai padel devant 10,0 × 12,6 in · dos 11,3 × 6,2 in ; Côte d'Azur devant 7,6 × 10,8 in · dos 9,1 × 4,4 in.
 - Dans Printful : centrer horizontalement, placer en haut de la zone, et régler la largeur sur celle de la version bleu nuit actuelle pour garder la même taille.
 - Le texte est crème : sur un fond d'aperçu blanc ou à damier clair, il se voit mal. C'est normal, il est fait pour le noir.
 - `apercus/` : rendu sur la photo Printful du t-shirt noir, l'ancien visuel effacé. Indicatif.
 
 ## Ce qui change par rapport aux originaux
 
-Les fichiers d'origine n'étaient pas dans le dépôt : les visuels ont été redessinés d'après les photos Printful. Textes, pictos et mise en page sont les mêmes. Les polices sont les plus proches disponibles en libre : Anton (gros titres), Archivo Expanded (petites capitales), Newsreader italique (phrases). Elles sont sous licence SIL Open Font, utilisables commercialement.
+Les fichiers d'origine n'étaient pas dans le dépôt : les visuels ont été redessinés d'après les photos Printful. Textes, pictos et mise en page sont les mêmes. Les polices sont les plus proches disponibles en libre : Anton (gros titres), Archivo Expanded (petites capitales), Newsreader italique et droit (phrases). Elles sont sous licence SIL Open Font, utilisables commercialement.
 
 ## Source
 
