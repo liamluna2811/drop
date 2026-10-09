@@ -168,13 +168,21 @@ const VL = (() => {
   const TYPE_ICONS = {
     plant: { label: 'Post-plant', svg: '<path d="M12 1.5 17.5 8v12.5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V8z" fill="currentColor"/><path d="M6.5 14h11" stroke="#0b1118" stroke-width="2.4"/>' },
     retake: { label: 'Retake', svg: '<path d="M19 12a7 7 0 1 1-2.1-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><path d="M20 3v6h-6z" fill="currentColor"/>' },
+    antidefuse: { label: 'Anti-défuse', svg: '<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.8"/><path d="M6.6 17.4 17.4 6.6" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>' },
   };
 
+  // Type de la lineup d'après ses tags (anti-défuse > retake > post-plant).
   function lineupType(lineup) {
     const tags = (lineup?.tags || []).map(t => slug(t));
+    if (tags.includes('anti-defuse')) return 'antidefuse';
     if (tags.includes('retake')) return 'retake';
     if (tags.includes('post-plant')) return 'plant';
     return null;
+  }
+
+  // Retakes et anti-défuses : sur la grande carte, on montre d'abord l'impact.
+  function impactFirst(lineup) {
+    return ['retake', 'antidefuse'].includes(lineupType(lineup));
   }
 
   function typeIcon(type) {
@@ -183,7 +191,7 @@ const VL = (() => {
   }
 
   // Pastille de la molly : icône officielle (sinon la touche), couleur selon le
-  // côté, et petit symbole post-plant / retake dans le coin.
+  // côté, et petit symbole post-plant / retake / anti-défuse dans le coin.
   function abilityBadge(agent, lineup, extraClass = '') {
     const ab = ability;
     const side = lineup?.side;
@@ -343,7 +351,7 @@ const VL = (() => {
 
   return {
     config, slug, escapeHtml, param, round,
-    getMaps, getMap, getAgent, mapRotation, impactFor, playerBadge, ability, abilityColor, abilityBadge, typeIcon,
+    getMaps, getMap, getAgent, mapRotation, impactFor, playerBadge, ability, abilityColor, abilityBadge, typeIcon, lineupType, impactFirst,
     allLineups, lineupsForMap, getLineup, isDraft, discardDraft, inFile, saveLineup, deleteLineup,
     draftCount, clearDrafts, newId, exportLineupsFile,
     toast, renderDraftBar, imgOrPlaceholder,

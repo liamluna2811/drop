@@ -226,19 +226,44 @@
   }
 
   function renderMarkers() {
-    markersEl.innerHTML = filtered().filter(l => l.spot).map(l => `
-      <a class="marker ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="left:${l.spot.x}%;top:${l.spot.y}%;--ab:${VL.abilityColor(l.side)}" aria-label="${esc(l.title)}">
-        ${VL.abilityBadge(agent, l)}
-        <span class="marker-label">${esc(l.title)}</span>
+    // Point principal : emplacement du joueur (post-plant…) ou impact (retake,
+    // anti-défuse). Au survol, l'autre point apparaît relié par un pointillé.
+    const items = filtered().filter(l => l.spot).map(l => {
+      const impact = VL.impactFor(l);
+      const flip = VL.impactFirst(l) && impact;
+      return { l, main: flip ? impact : l.spot, other: flip ? l.spot : impact, otherIsSpot: !!flip };
+    });
+
+    // Points superposés (ex. plusieurs retakes vers le même spot) : on les
+    // écarte en cercle pour pouvoir les survoler un par un.
+    const groups = [];
+    for (const it of items) {
+      const g = groups.find(g => Math.hypot(g[0].main.x - it.main.x, g[0].main.y - it.main.y) < 1.5);
+      g ? g.push(it) : groups.push([it]);
+    }
+    for (const g of groups) {
+      if (g.length < 2) continue;
+      const r = 19 + g.length * 3;
+      g.forEach((it, i) => {
+        const a = (2 * Math.PI * i) / g.length - Math.PI / 2;
+        it.ox = Math.round(Math.cos(a) * r);
+        it.oy = Math.round(Math.sin(a) * r);
+      });
+    }
+
+    const off = it => (it.ox || it.oy ? `--ox:${it.ox}px;--oy:${it.oy}px;` : '');
+    markersEl.innerHTML = items.map(it => `
+      <a class="marker ${it.l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(it.l.id)}" data-id="${esc(it.l.id)}" style="left:${it.main.x}%;top:${it.main.y}%;${off(it)}--ab:${VL.abilityColor(it.l.side)}" aria-label="${esc(it.l.title)}">
+        ${VL.abilityBadge(agent, it.l)}
+        <span class="marker-label">${esc(it.l.title)}</span>
       </a>`).join('');
 
-    // Impact de la molly + trait pointillé, visibles au survol d'un emplacement.
-    const withImpact = filtered().filter(l => l.spot && VL.impactFor(l));
+    const linked = items.filter(it => it.other);
     impactsEl.innerHTML = `
       <svg class="impact-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-        ${withImpact.map(l => { const i = VL.impactFor(l); return `<line data-impact="${esc(l.id)}" class="${l.id === activeId ? 'show' : ''}" x1="${l.spot.x}" y1="${l.spot.y}" x2="${i.x}" y2="${i.y}" style="--ab:${VL.abilityColor(l.side)}"/>`; }).join('')}
+        ${linked.map(it => `<line data-impact="${esc(it.l.id)}" class="${it.l.id === activeId ? 'show' : ''}" x1="${it.main.x}" y1="${it.main.y}" x2="${it.other.x}" y2="${it.other.y}" style="--ab:${VL.abilityColor(it.l.side)}"/>`).join('')}
       </svg>
-      ${withImpact.map(l => { const i = VL.impactFor(l); return `<span class="impact-mark ${l.id === activeId ? 'show' : ''}" data-impact="${esc(l.id)}" style="left:${i.x}%;top:${i.y}%">${VL.abilityBadge(agent, l)}</span>`; }).join('')}`;
+      ${linked.map(it => `<span class="impact-mark ${it.l.id === activeId ? 'show' : ''}" data-impact="${esc(it.l.id)}" style="left:${it.other.x}%;top:${it.other.y}%">${it.otherIsSpot ? VL.playerBadge() : VL.abilityBadge(agent, it.l)}</span>`).join('')}`;
   }
 
   function setActive(id) {
@@ -588,7 +613,8 @@
 
   /* ---------- Démarrage ---------- */
 
-  $('#legend-types').innerHTML = `<span class="legend-type">${VL.typeIcon('plant')}Post-plant</span><span class="legend-type">${VL.typeIcon('retake')}Retake</span>`;
+  $('#legend-types').innerHTML = [['plant', 'Post-plant'], ['retake', 'Retake'], ['antidefuse', 'Anti-défuse']]
+    .map(([type, label]) => `<span class="legend-type">${VL.typeIcon(type)}${label}</span>`).join('');
 
   fitLayer();
   applyView();

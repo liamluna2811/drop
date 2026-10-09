@@ -248,6 +248,7 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
   pointer-events: none;
 }
 .impact-mark.show { opacity: 1; }
+.impact-mark .player-badge { --size: 28px; }
 .impact-mark .ab-badge { --size: 26px; box-shadow: 0 0 0 3px rgba(11, 17, 24, 0.75), 0 0 18px var(--ab); }
 
 /* ---------- Placeholders image ---------- */
@@ -578,7 +579,7 @@ button.chip:hover { color: var(--text); border-color: var(--muted); }
 .marker {
   position: absolute;
   z-index: 2;
-  transform: translate(-50%, -50%) rotate(var(--rot-inv)) scale(var(--z-inv));
+  transform: translate(-50%, -50%) rotate(var(--rot-inv)) scale(var(--z-inv)) translate(var(--ox, 0px), var(--oy, 0px));
   cursor: pointer;
   transition: filter 0.15s;
 }
