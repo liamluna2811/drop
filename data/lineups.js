@@ -119,5 +119,41 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-retake-graffiti-depuis-a-link",
+    "map": "haven",
+    "title": "Molly retake Graffiti depuis A Link",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "tags": [
+      "Retake"
+    ],
+    "spot": {
+      "x": 29.3,
+      "y": 28.9
+    },
+    "impact": {
+      "x": 35.2,
+      "y": 26.1
+    },
+    "position": {
+      "image": "assets/lineups/haven/a-retake-graffiti-position.webp",
+      "note": "Colle-toi contre le mur, juste à droite des deux caisses, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/a-retake-graffiti-visee.webp",
+      "note": "Place ton viseur dans le coin en bas à gauche de la première fenêtre, puis lancer normal.",
+      "target": {
+        "x": 55.1,
+        "y": 41.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/a-retake-graffiti-resultat.webp",
+      "note": "La molly tombe sur le spot Graffiti."
+    },
+    "notes": ""
   }
 ];

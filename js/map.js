@@ -415,7 +415,7 @@
       </div>
       <div class="field">
         <label for="f-throw">Type de lancer</label>
-        <input class="input" id="f-throw" name="throwType" list="throw-list" placeholder="Choisir ou écrire…" value="${esc(l?.throwType || '')}">
+        <input class="input" id="f-throw" name="throwType" list="throw-list" placeholder="Choisir ou écrire…" value="${esc(l ? l.throwType || '' : config.throwTypes[0])}">
         <datalist id="throw-list">${config.throwTypes.map(t => `<option value="${esc(t)}">`).join('')}</datalist>
       </div>
       <div class="field">
