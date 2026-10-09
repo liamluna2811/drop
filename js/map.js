@@ -41,7 +41,8 @@
 
   const prefsKey = `vl.view.${mapSlug}`;
   const prefs = (() => { try { return JSON.parse(localStorage.getItem(prefsKey)) || {}; } catch { return {}; } })();
-  const view = { z: 1, tx: 0, ty: 0, rot: prefs.rot || 0 };
+  const baseRot = VL.mapRotation(mapSlug);
+  const view = { z: 1, tx: 0, ty: 0, rot: baseRot };
   const savePrefs = () => { try { localStorage.setItem(prefsKey, JSON.stringify(prefs)); } catch {} };
 
   function fitLayer() {
@@ -144,11 +145,9 @@
 
   tools['zoom-in'].onclick = () => zoomCenter(1.4);
   tools['zoom-out'].onclick = () => zoomCenter(1 / 1.4);
-  tools.reset.onclick = () => { Object.assign(view, { z: 1, tx: 0, ty: 0 }); applyView(true); };
+  tools.reset.onclick = () => { Object.assign(view, { z: 1, tx: 0, ty: 0, rot: baseRot + 360 * Math.round((view.rot - baseRot) / 360) }); applyView(true); };
   tools.rotate.onclick = () => {
-    view.rot = (view.rot + 90) % 360;
-    prefs.rot = view.rot;
-    savePrefs();
+    view.rot += 90;
     applyView(true);
   };
   tools.callouts.onclick = () => { showCallouts = !showCallouts; prefs.callouts = showCallouts; savePrefs(); syncToggles(); };

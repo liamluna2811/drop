@@ -26,6 +26,12 @@ window.VL_CONFIG = {
 
   tagSuggestions: ['Post-plant', 'Retake', 'Exécution', 'Anti-défuse', 'Clear de coin', 'Spawn', 'Rapide', 'Safe'],
 
+  // Orientation de base de chaque minimap, en degrés dans le sens horaire
+  // (0, 90, 180 ou 270), pour avoir le spawn attaquant en bas.
+  mapRotation: {
+    haven: 90,
+  },
+
   // Maps à masquer de l'accueil (nom anglais en minuscules, ex: 'abyss').
   hiddenMaps: [],
 

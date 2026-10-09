@@ -32,8 +32,8 @@ window.LINEUPS = [
       "Post-plant"
     ],
     "spot": {
-      "x": 16,
-      "y": 52
+      "x": 65.8,
+      "y": 27.7
     },
     "position": {
       "image": "assets/lineups/haven/a-long-default-position.webp",

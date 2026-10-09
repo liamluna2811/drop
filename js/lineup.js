@@ -36,7 +36,23 @@
     ['result', 'Résultat'],
   ];
 
-  const pt = p => p ? `left:${p.x}%;top:${p.y}%` : 'display:none';
+  const pt = p => `left:${p.x}%;top:${p.y}%`;
+  const rot = VL.mapRotation(map.slug);
+
+  function renderStep(i) {
+    const [key, label] = STEPS[i];
+    const step = lineup[key] || {};
+    return `
+      <article class="step step-${key}" style="--i:${i}">
+        <div class="step-media" data-zoom="${esc(step.image || '')}" data-caption="${i + 1}. ${label}">
+          ${VL.imgOrPlaceholder(step.image, `Capture « ${label} » à ajouter`)}
+        </div>
+        <div class="step-text">
+          <h2><span class="step-num">0${i + 1}</span>${label}</h2>
+          ${step.note ? `<p>${esc(step.note)}</p>` : '<p class="empty-note">Pas de description.</p>'}
+        </div>
+      </article>`;
+  }
 
   app.innerHTML = `
     <section class="lu-hero">
@@ -66,35 +82,20 @@
     </section>
 
     <div class="lu-layout">
-      <div class="steps">
-        ${STEPS.map(([key, label], i) => {
-          const step = lineup[key] || {};
-          return `
-            <article class="step" style="--i:${i}">
-              <div class="step-media" data-zoom="${esc(step.image || '')}" data-caption="${i + 1}. ${label}">
-                ${VL.imgOrPlaceholder(step.image, `Capture « ${label} » à ajouter`)}
-              </div>
-              <div>
-                <div class="step-num">0${i + 1}</div>
-                <h2>${label}</h2>
-                ${step.note ? `<p>${esc(step.note)}</p>` : '<p class="empty-note">Pas de description.</p>'}
-              </div>
-            </article>`;
-        }).join('')}
-      </div>
+      ${renderStep(0)}
+      ${renderStep(1)}
 
       <aside class="lu-aside">
-        <div class="card">
-          <h3>Sur la carte</h3>
-          <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte" style="display:block">
-            ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
-            <span style="position:absolute;${pt(lineup.spot)}">${VL.abilityBadge(agent)}</span>
-          </a>
-        </div>
+        ${renderStep(2)}
 
-        <div class="card">
-          <h3>Infos</h3>
-          <dl class="info-list">
+        <div class="lu-meta">
+          <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte">
+            <div class="mini-map-rot" style="--rot:${rot}deg">
+              ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
+              ${lineup.spot ? `<span class="mini-map-spot" style="${pt(lineup.spot)}">${VL.abilityBadge(agent)}</span>` : ''}
+            </div>
+          </a>
+          <dl class="info-list card">
             <div><dt>Site</dt><dd>${esc(lineup.site || '—')}</dd></div>
             <div><dt>Côté</dt><dd>${esc(config.sides[lineup.side] || '—')}</dd></div>
             <div><dt>Lancer</dt><dd>${esc(lineup.throwType || '—')}</dd></div>

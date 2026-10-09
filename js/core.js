@@ -140,6 +140,11 @@ const VL = (() => {
     return agentPromise;
   }
 
+  // Orientation de base d'une minimap (spawn attaquant en bas).
+  function mapRotation(mapSlug) {
+    return Number(config.mapRotation?.[mapSlug]) || 0;
+  }
+
   /* ---------- Capacité ---------- */
 
   const ability = { name: 'Capacité', bind: '?', color: '#ff4655', ...config.ability };
@@ -290,7 +295,7 @@ const VL = (() => {
 
   return {
     config, slug, escapeHtml, param, round,
-    getMaps, getMap, getAgent, ability, abilityBadge,
+    getMaps, getMap, getAgent, mapRotation, ability, abilityBadge,
     allLineups, lineupsForMap, getLineup, isDraft, saveLineup, deleteLineup,
     draftCount, clearDrafts, newId, exportLineupsFile,
     toast, renderDraftBar, imgOrPlaceholder,
