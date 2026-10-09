@@ -1,0 +1,304 @@
+'use strict';
+
+/*
+ * Noyau partagé : données de l'API Valorant (avec cache), stockage des
+ * lineups (fichier + brouillons du mode édition) et petits utilitaires DOM.
+ */
+const VL = (() => {
+  const API = 'https://valorant-api.com/v1';
+  const KEYS = {
+    maps: 'vl.cache.maps.v1',
+    agent: 'vl.cache.agent.v1',
+    drafts: 'vl.drafts.v1',
+  };
+  const CACHE_TTL = 3 * 24 * 3600 * 1000;
+  const config = window.VL_CONFIG || {};
+
+  /* ---------- localStorage tolérant ---------- */
+
+  function load(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function store(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /* ---------- Utilitaires ---------- */
+
+  function slug(text) {
+    return String(text)
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+
+  function escapeHtml(text) {
+    return String(text ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    }[c]));
+  }
+
+  function param(name) {
+    return new URLSearchParams(location.search).get(name);
+  }
+
+  function round(n) {
+    return Math.round(n * 10) / 10;
+  }
+
+  /* ---------- API valorant-api.com ---------- */
+
+  async function cachedFetch(key, url, transform) {
+    const cached = load(key);
+    if (cached && Date.now() - cached.t < CACHE_TTL) return cached.data;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = transform((await res.json()).data);
+      store(key, { t: Date.now(), data });
+      return data;
+    } catch (err) {
+      if (cached) return cached.data;
+      throw err;
+    }
+  }
+
+  function normalizeMap(m) {
+    const toPct = loc => ({
+      x: round((loc.y * m.xMultiplier + m.xScalarToAdd) * 100),
+      y: round((loc.x * m.yMultiplier + m.yScalarToAdd) * 100),
+    });
+    return {
+      slug: slug(m.displayName),
+      name: m.displayName,
+      sites: m.tacticalDescription || '',
+      coordinates: m.coordinates || '',
+      splash: m.splash,
+      minimap: m.displayIcon,
+      callouts: (m.callouts || []).map(c => ({
+        name: c.regionName,
+        zone: c.superRegionName,
+        ...toPct(c.location),
+      })),
+    };
+  }
+
+  let mapsPromise;
+  function getMaps() {
+    mapsPromise ??= cachedFetch(KEYS.maps, `${API}/maps`, data =>
+      data.filter(m => m.tacticalDescription && m.displayIcon).map(normalizeMap),
+    )
+      .then(maps => ({ maps, offline: false }))
+      .catch(() => ({
+        offline: true,
+        maps: (config.fallbackMaps || []).map(name => ({
+          slug: slug(name), name, sites: '', coordinates: '', splash: '', minimap: '', callouts: [],
+        })),
+      }))
+      .then(({ maps, offline }) => {
+        const hidden = new Set(config.hiddenMaps || []);
+        const overrides = config.mapOverrides || {};
+        const list = maps
+          .filter(m => !hidden.has(m.slug))
+          .map(m => ({ ...m, ...(overrides[m.slug] || {}) }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        return { maps: list, offline };
+      });
+    return mapsPromise;
+  }
+
+  async function getMap(mapSlug) {
+    const { maps, offline } = await getMaps();
+    return { map: maps.find(m => m.slug === mapSlug), offline };
+  }
+
+  let agentPromise;
+  function getAgent() {
+    agentPromise ??= cachedFetch(KEYS.agent, `${API}/agents?isPlayableCharacter=true`, data => {
+      const agent = data.find(a => a.displayName.toLowerCase() === String(config.agent).toLowerCase());
+      if (!agent) return null;
+      const icons = {};
+      for (const ab of config.abilities || []) {
+        const match = agent.abilities.find(x => x.displayName.toLowerCase() === ab.en.toLowerCase());
+        if (match?.displayIcon) icons[ab.key] = match.displayIcon;
+      }
+      return {
+        name: agent.displayName,
+        portrait: agent.fullPortrait || agent.displayIcon,
+        icon: agent.displayIcon,
+        colors: agent.backgroundGradientColors || [],
+        icons,
+      };
+    }).catch(() => null);
+    return agentPromise;
+  }
+
+  /* ---------- Capacités ---------- */
+
+  function ability(key) {
+    return (config.abilities || []).find(a => a.key === key)
+      || { key, name: key || 'Inconnue', bind: '?', color: '#8b97a6' };
+  }
+
+  // Pastille d'icône de capacité : icône officielle si dispo, sinon la touche.
+  function abilityBadge(key, agent, extraClass = '') {
+    const ab = ability(key);
+    const icon = agent?.icons?.[key];
+    const inner = icon
+      ? `<img src="${escapeHtml(icon)}" alt="" draggable="false">`
+      : `<span>${escapeHtml(ab.bind)}</span>`;
+    return `<span class="ab-badge ${extraClass}" style="--ab:${ab.color}" title="${escapeHtml(ab.name)}">${inner}</span>`;
+  }
+
+  /* ---------- Lineups : fichier + brouillons ---------- */
+
+  function baseLineups() {
+    return Array.isArray(window.LINEUPS) ? window.LINEUPS : [];
+  }
+
+  function drafts() {
+    const d = load(KEYS.drafts, null);
+    return { upserts: d?.upserts || {}, deleted: d?.deleted || [] };
+  }
+
+  function allLineups() {
+    const d = drafts();
+    const byId = new Map();
+    for (const l of baseLineups()) if (!d.deleted.includes(l.id)) byId.set(l.id, l);
+    for (const [id, l] of Object.entries(d.upserts)) byId.set(id, l);
+    return [...byId.values()];
+  }
+
+  function lineupsForMap(mapSlug) {
+    return allLineups().filter(l => l.map === mapSlug);
+  }
+
+  function getLineup(id) {
+    return allLineups().find(l => l.id === id);
+  }
+
+  function isDraft(id) {
+    return id in drafts().upserts;
+  }
+
+  function saveLineup(lineup) {
+    const d = drafts();
+    d.upserts[lineup.id] = lineup;
+    d.deleted = d.deleted.filter(x => x !== lineup.id);
+    if (!store(KEYS.drafts, d)) throw new Error('Impossible d\'enregistrer (stockage du navigateur indisponible ou plein).');
+  }
+
+  function deleteLineup(id) {
+    const d = drafts();
+    delete d.upserts[id];
+    if (baseLineups().some(l => l.id === id) && !d.deleted.includes(id)) d.deleted.push(id);
+    store(KEYS.drafts, d);
+  }
+
+  function draftCount() {
+    const d = drafts();
+    return Object.keys(d.upserts).length + d.deleted.length;
+  }
+
+  function clearDrafts() {
+    store(KEYS.drafts, { upserts: {}, deleted: [] });
+  }
+
+  function newId(mapSlug, title, abilityKey) {
+    const rand = Math.random().toString(36).slice(2, 6);
+    return [mapSlug, abilityKey, slug(title).slice(0, 40), rand].filter(Boolean).join('-');
+  }
+
+  function exportLineupsFile() {
+    const list = allLineups().sort((a, b) =>
+      a.map.localeCompare(b.map) || (a.site || '').localeCompare(b.site || '') || a.title.localeCompare(b.title));
+    const header = `/*
+ * Base de données des lineups — exportée le ${new Date().toLocaleString('fr-FR')}.
+ * Remplace data/lineups.js par ce fichier.
+ * Images : assets/lineups/<map>/<fichier>
+ */
+`;
+    const content = `${header}window.LINEUPS = ${JSON.stringify(list, null, 2)};\n`;
+    const blob = new Blob([content], { type: 'text/javascript' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'lineups.js';
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    return list.length;
+  }
+
+  /* ---------- UI partagée ---------- */
+
+  function toast(message, type = 'info') {
+    let host = document.querySelector('.toasts');
+    if (!host) {
+      host = document.createElement('div');
+      host.className = 'toasts';
+      document.body.append(host);
+    }
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.textContent = message;
+    host.append(t);
+    setTimeout(() => t.classList.add('out'), 2800);
+    setTimeout(() => t.remove(), 3200);
+  }
+
+  // Bandeau « modifications non exportées », commun aux pages.
+  function renderDraftBar() {
+    let bar = document.querySelector('.draft-bar');
+    const count = draftCount();
+    if (!count) {
+      bar?.remove();
+      return;
+    }
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'draft-bar';
+      document.body.append(bar);
+    }
+    bar.innerHTML = `
+      <span class="draft-dot"></span>
+      <span><strong>${count}</strong> modification${count > 1 ? 's' : ''} non exportée${count > 1 ? 's' : ''}</span>
+      <button class="btn btn-sm btn-red" data-act="export">Exporter lineups.js</button>
+      <button class="btn btn-sm btn-ghost" data-act="clear" title="Supprimer les brouillons du navigateur">Vider</button>`;
+    bar.querySelector('[data-act=export]').onclick = () => {
+      const n = exportLineupsFile();
+      toast(`${n} lineup${n > 1 ? 's' : ''} exportée${n > 1 ? 's' : ''} — remplace data/lineups.js par le fichier téléchargé.`, 'ok');
+    };
+    bar.querySelector('[data-act=clear]').onclick = () => {
+      if (!confirm('Vider les brouillons ? Les modifications non exportées seront perdues.\n(À faire après avoir remplacé data/lineups.js par le fichier exporté.)')) return;
+      clearDrafts();
+      location.reload();
+    };
+  }
+
+  // Image avec repli élégant quand le fichier n'existe pas (encore).
+  function imgOrPlaceholder(src, label, cls = '') {
+    const ph = `<div class="img-ph ${cls}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z M4 15l4-4 4 4 3-3 5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="15.5" cy="9" r="1.5" fill="currentColor"/></svg><span>${escapeHtml(label)}</span></div>`;
+    if (!src) return ph;
+    return `<img class="${cls}" src="${escapeHtml(src)}" alt="${escapeHtml(label)}" loading="lazy" onerror="this.outerHTML=this.nextElementSibling.innerHTML"><template>${ph}</template>`;
+  }
+
+  return {
+    config, slug, escapeHtml, param, round,
+    getMaps, getMap, getAgent, ability, abilityBadge,
+    allLineups, lineupsForMap, getLineup, isDraft, saveLineup, deleteLineup,
+    draftCount, clearDrafts, newId, exportLineupsFile,
+    toast, renderDraftBar, imgOrPlaceholder,
+    localPreviews: {},
+  };
+})();

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lineups Valorant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><circle cx="12" cy="12" r="6"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg></span>
+      <span class="brand-text">Lineups <small data-agent-name>Brimstone</small></span>
+    </a>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <div class="hero-kicker">Carnet de lineups</div>
+        <h1><span data-agent-name>Brimstone</span><br>Lineups</h1>
+        <p>Choisis la map sur laquelle tu joues, puis clique sur un point de la carte pour voir où te placer, où viser et ce que donne la lineup.</p>
+        <div class="hero-stats">
+          <div class="stat"><strong id="stat-total">0</strong><span>Lineups</span></div>
+          <div class="stat"><strong id="stat-maps">0</strong><span>Maps couvertes</span></div>
+          <div class="stat"><strong id="stat-sites">0</strong><span>Sites couverts</span></div>
+        </div>
+      </div>
+      <img class="hero-portrait" id="portrait" alt="">
+    </section>
+
+    <div class="toolbar">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Rechercher une map…" autocomplete="off">
+      </label>
+      <label class="switch"><input id="only-filled" type="checkbox"> Seulement les maps avec des lineups</label>
+    </div>
+
+    <div id="notice"></div>
+    <div class="map-grid" id="grid" aria-live="polite"></div>
+  </main>
+
+  <script src="data/config.js"></script>
+  <script src="data/lineups.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

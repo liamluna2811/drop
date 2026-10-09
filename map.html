@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map — Lineups Valorant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><circle cx="12" cy="12" r="6"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg></span>
+      <span class="brand-text">Lineups <small data-agent-name>Brimstone</small></span>
+    </a>
+    <nav class="crumbs">
+      <span class="sep">/</span>
+      <a href="index.html" class="hide-sm">Maps</a>
+      <span class="sep hide-sm">/</span>
+      <span class="current" data-map-name>…</span>
+    </nav>
+  </header>
+
+  <main class="map-page">
+    <section class="viewer" id="viewer" aria-label="Carte">
+      <div class="viewer-bg" id="viewer-bg"></div>
+
+      <div class="map-layer" id="layer">
+        <img class="minimap-img" id="minimap" alt="" draggable="false">
+        <svg class="traj" id="traj" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+        <div id="callouts"></div>
+        <div id="markers"></div>
+        <div id="placing"></div>
+      </div>
+
+      <div class="viewer-tools">
+        <div class="tool-group">
+          <button type="button" data-tool="zoom-in" title="Zoomer (molette)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button type="button" data-tool="zoom-out" title="Dézoomer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg></button>
+          <button type="button" data-tool="reset" title="Recentrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        </div>
+        <div class="tool-group">
+          <button type="button" data-tool="rotate" title="Pivoter la carte de 90°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></button>
+          <button type="button" data-tool="callouts" title="Afficher les noms des zones" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></svg></button>
+          <button type="button" data-tool="traj" title="Afficher toutes les trajectoires" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"><path d="M5 19C8 9 14 6 19 5"/></svg></button>
+        </div>
+        <div class="tool-group">
+          <button type="button" data-tool="edit" title="Mode édition : ajouter / modifier des lineups" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></svg></button>
+        </div>
+      </div>
+
+      <div class="viewer-title">
+        <h1 data-map-name></h1>
+        <p id="map-sites"></p>
+      </div>
+
+      <div class="edit-banner" role="status">
+        <span class="edit-num" id="edit-step">1</span>
+        <span id="edit-text">Clique sur la carte à l'endroit où tu te places.</span>
+        <button class="btn btn-sm btn-ghost" type="button" id="edit-cancel">Quitter</button>
+      </div>
+
+      <div class="legend">
+        <span><i style="background:var(--cyan)"></i>Position du joueur</span>
+        <span><i style="background:var(--red)"></i>Point d'impact</span>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="side-head-row">
+          <h2>Lineups <small id="count"></small></h2>
+          <button class="btn btn-sm btn-red" type="button" id="add-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>Ajouter
+          </button>
+        </div>
+        <div>
+          <div class="filter-label">Capacité</div>
+          <div class="seg" id="f-ability"></div>
+        </div>
+        <div class="row-2">
+          <div>
+            <div class="filter-label">Site</div>
+            <div class="seg" id="f-site"></div>
+          </div>
+          <div>
+            <div class="filter-label">Côté</div>
+            <div class="seg" id="f-side"></div>
+          </div>
+        </div>
+        <label class="search" style="max-width:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="f-q" type="search" placeholder="Rechercher (titre, tag…)" autocomplete="off">
+        </label>
+      </div>
+      <div class="lineup-list" id="list"></div>
+    </aside>
+  </main>
+
+  <dialog id="editor">
+    <form id="editor-form" method="dialog" novalidate>
+      <div class="dlg-head">
+        <h2 id="editor-title">Nouvelle lineup</h2>
+        <button class="btn btn-sm btn-ghost btn-icon" type="button" data-act="close" title="Fermer">✕</button>
+      </div>
+      <div class="dlg-body" id="editor-body"></div>
+      <div class="dlg-foot">
+        <button class="btn btn-red" type="submit">Enregistrer</button>
+        <button class="btn btn-ghost" type="button" data-act="replace">Replacer sur la carte</button>
+        <button class="btn btn-ghost" type="button" data-act="copy">Copier le JSON</button>
+        <span class="header-spacer"></span>
+        <button class="btn btn-danger" type="button" data-act="delete">Supprimer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="data/config.js"></script>
+  <script src="data/lineups.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/map.js"></script>
+</body>
+</html>

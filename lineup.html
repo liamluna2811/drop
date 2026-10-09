@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lineup — Lineups Valorant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><circle cx="12" cy="12" r="6"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg></span>
+      <span class="brand-text">Lineups <small data-agent-name>Brimstone</small></span>
+    </a>
+    <nav class="crumbs">
+      <span class="sep">/</span>
+      <a href="index.html" class="hide-sm">Maps</a>
+      <span class="sep hide-sm">/</span>
+      <a id="crumb-map" href="index.html">…</a>
+      <span class="sep">/</span>
+      <span class="current" id="crumb-lineup">…</span>
+    </nav>
+  </header>
+
+  <main id="app"></main>
+
+  <figure class="lightbox" id="lightbox">
+    <div><img alt=""><figcaption></figcaption></div>
+  </figure>
+
+  <script src="data/config.js"></script>
+  <script src="data/lineups.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/lineup.js"></script>
+</body>
+</html>
