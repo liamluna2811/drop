@@ -169,23 +169,21 @@ const VL = (() => {
     plant: { label: 'Post-plant', svg: '<path d="M12 1.5 17.5 8v12.5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V8z" fill="currentColor"/><path d="M6.5 14h11" stroke="#0b1118" stroke-width="2.4"/>' },
     retake: { label: 'Retake', svg: '<path d="M19 12a7 7 0 1 1-2.1-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><path d="M20 3v6h-6z" fill="currentColor"/>' },
     antiplant: { label: 'Anti-plant', svg: '<path d="M12 2 20 5v6.5c0 5-3.4 9-8 10.5-4.6-1.5-8-5.5-8-10.5V5z" fill="currentColor"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="#0b1118" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>' },
-    antidefuse: { label: 'Anti-défuse', svg: '<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.8"/><path d="M6.6 17.4 17.4 6.6" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>' },
   };
 
-  // Type de la lineup d'après ses tags (anti-défuse > anti-plant > retake > post-plant).
+  // Type de la lineup d'après ses tags (anti-plant > retake > post-plant).
+  // « Anti-défuse » est un synonyme de post-plant.
   function lineupType(lineup) {
     const tags = (lineup?.tags || []).map(t => slug(t));
-    if (tags.includes('anti-defuse')) return 'antidefuse';
     if (tags.includes('anti-plant')) return 'antiplant';
     if (tags.includes('retake')) return 'retake';
-    if (tags.includes('post-plant')) return 'plant';
+    if (tags.includes('post-plant') || tags.includes('anti-defuse')) return 'plant';
     return null;
   }
 
-  // Retakes, anti-plants et anti-défuses : sur la grande carte, on montre
-  // d'abord l'impact.
+  // Retakes et anti-plants : sur la grande carte, on montre d'abord l'impact.
   function impactFirst(lineup) {
-    return ['retake', 'antiplant', 'antidefuse'].includes(lineupType(lineup));
+    return ['retake', 'antiplant'].includes(lineupType(lineup));
   }
 
   function typeIcon(type) {

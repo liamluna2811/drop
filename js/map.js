@@ -613,7 +613,7 @@
 
   /* ---------- Démarrage ---------- */
 
-  $('#legend-types').innerHTML = [['plant', 'Post-plant'], ['retake', 'Retake'], ['antiplant', 'Anti-plant'], ['antidefuse', 'Anti-défuse']]
+  $('#legend-types').innerHTML = [['plant', 'Post-plant'], ['retake', 'Retake'], ['antiplant', 'Anti-plant']]
     .map(([type, label]) => `<span class="legend-type">${VL.typeIcon(type)}${label}</span>`).join('');
 
   fitLayer();
