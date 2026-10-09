@@ -145,6 +145,16 @@ const VL = (() => {
     return Number(config.mapRotation?.[mapSlug]) || 0;
   }
 
+  // Point d'impact d'une lineup : le sien, sinon celui par défaut du site.
+  function impactFor(lineup) {
+    return lineup.impact || config.defaultImpacts?.[lineup.map]?.[lineup.site] || null;
+  }
+
+  // Pastille « joueur » (emplacement où se placer).
+  function playerBadge(extraClass = '') {
+    return `<span class="player-badge ${extraClass}" title="Emplacement du joueur"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg></span>`;
+  }
+
   /* ---------- Capacité ---------- */
 
   const ability = { name: 'Capacité', bind: '?', color: '#ff4655', ...config.ability };
@@ -295,7 +305,7 @@ const VL = (() => {
 
   return {
     config, slug, escapeHtml, param, round,
-    getMaps, getMap, getAgent, mapRotation, ability, abilityBadge,
+    getMaps, getMap, getAgent, mapRotation, impactFor, playerBadge, ability, abilityBadge,
     allLineups, lineupsForMap, getLineup, isDraft, saveLineup, deleteLineup,
     draftCount, clearDrafts, newId, exportLineupsFile,
     toast, renderDraftBar, imgOrPlaceholder,

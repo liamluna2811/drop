@@ -270,8 +270,9 @@
   let editing = false;
   let placing = false;       // en attente d'un clic pour placer le joueur
   let editingLineup = null;  // lineup en cours d'édition (null = nouvelle)
-  let replacing = false;     // replacement du point d'une lineup déjà dans le formulaire
+  let replacing = false;     // 'spot' | 'impact' : point replacé depuis le formulaire
   let draftSpot = null;      // emplacement retenu pour le formulaire
+  let draftImpact = null;    // impact propre à la lineup (sinon celui du site)
 
   function setEditing(on) {
     editing = on;
@@ -284,8 +285,10 @@
   function startPlacing() {
     placing = true;
     placingEl.innerHTML = '';
-    $('#edit-text').innerHTML = '<b>Emplacement</b> — clique là où le joueur se place.'
-      + (replacing ? '' : ' <span class="muted">(ou clique sur une lineup existante pour la modifier)</span>');
+    $('#edit-text').innerHTML = replacing === 'impact'
+      ? '<b>Impact</b> — clique là où la molly atterrit.'
+      : '<b>Emplacement</b> — clique là où le joueur se place.'
+        + (replacing ? '' : ' <span class="muted">(ou clique sur une lineup existante pour la modifier)</span>');
   }
 
   $('#edit-cancel').onclick = () => {
@@ -305,7 +308,8 @@
     const pt = clientToPct(e.clientX, e.clientY);
     if (pt.x < 0 || pt.x > 100 || pt.y < 0 || pt.y > 100) return;
     placing = false;
-    draftSpot = pt;
+    if (replacing === 'impact') draftImpact = pt;
+    else draftSpot = pt;
     placingEl.innerHTML = `<span class="placing placing-spot" style="left:${pt.x}%;top:${pt.y}%"></span>`;
     if (replacing) {
       replacing = false;
@@ -423,16 +427,25 @@
 
   function updateCoordsBox() {
     const p = draftSpot;
-    $('#coords-box').innerHTML = p
-      ? `<span><i style="background:var(--red)"></i>Emplacement du joueur <b>${p.x} / ${p.y}</b></span>
-         <span class="muted">— « Replacer sur la carte » pour modifier</span>`
-      : '<span>⚠ Emplacement non placé — utilise « Replacer sur la carte ».</span>';
+    const site = form.elements.site?.value;
+    const siteImpact = config.defaultImpacts?.[mapSlug]?.[site];
+    const impactText = draftImpact
+      ? `<b>${draftImpact.x} / ${draftImpact.y}</b>`
+      : siteImpact ? `<span class="muted">par défaut du site ${esc(site)}</span>` : '<span class="muted">non placé</span>';
+    $('#coords-box').innerHTML = `
+      <span><i style="background:var(--cyan)"></i>Joueur ${p ? `<b>${p.x} / ${p.y}</b>` : '⚠ non placé'}</span>
+      <span><i style="background:var(--red)"></i>Impact ${impactText}</span>
+      <span class="coords-actions">
+        <button class="btn btn-sm btn-ghost" type="button" data-act="place-impact">Placer l'impact</button>
+        ${draftImpact ? '<button class="btn btn-sm btn-ghost" type="button" data-act="clear-impact">Impact par défaut</button>' : ''}
+      </span>`;
   }
 
   function openEditor(lineup, spot) {
     editingLineup = lineup || null;
     aimTarget = lineup?.aim?.target || null;
     draftSpot = lineup ? lineup.spot || null : spot || null;
+    draftImpact = lineup?.impact || null;
     $('#editor-title').textContent = lineup ? 'Modifier la lineup' : 'Nouvelle lineup';
     form.querySelector('[data-act=delete]').hidden = !lineup;
     buildForm(lineup);
@@ -453,6 +466,7 @@
       throwType: f.throwType.value.trim(),
       tags: f.tags.value.split(',').map(t => t.trim()).filter(Boolean),
       spot: draftSpot,
+      ...(draftImpact ? { impact: draftImpact } : {}),
       position: step('position'),
       aim: { ...step('aim'), ...(aimTarget ? { target: aimTarget } : {}) },
       result: step('result'),
@@ -461,6 +475,7 @@
   }
 
   form.addEventListener('input', e => {
+    if (e.target.name === 'site') updateCoordsBox();
     const m = e.target.name?.match(/^(\w+)\.image$/);
     if (m) { updatePreview(m[1]); if (m[1] === 'aim') updateTarget(); }
   });
@@ -493,8 +508,12 @@
       aimTarget = { x: VL.round(((e.clientX - r.left) / r.width) * 100), y: VL.round(((e.clientY - r.top) / r.height) * 100) };
       updateTarget();
     }
-    if (act === 'replace') {
-      replacing = true;
+    if (act === 'clear-impact') {
+      draftImpact = null;
+      updateCoordsBox();
+    }
+    if (act === 'replace' || act === 'place-impact') {
+      replacing = act === 'place-impact' ? 'impact' : 'spot';
       dialog.close();
       if (!editing) setEditing(true);
       startPlacing();

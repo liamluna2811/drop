@@ -37,6 +37,13 @@ window.VL_CONFIG = {
     split: 90,
   },
 
+  // Point d'impact de la molly par défaut pour chaque site (en % de la
+  // minimap). Affiché sur la petite carte des pages lineup quand la lineup
+  // n'a pas son propre point d'impact.
+  defaultImpacts: {
+    haven: { A: { x: 40.4, y: 16.5 } },
+  },
+
   // Maps à masquer de l'accueil (nom anglais en minuscules, ex: 'abyss').
   hiddenMaps: [],
 

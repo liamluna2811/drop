@@ -38,6 +38,8 @@
 
   const pt = p => `left:${p.x}%;top:${p.y}%`;
   const rot = VL.mapRotation(map.slug);
+  const spot = lineup.spot;
+  const impact = VL.impactFor(lineup);
 
   // Image d'étape ; pour la visée, cercle sur le viseur + encart zoomé.
   function media(src, label, target) {
@@ -109,7 +111,9 @@
         <a class="mini-map" href="${mapUrl}&focus=${encodeURIComponent(lineup.id)}" title="Voir sur la carte">
           <div class="mini-map-rot" style="--rot:${rot}deg">
             ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
-            ${lineup.spot ? `<span class="mini-map-spot" style="${pt(lineup.spot)}">${VL.abilityBadge(agent)}</span>` : ''}
+            ${spot && impact ? `<svg class="mini-map-line" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="${spot.x}" y1="${spot.y}" x2="${impact.x}" y2="${impact.y}"/></svg>` : ''}
+            ${impact ? `<span class="mini-map-spot" style="${pt(impact)}" title="Impact de la molly">${VL.abilityBadge(agent)}</span>` : ''}
+            ${spot ? `<span class="mini-map-spot" style="${pt(spot)}">${VL.playerBadge()}</span>` : ''}
           </div>
         </a>
         ${lineup.notes ? `<div class="card"><h3>Notes</h3><p class="notes">${esc(lineup.notes)}</p></div>` : ''}

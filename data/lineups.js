@@ -14,6 +14,8 @@
  *   "throwType": "Saut + lancer",
  *   "tags": ["Post-plant"],
  *   "spot": { "x": 42.1, "y": 61.3 },            // emplacement du joueur (% de la minimap)
+ *   "impact": { "x": 30.5, "y": 22.8 },          // facultatif : impact de la molly, sinon celui
+ *                                                // du site défini dans config.js (defaultImpacts)
  *   "position": { "image": "assets/lineups/ascent/default-a-pos.jpg", "note": "Coin du mur..." },
  *   "aim":      { "image": "assets/lineups/ascent/default-a-aim.jpg", "note": "Viser le haut de l'antenne",
  *                 "target": { "x": 54.2, "y": 27.1 } },   // point de visée (% de l'image), entouré et zoomé
@@ -97,8 +99,8 @@ window.LINEUPS = [
       "Post-plant"
     ],
     "spot": {
-      "x": 66.5,
-      "y": 32.5
+      "x": 59.9,
+      "y": 18.4
     },
     "position": {
       "image": "assets/lineups/haven/a-long-entree-default-position.webp",
