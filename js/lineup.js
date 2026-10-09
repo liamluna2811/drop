@@ -48,7 +48,7 @@
           ${VL.imgOrPlaceholder(step.image, `Capture « ${label} » à ajouter`)}
         </div>
         <div class="step-text">
-          <h2><span class="step-num">0${i + 1}</span>${label}</h2>
+          <h2><span class="step-num">0${i + 1}</span>${label}${key === 'aim' ? '<span class="step-key">Étape clé</span>' : ''}</h2>
           ${step.note ? `<p>${esc(step.note)}</p>` : '<p class="empty-note">Pas de description.</p>'}
         </div>
       </article>`;
@@ -82,10 +82,20 @@
     </section>
 
     <div class="lu-layout">
-      ${renderStep(0)}
+      <div class="lu-col">
+        ${renderStep(0)}
+        ${lineup.notes ? `<div class="card"><h3>Notes</h3><p class="notes">${esc(lineup.notes)}</p></div>` : ''}
+
+        ${siblings.length > 1 ? `
+          <nav class="lu-nav">
+            <a href="lineup.html?id=${encodeURIComponent(prev.id)}"><small>← Précédente</small><span>${esc(prev.title)}</span></a>
+            <a class="next" href="lineup.html?id=${encodeURIComponent(next.id)}"><small>Suivante →</small><span>${esc(next.title)}</span></a>
+          </nav>` : ''}
+      </div>
+
       ${renderStep(1)}
 
-      <aside class="lu-aside">
+      <aside class="lu-col">
         ${renderStep(2)}
 
         <div class="lu-meta">
@@ -101,14 +111,6 @@
             <div><dt>Lancer</dt><dd>${esc(lineup.throwType || '—')}</dd></div>
           </dl>
         </div>
-
-        ${lineup.notes ? `<div class="card"><h3>Notes</h3><p class="notes">${esc(lineup.notes)}</p></div>` : ''}
-
-        ${siblings.length > 1 ? `
-          <nav class="lu-nav">
-            <a href="lineup.html?id=${encodeURIComponent(prev.id)}"><small>← Précédente</small><span>${esc(prev.title)}</span></a>
-            <a class="next" href="lineup.html?id=${encodeURIComponent(next.id)}"><small>Suivante →</small><span>${esc(next.title)}</span></a>
-          </nav>` : ''}
       </aside>
     </div>`;
 

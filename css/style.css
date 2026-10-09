@@ -911,16 +911,16 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .lu-hero .chips { margin-top: 8px; }
 .lu-hero-actions { margin-left: auto; display: flex; gap: 8px; }
 
-/* Étapes 1 et 2 en grand côte à côte, étape 3 + carte + infos à droite :
-   tout tient sur un écran de PC sans défiler. */
+/* Lecture de gauche à droite : 1 Positionnement | 2 Visée (en grand, au
+   centre) | 3 Résultat + carte + infos. Tout tient sur un écran sans défiler. */
 .lu-layout {
   --img-max: calc(100vh - var(--header-h) - 250px);
   max-width: 1840px;
   margin: 0 auto;
   padding: 20px clamp(16px, 2.5vw, 40px) 24px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(300px, 400px);
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px;
   align-items: start;
 }
 
@@ -952,11 +952,32 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 .step p { margin: 6px 0 0; color: var(--muted); font-size: 15px; white-space: pre-line; }
 .step p.empty-note { color: var(--dim); font-style: italic; }
 
-.lu-aside { display: grid; gap: 16px; align-content: start; }
-.step-result .step-media > img { max-height: calc(var(--img-max) - 210px); }
-.step-result h2 { font-size: 20px; }
-.step-result .step-num { font-size: 24px; }
-.step-result p { font-size: 14px; }
+.lu-col { display: grid; gap: 18px; align-content: start; min-width: 0; }
+
+/* Étapes secondaires (1 et 3) plus compactes */
+.lu-col .step-media > img { max-height: calc(var(--img-max) * 0.55); }
+.lu-col .step h2 { font-size: 20px; }
+.lu-col .step-num { font-size: 24px; }
+.lu-col .step p { font-size: 14px; }
+
+/* Étape clé : la visée */
+.step-aim .step-media {
+  border-color: rgba(255, 70, 85, 0.55);
+  box-shadow: 0 0 0 1px rgba(255, 70, 85, 0.25), 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+.step-aim h2 { font-size: 30px; }
+.step-aim .step-num { font-size: 38px; }
+.step-aim p { font-size: 17px; color: var(--text); }
+.step-key {
+  margin-left: auto;
+  align-self: center;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--red);
+  color: #fff;
+  font: 600 11px/1.2 var(--font-body);
+  letter-spacing: 0.1em;
+}
 
 .lu-meta { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 12px; align-items: stretch; }
 
@@ -1069,8 +1090,8 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
    ================================================================ */
 
 @media (max-width: 1100px) {
-  .lu-layout { grid-template-columns: 1fr 1fr; --img-max: none; }
-  .lu-aside { grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .lu-layout { grid-template-columns: 1fr; --img-max: none; }
+  .lu-col .step-media > img { max-height: none; }
 }
 
 @media (max-width: 900px) {
@@ -1082,7 +1103,6 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
   .hero-portrait { right: -80px; opacity: 0.35 !important; }
   .row-2, .step-fields { grid-template-columns: 1fr; }
   .lu-hero-inner { flex-wrap: wrap; }
-  .lu-layout { grid-template-columns: 1fr; }
   .lu-hero-actions { margin-left: 0; }
   .viewer-title { display: none; }
   .edit-banner { left: 72px; translate: none; max-width: calc(100% - 88px); }
