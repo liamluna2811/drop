@@ -25,7 +25,7 @@ window.VL_CONFIG = {
     'Clic droit (lancer court)',
   ],
 
-  tagSuggestions: ['Post-plant', 'Retake', 'Exécution', 'Anti-défuse', 'Clear de coin', 'Spawn', 'Rapide', 'Safe'],
+  tagSuggestions: ['Post-plant', 'Retake', 'Anti-plant', 'Anti-défuse', 'Exécution', 'Clear de coin', 'Spawn', 'Rapide', 'Safe'],
 
   // Orientation de base de chaque minimap, en degrés dans le sens horaire
   // (0, 90, 180 ou 270), pour avoir le spawn attaquant en bas.
@@ -42,7 +42,7 @@ window.VL_CONFIG = {
   // minimap). Affiché sur la petite carte des pages lineup quand la lineup
   // n'a pas son propre point d'impact.
   defaultImpacts: {
-    haven: { A: { x: 40.4, y: 16.5 } },
+    haven: { A: { x: 40.7, y: 16.8 } },
   },
 
   // Maps à masquer de l'accueil (nom anglais en minuscules, ex: 'abyss').

@@ -155,5 +155,37 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot Graffiti."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-anti-plant-default-a-depuis-a-link",
+    "map": "haven",
+    "title": "Molly anti-plant default A depuis A Link",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 36.3,
+      "y": 40.7
+    },
+    "position": {
+      "image": "assets/lineups/haven/a-antiplant-default-position.webp",
+      "note": "Place-toi contre le mur de droite, juste à droite de la porte sous le graffiti B, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/a-antiplant-default-visee.webp",
+      "note": "Place ton viseur sur le mur, juste sous la frise du toit, puis lancer normal.",
+      "target": {
+        "x": 51.6,
+        "y": 34.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/a-antiplant-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A."
+    },
+    "notes": ""
   }
 ];
