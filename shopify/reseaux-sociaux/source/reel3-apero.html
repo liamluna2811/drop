@@ -1,0 +1,62 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.scene{position:absolute;inset:0;display:none}
+.top{position:absolute;left:40px;right:40px;top:230px;text-align:center}
+.kicker{font-weight:800;font-size:40px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.frame{position:absolute;left:70px;right:70px;top:540px;height:1040px;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(11,27,43,.14)}
+.frame img{position:absolute;width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform:scale(1.55);transform-origin:50% 40%}
+.chip{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:36px;background:var(--navy);color:var(--bg)}
+.chip i{width:30px;height:30px;border-radius:50%;display:inline-block;border:2px solid rgba(255,255,255,.5)}
+.sun{background:#f3e9d2}
+.end{background:var(--navy);color:var(--bg)}
+.end .logo{color:var(--bg);font-size:56px}.end .logo img{height:74px}
+</style></head><body><div class="stage grain">
+
+<div class="scene sun" id="s1">
+  <div class="top" style="top:600px">
+    <p class="disp anim" style="font-size:150px;animation:slam .45s .2s both">Bandeja,</p>
+    <p class="serif anim" style="font-size:150px;margin-top:30px;color:var(--orange);animation:slam .45s .8s both">puis apéro.</p>
+    <p class="kicker anim" style="margin-top:70px;animation:up .4s 1.3s both">Dans cet ordre.</p>
+  </div>
+</div>
+
+<div class="scene" id="s2">
+  <div class="top"><p class="kicker anim" style="animation:up .4s 2.3s both">Au dos</p>
+    <p class="disp anim" style="font-size:76px;margin-top:22px;animation:up .45s 2.4s both">Soleil, padel<br><span class="hl">&amp; apéro.</span></p></div>
+  <div class="frame anim" style="animation:up .5s 2.4s both"><img id="ci" src="a/apero-b-man-white.jpg">
+    <span class="pill chip"><i id="cd"></i><span id="cn">Blanc</span></span></div>
+</div>
+
+<div class="scene" id="s3">
+  <div class="top"><p class="kicker anim" style="animation:up .4s 7.3s both">Discret devant</p>
+    <p class="disp anim" style="font-size:84px;margin-top:22px;animation:up .45s 7.4s both">Logo <span class="hl">brodé</span></p></div>
+  <div class="abs" style="left:70px;right:70px;top:470px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div class="card anim" style="height:900px;animation:fromL .55s 7.5s both"><img src="a/apero-f-woman-white.jpg" style="object-position:50% 25%;transform:scale(1.25);transform-origin:50% 25%"></div>
+    <div class="card anim" style="height:900px;animation:fromR .55s 7.7s both"><img src="a/apero-b-woman-blue.jpg" style="object-position:50% 25%;transform:scale(1.25);transform-origin:50% 25%"></div>
+  </div>
+  <p class="abs anim serif" style="left:0;right:0;top:1420px;text-align:center;font-size:44px;animation:up .4s 8.0s both">…et le soleil dans le dos.</p>
+</div>
+
+<div class="scene end" id="s4">
+  <div class="top" style="top:450px;display:flex;flex-direction:column;align-items:center">
+    <div class="logo anim" style="animation:fadeIn .4s 9.6s both"><img src="logo-mark-light.png">BANDEJA <b>CLUB</b></div>
+    <p class="disp anim" style="font-size:96px;margin-top:80px;animation:up .45s 9.8s both">T-shirt<br>« Bandejapéro »</p>
+    <p class="anim" style="font-size:40px;margin-top:40px;opacity:.85;animation:up .45s 10.0s both">Brodé devant · imprimé au dos · 100 % coton</p>
+    <p class="anim" style="margin-top:30px;animation:up .45s 10.1s both"><span class="pill" style="background:var(--lime);color:var(--navy);font-size:48px">39,99 €</span></p>
+    <div class="dots anim" style="margin-top:46px;animation:fadeIn .4s 10.3s both"><i style="background:#fff"></i><i style="background:#141414;border-color:#555"></i><i style="background:#f29ab6"></i><i style="background:#7ba9d4"></i><i style="background:#f7d23e"></i></div>
+    <p class="anim" style="font-size:42px;font-weight:800;margin-top:60px;color:var(--lime);animation:up .45s 10.4s both">bandejaclubboutique.fr</p>
+  </div>
+</div>
+</div>
+<script>
+var S=[[0,2200],[2200,7200],[7200,9400],[9400,99999]];
+var C=[['white','Blanc','#fff'],['blue','Bleu ciel','#7ba9d4'],['pink','Rose','#f29ab6'],['gold','Jaune','#f7d23e'],['black','Noir','#141414']];
+window.tick=function(t){
+  S.forEach(function(r,i){document.getElementById('s'+(i+1)).style.display=(t>=r[0]&&t<r[1])?'block':'none';});
+  var k=Math.min(C.length-1,Math.max(0,Math.floor((t-2400)/960))), c=C[k];
+  var im=document.getElementById('ci'); if(im.getAttribute('src')!=='a/apero-b-man-'+c[0]+'.jpg') im.src='a/apero-b-man-'+c[0]+'.jpg';
+  im.style.transform='scale('+(1.55+0.06*((t-2400)%960)/960)+')';
+  document.getElementById('cn').textContent=c[1]; document.getElementById('cd').style.background=c[2];
+};
+tick(0);
+</script></body></html>

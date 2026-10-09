@@ -1,0 +1,80 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.scene{position:absolute;inset:0;display:none}
+.top{position:absolute;left:40px;right:40px;top:230px;text-align:center}
+.kicker{font-weight:800;font-size:40px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.big{font-size:150px}
+.vs{font-family:var(--display);font-size:64px;color:var(--orange)}
+.duo{position:absolute;left:60px;right:60px;top:500px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.duo .card{height:880px}
+.lab{margin-top:26px;text-align:center}
+.lab .disp{font-size:60px}
+.lab .serif{font-size:38px;margin-top:10px;display:block}
+.tag{position:absolute;top:28px;left:28px;font-size:30px;background:var(--navy);color:var(--lime)}
+.end{background:var(--navy);color:var(--bg)}
+.end .logo{color:var(--bg);font-size:56px}.end .logo img{height:74px}
+</style></head><body><div class="stage grain">
+
+<!-- 1. Accroche -->
+<div class="scene" id="s1">
+  <div class="top" style="top:520px">
+    <p class="kicker anim" style="animation:up .5s .1s both">Au padel, t'es plutôt…</p>
+    <p class="disp big anim" style="margin-top:60px;animation:slam .45s .55s both">Côté<br><span class="hl">drive</span></p>
+    <p class="vs anim" style="margin:40px 0;animation:fadeIn .3s 1.0s both">OU</p>
+    <p class="disp big anim" style="animation:slam .45s 1.2s both">Côté<br><span class="hl">revés</span> ?</p>
+  </div>
+</div>
+
+<!-- 2. Devants -->
+<div class="scene" id="s2">
+  <div class="top"><p class="kicker anim" style="animation:up .4s 2.3s both">Chacun son côté</p>
+    <p class="disp anim" style="font-size:84px;margin-top:22px;animation:up .45s 2.4s both">Choisis <span class="hl">ton camp</span></p></div>
+  <div class="duo">
+    <div class="anim" style="animation:fromL .6s 2.6s both"><div class="card" style="position:relative"><img src="a/drive-f-woman-white.jpg" style="object-position:50% 30%;transform:scale(1.35);transform-origin:50% 28%"><span class="pill tag">Côté drive</span></div>
+      <div class="lab"><span class="serif">« Je prends tout à droite. »</span></div></div>
+    <div class="anim" style="animation:fromR .6s 2.75s both"><div class="card" style="position:relative"><img src="a/reves-f-man-white.jpg" style="object-position:50% 30%;transform:scale(1.35);transform-origin:50% 28%"><span class="pill tag">Côté revés</span></div>
+      <div class="lab"><span class="serif">« Je finis les points. »</span></div></div>
+  </div>
+</div>
+
+<!-- 3. Dos -->
+<div class="scene" id="s3">
+  <div class="top"><p class="kicker anim" style="animation:up .4s 5.4s both">Et au dos…</p>
+    <p class="disp anim" style="font-size:84px;margin-top:22px;animation:up .45s 5.5s both">Le débat <span class="hl">continue</span></p></div>
+  <div class="duo">
+    <div class="anim" style="animation:up .55s 5.7s both"><div class="card"><img src="a/drive-b-man-white.jpg" style="object-position:50% 35%;transform:scale(1.45);transform-origin:50% 33%"></div>
+      <div class="lab"><span class="serif" style="font-size:32px">Balle au milieu ?<br>Toujours pour le revés.</span></div></div>
+    <div class="anim" style="animation:up .55s 6.0s both"><div class="card"><img src="a/reves-b-man-white.jpg" style="object-position:50% 35%;transform:scale(1.45);transform-origin:50% 33%"></div>
+      <div class="lab"><span class="serif" style="font-size:32px">Même quand c'était<br>pour le drive.</span></div></div>
+  </div>
+</div>
+
+<!-- 4. Appel au partage -->
+<div class="scene" id="s4">
+  <div class="top" style="top:300px">
+    <p class="disp anim" style="font-size:104px;animation:slam .45s 8.6s both">La paire<br>est <span class="hl">complète</span>.</p>
+    <p class="anim" style="font-size:44px;font-weight:700;margin-top:50px;animation:up .4s 9.0s both">Identifie ton ou ta partenaire 👇</p>
+  </div>
+  <div class="abs anim" style="left:90px;right:90px;top:900px;display:grid;grid-template-columns:1fr 1fr;gap:24px;animation:up .6s 8.8s both">
+    <div class="card" style="height:520px"><img src="a/drive-fb-pink.jpg"></div>
+    <div class="card" style="height:520px"><img src="a/reves-fb-blue.jpg"></div>
+  </div>
+</div>
+
+<!-- 5. Fin -->
+<div class="scene end" id="s5">
+  <div class="top" style="top:430px;display:flex;flex-direction:column;align-items:center">
+    <div class="logo anim" style="animation:fadeIn .4s 10.6s both"><img src="logo-mark-light.png">BANDEJA <b>CLUB</b></div>
+    <p class="disp anim" style="font-size:92px;margin-top:80px;animation:up .45s 10.8s both">T-shirts<br>côté drive<br>&amp; côté revés</p>
+    <p class="anim" style="font-size:40px;margin-top:46px;opacity:.85;animation:up .45s 11.0s both">100 % coton · fabriqués à la demande</p>
+    <p class="anim" style="margin-top:28px;animation:up .45s 11.1s both"><span class="pill" style="background:var(--lime);color:var(--navy);font-size:48px">34,99 €</span></p>
+    <div class="dots anim" style="margin-top:46px;animation:fadeIn .4s 11.3s both"><i style="background:#fff"></i><i style="background:#141414;border-color:#555"></i><i style="background:#f29ab6"></i><i style="background:#7ba9d4"></i><i style="background:#f6b72a"></i></div>
+    <p class="anim" style="font-size:42px;font-weight:800;margin-top:60px;color:var(--lime);animation:up .45s 11.4s both">bandejaclubboutique.fr</p>
+  </div>
+</div>
+</div>
+<script>
+var S=[[0,2200],[2200,5300],[5300,8400],[8400,10400],[10400,99999]];
+window.tick=function(t){S.forEach(function(r,i){document.getElementById('s'+(i+1)).style.display=(t>=r[0]&&t<r[1])?'block':'none';});};
+tick(location.hash?+location.hash.slice(1):0);
+</script></body></html>

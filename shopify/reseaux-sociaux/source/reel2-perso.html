@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.scene{position:absolute;inset:0;display:none}
+.top{position:absolute;left:40px;right:40px;top:230px;text-align:center}
+.kicker{font-weight:800;font-size:40px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+/* Photo 1400×1400 réduite ; textes placés dans le repère de la photo */
+.shirt{position:absolute;overflow:hidden;border-radius:32px;background:#fff;box-shadow:0 18px 50px rgba(11,27,43,.14)}
+.shirt .ph{position:absolute;width:1400px;height:1400px;transform-origin:0 0}
+.shirt .ph img{width:1400px;height:1400px;display:block}
+.pn{position:absolute;left:0;width:1400px;text-align:center;font-family:var(--display);color:#111;mix-blend-mode:multiply;opacity:.93;white-space:nowrap}
+.dark .pn{color:#f3f0e8;mix-blend-mode:normal;opacity:.95}
+.pn.nom{top:438px;font-size:58px;letter-spacing:.04em}
+.pn.num{top:530px;font-size:205px;letter-spacing:-.02em}
+.form{position:absolute;left:90px;right:90px;top:1270px;background:#fff;border-radius:28px;padding:34px 40px;box-shadow:0 18px 50px rgba(11,27,43,.12);display:grid;grid-template-columns:1.6fr 1fr;gap:26px}
+.form label{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-bottom:10px}
+.form .in{border:2px solid var(--navy);border-radius:999px;padding:16px 26px;font-size:40px;font-weight:700;min-height:78px}
+.caret{display:inline-block;width:3px;height:40px;background:var(--navy);vertical-align:-6px;margin-left:3px}
+.badge{position:absolute;top:22px;left:22px;font-size:28px;background:var(--navy);color:var(--lime)}
+.end{background:var(--navy);color:var(--bg)}
+.end .logo{color:var(--bg);font-size:56px}.end .logo img{height:74px}
+</style></head><body><div class="stage grain">
+
+<div class="scene" id="s1">
+  <div class="top" style="top:560px">
+    <p class="kicker anim" style="animation:up .5s .1s both">Ton t-shirt de padel</p>
+    <p class="disp anim" style="font-size:160px;margin-top:60px;animation:slam .45s .5s both">À ton<br><span class="hl">nom.</span></p>
+    <p class="disp anim" style="font-size:160px;margin-top:30px;animation:slam .45s 1.0s both">À ton<br><span class="hl">numéro.</span></p>
+  </div>
+</div>
+
+<div class="scene" id="s2">
+  <div class="top"><p class="kicker anim" style="animation:up .4s 2.2s both">Tu écris, tu vois</p>
+    <p class="disp anim" style="font-size:84px;margin-top:22px;animation:up .45s 2.3s both">Aperçu <span class="hl">en direct</span></p></div>
+  <div class="shirt anim" style="left:90px;top:470px;width:900px;height:760px;animation:up .55s 2.4s both">
+    <div class="ph" style="transform:scale(1.15);left:-358px;top:-330px"><img src="a/sun-b-man-blue-clean.jpg">
+      <div class="pn nom" id="n1"></div><div class="pn num" id="d1"></div></div>
+    <span class="pill badge">Aperçu</span>
+  </div>
+  <div class="form anim" style="animation:up .5s 2.7s both">
+    <div><label>Nom ou prénom</label><div class="in"><span id="f1"></span><i class="caret" id="c1"></i></div></div>
+    <div><label>Numéro</label><div class="in"><span id="f2"></span><i class="caret" id="c2" style="display:none"></i></div></div>
+  </div>
+</div>
+
+<div class="scene" id="s3">
+  <div class="top"><p class="kicker">Pour toi, ton ou ta partenaire</p>
+    <p class="disp" style="font-size:84px;margin-top:22px">Ou <span class="hl">toute l'équipe</span></p></div>
+  <div class="shirt" id="sw" style="left:90px;top:470px;width:900px;height:1000px">
+    <div class="ph" id="swp" style="transform:scale(1.3);left:-468px;top:-430px"><img id="swi" src="a/sun-b-man-pink-clean.jpg">
+      <div class="pn nom" id="n2"></div><div class="pn num" id="d2"></div></div>
+    <span class="pill badge">Aperçu</span>
+  </div>
+</div>
+
+<div class="scene" id="s4">
+  <div class="top" style="top:330px">
+    <p class="disp anim" style="font-size:104px;animation:slam .45s 10.0s both">L'idée <span class="hl">cadeau</span><br>du club 🎁</p>
+  </div>
+  <div class="abs anim" style="left:110px;right:80px;top:720px;font-size:52px;line-height:1.75;animation:up .5s 10.3s both">
+    <p>✓ Nom ou prénom : <b>10 caractères max</b></p>
+    <p>✓ Numéro : <b>de 0 à 99</b></p>
+    <p>✓ <b>5 couleurs</b>, du S au XL</p>
+    <p>✓ 100 % coton, <b>fabriqué à la demande</b></p>
+  </div>
+</div>
+
+<div class="scene end" id="s5">
+  <div class="top" style="top:450px;display:flex;flex-direction:column;align-items:center">
+    <div class="logo anim" style="animation:fadeIn .4s 12.2s both"><img src="logo-mark-light.png">BANDEJA <b>CLUB</b></div>
+    <p class="disp anim" style="font-size:96px;margin-top:80px;animation:up .45s 12.4s both">T-shirt<br>personnalisé</p>
+    <p class="anim" style="font-size:40px;margin-top:40px;opacity:.85;animation:up .45s 12.6s both">Ton nom et ton numéro, devant et au dos</p>
+    <p class="anim" style="margin-top:30px;animation:up .45s 12.7s both"><span class="pill" style="background:var(--lime);color:var(--navy);font-size:48px">44,99 €</span></p>
+    <p class="anim" style="font-size:42px;font-weight:800;margin-top:70px;color:var(--lime);animation:up .45s 12.9s both">bandejaclubboutique.fr</p>
+  </div>
+</div>
+</div>
+<script>
+var S=[[0,2100],[2100,6600],[6600,9900],[9900,12000],[12000,99999]];
+function type(str,t0,t,speed){var k=Math.max(0,Math.min(str.length,Math.floor((t-t0)/speed)+1));return t<t0?'':str.slice(0,k);}
+var swaps=[['pink','INÈS','3',''],['white','LÉO','10',''],['gold','MAËL','7',''],['black','JULIA','21','dark']];
+window.tick=function(t){
+  S.forEach(function(r,i){document.getElementById('s'+(i+1)).style.display=(t>=r[0]&&t<r[1])?'block':'none';});
+  // Saisie : nom puis numéro
+  var nom=type('HUGO',3300,t,220), num=type('7',4600,t,200);
+  ['f1','n1'].forEach(function(id){document.getElementById(id).textContent=nom;});
+  ['f2','d1'].forEach(function(id){document.getElementById(id).textContent=num;});
+  document.getElementById('c1').style.display=t<4500?'inline-block':'none';
+  document.getElementById('c2').style.display=(t>=4500&&t<5600)?'inline-block':'none';
+  // Défilé de couleurs
+  var k=Math.min(swaps.length-1,Math.max(0,Math.floor((t-6600)/825))), s=swaps[k];
+  document.getElementById('swi').src='a/sun-b-man-'+s[0]+'-clean.jpg';
+  document.getElementById('sw').className='shirt '+s[3];
+  document.getElementById('n2').textContent=s[1]; document.getElementById('d2').textContent=s[2];
+};
+tick(0);
+</script></body></html>

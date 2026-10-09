@@ -1,0 +1,58 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.v{position:absolute;inset:0;display:none}
+.kicker{font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,244,238,.7)}
+body{background:var(--navy)}
+.dark{background:var(--navy);color:var(--bg)}
+.dark .logo{color:var(--bg)}
+.ticket{background:var(--lime);color:var(--navy);border-radius:36px}
+.ticket:before,.ticket:after{content:"";position:absolute;top:50%;width:56px;height:56px;border-radius:50%;background:var(--navy);transform:translateY(-50%)}
+.ticket:before{left:-28px}.ticket:after{right:-28px}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.cards .card{border-radius:22px}
+</style></head><body class="dark"><div class="stage grain dark">
+
+<!-- Post 4:5 -->
+<div class="v" id="post">
+  <div class="abs" style="left:70px;right:70px;top:70px;display:flex;justify-content:space-between;align-items:center">
+    <div class="logo" style="font-size:34px;gap:10px"><img src="logo-mark-light.png" style="height:44px">BANDEJA <b>CLUB</b></div>
+    <span class="kicker" style="font-size:24px">Offre de bienvenue</span></div>
+  <div class="abs ticket" style="left:70px;right:70px;top:190px;padding:50px 60px 54px">
+    <p style="font-weight:800;font-size:30px;letter-spacing:.16em;text-transform:uppercase">Ta première commande</p>
+    <p class="disp" style="font-size:250px;margin-top:10px">−15 %</p>
+    <p style="font-size:32px;font-weight:600;margin-top:16px;line-height:1.35">Crée ton compte : la réduction s'applique toute seule au panier, jusqu'au lendemain minuit.</p>
+  </div>
+  <div class="abs cards" style="left:70px;right:70px;top:770px;height:400px">
+    <div class="card"><img src="a/reves-f-woman-pink.jpg" style="object-position:50% 20%;transform:scale(1.4);transform-origin:50% 20%"></div>
+    <div class="card"><img src="a/lob-b-man-blue.jpg" style="object-position:50% 35%;transform:scale(1.5);transform-origin:50% 35%"></div>
+    <div class="card"><img src="a/visor-white.jpg"></div>
+  </div>
+  <div class="abs" style="left:70px;right:70px;top:1200px;display:flex;justify-content:space-between;align-items:center">
+    <div><p class="disp" style="font-size:44px">+ Livraison offerte dès 60 €</p>
+      <p style="font-size:22px;opacity:.7;margin-top:8px">France et UE · montant après réductions · −15 % hors sac de sport et gourde</p></div></div>
+</div>
+
+<!-- Story 9:16 -->
+<div class="v" id="story">
+  <div class="abs" style="left:70px;right:70px;top:230px;display:flex;justify-content:center">
+    <div class="logo" style="font-size:44px"><img src="logo-mark-light.png">BANDEJA <b>CLUB</b></div></div>
+  <div class="abs ticket" style="left:80px;right:80px;top:400px;padding:60px 60px 64px;text-align:center">
+    <p style="font-weight:800;font-size:34px;letter-spacing:.16em;text-transform:uppercase">Ta première commande</p>
+    <p class="disp" style="font-size:230px;margin-top:10px;white-space:nowrap">−15 %</p>
+    <p style="font-size:36px;font-weight:600;margin-top:14px;line-height:1.35">Crée ton compte, la réduction<br>s'applique toute seule au panier.</p>
+    <p class="pill" style="background:var(--navy);color:var(--lime);font-size:30px;margin-top:26px">⏱ Valable jusqu'au lendemain minuit</p>
+  </div>
+  <div class="abs cards" style="left:80px;right:80px;top:1080px;height:360px">
+    <div class="card"><img src="a/drive-f-woman-blue.jpg" style="object-position:50% 20%;transform:scale(1.4);transform-origin:50% 20%"></div>
+    <div class="card"><img src="a/apero-b-man-pink.jpg" style="object-position:50% 35%;transform:scale(1.5);transform-origin:50% 35%"></div>
+    <div class="card"><img src="a/jersey-duo-orange.jpg" style="object-position:50% 25%"></div>
+  </div>
+  <div class="abs" style="left:80px;right:80px;top:1480px;text-align:center">
+    <p class="disp" style="font-size:52px">+ Livraison offerte dès 60 €</p>
+    <p style="font-size:24px;opacity:.7;margin-top:10px">France et UE, montant après réductions. −15 % hors sac de sport et gourde.</p>
+    <p style="font-size:34px;font-weight:800;margin-top:60px;color:var(--lime)">👇 bandejaclubboutique.fr</p>
+  </div>
+</div>
+</div>
+<script>var v=location.hash.slice(1)||'post';document.getElementById(v).style.display='block';</script>
+</body></html>

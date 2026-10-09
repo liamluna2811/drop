@@ -1,0 +1,236 @@
+<title>Kit réseaux BandejaClub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;700;800&display=swap">
+<style>
+/* Layout : planche de travail du community manager — une rangée par publication, visuel à gauche, texte prêt à coller à droite. */
+:root{
+  --bg:#F6F4EE; --surface:#FFFFFF; --sunk:#ECE8DD; --ink:#0B1B2B; --muted:#4F5D6B; --line:rgba(11,27,43,.14);
+  --lime:#D4FF3A; --on-lime:#0B1B2B; --orange:#C9531F;
+  --display:'Archivo Black','Arial Black',system-ui,sans-serif; --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1B2B;--surface:#13283C;--sunk:#0F2234;--ink:#F1EEE6;--muted:#A9B4BF;--line:rgba(241,238,230,.16);--orange:#F08A5D;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1B2B;--surface:#13283C;--sunk:#0F2234;--ink:#F1EEE6;--muted:#A9B4BF;--line:rgba(241,238,230,.16);--orange:#F08A5D;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;padding-inline:clamp(16px,4vw,48px);padding-block:32px 80px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:-.005em;text-wrap:balance;margin:0}
+.hl{background:var(--lime);color:var(--on-lime);padding:0 .12em}
+.eyebrow{font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:18px;padding-block:20px 36px;border-bottom:2px solid var(--ink)}
+header h1{font-size:clamp(40px,7vw,80px);line-height:.92}
+header p{max-width:62ch;margin:0;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+nav{display:flex;flex-wrap:wrap;gap:8px;padding-block:18px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:2;border-bottom:1px solid var(--line)}
+nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;padding:6px 12px;border-radius:999px;background:var(--sunk)}
+nav a:hover,nav a:focus-visible{background:var(--lime);color:var(--on-lime);outline:none}
+section.post{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,48px);padding-block:48px;border-bottom:1px solid var(--line)}
+@media (max-width:820px){section.post{grid-template-columns:1fr}}
+.media{min-width:0}
+.vid{display:flex;justify-content:center;background:var(--sunk);border-radius:20px;padding:20px}
+.vid video{width:min(330px,100%);aspect-ratio:9/16;border-radius:14px;background:#000;display:block}
+.slides{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}
+.slides img{flex:0 0 min(300px,78%);aspect-ratio:4/5;object-fit:cover;border-radius:12px;scroll-snap-align:start;border:1px solid var(--line);max-width:100%}
+.pair{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;align-items:start}
+.pair img{width:100%;border-radius:12px;border:1px solid var(--line)}
+.hint{font-size:13px;color:var(--muted);margin-top:8px}
+.text{min-width:0;display:grid;gap:18px;align-content:start}
+.tag{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--bg);border-radius:6px;padding:4px 8px}
+.text h2{font-size:clamp(26px,3.4vw,36px);line-height:1}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px;margin:0}
+.meta dt{color:var(--muted);font-weight:700}
+.meta dd{margin:0}
+.cap{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px}
+.cap pre{white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.55;margin:0 0 12px}
+.cap .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+button{font:inherit;font-weight:800;font-size:13px;border:0;border-radius:999px;padding:8px 14px;background:var(--lime);color:var(--on-lime);cursor:pointer}
+button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.why{font-size:14px;color:var(--muted);margin:0}
+.why b{color:var(--ink)}
+.plan{padding-block:48px}
+.plan h2{font-size:clamp(28px,4vw,44px);margin-bottom:20px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:28px}
+.note{background:var(--sunk);border-radius:16px;padding:18px}
+.note h3{font-size:16px;margin-bottom:8px}
+.note p,.note li{font-size:14px;margin:0}
+.note ul{margin:0;padding-left:18px;display:grid;gap:4px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">BandejaClub · Instagram &amp; TikTok · première vague</span>
+  <h1>Kit <span class="hl">réseaux</span><br>de lancement</h1>
+  <p>Trois vidéos verticales, deux carrousels et l'offre de bienvenue, réalisés avec les photos actuelles de la boutique et l'identité du site. Chaque publication a sa légende prête à coller.</p>
+  <div class="facts"><span class="chip">3 Reels / TikTok · 9:16</span><span class="chip">2 carrousels · 4:5</span><span class="chip">1 post + 1 story</span><span class="chip">Prix et offres vérifiés en octobre 2026</span></div>
+</header>
+
+<nav aria-label="Publications"><a href="#drive">Drive ou revés</a><a href="#perso">Personnalisé</a><a href="#apero">Bandejapéro</a><a href="#jaipadel">J'ai padel</a><a href="#gamme">La gamme</a><a href="#offre">Offre</a><a href="#calendrier">Calendrier</a></nav>
+
+<section class="post" id="drive">
+  <div class="media"><div class="vid"><video src="m/reel1-drive-reves.mp4" poster="m/reel1-drive-reves-couverture.jpg" controls muted playsinline loop preload="metadata"></video></div></div>
+  <div class="text">
+    <span class="tag">Reel · 12,5 s</span>
+    <h2>Côté drive ou côté revés ?</h2>
+    <dl class="meta"><dt>Produits</dt><dd>T-shirts Lifestyle « Côté drive » et « Côté revés », 34,99 €</dd><dt>Objectif</dt><dd>Partages et identifications : chaque joueur a un partenaire à taguer.</dd></dl>
+    <div class="cap"><pre id="c1">Côté drive ou côté revés ? 🎾
+
+Devant, ton poste. Au dos, le débat continue :
+« À toi ! » pour le drive, « À moi ! » pour le revés.
+
+👉 Identifie ton ou ta partenaire pour former la paire.
+
+T-shirts Lifestyle 100 % coton, 5 couleurs, 34,99 €. Fabriqués à la demande.
+Lien en bio.
+
+#padel #padelfrance #padellife #padeladdict #bandeja #drive #reves #padelstyle</pre>
+      <div class="row"><span class="why">Son : ajoute un son tendance dans l'appli avant de publier.</span><button type="button" data-copy="c1">Copier la légende</button></div></div>
+  </div>
+</section>
+
+<section class="post" id="perso">
+  <div class="media"><div class="vid"><video src="m/reel2-perso.mp4" poster="m/reel2-perso-couverture.jpg" controls muted playsinline loop preload="metadata"></video></div></div>
+  <div class="text">
+    <span class="tag">Reel · 14 s</span>
+    <h2>Ton nom. Ton numéro.</h2>
+    <dl class="meta"><dt>Produits</dt><dd>T-shirts personnalisés BandejaSun et BandejaClub, 44,99 €</dd><dt>Objectif</dt><dd>Ventes à plus forte marge, et idée cadeau pour Noël.</dd></dl>
+    <div class="cap"><pre id="c2">Ton t-shirt de padel, à ton nom et à ton numéro ✍️
+
+Tu tapes ton prénom (10 caractères max) et ton numéro (de 0 à 99) : l'aperçu s'affiche en direct sur la photo avant de commander.
+
+Pour toi, pour ton ou ta partenaire, ou pour toute l'équipe.
+100 % coton, 5 couleurs, 44,99 €. Fabriqué à la demande.
+Lien en bio.
+
+(Prénoms d'exemple dans la vidéo, aperçu indicatif.)
+
+#padel #padelfrance #tshirtpersonnalise #cadeaupadel #padelteam #bandeja</pre>
+      <div class="row"><span class="why">Les prénoms de la vidéo sont des exemples ; la mention reste dans la légende.</span><button type="button" data-copy="c2">Copier la légende</button></div></div>
+  </div>
+</section>
+
+<section class="post" id="apero">
+  <div class="media"><div class="vid"><video src="m/reel3-apero.mp4" poster="m/reel3-apero-couverture.jpg" controls muted playsinline loop preload="metadata"></video></div></div>
+  <div class="text">
+    <span class="tag">Reel · 12 s</span>
+    <h2>Bandeja, puis apéro.</h2>
+    <dl class="meta"><dt>Produit</dt><dd>T-shirt Lifestyle « Bandejapéro », 39,99 €</dd><dt>Objectif</dt><dd>Notoriété, ton léger, publication du vendredi soir.</dd></dl>
+    <div class="cap"><pre id="c3">Bandeja, puis apéro. Dans cet ordre. 🌅
+
+Logo Bandeja Club brodé devant, « Soleil, padel &amp; apéro » imprimé au dos.
+Pour les fins de match qui se terminent en terrasse.
+
+T-shirt « Bandejapéro », 100 % coton, 5 couleurs, 39,99 €.
+Lien en bio.
+
+#padel #padelfrance #apero #padellife #troisiememitemps #bandeja</pre>
+      <div class="row"><span class="why">À publier un vendredi en fin d'après-midi.</span><button type="button" data-copy="c3">Copier la légende</button></div></div>
+  </div>
+</section>
+
+<section class="post" id="jaipadel">
+  <div class="media"><div class="slides" tabindex="0" aria-label="Carrousel J'ai padel, 5 diapos">
+    <img src="m/carrousel-jai-padel-1.jpg" alt="Diapo 1 : Pas ce soir, j'ai padel"><img src="m/carrousel-jai-padel-2.jpg" alt="Diapo 2 : le devant du t-shirt rose porté"><img src="m/carrousel-jai-padel-3.jpg" alt="Diapo 3 : le dos, Et demain non plus"><img src="m/carrousel-jai-padel-4.jpg" alt="Diapo 4 : quatre couleurs"><img src="m/carrousel-jai-padel-5.jpg" alt="Diapo 5 : prix et appel à identifier un ami"></div>
+    <p class="hint">Fais défiler horizontalement · 5 diapos 1080 × 1350</p></div>
+  <div class="text">
+    <span class="tag">Carrousel · 5 diapos</span>
+    <h2>Pas ce soir, j'ai padel</h2>
+    <dl class="meta"><dt>Produit</dt><dd>T-shirt Lifestyle « J'ai padel », 34,99 €</dd><dt>Objectif</dt><dd>Commentaires et identifications : tout le monde connaît un accro.</dd></dl>
+    <div class="cap"><pre id="c4">L'excuse officielle pour refuser un dîner, un déménagement ou une soirée : tu as padel. 🎾
+
+Devant : « Pas ce soir, j'ai padel ».
+Au dos : « Et demain non plus. Réservé : mardi, jeudi, samedi. »
+
+👇 Identifie le pote qui annule tout pour un créneau.
+
+T-shirt Lifestyle 100 % coton, 34,99 €. Lien en bio.
+
+#padel #padelfrance #padeladdict #humourpadel #padellife #bandeja</pre>
+      <div class="row"><span class="why">Évite le noir dans tes visuels : sur ce modèle, le texte bleu nuit se voit mal.</span><button type="button" data-copy="c4">Copier la légende</button></div></div>
+  </div>
+</section>
+
+<section class="post" id="gamme">
+  <div class="media"><div class="slides" tabindex="0" aria-label="Carrousel de la gamme, 6 diapos">
+    <img src="m/carrousel-gamme-1.jpg" alt="Diapo 1 : le vestiaire Bandeja Club"><img src="m/carrousel-gamme-2.jpg" alt="Diapo 2 : Lifestyle dès 34,99 €"><img src="m/carrousel-gamme-3.jpg" alt="Diapo 3 : Sport, 42,99 €"><img src="m/carrousel-gamme-4.jpg" alt="Diapo 4 : Personnalisé, 44,99 €"><img src="m/carrousel-gamme-5.jpg" alt="Diapo 5 : accessoires et prix"><img src="m/carrousel-gamme-6.jpg" alt="Diapo 6 : moins 15 % et livraison offerte dès 60 €"></div>
+    <p class="hint">Fais défiler horizontalement · 6 diapos 1080 × 1350</p></div>
+  <div class="text">
+    <span class="tag">Carrousel · 6 diapos</span>
+    <h2>Le vestiaire Bandeja Club</h2>
+    <dl class="meta"><dt>Produits</dt><dd>Toute la gamme, avec les prix</dd><dt>Objectif</dt><dd>Post à épingler en haut du profil : il présente la boutique.</dd></dl>
+    <div class="cap"><pre id="c5">Le vestiaire Bandeja Club, en un seul post 👇
+
+1. Lifestyle : pour le club et la ville, dès 34,99 €
+2. Sport : maille respirante, 42,99 €
+3. Personnalisé : ton nom et ton numéro, 44,99 €
+4. Accessoires : visière, gourde, tote, sac de sport, brassière
+
+Tout est fabriqué à la demande.
+−15 % sur ta première commande en créant ton compte, et livraison offerte dès 60 € (France et UE).
+Lien en bio.
+
+#padel #padelfrance #padelwear #padelstyle #bandeja</pre>
+      <div class="row"><span class="why"><b>À épingler</b> sur le profil.</span><button type="button" data-copy="c5">Copier la légende</button></div></div>
+  </div>
+</section>
+
+<section class="post" id="offre">
+  <div class="media"><div class="pair"><img src="m/post-offre-bienvenue.jpg" alt="Post : moins 15 % sur la première commande"><img src="m/story-offre-bienvenue.jpg" alt="Story : moins 15 % et livraison offerte dès 60 €"></div>
+    <p class="hint">Post 1080 × 1350 · Story 1080 × 1920 (ajoute le sticker Lien en bas)</p></div>
+  <div class="text">
+    <span class="tag">Post + story</span>
+    <h2>L'offre de bienvenue</h2>
+    <dl class="meta"><dt>Offre</dt><dd>−15 % sur la 1re commande avec un compte, jusqu'au lendemain minuit, hors sac de sport et gourde. Livraison offerte dès 60 € après réductions, France et UE.</dd><dt>Objectif</dt><dd>Faire passer à l'achat ceux qui hésitent.</dd></dl>
+    <div class="cap"><pre id="c6">Ta première commande Bandeja Club : −15 % 🎾
+
+Crée ton compte sur le site : la réduction s'applique toute seule au panier, jusqu'au lendemain minuit.
+Et la livraison est offerte dès 60 € d'achat (France et UE, montant après réductions).
+
+Valable sur tout, sauf le sac de sport et la gourde.
+Lien en bio.
+
+#padel #padelfrance #bandeja #padelwear</pre>
+      <div class="row"><span class="why">Story : ajoute le sticker « Lien » vers bandejaclubboutique.fr.</span><button type="button" data-copy="c6">Copier la légende</button></div></div>
+  </div>
+</section>
+
+<section class="plan" id="calendrier">
+  <span class="eyebrow">Deux premières semaines après l'ouverture</span>
+  <h2>Calendrier de publication</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Jour</th><th>Publication</th><th>Où</th><th>Pourquoi ce moment</th></tr></thead>
+    <tbody>
+      <tr><td>J1</td><td>Carrousel « La gamme », épinglé</td><td>Instagram</td><td>Les premiers visiteurs du profil voient toute la boutique.</td></tr>
+      <tr><td>J1</td><td>Story « Offre de bienvenue »</td><td>Instagram</td><td>Annonce l'ouverture et donne une raison d'acheter.</td></tr>
+      <tr><td>J2 · 18 h 30</td><td>Reel « Côté drive ou côté revés ? »</td><td>Instagram + TikTok</td><td>Le plus partageable : à lancer tôt.</td></tr>
+      <tr><td>J4 · 19 h</td><td>Carrousel « J'ai padel »</td><td>Instagram</td><td>Soir de semaine, après les créneaux.</td></tr>
+      <tr><td>J6 · 18 h</td><td>Reel « Bandeja, puis apéro »</td><td>Instagram + TikTok</td><td>Vendredi, début du week-end.</td></tr>
+      <tr><td>J8 · 18 h 30</td><td>Reel « Ton nom. Ton numéro. »</td><td>Instagram + TikTok</td><td>Lance l'angle cadeau avant novembre.</td></tr>
+      <tr><td>J10</td><td>Post « Offre de bienvenue »</td><td>Instagram</td><td>Relance pour ceux qui ont vu les vidéos sans acheter.</td></tr>
+      <tr><td>J12</td><td>Repost en story des 2 meilleures vidéos</td><td>Instagram</td><td>Garde l'élan sans nouveau tournage.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <div class="note"><h3>À faire dans l'appli</h3><ul><li>Ajoute un son tendance aux 3 vidéos : elles sont exportées sans musique.</li><li>Choisis la couverture fournie pour chaque Reel.</li><li>Mets le lien du site en bio.</li></ul></div>
+    <div class="note"><h3>Ce qu'on a gardé vrai</h3><ul><li>Photos actuelles de la boutique, sans retouche du produit.</li><li>Prénoms ajoutés sur les t-shirts personnalisés, signalés comme exemples.</li><li>Aucun avis, chiffre de vente ni « stock limité » inventé.</li></ul></div>
+    <div class="note"><h3>Pour le graphiste</h3><p>Fond crème, bleu nuit, vert fluo ; titres en Archivo Black, texte en Inter. Les fichiers sources (HTML) sont dans le dépôt, dossier <b>shopify/reseaux-sociaux/source</b>.</p></div>
+  </div>
+</section>
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.copy), t=el.textContent;
+    var done=function(){var o=b.textContent;b.textContent='Copié';setTimeout(function(){b.textContent=o;},1600);};
+    try{navigator.clipboard.writeText(t).then(done,function(){sel(el);});}catch(e){sel(el);}
+  });
+});
+function sel(el){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+</script>

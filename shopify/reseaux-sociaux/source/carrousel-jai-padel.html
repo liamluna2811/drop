@@ -1,0 +1,59 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.slide{position:absolute;inset:0;display:none}
+.pad{position:absolute;inset:70px}
+.kicker{font-weight:800;font-size:30px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.foot{position:absolute;left:70px;right:70px;bottom:56px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:26px}
+.foot .logo{font-size:28px;gap:10px}.foot .logo img{height:36px}.foot .logo b{padding:1px 8px 0;border-radius:6px}
+.n{color:var(--muted)}
+.ph{position:absolute;left:70px;right:70px;top:250px;bottom:150px;border-radius:30px;overflow:hidden;background:#fff;box-shadow:0 14px 40px rgba(11,27,43,.12)}
+.ph img{width:100%;height:100%;object-fit:cover}
+.cap{position:absolute;left:70px;right:70px;top:80px}
+.dark{background:var(--navy);color:var(--bg)}.dark .kicker{color:rgba(246,244,238,.7)}.dark .logo{color:var(--bg)}.dark .n{color:rgba(246,244,238,.6)}
+</style></head><body><div class="stage grain">
+
+<div class="slide" id="s1">
+  <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+    <p class="kicker">Les excuses officielles des accros</p>
+    <p class="disp" style="font-size:96px;margin-top:40px;color:var(--muted)">Pas ce soir,</p>
+    <p class="disp" style="font-size:210px;margin-top:10px">J'ai<br><span class="hl">padel.</span></p>
+    <p style="font-size:36px;font-weight:700;margin-top:56px">Glisse pour voir le t-shirt 👉</p>
+  </div>
+  <div class="foot"><div class="logo"><img src="logo-mark.png">BANDEJA <b>CLUB</b></div><span class="n">1/5</span></div>
+</div>
+
+<div class="slide" id="s2">
+  <div class="cap"><p class="kicker">Devant</p><p class="disp" style="font-size:64px;margin-top:14px">L'excuse <span class="hl">officielle.</span></p></div>
+  <div class="ph"><img src="a/jp-f-woman-pink.jpg" style="object-position:50% 22%;transform:scale(1.3);transform-origin:50% 22%"></div>
+  <div class="foot"><div class="logo"><img src="logo-mark.png">BANDEJA <b>CLUB</b></div><span class="n">2/5</span></div>
+</div>
+
+<div class="slide" id="s3">
+  <div class="cap"><p class="kicker">Au dos</p><p class="disp" style="font-size:64px;margin-top:14px">Et demain <span class="hl">non plus.</span></p></div>
+  <div class="ph"><img src="a/jp-b-man-pink.jpg" style="object-position:50% 35%;transform:scale(1.5);transform-origin:50% 33%"></div>
+  <div class="foot"><div class="logo"><img src="logo-mark.png">BANDEJA <b>CLUB</b></div><span class="n">3/5</span></div>
+</div>
+
+<div class="slide" id="s4">
+  <div class="cap"><p class="kicker">Ton excuse, ta couleur</p><p class="disp" style="font-size:64px;margin-top:14px">Cinq <span class="hl">couleurs</span></p></div>
+  <div class="abs" style="left:70px;right:70px;top:250px;bottom:150px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px">
+    <div class="card"><img src="a/jp-fb-white.jpg"></div><div class="card"><img src="a/jp-fb-pink.jpg"></div>
+    <div class="card"><img src="a/jp-fb-blue.jpg"></div><div class="card"><img src="a/jp-fb-gold.jpg"></div>
+  </div>
+  <div class="foot"><span>Blanc · Rose · Bleu ciel · Jaune · Noir</span><span class="n">4/5</span></div>
+</div>
+
+<div class="slide dark" id="s5">
+  <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+    <p class="kicker">T-shirt Lifestyle « J'ai padel »</p>
+    <p class="disp" style="font-size:104px;margin-top:30px">Identifie<br>le pote qui<br>annule tout<br>pour un <span class="hl" style="color:var(--navy)">créneau</span> 👇</p>
+    <div style="display:flex;gap:18px;align-items:center;margin-top:60px">
+      <span class="pill" style="background:var(--lime);color:var(--navy);font-size:44px">34,99 €</span>
+      <span style="font-size:32px;opacity:.85">100 % coton · fabriqué à la demande</span></div>
+    <p style="font-size:38px;font-weight:800;margin-top:44px;color:var(--lime)">bandejaclubboutique.fr</p>
+  </div>
+  <div class="foot"><div class="logo"><img src="logo-mark-light.png">BANDEJA <b>CLUB</b></div><span class="n">5/5</span></div>
+</div>
+</div>
+<script>var n=+(location.hash.slice(1)||1);document.getElementById('s'+n).style.display='block';</script>
+</body></html>
