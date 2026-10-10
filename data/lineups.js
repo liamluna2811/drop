@@ -803,5 +803,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le pont d'A Bridge et bloque le plant."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-plant-bridge-a-depuis-a-lobby",
+    "map": "abyss",
+    "title": "Molly plant A Bridge depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 86.4,
+      "y": 17.7
+    },
+    "impact": {
+      "x": 46.5,
+      "y": 3.4
+    },
+    "position": {
+      "image": "assets/lineups/abyss/a-lobby-bridge-position.webp",
+      "note": "Dans A Lobby, colle-toi contre la rambarde, juste à droite du petit pilier, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/a-lobby-bridge-visee.webp",
+      "note": "Place le point rouge (en haut de l'icône du HUD) sur le coin de la montagne, puis lancer normal.",
+      "target": {
+        "x": 48.4,
+        "y": 86.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/a-lobby-bridge-resultat.webp",
+      "note": "La molly tombe sur le pont d'A Bridge, sur le spot de plant."
+    },
+    "notes": ""
   }
 ];
