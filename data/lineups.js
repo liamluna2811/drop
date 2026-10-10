@@ -296,5 +296,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default C."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-plant-box-c-depuis-c-cubby",
+    "map": "haven",
+    "title": "Molly plant box C depuis C Cubby",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 61.9,
+      "y": 79.8
+    },
+    "impact": {
+      "x": 31.9,
+      "y": 85.6
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-cubby-box-position.webp",
+      "note": "Pars de la même position que la molly default C (fond du Cubby, à côté du pot), puis décale-toi un petit peu vers le couloir C pour voir le coin à viser."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-cubby-box-visee.webp",
+      "note": "Place ton viseur sur le coin du toit du bâtiment du fond, juste contre le mur de droite, puis lancer normal.",
+      "target": {
+        "x": 59.0,
+        "y": 29.2
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-cubby-box-resultat.webp",
+      "note": "La molly tombe au pied de la box, sur le spot de plant box C."
+    },
+    "notes": "Il faut se décaler un petit peu vers le couloir C pour voir le coin que l'on veut viser."
   }
 ];
