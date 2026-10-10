@@ -3255,8 +3255,8 @@ window.LINEUPS = [
       "y": 31.1
     },
     "position": {
-      "image": "assets/lineups/sunset/a-elbow-open-carte.webp",
-      "note": "Place-toi en bas d'A Elbow, comme indiqué sur la carte."
+      "image": "assets/lineups/sunset/a-elbow-bas-position.webp",
+      "note": "En bas d'A Elbow, colle-toi dans le coin entre le grillage et la tôle ondulée, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/a-elbow-open-visee.webp",
