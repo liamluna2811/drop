@@ -1718,5 +1718,43 @@ window.LINEUPS = [
       "note": "La molly tombe sous l'abri (hut) du site B, sur le spot de plant."
     },
     "notes": ""
+  },
+  {
+    "id": "corrode-molly-hut-b-depuis-ct",
+    "map": "corrode",
+    "title": "Molly hut B depuis le spawn CT",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant",
+      "Retake"
+    ],
+    "spot": {
+      "x": 14.1,
+      "y": 73.4
+    },
+    "impact": {
+      "x": 40.5,
+      "y": 74.0
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. À la sortie du spawn défenseur vers B Arch, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/corrode/b-ct-hut-visee.webp",
+      "note": "Place le petit trait rouge (au bout de la ligne des HP, à droite du « 100 ») sur le bord du toit en bas à gauche, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 26.9,
+        "y": 93.2
+      }
+    },
+    "result": {
+      "image": "assets/lineups/corrode/b-ct-hut-resultat.webp",
+      "note": "La molly tombe sous l'abri (hut) du site B : en anti-plant ou en retake."
+    },
+    "notes": ""
   }
 ];
