@@ -2032,8 +2032,8 @@ window.LINEUPS = [
       "y": 46.8
     },
     "position": {
-      "image": "assets/lineups/fracture/a-spawn-under-carte.webp",
-      "note": "Dans le spawn attaquant, au bout du couloir vers A Hall (ce n'est pas la même position que la molly safe), comme sur la carte."
+      "image": "assets/lineups/fracture/a-spawn-under-position.webp",
+      "note": "Dans le spawn attaquant, colle-toi dans le coin gauche du mur vert, contre la fenêtre, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/fracture/a-spawn-under-visee.webp",
