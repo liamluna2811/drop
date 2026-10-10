@@ -1644,5 +1644,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant triple A, à côté des caisses empilées."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-anti-plant-triple-a-depuis-spawn",
+    "map": "bind",
+    "title": "Molly anti-plant triple A depuis le spawn",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 46.4,
+      "y": 12.1
+    },
+    "impact": {
+      "x": 76.4,
+      "y": 34.5
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans le spawn défenseur, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/a-antiplant-triple-visee.webp",
+      "note": "Place le haut de la flèche du HUD (le point rouge) juste au-dessus de l'enseigne « REACTOR A », comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 42.3,
+        "y": 88.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/a-antiplant-triple-resultat.webp",
+      "note": "La molly tombe sur le spot de plant triple A, à côté des caisses empilées."
+    },
+    "notes": ""
   }
 ];
