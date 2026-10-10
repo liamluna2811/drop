@@ -3551,8 +3551,8 @@ window.LINEUPS = [
       "y": 45.6
     },
     "position": {
-      "image": "assets/lineups/lotus/c-mound-safe-carte.webp",
-      "note": "Place-toi en bas de C Mound, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/c-mound-position.webp",
+      "note": "En bas de C Mound, colle-toi dans le coin entre le mur et le pilier, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/c-mound-safe-visee.webp",
