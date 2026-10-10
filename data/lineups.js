@@ -2365,8 +2365,8 @@ window.LINEUPS = [
       "y": 88.1
     },
     "position": {
-      "image": "assets/lineups/split/b-lobby-open-carte.webp",
-      "note": "Dans B Lobby, contre le mur côté B Garage, comme sur la carte."
+      "image": "assets/lineups/split/b-lobby-open-position.webp",
+      "note": "Dans B Lobby, colle-toi contre le mur peint, juste à gauche des tôles et des caisses, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-lobby-open-visee.webp",
