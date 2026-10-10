@@ -2608,13 +2608,13 @@ window.LINEUPS = [
   {
     "id": "split-molly-plant-back-screen-a-depuis-a-lobby",
     "map": "split",
-    "title": "Molly plant back screen A depuis A Lobby",
+    "title": "Molly back screen A depuis A Lobby",
     "site": "A",
     "side": "attack",
     "throwType": "Saut + lancer",
     "fuse": 7,
     "tags": [
-      "Post-plant"
+      "Délogement"
     ],
     "spot": {
       "x": 65.9,
@@ -2638,7 +2638,44 @@ window.LINEUPS = [
     },
     "result": {
       "image": "assets/lineups/split/a-lobby-back-screen-resultat.webp",
-      "note": "La molly tombe sur le spot de plant back screen A, derrière la caisse, contre le mur."
+      "note": "La molly tombe sur le spot back screen A, derrière la caisse, contre le mur."
+    },
+    "notes": ""
+  },
+  {
+    "id": "split-molly-pocket-a-depuis-a-lobby",
+    "map": "split",
+    "title": "Molly pocket A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 9,
+    "tags": [
+      "Délogement"
+    ],
+    "spot": {
+      "x": 65.1,
+      "y": 12.8
+    },
+    "impact": {
+      "x": 41.7,
+      "y": 5.9
+    },
+    "position": {
+      "image": "assets/lineups/split/a-lobby-pocket-carte.webp",
+      "note": "Dans A Lobby, juste à côté de la position de la default (ce n'est pas la même), comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/a-lobby-pocket-visee.webp",
+      "note": "Aligne la marque rouge en haut à gauche de l'indicateur de lancer du HUD comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 43.0,
+        "y": 79.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/a-lobby-pocket-resultat.webp",
+      "note": "La molly tombe dans le pocket du site A, dans le coin."
     },
     "notes": ""
   }
