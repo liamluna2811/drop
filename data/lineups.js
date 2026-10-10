@@ -3234,5 +3234,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot safe du site A, dans le coin derrière la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "sunset-molly-plant-open-a-depuis-a-elbow",
+    "map": "sunset",
+    "title": "Molly plant open A depuis A Elbow",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 96.5,
+      "y": 52.2
+    },
+    "impact": {
+      "x": 82.4,
+      "y": 31.1
+    },
+    "position": {
+      "image": "assets/lineups/sunset/a-elbow-open-carte.webp",
+      "note": "Place-toi en bas d'A Elbow, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/sunset/a-elbow-open-visee.webp",
+      "note": "Place le crosshair sur le point rouge, au-dessus de l'icône de flamme, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 45.8,
+        "y": 91.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/sunset/a-elbow-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open du site A, devant la caisse."
+    },
+    "notes": ""
   }
 ];
