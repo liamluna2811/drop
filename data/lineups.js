@@ -411,7 +411,7 @@ window.LINEUPS = [
     "site": "C",
     "side": "attack",
     "throwType": "Lancer normal",
-    "fuse": 3.5,
+    "fuse": 7.5,
     "tags": [
       "Post-plant"
     ],
@@ -425,7 +425,7 @@ window.LINEUPS = [
     },
     "position": {
       "image": "assets/lineups/haven/c-long-open-position.webp",
-      "note": "Colle-toi contre le mur du fond, sous le cadre accroché au mur, comme sur la capture."
+      "note": "Colle-toi contre le mur du fond, sur les fleurs, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/haven/c-long-open-visee.webp",
