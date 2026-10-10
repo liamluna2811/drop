@@ -1438,5 +1438,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, contre le véhicule."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-default-b-depuis-tp-b",
+    "map": "bind",
+    "title": "Molly default B depuis le TP B",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 15.5,
+      "y": 46.2
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. À la sortie du téléporteur B, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/b-tp-default-visee.webp",
+      "note": "Place ton crosshair (le point rouge) dans l'arche, juste au-dessus du bord gauche de l'arche du fond, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 57.5,
+        "y": 46.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/b-tp-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, devant les caisses."
+    },
+    "notes": ""
   }
 ];
