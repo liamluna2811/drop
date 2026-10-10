@@ -1665,8 +1665,8 @@ window.LINEUPS = [
       "y": 34.5
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans le spawn défenseur, comme sur la carte."
+      "image": "assets/lineups/bind/a-antiplant-triple-position.webp",
+      "note": "Dans le spawn défenseur, colle-toi contre le mur, juste à gauche du premier bloc de béton, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/a-antiplant-triple-visee.webp",
