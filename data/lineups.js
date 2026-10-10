@@ -927,8 +927,8 @@ window.LINEUPS = [
       "y": 38.2
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans Mid Cubby, comme sur la carte."
+      "image": "assets/lineups/ascent/a-cubby-default-position.webp",
+      "note": "Dans Mid Cubby, colle-toi contre le mur beige, vers son coin droit, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-default-5s-visee.webp",
