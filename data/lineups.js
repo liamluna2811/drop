@@ -2922,8 +2922,8 @@ window.LINEUPS = [
       "y": 44.4
     },
     "position": {
-      "image": "assets/lineups/summit/a-lobby-open-carte.webp",
-      "note": "Dans A Lobby, au coin en bas d'A Main, comme sur la carte."
+      "image": "assets/lineups/summit/a-lobby-open-position.webp",
+      "note": "Dans A Lobby, colle-toi au coin du mur, juste devant le pilier à gauche, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/a-lobby-open-visee.webp",
