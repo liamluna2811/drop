@@ -2826,5 +2826,43 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant hut B, devant la petite maison."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-hut-b-depuis-ct",
+    "map": "summit",
+    "title": "Molly hut B depuis CT",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant",
+      "Retake"
+    ],
+    "spot": {
+      "x": 34.0,
+      "y": 20.3
+    },
+    "impact": {
+      "x": 16.2,
+      "y": 34.2
+    },
+    "position": {
+      "image": "assets/lineups/summit/b-ct-hut-carte.webp",
+      "note": "Même position que la molly anti-plant default B depuis CT : au coin de B Gym vers le spawn défenseur."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/b-ct-hut-visee.webp",
+      "note": "Aligne la marque rouge en haut de la flamme du HUD comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 43.3,
+        "y": 90.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/b-ct-hut-resultat.webp",
+      "note": "La molly tombe sur le spot hut B, devant la petite maison : en anti-plant ou en retake."
+    },
+    "notes": ""
   }
 ];
