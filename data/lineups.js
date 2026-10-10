@@ -1488,8 +1488,8 @@ window.LINEUPS = [
       "y": 29.1
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans B Elbow, comme sur la carte."
+      "image": "assets/lineups/bind/b-elbow-default-position.webp",
+      "note": "Dans B Elbow, colle-toi contre le mur, juste devant la barre verticale, à droite de l'écran bleu, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/b-elbow-default-visee.webp",
