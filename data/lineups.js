@@ -3736,8 +3736,8 @@ window.LINEUPS = [
       "y": 35.4
     },
     "position": {
-      "image": "assets/lineups/pearl/a-main-art-carte.webp",
-      "note": "Place-toi tout au fond d'A Main, contre le mur de droite, comme indiqué sur la carte."
+      "image": "assets/lineups/pearl/a-main-fond-position.webp",
+      "note": "Tout au fond d'A Main, colle-toi dans le coin du mur, devant la bande « Kingdom Industries », comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/pearl/a-main-art-visee.webp",
