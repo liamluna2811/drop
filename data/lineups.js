@@ -1198,5 +1198,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open A, sous la caisse suspendue."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-default-b-depuis-b-main",
+    "map": "ascent",
+    "title": "Molly default B depuis B Main",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 47.7,
+      "y": 72.7
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. En bas de B Main, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/b-main-default-visee.webp",
+      "note": "Place ton crosshair en bas de la fenêtre arrondie, au niveau du petit arbre, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 51.7,
+        "y": 45.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/b-main-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, autour des caisses."
+    },
+    "notes": ""
   }
 ];
