@@ -3419,5 +3419,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open du site A, contre le mur de droite."
     },
     "notes": ""
+  },
+  {
+    "id": "lotus-molly-plant-open-b-depuis-a-door",
+    "map": "lotus",
+    "title": "Molly plant open B depuis A Door",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 79.6,
+      "y": 48.6
+    },
+    "impact": {
+      "x": 42.5,
+      "y": 43.2
+    },
+    "position": {
+      "image": "assets/lineups/lotus/b-a-door-open-carte.webp",
+      "note": "Place-toi à A Door, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/lotus/b-a-door-open-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, à gauche de la première icône de la barre de compétences, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 31.8,
+        "y": 90.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/lotus/b-a-door-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open du site B, devant les caisses."
+    },
+    "notes": ""
   }
 ];
