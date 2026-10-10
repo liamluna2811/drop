@@ -1702,8 +1702,8 @@ window.LINEUPS = [
       "y": 74.0
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. En bas de B Main, comme sur la carte."
+      "image": "assets/lineups/corrode/b-main-hut-position.webp",
+      "note": "En bas de B Main, colle-toi dans le coin entre le mur de briques et la petite porte en bois, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/corrode/b-main-hut-visee.webp",
