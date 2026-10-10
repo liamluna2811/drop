@@ -1633,10 +1633,10 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/bind/a-short-triple-visee.webp",
-      "note": "Place ton crosshair dans le ciel, juste à droite du câble qui pend, à mi-hauteur entre les deux toits, comme sur la capture, puis lancer normal.",
+      "note": "Place le point rouge (en haut de l'icône de lancer du HUD) juste sous le coin inférieur droit de la fenêtre du bâtiment orange, comme sur la capture, puis lancer normal.",
       "target": {
-        "x": 46.7,
-        "y": 44.1
+        "x": 41.5,
+        "y": 77.5
       }
     },
     "result": {
