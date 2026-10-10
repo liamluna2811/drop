@@ -3658,8 +3658,8 @@ window.LINEUPS = [
       "y": 77.1
     },
     "impact": {
-      "x": 14.7,
-      "y": 36.9
+      "x": 15.6,
+      "y": 45.6
     },
     "position": {
       "image": "assets/lineups/pearl/b-ramp-default-carte.webp",
@@ -3676,6 +3676,43 @@ window.LINEUPS = [
     "result": {
       "image": "assets/lineups/pearl/b-ramp-safe-resultat.webp",
       "note": "La molly tombe sur le spot de plant safe du site B, au pied de la petite caisse contre le mur."
+    },
+    "notes": ""
+  },
+  {
+    "id": "pearl-molly-plant-default-a-depuis-a-main",
+    "map": "pearl",
+    "title": "Molly plant default A depuis A Main",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 86.6,
+      "y": 61.9
+    },
+    "impact": {
+      "x": 83.5,
+      "y": 32.2
+    },
+    "position": {
+      "image": "assets/lineups/pearl/a-main-default-carte.webp",
+      "note": "Place-toi en bas d'A Main, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/pearl/a-main-default-visee.webp",
+      "note": "Place le crosshair sur le point rouge, au-dessus de l'icône de flamme, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 41.1,
+        "y": 89.6
+      }
+    },
+    "result": {
+      "image": "assets/lineups/pearl/a-main-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site A, autour de la caisse."
     },
     "notes": ""
   }
