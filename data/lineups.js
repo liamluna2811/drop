@@ -477,5 +477,42 @@ window.LINEUPS = [
       "note": "La molly tombe devant la box, sur le spot de plant open B."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-anti-plant-open-b-depuis-c-site",
+    "map": "haven",
+    "title": "Molly anti-plant open B depuis le site C",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 31.3,
+      "y": 83.2
+    },
+    "impact": {
+      "x": 41.5,
+      "y": 49.7
+    },
+    "position": {
+      "image": "assets/lineups/haven/b-antiplant-open-position.webp",
+      "note": "Sur le site C, colle-toi dans le coin entre la grande caisse verte et le mur de droite, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/b-antiplant-open-visee.webp",
+      "note": "Place le point rouge au-dessus de l'icône des smokes (BS5) sur le bord du toit, puis lancer normal.",
+      "target": {
+        "x": 63.9,
+        "y": 85.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/b-antiplant-open-resultat.webp",
+      "note": "La molly tombe devant la box, sur le spot de plant open B."
+    },
+    "notes": ""
   }
 ];
