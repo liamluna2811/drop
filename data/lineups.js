@@ -3144,8 +3144,8 @@ window.LINEUPS = [
       "y": 33.7
     },
     "position": {
-      "image": "assets/lineups/sunset/a-lobby-default-carte.webp",
-      "note": "Place-toi à A Lobby, comme indiqué sur la carte."
+      "image": "assets/lineups/sunset/a-lobby-position.webp",
+      "note": "À A Lobby, colle-toi contre la porte vitrée, sur le montant du milieu, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/a-lobby-default-visee.webp",
@@ -3292,8 +3292,8 @@ window.LINEUPS = [
       "y": 31.1
     },
     "position": {
-      "image": "assets/lineups/sunset/a-lobby-default-carte.webp",
-      "note": "Place-toi à A Lobby, comme indiqué sur la carte (même position que le default)."
+      "image": "assets/lineups/sunset/a-lobby-position.webp",
+      "note": "À A Lobby, colle-toi contre la porte vitrée, sur le montant du milieu, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/a-lobby-open-visee.webp",
