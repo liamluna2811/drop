@@ -1628,8 +1628,8 @@ window.LINEUPS = [
       "y": 34.5
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Au début d'A Short, comme sur la carte."
+      "image": "assets/lineups/bind/a-short-triple-position.webp",
+      "note": "Dans A Short, monte sur le tonneau dans le coin, au bout de l'étal en bois, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/a-short-triple-visee.webp",
