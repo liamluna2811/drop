@@ -1793,5 +1793,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans le coin (corner) du site B, contre le muret."
     },
     "notes": ""
+  },
+  {
+    "id": "corrode-molly-anti-plant-corner-b-depuis-ct",
+    "map": "corrode",
+    "title": "Molly anti-plant corner B depuis CT B",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 14.3,
+      "y": 85.9
+    },
+    "impact": {
+      "x": 43.2,
+      "y": 79.0
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Côté CT, au-dessus de B Arch, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/corrode/b-ct-corner-visee.webp",
+      "note": "Place le petit trait rouge (en bas à gauche, sous le « 100 ») sur le haut de la tour en bas à gauche de l'écran, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 14.5,
+        "y": 96.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/corrode/b-ct-corner-resultat.webp",
+      "note": "La molly tombe dans le coin (corner) du site B, contre le muret."
+    },
+    "notes": ""
   }
 ];
