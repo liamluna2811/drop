@@ -2037,10 +2037,10 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/fracture/a-spawn-under-visee.webp",
-      "note": "Place le crosshair dans le ciel, juste à gauche de l'arête du mur, comme sur la capture, puis saute et lance au sommet du saut.",
+      "note": "Aligne la marque rouge du HUD (en bas à gauche, à côté des 100 PV) comme sur la capture, puis saute et lance au sommet du saut.",
       "target": {
-        "x": 58.0,
-        "y": 31.4
+        "x": 28.3,
+        "y": 93.9
       }
     },
     "result": {
