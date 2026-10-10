@@ -840,5 +840,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le pont d'A Bridge, sur le spot de plant."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-default-a-depuis-a-wine",
+    "map": "ascent",
+    "title": "Molly default A depuis A Wine",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 50.1,
+      "y": 4.4
+    },
+    "impact": {
+      "x": 34.5,
+      "y": 18.9
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans A Wine, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-wine-default-visee.webp",
+      "note": "Place le haut de la flamme (icône de la molly dans le HUD, le point rouge) sur le coin du toit, puis lancer normal.",
+      "target": {
+        "x": 48.0,
+        "y": 89.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-wine-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, autour du générateur."
+    },
+    "notes": ""
   }
 ];
