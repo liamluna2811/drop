@@ -2307,5 +2307,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, contre la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-default-b-depuis-b-top",
+    "map": "split",
+    "title": "Molly plant default B depuis B Top",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 48.7,
+      "y": 64.0
+    },
+    "impact": {
+      "x": 34.5,
+      "y": 85.9
+    },
+    "position": {
+      "image": "assets/lineups/split/b-top-default-carte.webp",
+      "note": "En haut de B Tower (B Top), à côté de Mid Mail, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/b-top-default-visee.webp",
+      "note": "Place le crosshair sur le point rouge, dans l'ouverture au fond, sous le balcon, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 55.4,
+        "y": 47.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/b-top-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, contre la caisse."
+    },
+    "notes": ""
   }
 ];
