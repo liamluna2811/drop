@@ -1554,8 +1554,8 @@ window.LINEUPS = [
       "y": 19.9
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Côté CT, au début de B Hall, comme sur la carte."
+      "image": "assets/lineups/bind/a-antiplant-ctb-position.webp",
+      "note": "Côté CT, au début de B Hall, colle-toi contre le pilier juste à droite de la porte « B », au bout du câble au sol, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/a-antiplant-ctb-visee.webp",
