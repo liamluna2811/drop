@@ -246,7 +246,7 @@
 
   function buildGroups() {
     const out = [];
-    for (const l of lineups.filter(x => x.spot)) {
+    for (const l of lineups.filter(x => x.spot || VL.impactFor(x))) {
       const impact = VL.impactFor(l);
       const at = impact || l.spot;
       const g = out.find(g => !!g.impact === !!impact
@@ -318,7 +318,7 @@
     }).join('');
 
     const spots = groups.filter(g => g.impact).flatMap(g =>
-      g.items.map(l => ({ l, g, x: l.spot.x, y: l.spot.y })));
+      g.items.filter(l => l.spot).map(l => ({ l, g, x: l.spot.x, y: l.spot.y })));
     for (const g of groups) spread(spots.filter(s => s.g === g), 1.2);
 
     impactsEl.innerHTML = `

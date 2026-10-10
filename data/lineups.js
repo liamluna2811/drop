@@ -910,5 +910,34 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, autour du générateur."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-default-a-5s",
+    "map": "ascent",
+    "title": "Molly default A (5 s)",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 5,
+    "tags": [
+      "Post-plant"
+    ],
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-default-5s-visee.webp",
+      "note": "Place la flèche du HUD (le point rouge, au-dessus de l'icône de la souris) sur le coin du carré, puis lancer normal.",
+      "target": {
+        "x": 50.0,
+        "y": 76.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-default-5s-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, autour du générateur."
+    },
+    "notes": ""
   }
 ];
