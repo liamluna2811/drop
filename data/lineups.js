@@ -625,5 +625,43 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant safe B."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-safe-b-depuis-b-link",
+    "map": "abyss",
+    "title": "Molly safe B depuis B Link",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Retake",
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 46.7,
+      "y": 65.6
+    },
+    "impact": {
+      "x": 42.6,
+      "y": 92.7
+    },
+    "position": {
+      "image": "assets/lineups/abyss/b-safe-retake-position.webp",
+      "note": "Colle-toi dans le coin du mur, au bout de B Link côté site, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/b-safe-retake-visee.webp",
+      "note": "Place ton crosshair sur le point indiqué, au bord du toit en bois à travers l'ouverture, puis lancer normal.",
+      "target": {
+        "x": 56.2,
+        "y": 46.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/b-safe-retake-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe B. Utilisable en retake ou en anti-plant."
+    },
+    "notes": ""
   }
 ];
