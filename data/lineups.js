@@ -3514,8 +3514,8 @@ window.LINEUPS = [
       "y": 50.9
     },
     "position": {
-      "image": "assets/lineups/lotus/c-lobby-default-carte.webp",
-      "note": "Place-toi à C Lobby, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/c-lobby-position.webp",
+      "note": "À C Lobby, colle-toi contre le mur, pile au centre de la petite niche sculptée, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/c-lobby-default-visee.webp",
