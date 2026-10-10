@@ -1248,8 +1248,8 @@ window.LINEUPS = [
       "y": 76.7
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans B Lobby, contre le mur, comme sur la carte."
+      "image": "assets/lineups/ascent/b-lobby-default-position.webp",
+      "note": "Dans B Lobby, colle-toi devant la porte de la petite cabane, dans le coin contre le muret de droite, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/b-lobby-default-visee.webp",
