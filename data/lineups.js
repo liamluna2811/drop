@@ -3382,5 +3382,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site A, à côté de la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "lotus-molly-plant-open-a-depuis-a-rubble",
+    "map": "lotus",
+    "title": "Molly plant open A depuis A Rubble",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 80.0,
+      "y": 65.9
+    },
+    "impact": {
+      "x": 92.4,
+      "y": 37.6
+    },
+    "position": {
+      "image": "assets/lineups/lotus/a-rubble-open-carte.webp",
+      "note": "Place-toi à A Rubble, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/lotus/a-rubble-open-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, entre les deux dernières icônes de la barre de compétences, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 59.3,
+        "y": 92.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/lotus/a-rubble-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open du site A, contre le mur de droite."
+    },
+    "notes": ""
   }
 ];
