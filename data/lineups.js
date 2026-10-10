@@ -3049,5 +3049,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site B, devant la porte."
     },
     "notes": ""
+  },
+  {
+    "id": "sunset-molly-plant-stairs-b-depuis-b-lobby",
+    "map": "sunset",
+    "title": "Molly plant stairs B depuis B Lobby",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 33.7,
+      "y": 77.6
+    },
+    "impact": {
+      "x": 9.1,
+      "y": 43.4
+    },
+    "position": {
+      "image": "assets/lineups/sunset/b-lobby-stairs-carte.webp",
+      "note": "Place-toi à B Lobby, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/sunset/b-lobby-stairs-visee.webp",
+      "note": "Place le crosshair sur le point rouge, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 40.6,
+        "y": 89.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/sunset/b-lobby-stairs-resultat.webp",
+      "note": "La molly tombe au pied des escaliers du site B."
+    },
+    "notes": ""
   }
 ];
