@@ -42,7 +42,7 @@ window.VL_CONFIG = {
   // minimap). Affiché sur la petite carte des pages lineup quand la lineup
   // n'a pas son propre point d'impact.
   defaultImpacts: {
-    haven: { A: { x: 40.7, y: 16.8 } },
+    haven: { A: { x: 40.7, y: 16.8 }, C: { x: 41.2, y: 80.8 } },
   },
 
   // Maps à masquer de l'accueil (nom anglais en minuscules, ex: 'abyss').

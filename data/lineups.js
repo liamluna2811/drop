@@ -193,5 +193,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-default-c-depuis-c-long",
+    "map": "haven",
+    "title": "Molly default C depuis C Long",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 73.9,
+      "y": 88.1
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-long-default-position.webp",
+      "note": "Colle-toi dans le coin, contre le mur, juste à côté de la barrière en bois, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-long-default-visee.webp",
+      "note": "Place ton viseur un peu à gauche du bord de la montagne, puis lancer normal.",
+      "target": {
+        "x": 56.1,
+        "y": 40.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-long-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default C."
+    },
+    "notes": ""
   }
 ];
