@@ -3033,8 +3033,8 @@ window.LINEUPS = [
       "y": 45.8
     },
     "position": {
-      "image": "assets/lineups/sunset/b-lobby-default-carte.webp",
-      "note": "Place-toi à B Lobby, comme indiqué sur la carte."
+      "image": "assets/lineups/sunset/b-lobby-position.webp",
+      "note": "À B Lobby, colle-toi dans le coin du mur de briques, entre les pots de fleurs et le muret, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/b-lobby-default-visee.webp",
@@ -3070,8 +3070,8 @@ window.LINEUPS = [
       "y": 43.4
     },
     "position": {
-      "image": "assets/lineups/sunset/b-lobby-stairs-carte.webp",
-      "note": "Place-toi à B Lobby, comme indiqué sur la carte."
+      "image": "assets/lineups/sunset/b-lobby-position.webp",
+      "note": "À B Lobby, colle-toi dans le coin du mur de briques, entre les pots de fleurs et le muret, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/b-lobby-stairs-visee.webp",
