@@ -3530,5 +3530,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site C, sur et autour de la plateforme."
     },
     "notes": ""
+  },
+  {
+    "id": "lotus-molly-plant-safe-c-depuis-c-mound",
+    "map": "lotus",
+    "title": "Molly plant safe C depuis C Mound",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 32.7,
+      "y": 69.9
+    },
+    "impact": {
+      "x": 6.3,
+      "y": 45.6
+    },
+    "position": {
+      "image": "assets/lineups/lotus/c-mound-safe-carte.webp",
+      "note": "Place-toi en bas de C Mound, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/lotus/c-mound-safe-visee.webp",
+      "note": "Place le crosshair sur le point rouge, au-dessus de l'icône de flamme, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 40.6,
+        "y": 90.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/lotus/c-mound-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe du site C, au fond contre le mur."
+    },
+    "notes": ""
   }
 ];
