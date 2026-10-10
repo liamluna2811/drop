@@ -2938,5 +2938,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open A, autour de la caisse au milieu du site."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-plant-open-a-depuis-a-cave",
+    "map": "summit",
+    "title": "Molly plant open A depuis A Cave",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 92.3,
+      "y": 21.3
+    },
+    "impact": {
+      "x": 92.4,
+      "y": 44.4
+    },
+    "position": {
+      "image": "assets/lineups/summit/a-cave-open-carte.webp",
+      "note": "Au fond d'A Cave, dans le coin, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/a-cave-open-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, dans l'arche au bout du couloir, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 45.5,
+        "y": 44.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/a-cave-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open A, contre le mur à côté de la caisse."
+    },
+    "notes": ""
   }
 ];
