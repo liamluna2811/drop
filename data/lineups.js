@@ -976,5 +976,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, autour du générateur."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-anti-plant-dice-a-depuis-spawn",
+    "map": "ascent",
+    "title": "Molly anti-plant dice A depuis le spawn",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 13.2,
+      "y": 35.9
+    },
+    "impact": {
+      "x": 32.8,
+      "y": 12.6
+    },
+    "position": {
+      "image": "",
+      "note": "Même position que l'anti-plant default A : à la sortie du spawn défenseur côté A."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-antiplant-dice-visee.webp",
+      "note": "Place le trait de la barre des HP (le point rouge) au bas de la tuile du toit qui touche la barrière, puis lancer normal.",
+      "target": {
+        "x": 37.1,
+        "y": 90.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-antiplant-dice-resultat.webp",
+      "note": "La molly tombe sur le spot de plant dice A, devant les caisses."
+    },
+    "notes": ""
   }
 ];
