@@ -2217,8 +2217,8 @@ window.LINEUPS = [
       "y": 85.9
     },
     "position": {
-      "image": "assets/lineups/split/b-main-default-carte.webp",
-      "note": "Dans B Lobby, à l'entrée de B Main, comme sur la carte."
+      "image": "assets/lineups/split/b-main-default-position.webp",
+      "note": "Dans B Lobby, colle-toi dans le coin entre le mur et le boîtier électrique, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-main-default-visee.webp",
