@@ -3715,5 +3715,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site A, autour de la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "pearl-molly-plant-art-a-depuis-a-main",
+    "map": "pearl",
+    "title": "Molly plant art A depuis A Main",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 98.8,
+      "y": 54.8
+    },
+    "impact": {
+      "x": 91.2,
+      "y": 35.4
+    },
+    "position": {
+      "image": "assets/lineups/pearl/a-main-art-carte.webp",
+      "note": "Place-toi tout au fond d'A Main, contre le mur de droite, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/pearl/a-main-art-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, juste au-dessus du mur en pierre, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 42.5,
+        "y": 44.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/pearl/a-main-art-resultat.webp",
+      "note": "La molly tombe dans le coin art du site A, contre le mur."
+    },
+    "notes": ""
   }
 ];
