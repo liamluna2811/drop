@@ -3604,5 +3604,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site B, au pied des caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "pearl-molly-plant-default-b-depuis-b-link",
+    "map": "pearl",
+    "title": "Molly plant default B depuis B Link",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 27.2,
+      "y": 49.6
+    },
+    "impact": {
+      "x": 14.7,
+      "y": 36.9
+    },
+    "position": {
+      "image": "assets/lineups/pearl/b-link-default-carte.webp",
+      "note": "Place-toi au début de B Link, côté site, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/pearl/b-link-default-visee.webp",
+      "note": "Place le crosshair sur la pointe de la marque rouge, juste au-dessus de la barre de la molly, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 46.7,
+        "y": 75.2
+      }
+    },
+    "result": {
+      "image": "assets/lineups/pearl/b-link-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site B, au pied des caisses."
+    },
+    "notes": ""
   }
 ];
