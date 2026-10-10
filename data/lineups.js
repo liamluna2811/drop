@@ -1521,8 +1521,8 @@ window.LINEUPS = [
       "y": 20.0
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. À la sortie du spawn défenseur (CT) vers B Hall, comme sur la carte."
+      "image": "assets/lineups/bind/b-antiplant-ct-position.webp",
+      "note": "À la sortie du spawn défenseur vers B Hall, colle-toi dans le coin entre les deux murs, le long du câble au sol, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/b-antiplant-ct-visee.webp",
