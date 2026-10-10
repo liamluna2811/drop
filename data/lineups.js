@@ -1368,5 +1368,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans les escaliers (stairs) du site B : pour le post-plant ou pour déloger un défenseur."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-default-a-depuis-a-short",
+    "map": "bind",
+    "title": "Molly default A depuis A Short",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 2,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 59.2,
+      "y": 53.9
+    },
+    "impact": {
+      "x": 69.8,
+      "y": 35.4
+    },
+    "position": {
+      "image": "assets/lineups/bind/a-short-default-position.webp",
+      "note": "Dans A Short, monte sur l'étal en bois contre le mur, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/a-short-default-visee.webp",
+      "note": "Place ton crosshair (le point rouge) dans l'ouverture entre les deux murs, juste au-dessus des caisses, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 52.7,
+        "y": 49.6
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/a-short-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, contre le véhicule."
+    },
+    "notes": ""
   }
 ];
