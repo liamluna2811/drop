@@ -2959,8 +2959,8 @@ window.LINEUPS = [
       "y": 44.4
     },
     "position": {
-      "image": "assets/lineups/summit/a-cave-open-carte.webp",
-      "note": "Au fond d'A Cave, dans le coin, comme sur la carte."
+      "image": "assets/lineups/summit/a-cave-position.webp",
+      "note": "Dans A Cave, colle-toi contre le mur de pierre courbé, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/a-cave-open-visee.webp",
@@ -2996,8 +2996,8 @@ window.LINEUPS = [
       "y": 39.5
     },
     "position": {
-      "image": "assets/lineups/summit/a-cave-corner-carte.webp",
-      "note": "Même position que la molly plant open A depuis A Cave : au fond d'A Cave, dans le coin."
+      "image": "assets/lineups/summit/a-cave-position.webp",
+      "note": "Dans A Cave, colle-toi contre le mur de pierre courbé, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/a-cave-corner-visee.webp",
