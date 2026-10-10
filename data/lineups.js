@@ -2567,5 +2567,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans Elbow, au pied des escaliers d'A Back."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-screen-a-depuis-a-lobby",
+    "map": "split",
+    "title": "Molly plant screen A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 65.9,
+      "y": 12.8
+    },
+    "impact": {
+      "x": 33.8,
+      "y": 9.4
+    },
+    "position": {
+      "image": "assets/lineups/split/a-lobby-screen-carte.webp",
+      "note": "Même position que la molly default A depuis A Lobby : au fond d'A Lobby, dans le coin côté spawn."
+    },
+    "aim": {
+      "image": "assets/lineups/split/a-lobby-screen-visee.webp",
+      "note": "Aligne le trait rouge du HUD (à droite du bas de l'indicateur de lancer) comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 47.9,
+        "y": 88.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/a-lobby-screen-resultat.webp",
+      "note": "La molly tombe sur le spot de plant screen A, sur la caisse au milieu du site."
+    },
+    "notes": ""
   }
 ];
