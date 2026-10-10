@@ -3699,8 +3699,8 @@ window.LINEUPS = [
       "y": 32.2
     },
     "position": {
-      "image": "assets/lineups/pearl/a-main-default-carte.webp",
-      "note": "Place-toi en bas d'A Main, comme indiqué sur la carte."
+      "image": "assets/lineups/pearl/a-main-position.webp",
+      "note": "En bas d'A Main, colle-toi dans le coin du grand mur, à gauche du pilier, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/pearl/a-main-default-visee.webp",
