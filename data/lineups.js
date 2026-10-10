@@ -3086,5 +3086,42 @@ window.LINEUPS = [
       "note": "La molly tombe au pied des escaliers du site B."
     },
     "notes": ""
+  },
+  {
+    "id": "sunset-molly-plant-default-a-depuis-a-elbow",
+    "map": "sunset",
+    "title": "Molly plant default A depuis A Elbow",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 94.9,
+      "y": 40.8
+    },
+    "impact": {
+      "x": 77.8,
+      "y": 33.7
+    },
+    "position": {
+      "image": "assets/lineups/sunset/a-elbow-default-carte.webp",
+      "note": "Place-toi à A Elbow, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/sunset/a-elbow-default-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 38.2,
+        "y": 92.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/sunset/a-elbow-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site A, contre la caisse."
+    },
+    "notes": ""
   }
 ];
