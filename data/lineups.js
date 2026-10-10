@@ -2024,8 +2024,8 @@ window.LINEUPS = [
       "Post-plant"
     ],
     "spot": {
-      "x": 64.5,
-      "y": 91.3
+      "x": 66.7,
+      "y": 90.2
     },
     "impact": {
       "x": 84.6,
@@ -2033,7 +2033,7 @@ window.LINEUPS = [
     },
     "position": {
       "image": "assets/lineups/fracture/a-spawn-under-carte.webp",
-      "note": "Dans le coin du spawn attaquant, à l'entrée du couloir vers A Hall, comme sur la carte."
+      "note": "Dans le spawn attaquant, au bout du couloir vers A Hall (ce n'est pas la même position que la molly safe), comme sur la carte."
     },
     "aim": {
       "image": "assets/lineups/fracture/a-spawn-under-visee.webp",
