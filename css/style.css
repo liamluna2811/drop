@@ -1260,3 +1260,56 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- Grande carte : impacts groupés + emplacements ---------- */
+
+button.marker { padding: 0; border: 0; background: none; color: inherit; font: inherit; }
+.marker-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ab);
+  color: #fff;
+  font: 700 11px/1 var(--font-body);
+  box-shadow: 0 0 0 2px #0b1118;
+}
+.marker.selected .ab-badge { box-shadow: 0 0 0 3px rgba(11, 17, 24, 0.75), 0 0 0 6px var(--ab), 0 0 22px var(--ab); }
+
+.impact-lines line.show { opacity: 0.95; animation: dash 1s linear infinite; }
+.impact-lines line.active { stroke-width: 3.5; }
+
+.spot-mark {
+  position: absolute;
+  z-index: 4;
+  transform: translate(-50%, -50%) rotate(var(--rot-inv)) scale(var(--z-inv)) translate(var(--ox, 0px), var(--oy, 0px));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.spot-mark.show { opacity: 1; pointer-events: auto; cursor: pointer; }
+.spot-mark .player-badge { --size: 26px; transition: transform 0.15s; }
+.spot-mark:hover .player-badge, .spot-mark.active .player-badge { transform: scale(1.25); box-shadow: 0 0 0 2px #0b1118, 0 0 0 4px var(--cyan), 0 0 16px var(--cyan); }
+.spot-mark:hover .marker-label, .spot-mark.active .marker-label { opacity: 1; }
+
+.legend-hint { color: var(--dim); font-style: italic; }
+
+.group-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 4px;
+  border: 1px solid var(--ab);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--ab) 10%, transparent);
+}
+.group-bar .ab-badge { --size: 30px; }
+.group-bar div { flex: 1; display: grid; line-height: 1.25; }
+.group-bar strong { font-size: 14px; }
+.group-bar span { font-size: 12px; color: var(--muted); }

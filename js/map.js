@@ -191,7 +191,7 @@
 
   $('#f-site').onclick = e => { const b = e.target.closest('[data-site]'); if (b) { filters.site = b.dataset.site; update(); } };
   $('#f-side').onclick = e => { const b = e.target.closest('[data-side]'); if (b) { filters.side = b.dataset.side; update(); } };
-  $('#f-q').oninput = e => { filters.q = e.target.value; saveFilters(); renderList(); renderMarkers(); };
+  $('#f-q').oninput = e => { filters.q = e.target.value; saveFilters(); renderMarkers(); renderList(); };
 
   function chipsFor(l) {
     return [
@@ -203,7 +203,8 @@
   }
 
   function renderList() {
-    const items = filtered();
+    const group = selectedKey ? groups.find(g => g.key === selectedKey) : null;
+    const items = group ? group.items : filtered();
     $('#count').textContent = `(${items.length}${items.length !== lineups.length ? ` / ${lineups.length}` : ''})`;
     if (!lineups.length) {
       listEl.innerHTML = `<div class="empty">Aucune lineup sur ${esc(map.name)} pour l'instant.<br><br>Clique sur <b>Ajouter</b> puis clique sur la carte à l'endroit où le joueur se place.</div>`;
@@ -213,7 +214,13 @@
       listEl.innerHTML = '<div class="empty">Aucune lineup ne correspond aux filtres.</div>';
       return;
     }
-    listEl.innerHTML = items.map(l => `
+    const head = group ? `
+      <div class="group-bar" style="--ab:${VL.abilityColor(group.side)}">
+        ${VL.abilityBadge(agent, group.items[0])}
+        <div><strong>${items.length} position${items.length > 1 ? 's' : ''}</strong><span>pour ce point d'impact</span></div>
+        <button type="button" class="btn btn-sm btn-ghost" data-act="clear-group">Tout voir</button>
+      </div>` : '';
+    listEl.innerHTML = head + items.map(l => `
       <a class="lineup-item ${l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(l.id)}" data-id="${esc(l.id)}" style="--ab:${VL.abilityColor(l.side)}">
         <div class="lineup-thumb">
           ${VL.imgOrPlaceholder(l.result?.image || l.aim?.image || l.position?.image, '')}
@@ -226,77 +233,171 @@
       </a>`).join('');
   }
 
-  function renderMarkers() {
-    // Point principal : emplacement du joueur (post-plant…) ou impact (retake,
-    // anti-défuse). Au survol, l'autre point apparaît relié par un pointillé.
-    const items = filtered().filter(l => l.spot).map(l => {
-      const impact = VL.impactFor(l);
-      const flip = VL.impactFirst(l) && impact;
-      return { l, main: flip ? impact : l.spot, other: flip ? l.spot : impact, otherIsSpot: !!flip };
-    });
+  /* ---------- Carte : un point par impact ---------- */
 
-    // Points superposés (ex. plusieurs retakes vers le même spot) : on les
-    // écarte en cercle pour pouvoir les survoler un par un.
-    const groups = [];
-    for (const it of items) {
-      const g = groups.find(g => Math.hypot(g[0].main.x - it.main.x, g[0].main.y - it.main.y) < 1.5);
-      g ? g.push(it) : groups.push([it]);
+  // Toutes les lineups qui tombent au même endroit (même côté) sont regroupées
+  // sur un seul point d'impact. Survol ou clic : on voit tous les emplacements
+  // d'où lancer la molly, reliés à l'impact par un pointillé.
+  let groups = [];
+  let selectedKey = null;   // groupe cliqué (reste affiché)
+  let hoverKey = null;      // groupe survolé
+
+  const groupOf = id => groups.find(g => g.items.some(l => l.id === id));
+
+  function buildGroups() {
+    const out = [];
+    for (const l of lineups.filter(x => x.spot)) {
+      const impact = VL.impactFor(l);
+      const at = impact || l.spot;
+      const g = out.find(g => g.side === l.side && !!g.impact === !!impact
+        && Math.hypot(g.x - at.x, g.y - at.y) < 1.5);
+      if (g) g.items.push(l);
+      else out.push({ side: l.side, impact: !!impact, x: at.x, y: at.y, items: [l] });
     }
-    for (const g of groups) {
-      if (g.length < 2) continue;
-      const r = 19 + g.length * 3;
-      g.forEach((it, i) => {
-        const a = (2 * Math.PI * i) / g.length - Math.PI / 2;
-        it.ox = Math.round(Math.cos(a) * r);
-        it.oy = Math.round(Math.sin(a) * r);
+    for (const g of out) {
+      g.key = `${g.side}@${g.x},${g.y}`;
+      g.x = VL.round(g.items.reduce((s, l) => s + (VL.impactFor(l) || l.spot).x, 0) / g.items.length);
+      g.y = VL.round(g.items.reduce((s, l) => s + (VL.impactFor(l) || l.spot).y, 0) / g.items.length);
+    }
+    return out;
+  }
+
+  // Écarte en petit cercle les points superposés pour pouvoir les survoler.
+  function spread(points, threshold) {
+    const clusters = [];
+    for (const p of points) {
+      const c = clusters.find(c => Math.hypot(c[0].x - p.x, c[0].y - p.y) < threshold);
+      c ? c.push(p) : clusters.push([p]);
+    }
+    for (const c of clusters) {
+      if (c.length < 2) continue;
+      const r = 19 + c.length * 3;
+      c.forEach((p, i) => {
+        const a = (2 * Math.PI * i) / c.length - Math.PI / 2;
+        p.ox = Math.round(Math.cos(a) * r);
+        p.oy = Math.round(Math.sin(a) * r);
       });
     }
+  }
 
-    const off = it => (it.ox || it.oy ? `--ox:${it.ox}px;--oy:${it.oy}px;` : '');
-    markersEl.innerHTML = items.map(it => `
-      <a class="marker ${it.l.id === activeId ? 'active' : ''}" href="lineup.html?id=${encodeURIComponent(it.l.id)}" data-id="${esc(it.l.id)}" style="left:${it.main.x}%;top:${it.main.y}%;${off(it)}--ab:${VL.abilityColor(it.l.side)}" aria-label="${esc(it.l.title)}">
-        ${VL.abilityBadge(agent, it.l)}
-        <span class="marker-label">${esc(it.l.title)}</span>
-      </a>`).join('');
+  const off = p => (p.ox || p.oy ? `--ox:${p.ox}px;--oy:${p.oy}px;` : '');
 
-    const linked = items.filter(it => it.other);
+  function renderMarkers() {
+    const shown = new Set(filtered().map(l => l.id));
+    groups = buildGroups()
+      .map(g => ({ ...g, items: g.items.filter(l => shown.has(l.id)) }))
+      .filter(g => g.items.length);
+    if (selectedKey && !groups.some(g => g.key === selectedKey)) selectedKey = null;
+    spread(groups, 2.5);
+
+    markersEl.innerHTML = groups.map(g => {
+      const l = g.items[0];
+      const n = g.items.length;
+      const label = n > 1 ? `${n} positions — clique pour les voir` : esc(l.title);
+      return `
+        <button type="button" class="marker" data-group="${esc(g.key)}" style="left:${g.x}%;top:${g.y}%;${off(g)}--ab:${VL.abilityColor(g.side)}" aria-label="${n > 1 ? `${n} lineups` : esc(l.title)}">
+          ${VL.abilityBadge(agent, l)}
+          ${n > 1 ? `<span class="marker-count">${n}</span>` : ''}
+          <span class="marker-label">${label}</span>
+        </button>`;
+    }).join('');
+
+    const spots = groups.filter(g => g.impact).flatMap(g =>
+      g.items.map(l => ({ l, g, x: l.spot.x, y: l.spot.y })));
+    for (const g of groups) spread(spots.filter(s => s.g === g), 1.2);
+
     impactsEl.innerHTML = `
       <svg class="impact-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-        ${linked.map(it => `<line data-impact="${esc(it.l.id)}" class="${it.l.id === activeId ? 'show' : ''}" x1="${it.main.x}" y1="${it.main.y}" x2="${it.other.x}" y2="${it.other.y}" style="--ab:${VL.abilityColor(it.l.side)}"/>`).join('')}
+        ${spots.map(s => `<line data-id="${esc(s.l.id)}" data-group="${esc(s.g.key)}" x1="${s.x}" y1="${s.y}" x2="${s.g.x}" y2="${s.g.y}" style="--ab:${VL.abilityColor(s.l.side)}"/>`).join('')}
       </svg>
-      ${linked.map(it => `<span class="impact-mark ${it.l.id === activeId ? 'show' : ''}" data-impact="${esc(it.l.id)}" style="left:${it.other.x}%;top:${it.other.y}%">${it.otherIsSpot ? VL.playerBadge() : VL.abilityBadge(agent, it.l)}</span>`).join('')}`;
+      ${spots.map(s => `
+        <a class="spot-mark" href="lineup.html?id=${encodeURIComponent(s.l.id)}" data-id="${esc(s.l.id)}" data-group="${esc(s.g.key)}" style="left:${s.x}%;top:${s.y}%;${off(s)}">
+          ${VL.playerBadge()}
+          <span class="marker-label">${esc(s.l.title)}${VL.formatFuse(s.l.fuse) ? ` · ${VL.formatFuse(s.l.fuse)}` : ''}</span>
+        </a>`).join('')}`;
+    applyState();
+  }
+
+  // Met à jour ce qui est visible / mis en avant, sans tout redessiner.
+  function applyState() {
+    const activeGroup = activeId ? groupOf(activeId)?.key : null;
+    const open = new Set([selectedKey, hoverKey, activeGroup].filter(Boolean));
+    markersEl.querySelectorAll('.marker').forEach(m => {
+      m.classList.toggle('active', open.has(m.dataset.group));
+      m.classList.toggle('selected', m.dataset.group === selectedKey);
+    });
+    impactsEl.querySelectorAll('[data-group]').forEach(el => {
+      el.classList.toggle('show', open.has(el.dataset.group));
+      el.classList.toggle('active', el.dataset.id === activeId);
+    });
+    listEl.querySelectorAll('.lineup-item').forEach(el => el.classList.toggle('active', el.dataset.id === activeId));
   }
 
   function setActive(id) {
     activeId = id;
-    const sel = v => `[data-id="${CSS.escape(v)}"]`;
-    document.querySelectorAll('.marker.active, .lineup-item.active').forEach(el => el.classList.remove('active'));
-    impactsEl.querySelectorAll('.show').forEach(el => el.classList.remove('show'));
-    if (!id) return;
-    document.querySelectorAll(sel(id)).forEach(el => el.classList.add('active'));
-    impactsEl.querySelectorAll(`[data-impact="${CSS.escape(id)}"]`).forEach(el => el.classList.add('show'));
+    applyState();
   }
 
-  for (const host of [markersEl, listEl]) {
-    host.addEventListener('mouseover', e => {
-      const el = e.target.closest('[data-id]');
-      if (el && el.dataset.id !== activeId) setActive(el.dataset.id);
-    });
-    host.addEventListener('mouseleave', () => setActive(null));
-    host.addEventListener('click', e => {
-      const el = e.target.closest('[data-id]');
-      if (!el || !editing) return;
-      e.preventDefault();
-      openEditor(VL.getLineup(el.dataset.id));
-    });
+  function selectGroup(key) {
+    selectedKey = key;
+    renderList();
+    applyState();
   }
+
+  markersEl.addEventListener('mouseover', e => {
+    const m = e.target.closest('.marker');
+    if (m && m.dataset.group !== hoverKey) { hoverKey = m.dataset.group; applyState(); }
+  });
+  markersEl.addEventListener('mouseleave', () => { hoverKey = null; applyState(); });
+  markersEl.addEventListener('click', e => {
+    const m = e.target.closest('.marker');
+    if (!m) return;
+    e.stopPropagation();
+    selectGroup(selectedKey === m.dataset.group ? null : m.dataset.group);
+  });
+
+  impactsEl.addEventListener('mouseover', e => {
+    const s = e.target.closest('.spot-mark');
+    if (s && s.dataset.id !== activeId) setActive(s.dataset.id);
+  });
+  impactsEl.addEventListener('mouseleave', () => setActive(null));
+
+  listEl.addEventListener('mouseover', e => {
+    const el = e.target.closest('[data-id]');
+    if (el && el.dataset.id !== activeId) setActive(el.dataset.id);
+  });
+  listEl.addEventListener('mouseleave', () => setActive(null));
+  listEl.addEventListener('click', e => {
+    if (e.target.closest('[data-act=clear-group]')) { e.preventDefault(); selectGroup(null); return; }
+    const el = e.target.closest('[data-id]');
+    if (!el || !editing) return;
+    e.preventDefault();
+    openEditor(VL.getLineup(el.dataset.id));
+  });
+  impactsEl.addEventListener('click', e => {
+    const el = e.target.closest('.spot-mark');
+    if (!el || !editing) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openEditor(VL.getLineup(el.dataset.id));
+  });
+
+  // Clic dans le vide : on désélectionne l'impact.
+  viewer.addEventListener('click', e => {
+    if (editing || !selectedKey || e.target.closest('.marker, .spot-mark, .viewer-tools')) return;
+    selectGroup(null);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && selectedKey && !editing && !dialog.open) selectGroup(null);
+  });
 
   function update() {
     lineups = VL.lineupsForMap(mapSlug);
     saveFilters();
     renderFilters();
-    renderList();
     renderMarkers();
+    renderList();
+    applyState();
     VL.renderDraftBar();
   }
 
@@ -325,7 +426,7 @@
     $('#edit-text').innerHTML = replacing === 'impact'
       ? '<b>Impact</b> — clique là où la molly atterrit.'
       : '<b>Emplacement</b> — clique là où le joueur se place.'
-        + (replacing ? '' : ' <span class="muted">(ou clique sur une lineup existante pour la modifier)</span>');
+        + (replacing ? '' : ' <span class="muted">(ou clique sur un emplacement existant pour le modifier)</span>');
   }
 
   $('#edit-cancel').onclick = () => {
@@ -341,7 +442,7 @@
   };
 
   viewer.addEventListener('click', e => {
-    if (!editing || !placing || e.target.closest('.viewer-tools, .edit-banner, .marker')) return;
+    if (!editing || !placing || e.target.closest('.viewer-tools, .edit-banner, .marker, .spot-mark')) return;
     const pt = clientToPct(e.clientX, e.clientY);
     if (pt.x < 0 || pt.x > 100 || pt.y < 0 || pt.y > 100) return;
     placing = false;
@@ -605,7 +706,7 @@
       : 'Lineup enregistrée dans les brouillons.', 'ok');
     activeId = lineup.id;
     update();
-    setActive(lineup.id);
+    if (groupOf(lineup.id)) selectGroup(groupOf(lineup.id).key);
     if (editing) startPlacing();
   });
 
@@ -628,7 +729,7 @@
   applyView();
   syncToggles();
   update();
-  if (activeId) setActive(activeId);
+  if (activeId && groupOf(activeId)) selectGroup(groupOf(activeId).key);
 
   const editId = VL.param('edit');
   if (editId && VL.getLineup(editId)) {
