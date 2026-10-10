@@ -3107,8 +3107,8 @@ window.LINEUPS = [
       "y": 33.7
     },
     "position": {
-      "image": "assets/lineups/sunset/a-elbow-default-carte.webp",
-      "note": "Place-toi à A Elbow, comme indiqué sur la carte."
+      "image": "assets/lineups/sunset/a-elbow-position.webp",
+      "note": "À A Elbow, colle-toi dans le coin entre le mur et la caisse grise, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/a-elbow-default-visee.webp",
@@ -3181,8 +3181,8 @@ window.LINEUPS = [
       "y": 40.4
     },
     "position": {
-      "image": "assets/lineups/sunset/a-elbow-default-carte.webp",
-      "note": "Place-toi à A Elbow, comme indiqué sur la carte (même position que le default)."
+      "image": "assets/lineups/sunset/a-elbow-position.webp",
+      "note": "À A Elbow, colle-toi dans le coin entre le mur et la caisse grise, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/a-elbow-safe-visee.webp",
