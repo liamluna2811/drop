@@ -440,5 +440,42 @@ window.LINEUPS = [
       "note": "La molly tombe entre l'ascenseur et la box, sur le spot de plant open C."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-plant-open-b-depuis-mid-doors",
+    "map": "haven",
+    "title": "Molly plant open B depuis Mid Doors",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 2,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 64.2,
+      "y": 57.6
+    },
+    "impact": {
+      "x": 42.5,
+      "y": 51.3
+    },
+    "position": {
+      "image": "assets/lineups/haven/b-mid-open-position.webp",
+      "note": "Colle-toi contre le mur, juste à gauche des caisses en bois et du pot, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/b-mid-open-visee.webp",
+      "note": "Place ton viseur sur le bord du mur du site B, aligné avec la poutre rouge du bâtiment de droite (le trait rouge), puis lancer normal.",
+      "target": {
+        "x": 48.1,
+        "y": 44.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/b-mid-open-resultat.webp",
+      "note": "La molly tombe devant la box, sur le spot de plant open B."
+    },
+    "notes": ""
   }
 ];
