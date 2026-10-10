@@ -1740,8 +1740,8 @@ window.LINEUPS = [
       "y": 74.0
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. À la sortie du spawn défenseur vers B Arch, comme sur la carte."
+      "image": "assets/lineups/corrode/b-ct-hut-position.webp",
+      "note": "À la sortie du spawn défenseur, colle-toi dans le coin juste à droite de la petite porte en bois arrondie, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/corrode/b-ct-hut-visee.webp",
