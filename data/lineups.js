@@ -1471,5 +1471,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-default-b-depuis-b-elbow",
+    "map": "bind",
+    "title": "Molly default B depuis B Elbow",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 20.0,
+      "y": 29.1
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans B Elbow, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/b-elbow-default-visee.webp",
+      "note": "Place ton crosshair juste sous le coin inférieur gauche de la petite ouverture dans le mur, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 49.4,
+        "y": 49.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/b-elbow-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, devant les caisses."
+    },
+    "notes": ""
   }
 ];
