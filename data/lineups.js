@@ -1777,8 +1777,8 @@ window.LINEUPS = [
       "y": 79.0
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. En haut de B Lobby, à l'entrée de B Main, comme sur la carte."
+      "image": "assets/lineups/corrode/b-lobby-position.webp",
+      "note": "En haut de B Lobby, colle-toi dans le coin du mur de briques, sous la branche d'arbre, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/corrode/b-lobby-corner-visee.webp",
@@ -1851,8 +1851,8 @@ window.LINEUPS = [
       "y": 74.0
     },
     "position": {
-      "image": "",
-      "note": "Même position que la plant corner B depuis B Lobby."
+      "image": "assets/lineups/corrode/b-lobby-position.webp",
+      "note": "Même position que la plant corner B depuis B Lobby : dans le coin du mur de briques, sous la branche d'arbre."
     },
     "aim": {
       "image": "assets/lineups/corrode/b-lobby-hut-visee.webp",
