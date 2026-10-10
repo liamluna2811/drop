@@ -2604,5 +2604,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant screen A, sur la caisse au milieu du site."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-back-screen-a-depuis-a-lobby",
+    "map": "split",
+    "title": "Molly plant back screen A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Saut + lancer",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 65.9,
+      "y": 12.8
+    },
+    "impact": {
+      "x": 33.6,
+      "y": 5.5
+    },
+    "position": {
+      "image": "assets/lineups/split/a-lobby-back-screen-carte.webp",
+      "note": "Même position que la molly default A depuis A Lobby : au fond d'A Lobby, dans le coin côté spawn."
+    },
+    "aim": {
+      "image": "assets/lineups/split/a-lobby-back-screen-visee.webp",
+      "note": "Aligne la marque rouge en haut à gauche de l'indicateur de lancer du HUD comme sur la capture, puis saute et lance au sommet du saut.",
+      "target": {
+        "x": 45.3,
+        "y": 78.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/a-lobby-back-screen-resultat.webp",
+      "note": "La molly tombe sur le spot de plant back screen A, derrière la caisse, contre le mur."
+    },
+    "notes": ""
   }
 ];
