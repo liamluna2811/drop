@@ -861,8 +861,8 @@ window.LINEUPS = [
       "y": 18.9
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans A Wine, comme sur la carte."
+      "image": "assets/lineups/ascent/a-wine-position.webp",
+      "note": "Dans A Wine, colle-toi dans le coin contre le mur du magasin « Vini Venaro », au pied de la rambarde, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-wine-default-visee.webp",
