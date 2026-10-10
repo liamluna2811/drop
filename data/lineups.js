@@ -2662,8 +2662,8 @@ window.LINEUPS = [
       "y": 5.9
     },
     "position": {
-      "image": "assets/lineups/split/a-lobby-pocket-carte.webp",
-      "note": "Dans A Lobby, juste à côté de la position de la default (ce n'est pas la même), comme sur la carte."
+      "image": "assets/lineups/split/a-lobby-pocket-position.webp",
+      "note": "Au fond d'A Lobby, monte sur le petit bac à plantes et colle-toi contre le mur en bois, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/a-lobby-pocket-visee.webp",
