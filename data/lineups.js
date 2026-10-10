@@ -960,8 +960,8 @@ window.LINEUPS = [
       "y": 35.9
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. À la sortie du spawn défenseur côté A, comme sur la carte."
+      "image": "assets/lineups/ascent/a-antiplant-spawn-position.webp",
+      "note": "À la sortie du spawn défenseur côté A, colle-toi dans le coin du mur, juste à droite de l'arche, sur la grille au sol, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-antiplant-default-visee.webp",
@@ -997,8 +997,8 @@ window.LINEUPS = [
       "y": 12.6
     },
     "position": {
-      "image": "",
-      "note": "Même position que l'anti-plant default A : à la sortie du spawn défenseur côté A."
+      "image": "assets/lineups/ascent/a-antiplant-spawn-position.webp",
+      "note": "Même position que l'anti-plant default A : dans le coin du mur juste à droite de l'arche, sur la grille au sol."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-antiplant-dice-visee.webp",
@@ -1182,8 +1182,8 @@ window.LINEUPS = [
       "y": 7.9
     },
     "position": {
-      "image": "",
-      "note": "Même position que l'anti-plant default A : à la sortie du spawn défenseur côté A."
+      "image": "assets/lineups/ascent/a-antiplant-spawn-position.webp",
+      "note": "Même position que l'anti-plant default A : dans le coin du mur juste à droite de l'arche, sur la grille au sol."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-antiplant-open-visee.webp",
