@@ -1215,8 +1215,8 @@ window.LINEUPS = [
       "y": 72.7
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. En bas de B Main, comme sur la carte."
+      "image": "assets/lineups/ascent/b-main-default-position.webp",
+      "note": "En bas de B Main, colle-toi dans le coin entre le mur de la « Pescheria » et le pilier, à côté de la petite grille, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/b-main-default-visee.webp",
