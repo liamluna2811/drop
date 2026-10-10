@@ -41,6 +41,8 @@
   const fuse = VL.formatFuse(lineup.fuse);
   const spot = lineup.spot;
   const impact = VL.impactFor(lineup);
+  const jump = /saut/i.test(lineup.throwType || '');
+  const JUMP = '<svg class="ico-jump" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M6.5 8.5 12 3l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
 
   // Image d'étape ; pour la visée, cercle sur le viseur + encart zoomé.
   function media(src, label, target) {
@@ -54,6 +56,7 @@
       <div class="media-frame">
         <img src="${esc(src)}" alt="${esc(label)}" onload="this.parentNode.style.setProperty('--ratio', this.naturalWidth / this.naturalHeight)" onerror="this.closest('.step-media').innerHTML = VL.imgOrPlaceholder('', 'Image introuvable')">
         ${ring}${zoom}
+        ${target && jump ? `<span class="jump-tag">${JUMP}Saute puis lance</span>` : ''}
       </div>`;
   }
 
@@ -67,6 +70,7 @@
         </div>
         <div class="step-text">
           <h2><span class="step-num">0${i + 1}</span>${label}${key === 'aim' ? '<span class="step-key">Étape clé</span>' : ''}</h2>
+          ${key === 'aim' && jump ? `<div class="jump-callout">${JUMP}<div><strong>Lancer sauté</strong><span>Saute, puis lance la molly au sommet du saut.</span></div></div>` : ''}
           ${step.note ? `<p>${esc(step.note)}</p>` : '<p class="empty-note">Pas de description.</p>'}
         </div>
       </article>`;
@@ -83,7 +87,7 @@
           <div class="chips">
             ${lineup.site ? `<span class="chip chip-red">Site ${esc(lineup.site)}</span>` : ''}
             ${lineup.side ? `<span class="chip chip-strong">${esc(config.sides[lineup.side] || lineup.side)}</span>` : ''}
-            ${lineup.throwType ? `<span class="chip chip-strong">${esc(lineup.throwType)}</span>` : ''}
+            ${lineup.throwType ? `<span class="chip ${jump ? 'chip-jump' : 'chip-strong'}">${jump ? JUMP : ''}${esc(lineup.throwType)}</span>` : ''}
             ${fuse ? `<span class="chip chip-fuse" title="Temps avant explosion">${VL.STOPWATCH}${fuse}</span>` : ''}
             ${(lineup.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
             ${VL.isDraft(lineup.id) ? '<span class="chip chip-draft">brouillon non exporté</span>' : ''}
@@ -131,6 +135,12 @@
         <div class="fuse-card card">
           ${VL.STOPWATCH}
           <div><small>Temps avant explosion</small><strong>${fuse}</strong></div>
+        </div>` : ''}
+
+        ${jump ? `
+        <div class="jump-card card">
+          ${JUMP}
+          <div><small>Type de lancer</small><strong>${esc(lineup.throwType)}</strong></div>
         </div>` : ''}
 
         <dl class="info-list card">

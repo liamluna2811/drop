@@ -197,6 +197,48 @@ h1, h2, h3, .display {
 .fuse-card .ico-timer { width: 34px; height: 34px; color: #ffd84d; }
 .fuse-card small { display: block; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
 .fuse-card strong { display: block; font: 700 30px/1.1 var(--font-display); color: #ffd84d; }
+/* Lancer sauté : mis en avant */
+.ico-jump { width: 14px; height: 14px; flex: none; }
+.chip-jump { color: #0b1118; background: var(--cyan); border-color: transparent; font-weight: 700; }
+.chip-jump .ico-jump { margin-right: 2px; }
+.jump-card { display: flex; align-items: center; gap: 14px; border-color: rgba(79, 209, 232, 0.45); background: rgba(79, 209, 232, 0.08); }
+.jump-card .ico-jump { width: 34px; height: 34px; color: var(--cyan); }
+.jump-card small { display: block; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.jump-card strong { display: block; font: 700 26px/1.1 var(--font-display); color: var(--cyan); text-transform: uppercase; }
+.jump-callout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2px 0 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(79, 209, 232, 0.5);
+  border-left: 4px solid var(--cyan);
+  border-radius: var(--radius);
+  background: rgba(79, 209, 232, 0.1);
+}
+.jump-callout .ico-jump { width: 30px; height: 30px; color: var(--cyan); }
+.jump-callout strong { display: block; font: 700 20px/1.1 var(--font-display); color: var(--cyan); text-transform: uppercase; letter-spacing: 0.04em; }
+.jump-callout span { display: block; font-size: 14px; color: var(--text); }
+.jump-tag {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--cyan);
+  color: #0b1118;
+  font: 700 13px/1 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.jump-tag .ico-jump { width: 16px; height: 16px; }
 .chip .ab-badge { --size: 18px; margin-left: -6px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
