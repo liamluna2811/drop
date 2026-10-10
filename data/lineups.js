@@ -1161,5 +1161,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open A, sous la caisse suspendue."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-anti-plant-open-a-depuis-spawn",
+    "map": "ascent",
+    "title": "Molly anti-plant open A depuis le spawn",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 13.2,
+      "y": 35.9
+    },
+    "impact": {
+      "x": 34.4,
+      "y": 7.9
+    },
+    "position": {
+      "image": "",
+      "note": "Même position que l'anti-plant default A : à la sortie du spawn défenseur côté A."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-antiplant-open-visee.webp",
+      "note": "Place le haut de la flamme (icône de la molly dans le HUD, le point rouge) en bas de la fenêtre, puis lancer normal.",
+      "target": {
+        "x": 51.5,
+        "y": 94.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-antiplant-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open A, sous la caisse suspendue."
+    },
+    "notes": ""
   }
 ];
