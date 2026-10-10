@@ -2381,5 +2381,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open B, au pied des escaliers."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-open-b-depuis-b-top",
+    "map": "split",
+    "title": "Molly plant open B depuis B Top",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 2,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 44.6,
+      "y": 64.7
+    },
+    "impact": {
+      "x": 29.8,
+      "y": 88.1
+    },
+    "position": {
+      "image": "assets/lineups/split/b-top-open-carte.webp",
+      "note": "En haut de B Tower (B Top), plus près de B Tower que pour la default, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/b-top-open-visee.webp",
+      "note": "Place le crosshair sur le point rouge, au bout du panneau vert sous le B, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 45.7,
+        "y": 46.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/b-top-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open B, au pied des escaliers."
+    },
+    "notes": ""
   }
 ];
