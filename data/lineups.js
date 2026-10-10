@@ -1570,5 +1570,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, contre le véhicule."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-plant-triple-a-depuis-showers",
+    "map": "bind",
+    "title": "Molly plant triple A depuis Showers",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 85.0,
+      "y": 45.9
+    },
+    "impact": {
+      "x": 76.7,
+      "y": 35.6
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans Showers (A Bath), comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/a-shower-triple-visee.webp",
+      "note": "Place ton crosshair (le point rouge) dans le trou du plafond, sur le bâtiment au loin, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 45.3,
+        "y": 43.6
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/a-shower-triple-resultat.webp",
+      "note": "La molly tombe sur le spot de plant triple A, à côté des caisses empilées."
+    },
+    "notes": ""
   }
 ];
