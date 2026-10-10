@@ -2789,5 +2789,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, devant la porte, entre les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-plant-hut-b-depuis-b-lobby",
+    "map": "summit",
+    "title": "Molly plant hut B depuis B Lobby",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 28.1,
+      "y": 64.2
+    },
+    "impact": {
+      "x": 16.2,
+      "y": 34.2
+    },
+    "position": {
+      "image": "assets/lineups/summit/b-lobby-hut-carte.webp",
+      "note": "Dans B Lobby, au coin vers Mid Tiles, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/b-lobby-hut-visee.webp",
+      "note": "Aligne le point rouge en bas de l'indicateur de lancer du HUD comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 45.1,
+        "y": 89.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/b-lobby-hut-resultat.webp",
+      "note": "La molly tombe sur le spot de plant hut B, devant la petite maison."
+    },
+    "notes": ""
   }
 ];
