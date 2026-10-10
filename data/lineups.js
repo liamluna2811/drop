@@ -1559,7 +1559,7 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/bind/a-antiplant-ctb-visee.webp",
-      "note": "Place le haut de la flamme (icône de la molly dans le HUD, le point rouge) sur le point indiqué, comme sur la capture, puis lancer normal.",
+      "note": "Place le haut de la flamme (icône de la molly dans le HUD, le point rouge) sur le bord gauche de la tour en ruine, comme sur la capture, puis lancer normal.",
       "target": {
         "x": 41.2,
         "y": 89.0
