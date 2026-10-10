@@ -1063,8 +1063,8 @@ window.LINEUPS = [
       "Post-plant"
     ],
     "spot": {
-      "x": 46.6,
-      "y": 38.2
+      "x": 48.6,
+      "y": 35.3
     },
     "impact": {
       "x": 32.8,
@@ -1072,7 +1072,7 @@ window.LINEUPS = [
     },
     "position": {
       "image": "",
-      "note": "Même position que la default A depuis Mid Cubby."
+      "note": "Dans Mid Cubby, mais pas au même endroit que la default A : place-toi comme sur la carte."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-cubby-dice-visee.webp",
