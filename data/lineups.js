@@ -3366,8 +3366,8 @@ window.LINEUPS = [
       "y": 37.5
     },
     "position": {
-      "image": "assets/lineups/lotus/a-rubble-default-carte.webp",
-      "note": "Place-toi à A Rubble, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/a-rubble-position.webp",
+      "note": "À A Rubble, colle-toi contre le mur, pile au centre de la niche sculptée, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/a-rubble-default-visee.webp",
@@ -3403,8 +3403,8 @@ window.LINEUPS = [
       "y": 37.6
     },
     "position": {
-      "image": "assets/lineups/lotus/a-rubble-open-carte.webp",
-      "note": "Place-toi à A Rubble, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/a-rubble-position.webp",
+      "note": "À A Rubble, colle-toi contre le mur, pile au centre de la niche sculptée, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/a-rubble-open-visee.webp",
