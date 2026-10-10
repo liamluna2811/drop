@@ -2085,5 +2085,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, contre les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "fracture-molly-plant-default-b-depuis-b-arcade",
+    "map": "fracture",
+    "title": "Molly plant default B depuis B Arcade",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 20.9,
+      "y": 30.6
+    },
+    "impact": {
+      "x": 16.0,
+      "y": 51.5
+    },
+    "position": {
+      "image": "assets/lineups/fracture/b-arcade-default-carte.webp",
+      "note": "En haut de B Arcade, côté B Bench, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/fracture/b-arcade-default-visee.webp",
+      "note": "Aligne la marque rouge du HUD (en bas à gauche, à droite des 100 PV) comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 23.0,
+        "y": 92.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/fracture/b-arcade-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, contre les caisses."
+    },
+    "notes": ""
   }
 ];
