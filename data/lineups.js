@@ -792,10 +792,10 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/abyss/a-antiplant-bridge-visee.webp",
-      "note": "Place le haut de la flamme (icône de la molly dans le HUD) sur le bas du triangle dessiné sur le mur, puis lancer normal.",
+      "note": "Place le haut de l'icône de la smoke (dans le HUD, là où est le point rouge) sur le bas du triangle dessiné sur le mur, puis lancer normal.",
       "target": {
-        "x": 43.8,
-        "y": 88.7
+        "x": 54.3,
+        "y": 88.8
       }
     },
     "result": {
