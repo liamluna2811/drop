@@ -1867,5 +1867,42 @@ window.LINEUPS = [
       "note": "La molly tombe sous l'abri (hut) du site B, sur le spot de plant."
     },
     "notes": ""
+  },
+  {
+    "id": "corrode-molly-default-a-depuis-a-pocket",
+    "map": "corrode",
+    "title": "Molly default A depuis A Pocket",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 49.3,
+      "y": 15.7
+    },
+    "impact": {
+      "x": 36.7,
+      "y": 22.8
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans A Pocket, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/corrode/a-pocket-default-visee.webp",
+      "note": "Place ton crosshair (le petit trait rouge) juste au-dessus du muret, sur le bord gauche de l'ouverture ronde du bâtiment, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 51.0,
+        "y": 46.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/corrode/a-pocket-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, devant la caisse."
+    },
+    "notes": ""
   }
 ];
