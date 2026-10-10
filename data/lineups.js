@@ -2291,8 +2291,8 @@ window.LINEUPS = [
       "y": 85.9
     },
     "position": {
-      "image": "assets/lineups/split/b-back-default-carte.webp",
-      "note": "Tout au fond de B Back, dans le coin, comme sur la carte."
+      "image": "assets/lineups/split/b-back-default-position.webp",
+      "note": "Au fond de B Back, colle-toi dans le coin contre le mur, juste à gauche du climatiseur, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-back-default-visee.webp",
