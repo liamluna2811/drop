@@ -1607,5 +1607,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant triple A, à côté des caisses empilées."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-plant-triple-a-depuis-a-short",
+    "map": "bind",
+    "title": "Molly plant triple A depuis A Short",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 57.7,
+      "y": 54.4
+    },
+    "impact": {
+      "x": 75.9,
+      "y": 34.5
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Au début d'A Short, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/a-short-triple-visee.webp",
+      "note": "Place ton crosshair dans le ciel, juste à droite du câble qui pend, à mi-hauteur entre les deux toits, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 46.7,
+        "y": 44.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/a-short-triple-resultat.webp",
+      "note": "La molly tombe sur le spot de plant triple A, à côté des caisses empilées."
+    },
+    "notes": ""
   }
 ];
