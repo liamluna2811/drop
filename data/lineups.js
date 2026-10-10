@@ -3493,5 +3493,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans le pit du site B, au pied de la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "lotus-molly-plant-default-c-depuis-c-lobby",
+    "map": "lotus",
+    "title": "Molly plant default C depuis C Lobby",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 24.6,
+      "y": 77.4
+    },
+    "impact": {
+      "x": 15.7,
+      "y": 50.9
+    },
+    "position": {
+      "image": "assets/lineups/lotus/c-lobby-default-carte.webp",
+      "note": "Place-toi à C Lobby, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/lotus/c-lobby-default-visee.webp",
+      "note": "Place le crosshair sur le coin rouge, en haut à droite de la barre de la molly, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 38.2,
+        "y": 75.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/lotus/c-lobby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site C, sur et autour de la plateforme."
+    },
+    "notes": ""
   }
 ];
