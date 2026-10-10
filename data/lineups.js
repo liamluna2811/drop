@@ -2492,5 +2492,43 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, autour du bac à plantes."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-elbow-a-depuis-a-lobby",
+    "map": "split",
+    "title": "Molly elbow A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant",
+      "Délogement"
+    ],
+    "spot": {
+      "x": 65.9,
+      "y": 12.8
+    },
+    "impact": {
+      "x": 22.6,
+      "y": 11.2
+    },
+    "position": {
+      "image": "assets/lineups/split/a-lobby-elbow-carte.webp",
+      "note": "Même position que la molly default A depuis A Lobby : au fond d'A Lobby, dans le coin côté spawn."
+    },
+    "aim": {
+      "image": "assets/lineups/split/a-lobby-elbow-visee.webp",
+      "note": "Aligne la marque rouge en haut de la flamme du HUD comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 43.6,
+        "y": 90.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/a-lobby-elbow-resultat.webp",
+      "note": "La molly tombe dans Elbow, au pied des escaliers d'A Back."
+    },
+    "notes": ""
   }
 ];
