@@ -2476,8 +2476,8 @@ window.LINEUPS = [
       "y": 12.8
     },
     "position": {
-      "image": "assets/lineups/split/a-lobby-default-carte.webp",
-      "note": "Au fond d'A Lobby, dans le coin côté spawn, comme sur la carte."
+      "image": "assets/lineups/split/a-lobby-position.webp",
+      "note": "Au fond d'A Lobby, colle-toi contre le mur en bois, juste à droite du petit bac à plantes, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/a-lobby-default-visee.webp",
@@ -2514,8 +2514,8 @@ window.LINEUPS = [
       "y": 11.2
     },
     "position": {
-      "image": "assets/lineups/split/a-lobby-elbow-carte.webp",
-      "note": "Même position que la molly default A depuis A Lobby : au fond d'A Lobby, dans le coin côté spawn."
+      "image": "assets/lineups/split/a-lobby-position.webp",
+      "note": "Au fond d'A Lobby, colle-toi contre le mur en bois, juste à droite du petit bac à plantes, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/a-lobby-elbow-visee.webp",
@@ -2588,8 +2588,8 @@ window.LINEUPS = [
       "y": 9.4
     },
     "position": {
-      "image": "assets/lineups/split/a-lobby-screen-carte.webp",
-      "note": "Même position que la molly default A depuis A Lobby : au fond d'A Lobby, dans le coin côté spawn."
+      "image": "assets/lineups/split/a-lobby-position.webp",
+      "note": "Au fond d'A Lobby, colle-toi contre le mur en bois, juste à droite du petit bac à plantes, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/a-lobby-screen-visee.webp",
@@ -2625,8 +2625,8 @@ window.LINEUPS = [
       "y": 5.5
     },
     "position": {
-      "image": "assets/lineups/split/a-lobby-back-screen-carte.webp",
-      "note": "Même position que la molly default A depuis A Lobby : au fond d'A Lobby, dans le coin côté spawn."
+      "image": "assets/lineups/split/a-lobby-position.webp",
+      "note": "Au fond d'A Lobby, colle-toi contre le mur en bois, juste à droite du petit bac à plantes, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/a-lobby-back-screen-visee.webp",
