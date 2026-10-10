@@ -1814,8 +1814,8 @@ window.LINEUPS = [
       "y": 79.0
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Côté CT, au-dessus de B Arch, comme sur la carte."
+      "image": "assets/lineups/corrode/b-ct-corner-position.webp",
+      "note": "Côté CT, au-dessus de B Arch, colle-toi dans le coin entre le muret et la caisse en bois avec le pot de fleurs, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/corrode/b-ct-corner-visee.webp",
