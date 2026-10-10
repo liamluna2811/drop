@@ -663,5 +663,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant safe B. Utilisable en retake ou en anti-plant."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-default-a-depuis-a-main",
+    "map": "abyss",
+    "title": "Molly default A depuis A Main",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 65.7,
+      "y": 20.4
+    },
+    "impact": {
+      "x": 47.6,
+      "y": 13.8
+    },
+    "position": {
+      "image": "assets/lineups/abyss/a-main-default-position.webp",
+      "note": "Mets-toi dans A Main, collé contre le coin du bâtiment à côté de la porte, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/a-main-default-visee.webp",
+      "note": "Place ton crosshair dans le coin en haut de l'encadrement de la porte, sous le toit, puis lancer normal.",
+      "target": {
+        "x": 55.8,
+        "y": 48.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/a-main-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, devant les bidons."
+    },
+    "notes": ""
   }
 ];
