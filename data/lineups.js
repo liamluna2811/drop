@@ -1297,5 +1297,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, autour des caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-anti-plant-default-b-depuis-ct",
+    "map": "ascent",
+    "title": "Molly anti-plant default B depuis CT",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 14.2,
+      "y": 52.8
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Au spawn défenseur (CT), côté B, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/b-antiplant-default-visee.webp",
+      "note": "Place ton crosshair sur le bord gauche du bâtiment orange, à droite de la statue du lion, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 56.1,
+        "y": 51.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/b-antiplant-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, devant les caisses."
+    },
+    "notes": ""
   }
 ];
