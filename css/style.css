@@ -1152,9 +1152,9 @@ select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csv
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--cyan);
-  color: #0b1118;
-  box-shadow: 0 0 0 2px #0b1118, 0 0 12px rgba(79, 209, 232, 0.6);
+  background: var(--pl, var(--cyan));
+  color: #fff;
+  box-shadow: 0 0 0 2px #0b1118, 0 0 12px color-mix(in srgb, var(--pl, var(--cyan)) 60%, transparent);
 }
 .player-badge svg { width: 64%; height: 64%; fill: currentColor; }
 
@@ -1294,7 +1294,7 @@ button.marker { padding: 0; border: 0; background: none; color: inherit; font: i
 }
 .spot-mark.show { opacity: 1; pointer-events: auto; cursor: pointer; }
 .spot-mark .player-badge { --size: 26px; transition: transform 0.15s; }
-.spot-mark:hover .player-badge, .spot-mark.active .player-badge { transform: scale(1.25); box-shadow: 0 0 0 2px #0b1118, 0 0 0 4px var(--cyan), 0 0 16px var(--cyan); }
+.spot-mark:hover .player-badge, .spot-mark.active .player-badge { transform: scale(1.25); box-shadow: 0 0 0 2px #0b1118, 0 0 0 4px var(--pl), 0 0 16px var(--pl); }
 .spot-mark:hover .marker-label, .spot-mark.active .marker-label { opacity: 1; }
 
 .legend-hint { color: var(--dim); font-style: italic; }
@@ -1313,3 +1313,16 @@ button.marker { padding: 0; border: 0; background: none; color: inherit; font: i
 .group-bar div { flex: 1; display: grid; line-height: 1.25; }
 .group-bar strong { font-size: 14px; }
 .group-bar span { font-size: 12px; color: var(--muted); }
+
+/* Impact partagé attaque + défense : pastille mi-rouge mi-bleue */
+.ab-badge.ab-split {
+  --red-s: var(--red);
+  --blue-s: #3d9bff;
+  border-color: transparent;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--red-s) 24%, #0b1118) 50%, color-mix(in srgb, var(--blue-s) 24%, #0b1118) 50%) padding-box,
+    linear-gradient(90deg, var(--red-s) 50%, var(--blue-s) 50%) border-box;
+  color: #fff;
+}
+.ab-split .ab-site, .ab-split .ab-type { border-color: #d8d2e6; }
+.marker.mixed .marker-count { background: linear-gradient(90deg, var(--red) 50%, #3d9bff 50%); }

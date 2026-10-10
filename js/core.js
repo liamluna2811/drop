@@ -151,8 +151,9 @@ const VL = (() => {
   }
 
   // Pastille « joueur » (emplacement où se placer).
-  function playerBadge(extraClass = '') {
-    return `<span class="player-badge ${extraClass}" title="Emplacement du joueur"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg></span>`;
+  // Rouge pour un attaquant, bleu pour un défenseur.
+  function playerBadge(side, extraClass = '') {
+    return `<span class="player-badge ${extraClass}" style="--pl:${abilityColor(side)}" title="Emplacement du joueur${side === 'defense' ? ' (défense)' : side === 'attack' ? ' (attaque)' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg></span>`;
   }
 
   // Temps avant explosion : 3 -> « 3 s », 3.5 -> « 3,5 s ».

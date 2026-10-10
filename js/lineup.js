@@ -116,7 +116,7 @@
             ${map.minimap ? `<img src="${esc(map.minimap)}" alt="Minimap ${esc(map.name)}">` : '<div class="img-ph">Minimap indisponible</div>'}
             ${spot && impact ? `<svg class="mini-map-line" style="--ab:${VL.abilityColor(lineup.side)}" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="${spot.x}" y1="${spot.y}" x2="${impact.x}" y2="${impact.y}"/></svg>` : ''}
             ${impact ? `<span class="mini-map-spot" style="${pt(impact)}" title="Impact de la molly">${VL.abilityBadge(agent, lineup)}</span>` : ''}
-            ${spot ? `<span class="mini-map-spot" style="${pt(spot)}">${VL.playerBadge()}</span>` : ''}
+            ${spot ? `<span class="mini-map-spot" style="${pt(spot)}">${VL.playerBadge(lineup.side)}</span>` : ''}
           </div>
         </a>
         ${lineup.notes ? `<div class="card"><h3>Notes</h3><p class="notes">${esc(lineup.notes)}</p></div>` : ''}

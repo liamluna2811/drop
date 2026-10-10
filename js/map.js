@@ -215,8 +215,8 @@
       return;
     }
     const head = group ? `
-      <div class="group-bar" style="--ab:${VL.abilityColor(group.side)}">
-        ${VL.abilityBadge(agent, group.items[0])}
+      <div class="group-bar" style="--ab:${groupColor(group)}">
+        ${groupBadge(group)}
         <div><strong>${items.length} position${items.length > 1 ? 's' : ''}</strong><span>pour ce point d'impact</span></div>
         <button type="button" class="btn btn-sm btn-ghost" data-act="clear-group">Tout voir</button>
       </div>` : '';
@@ -249,13 +249,15 @@
     for (const l of lineups.filter(x => x.spot)) {
       const impact = VL.impactFor(l);
       const at = impact || l.spot;
-      const g = out.find(g => g.side === l.side && !!g.impact === !!impact
-        && Math.hypot(g.x - at.x, g.y - at.y) < 1.5);
+      const g = out.find(g => !!g.impact === !!impact
+        && Math.hypot(g.x - at.x, g.y - at.y) < (impact ? 2 : 0.5));
       if (g) g.items.push(l);
-      else out.push({ side: l.side, impact: !!impact, x: at.x, y: at.y, items: [l] });
+      else out.push({ impact: !!impact, x: at.x, y: at.y, items: [l] });
     }
     for (const g of out) {
-      g.key = `${g.side}@${g.x},${g.y}`;
+      const sides = new Set(g.items.map(l => l.side));
+      g.side = sides.size > 1 ? 'mixed' : g.items[0].side;
+      g.key = `${g.impact ? 'impact' : 'spot'}@${g.x},${g.y}`;
       g.x = VL.round(g.items.reduce((s, l) => s + (VL.impactFor(l) || l.spot).x, 0) / g.items.length);
       g.y = VL.round(g.items.reduce((s, l) => s + (VL.impactFor(l) || l.spot).y, 0) / g.items.length);
     }
@@ -282,6 +284,18 @@
 
   const off = p => (p.ox || p.oy ? `--ox:${p.ox}px;--oy:${p.oy}px;` : '');
 
+  // Couleur d'un groupe : rouge, bleu, ou violet (repère) quand il mélange
+  // attaque et défense — la pastille est alors mi-rouge mi-bleue.
+  const groupColor = g => (g.side === 'mixed' ? '#b06ad8' : VL.abilityColor(g.side));
+
+  function groupBadge(g) {
+    if (g.side !== 'mixed') return VL.abilityBadge(agent, g.items[0]);
+    const types = new Set(g.items.map(l => VL.lineupType(l)));
+    const sites = new Set(g.items.map(l => l.site));
+    const proxy = { site: sites.size === 1 ? g.items[0].site : '', tags: types.size === 1 ? g.items[0].tags : [] };
+    return VL.abilityBadge(agent, proxy, 'ab-split');
+  }
+
   function renderMarkers() {
     const shown = new Set(filtered().map(l => l.id));
     groups = buildGroups()
@@ -289,14 +303,15 @@
       .filter(g => g.items.length);
     if (selectedKey && !groups.some(g => g.key === selectedKey)) selectedKey = null;
     spread(groups, 2.5);
+    groups.sort((a, b) => a.y - b.y);
 
     markersEl.innerHTML = groups.map(g => {
       const l = g.items[0];
       const n = g.items.length;
       const label = n > 1 ? `${n} positions — clique pour les voir` : esc(l.title);
       return `
-        <button type="button" class="marker" data-group="${esc(g.key)}" style="left:${g.x}%;top:${g.y}%;${off(g)}--ab:${VL.abilityColor(g.side)}" aria-label="${n > 1 ? `${n} lineups` : esc(l.title)}">
-          ${VL.abilityBadge(agent, l)}
+        <button type="button" class="marker ${g.side === 'mixed' ? 'mixed' : ''}" data-group="${esc(g.key)}" style="left:${g.x}%;top:${g.y}%;${off(g)}--ab:${groupColor(g)}" aria-label="${n > 1 ? `${n} lineups` : esc(l.title)}">
+          ${groupBadge(g)}
           ${n > 1 ? `<span class="marker-count">${n}</span>` : ''}
           <span class="marker-label">${label}</span>
         </button>`;
@@ -312,7 +327,7 @@
       </svg>
       ${spots.map(s => `
         <a class="spot-mark" href="lineup.html?id=${encodeURIComponent(s.l.id)}" data-id="${esc(s.l.id)}" data-group="${esc(s.g.key)}" style="left:${s.x}%;top:${s.y}%;${off(s)}">
-          ${VL.playerBadge()}
+          ${VL.playerBadge(s.l.side)}
           <span class="marker-label">${esc(s.l.title)}${VL.formatFuse(s.l.fuse) ? ` · ${VL.formatFuse(s.l.fuse)}` : ''}</span>
         </a>`).join('')}`;
     applyState();
