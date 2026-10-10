@@ -3477,8 +3477,8 @@ window.LINEUPS = [
       "y": 44.6
     },
     "position": {
-      "image": "assets/lineups/lotus/b-pillars-pit-carte.webp",
-      "note": "Place-toi en haut de B Pillars, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/b-pillars-position.webp",
+      "note": "En haut de B Pillars, colle-toi dans le coin entre le mur et la caisse, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/b-pillars-pit-visee.webp",
