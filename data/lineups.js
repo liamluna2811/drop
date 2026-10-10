@@ -3456,5 +3456,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open du site B, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "lotus-molly-plant-pit-b-depuis-b-pillars",
+    "map": "lotus",
+    "title": "Molly plant pit B depuis B Pillars",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 53.0,
+      "y": 71.4
+    },
+    "impact": {
+      "x": 49.8,
+      "y": 44.6
+    },
+    "position": {
+      "image": "assets/lineups/lotus/b-pillars-pit-carte.webp",
+      "note": "Place-toi en haut de B Pillars, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/lotus/b-pillars-pit-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, en bas de la barre de la molly, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 38.5,
+        "y": 86.6
+      }
+    },
+    "result": {
+      "image": "assets/lineups/lotus/b-pillars-pit-resultat.webp",
+      "note": "La molly tombe dans le pit du site B, au pied de la caisse."
+    },
+    "notes": ""
   }
 ];
