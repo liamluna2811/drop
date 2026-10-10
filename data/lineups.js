@@ -2678,5 +2678,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans le pocket du site A, dans le coin."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-plant-default-b-depuis-mid-tiles",
+    "map": "summit",
+    "title": "Molly plant default B depuis Mid Tiles",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 34.5,
+      "y": 63.1
+    },
+    "impact": {
+      "x": 5.3,
+      "y": 35.8
+    },
+    "position": {
+      "image": "assets/lineups/summit/b-tiles-default-carte.webp",
+      "note": "Dans Mid Tiles, à l'entrée côté B Lobby, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/b-tiles-default-visee.webp",
+      "note": "Aligne le trait rouge du HUD (en bas à droite de l'indicateur de lancer) comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 45.1,
+        "y": 85.6
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/b-tiles-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, devant la porte, entre les caisses."
+    },
+    "notes": ""
   }
 ];
