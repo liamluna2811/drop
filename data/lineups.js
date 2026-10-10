@@ -3641,5 +3641,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site B, au pied des caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "pearl-molly-plant-safe-b-depuis-b-ramp",
+    "map": "pearl",
+    "title": "Molly plant safe B depuis B Ramp",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 17.7,
+      "y": 77.1
+    },
+    "impact": {
+      "x": 14.7,
+      "y": 36.9
+    },
+    "position": {
+      "image": "assets/lineups/pearl/b-ramp-default-carte.webp",
+      "note": "Place-toi en bas de B Ramp, comme indiqué sur la carte (même position que le default)."
+    },
+    "aim": {
+      "image": "assets/lineups/pearl/b-ramp-safe-visee.webp",
+      "note": "Place le crosshair sur le petit trait rouge, à gauche de la première icône de la barre de compétences, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 28.4,
+        "y": 92.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/pearl/b-ramp-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe du site B, au pied de la petite caisse contre le mur."
+    },
+    "notes": ""
   }
 ];
