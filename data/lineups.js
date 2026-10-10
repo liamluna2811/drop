@@ -3329,8 +3329,8 @@ window.LINEUPS = [
       "y": 37.5
     },
     "position": {
-      "image": "assets/lineups/lotus/a-link-default-carte.webp",
-      "note": "Place-toi au bout d'A Link, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/a-link-position.webp",
+      "note": "Au bout d'A Link, colle-toi contre le mur, à gauche de la porte rotative, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/a-link-default-visee.webp",
