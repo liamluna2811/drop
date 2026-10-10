@@ -2864,5 +2864,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot hut B, devant la petite maison : en anti-plant ou en retake."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-plant-default-a-depuis-a-main",
+    "map": "summit",
+    "title": "Molly plant default A depuis A Main",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 76.4,
+      "y": 54.0
+    },
+    "impact": {
+      "x": 88.0,
+      "y": 46.2
+    },
+    "position": {
+      "image": "assets/lineups/summit/a-main-default-carte.webp",
+      "note": "En haut d'A Main, au coin à droite avant d'entrer sur le site, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/a-main-default-visee.webp",
+      "note": "Place le crosshair sur le point rouge, au coin du haut du rocher, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 55.1,
+        "y": 44.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/a-main-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, au bord du site."
+    },
+    "notes": ""
   }
 ];
