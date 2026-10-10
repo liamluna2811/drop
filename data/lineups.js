@@ -2270,5 +2270,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, contre la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-default-b-depuis-b-back",
+    "map": "split",
+    "title": "Molly plant default B depuis B Back",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 9,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 22.8,
+      "y": 92.4
+    },
+    "impact": {
+      "x": 34.5,
+      "y": 85.9
+    },
+    "position": {
+      "image": "assets/lineups/split/b-back-default-carte.webp",
+      "note": "Tout au fond de B Back, dans le coin, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/b-back-default-visee.webp",
+      "note": "Aligne le trait rouge du HUD (entre la flamme et l'icône suivante) comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 48.0,
+        "y": 92.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/b-back-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, contre la caisse."
+    },
+    "notes": ""
   }
 ];
