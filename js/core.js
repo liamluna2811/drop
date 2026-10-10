@@ -58,7 +58,9 @@ const VL = (() => {
 
   /* ---------- API valorant-api.com ---------- */
 
-  async function cachedFetch(key, url, transform) {
+  async function cachedFetch(key, url, transform, local) {
+    // Données intégrées (data/api.js) : pas besoin de réseau.
+    if (local) return transform(local);
     const cached = load(key);
     if (cached && Date.now() - cached.t < CACHE_TTL) return cached.data;
     try {
@@ -97,6 +99,7 @@ const VL = (() => {
   function getMaps() {
     mapsPromise ??= cachedFetch(KEYS.maps, `${API}/maps`, data =>
       data.filter(m => m.tacticalDescription && m.displayIcon).map(normalizeMap),
+      window.VL_API?.maps,
     )
       .then(maps => ({ maps, offline: false }))
       .catch(() => ({
@@ -136,7 +139,7 @@ const VL = (() => {
         colors: agent.backgroundGradientColors || [],
         abilityIcon: match?.displayIcon || '',
       };
-    }).catch(() => null);
+    }, window.VL_API?.agents).catch(() => null);
     return agentPromise;
   }
 
