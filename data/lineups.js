@@ -2069,8 +2069,8 @@ window.LINEUPS = [
       "y": 51.5
     },
     "position": {
-      "image": "assets/lineups/fracture/b-tree-default-carte.webp",
-      "note": "Dans B Tree, sous B Tunnel, comme sur la carte."
+      "image": "assets/lineups/fracture/b-tree-default-position.webp",
+      "note": "Dans B Tree, colle-toi entre la grande caisse et la petite caisse, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/fracture/b-tree-default-visee.webp",
