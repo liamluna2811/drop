@@ -2254,8 +2254,8 @@ window.LINEUPS = [
       "y": 85.9
     },
     "position": {
-      "image": "assets/lineups/split/b-alley-default-carte.webp",
-      "note": "Au bout de B Alley, côté spawn défenseur, comme sur la carte."
+      "image": "assets/lineups/split/b-alley-position.webp",
+      "note": "Au bout de B Alley, colle-toi dans le coin au pied du mur tagué, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-alley-default-visee.webp",
@@ -2439,8 +2439,8 @@ window.LINEUPS = [
       "y": 88.1
     },
     "position": {
-      "image": "assets/lineups/split/b-alley-open-carte.webp",
-      "note": "Même position que la molly default B depuis B Alley : au bout de B Alley, côté spawn défenseur."
+      "image": "assets/lineups/split/b-alley-position.webp",
+      "note": "Au bout de B Alley, colle-toi dans le coin au pied du mur tagué, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-alley-open-visee.webp",
