@@ -3197,5 +3197,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant safe du site A, à droite de la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "sunset-molly-retake-safe-a-depuis-a-link",
+    "map": "sunset",
+    "title": "Molly retake safe A depuis A Link",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Retake"
+    ],
+    "spot": {
+      "x": 56.5,
+      "y": 26.8
+    },
+    "impact": {
+      "x": 85.5,
+      "y": 41.5
+    },
+    "position": {
+      "image": "assets/lineups/sunset/a-link-safe-carte.webp",
+      "note": "Place-toi à A Link, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/sunset/a-link-safe-visee.webp",
+      "note": "Aligne le point rouge du haut (au-dessus de la barre de la molly) sur le coin de la caisse, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 44.4,
+        "y": 76.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/sunset/a-link-safe-resultat.webp",
+      "note": "La molly tombe sur le spot safe du site A, dans le coin derrière la caisse."
+    },
+    "notes": ""
   }
 ];
