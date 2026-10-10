@@ -477,42 +477,5 @@ window.LINEUPS = [
       "note": "La molly tombe devant la box, sur le spot de plant open B."
     },
     "notes": ""
-  },
-  {
-    "id": "haven-molly-anti-plant-open-b-depuis-c-site",
-    "map": "haven",
-    "title": "Molly anti-plant open B depuis le site C",
-    "site": "B",
-    "side": "defense",
-    "throwType": "Lancer normal",
-    "fuse": 9,
-    "tags": [
-      "Anti-plant"
-    ],
-    "spot": {
-      "x": 40.5,
-      "y": 78.7
-    },
-    "impact": {
-      "x": 42.3,
-      "y": 51.7
-    },
-    "position": {
-      "image": "assets/lineups/haven/b-antiplant-open-position.webp",
-      "note": "Sur le site C, colle-toi contre la petite caisse verte, à droite de la grande box bâchée, comme sur la capture."
-    },
-    "aim": {
-      "image": "assets/lineups/haven/b-antiplant-open-visee.webp",
-      "note": "Place la poutre en bois entre les deux pics rouges au bout des barres de sorts (A et C), puis lancer normal.",
-      "target": {
-        "x": 52.1,
-        "y": 96.1
-      }
-    },
-    "result": {
-      "image": "assets/lineups/haven/b-antiplant-open-resultat.webp",
-      "note": "La molly tombe devant la box, sur le spot de plant open B."
-    },
-    "notes": ""
   }
 ];
