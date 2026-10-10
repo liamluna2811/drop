@@ -2901,5 +2901,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, au bord du site."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-plant-open-a-depuis-a-lobby",
+    "map": "summit",
+    "title": "Molly plant open A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 64.2,
+      "y": 71.6
+    },
+    "impact": {
+      "x": 92.4,
+      "y": 44.4
+    },
+    "position": {
+      "image": "assets/lineups/summit/a-lobby-open-carte.webp",
+      "note": "Dans A Lobby, au coin en bas d'A Main, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/a-lobby-open-visee.webp",
+      "note": "Place le crosshair sur le point rouge, à la pointe du toit vert, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 51.6,
+        "y": 48.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/a-lobby-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open A, autour de la caisse au milieu du site."
+    },
+    "notes": ""
   }
 ];
