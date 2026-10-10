@@ -3440,8 +3440,8 @@ window.LINEUPS = [
       "y": 43.2
     },
     "position": {
-      "image": "assets/lineups/lotus/b-a-door-open-carte.webp",
-      "note": "Place-toi à A Door, comme indiqué sur la carte."
+      "image": "assets/lineups/lotus/a-door-position.webp",
+      "note": "À A Door, colle-toi contre la porte métallique, sur son bord gauche, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/lotus/b-a-door-open-visee.webp",
