@@ -2530,5 +2530,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans Elbow, au pied des escaliers d'A Back."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-retake-elbow-a-depuis-a-screens",
+    "map": "split",
+    "title": "Molly retake elbow A depuis A Screens",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Retake"
+    ],
+    "spot": {
+      "x": 13.5,
+      "y": 33.8
+    },
+    "impact": {
+      "x": 22.6,
+      "y": 11.2
+    },
+    "position": {
+      "image": "assets/lineups/split/a-screens-elbow-carte.webp",
+      "note": "Au début d'A Screens, côté spawn défenseur, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/a-screens-elbow-visee.webp",
+      "note": "Aligne la marque rouge en haut de l'indicateur de lancer du HUD comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 42.9,
+        "y": 78.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/a-screens-elbow-resultat.webp",
+      "note": "La molly tombe dans Elbow, au pied des escaliers d'A Back."
+    },
+    "notes": ""
   }
 ];
