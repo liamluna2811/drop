@@ -3308,5 +3308,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open du site A, devant la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "lotus-molly-plant-default-a-depuis-a-link",
+    "map": "lotus",
+    "title": "Molly plant default A depuis A Link",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 1,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 66.6,
+      "y": 47.0
+    },
+    "impact": {
+      "x": 85.4,
+      "y": 37.5
+    },
+    "position": {
+      "image": "assets/lineups/lotus/a-link-default-carte.webp",
+      "note": "Place-toi au bout d'A Link, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/lotus/a-link-default-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, sur le coin du muret, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 54.8,
+        "y": 48.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/lotus/a-link-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site A, autour de la caisse."
+    },
+    "notes": ""
   }
 ];
