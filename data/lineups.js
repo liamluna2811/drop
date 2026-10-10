@@ -3218,8 +3218,8 @@ window.LINEUPS = [
       "y": 41.5
     },
     "position": {
-      "image": "assets/lineups/sunset/a-link-safe-carte.webp",
-      "note": "Place-toi à A Link, comme indiqué sur la carte."
+      "image": "assets/lineups/sunset/a-link-position.webp",
+      "note": "À A Link, monte en haut des escaliers et colle-toi contre le mur de droite, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/sunset/a-link-safe-visee.webp",
