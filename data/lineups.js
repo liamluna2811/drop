@@ -588,5 +588,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant under B, sous le passage."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-plant-safe-b-depuis-b-main",
+    "map": "abyss",
+    "title": "Molly plant safe B depuis B Main",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 63.5,
+      "y": 67.1
+    },
+    "impact": {
+      "x": 42.5,
+      "y": 92.8
+    },
+    "position": {
+      "image": "assets/lineups/abyss/b-main-safe-position.webp",
+      "note": "Même position que pour l'open et l'under : contre le mur au bout de B Main, entre la porte grise et les bidons bleus."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/b-main-safe-visee.webp",
+      "note": "Vise avec la flamme (icône de la molly dans le HUD) : le bas et le côté gauche de la flamme doivent suivre à peu près les lignes du mur (traits rouges), puis lancer normal.",
+      "target": {
+        "x": 49.0,
+        "y": 92.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/b-main-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe B."
+    },
+    "notes": ""
   }
 ];
