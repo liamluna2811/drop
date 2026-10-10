@@ -1231,5 +1231,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, autour des caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-default-b-depuis-b-lobby",
+    "map": "ascent",
+    "title": "Molly default B depuis B Lobby",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 54.0,
+      "y": 76.7
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans B Lobby, contre le mur, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/b-lobby-default-visee.webp",
+      "note": "Place le bas de la flèche du HUD (le point rouge) sur le coin du bâtiment, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 53.3,
+        "y": 87.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/b-lobby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, autour des caisses."
+    },
+    "notes": ""
   }
 ];
