@@ -1995,8 +1995,8 @@ window.LINEUPS = [
       "y": 52.5
     },
     "position": {
-      "image": "assets/lineups/fracture/a-dish-safe-carte.webp",
-      "note": "En haut d'A Dish, juste après A Gate, comme sur la carte."
+      "image": "assets/lineups/fracture/a-dish-safe-position.webp",
+      "note": "En haut d'A Dish, colle-toi dans le coin gauche de la porte, contre le rocher, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/fracture/a-dish-safe-visee.webp",
