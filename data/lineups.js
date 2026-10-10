@@ -263,5 +263,38 @@ window.LINEUPS = [
       "note": "La molly tombe au pied de la box, sur le spot de plant box C."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-default-c-depuis-c-cubby",
+    "map": "haven",
+    "title": "Molly default C depuis C Cubby",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 62.3,
+      "y": 78.8
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-cubby-default-position.webp",
+      "note": "Colle-toi au fond du Cubby, dans le coin à gauche contre le mur, à côté du pot, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-cubby-default-visee.webp",
+      "note": "Place ton viseur sur le coin du toit de la petite tour, puis lancer normal.",
+      "target": {
+        "x": 65.2,
+        "y": 35.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-cubby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default C."
+    },
+    "notes": ""
   }
 ];
