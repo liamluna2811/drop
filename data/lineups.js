@@ -1314,8 +1314,8 @@ window.LINEUPS = [
       "y": 52.8
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Au spawn défenseur (CT), côté B, comme sur la carte."
+      "image": "assets/lineups/ascent/b-antiplant-ct-position.webp",
+      "note": "Au spawn défenseur côté B, colle-toi contre le muret orange, vers le milieu, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/b-antiplant-default-visee.webp",
