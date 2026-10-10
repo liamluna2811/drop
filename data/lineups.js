@@ -251,11 +251,11 @@ window.LINEUPS = [
       "note": "Même position que la molly default C : colle-toi dans le coin, contre le mur, juste à côté de la barrière en bois."
     },
     "aim": {
-      "image": "assets/lineups/haven/c-long-box-visee.webp",
+      "image": "assets/lineups/haven/c-long-box-visee-2.webp",
       "note": "Place ton viseur sur le coin où le toit de gauche rejoint le bord du toit en tuiles, puis saute et lance.",
       "target": {
-        "x": 51.5,
-        "y": 39.0
+        "x": 56.1,
+        "y": 41.6
       }
     },
     "result": {
