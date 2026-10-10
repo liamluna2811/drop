@@ -1888,8 +1888,8 @@ window.LINEUPS = [
       "y": 22.8
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans A Pocket, comme sur la carte."
+      "image": "assets/lineups/corrode/a-pocket-default-position.webp",
+      "note": "Dans A Pocket, colle-toi dans le coin entre le mur et la grande caisse en bois, sur les planches au sol, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/corrode/a-pocket-default-visee.webp",
