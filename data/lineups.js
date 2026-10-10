@@ -1670,7 +1670,7 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/bind/a-antiplant-triple-visee.webp",
-      "note": "Place le haut de la flèche du HUD (le point rouge) juste au-dessus de l'enseigne « REACTOR A », comme sur la capture, puis lancer normal.",
+      "note": "Place le haut de la flèche du HUD (le point rouge) sur le bas du toit au-dessus de l'enseigne « REACTOR A », comme sur la capture, puis lancer normal.",
       "target": {
         "x": 42.3,
         "y": 88.1
