@@ -1537,5 +1537,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-anti-plant-default-a-depuis-ct-b",
+    "map": "bind",
+    "title": "Molly anti-plant default A depuis CT B",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 37.6,
+      "y": 19.9
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Côté CT, au début de B Hall, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/a-antiplant-ctb-visee.webp",
+      "note": "Place le haut de la flamme (icône de la molly dans le HUD, le point rouge) sur le point indiqué, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 41.2,
+        "y": 89.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/a-antiplant-ctb-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, contre le véhicule."
+    },
+    "notes": ""
   }
 ];
