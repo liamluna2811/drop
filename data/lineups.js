@@ -1504,5 +1504,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-anti-plant-default-b-depuis-ct",
+    "map": "bind",
+    "title": "Molly anti-plant default B depuis CT",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 42.7,
+      "y": 20.0
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. À la sortie du spawn défenseur (CT) vers B Hall, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/b-antiplant-ct-visee.webp",
+      "note": "Place ton crosshair (le point rouge) sur le petit poteau qui dépasse derrière la rambarde, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 52.9,
+        "y": 49.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/b-antiplant-ct-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, devant les caisses."
+    },
+    "notes": ""
   }
 ];
