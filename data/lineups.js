@@ -2455,5 +2455,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open B, au pied des escaliers."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-default-a-depuis-a-lobby",
+    "map": "split",
+    "title": "Molly plant default A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 65.9,
+      "y": 12.8
+    },
+    "impact": {
+      "x": 29.7,
+      "y": 12.8
+    },
+    "position": {
+      "image": "assets/lineups/split/a-lobby-default-carte.webp",
+      "note": "Au fond d'A Lobby, dans le coin côté spawn, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/a-lobby-default-visee.webp",
+      "note": "Aligne le trait rouge sur le coin du haut de l'immeuble grillagé (le crosshair au bout du trait), comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 49.9,
+        "y": 41.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/a-lobby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, autour du bac à plantes."
+    },
+    "notes": ""
   }
 ];
