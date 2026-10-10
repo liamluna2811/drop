@@ -2885,8 +2885,8 @@ window.LINEUPS = [
       "y": 46.2
     },
     "position": {
-      "image": "assets/lineups/summit/a-main-default-carte.webp",
-      "note": "En haut d'A Main, au coin à droite avant d'entrer sur le site, comme sur la carte."
+      "image": "assets/lineups/summit/a-main-default-position.webp",
+      "note": "En haut d'A Main, colle-toi au bord de l'arche, juste à gauche du tronc d'arbre, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/a-main-default-visee.webp",
