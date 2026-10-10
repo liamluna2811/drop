@@ -2699,8 +2699,8 @@ window.LINEUPS = [
       "y": 35.8
     },
     "position": {
-      "image": "assets/lineups/summit/b-tiles-default-carte.webp",
-      "note": "Dans Mid Tiles, à l'entrée côté B Lobby, comme sur la carte."
+      "image": "assets/lineups/summit/b-tiles-position.webp",
+      "note": "Dans Mid Tiles, colle-toi contre le mur, juste à droite de la grande caisse, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/b-tiles-default-visee.webp",
@@ -2810,8 +2810,8 @@ window.LINEUPS = [
       "y": 34.2
     },
     "position": {
-      "image": "assets/lineups/summit/b-tiles-hut-carte.webp",
-      "note": "Même position que la molly default B depuis Mid Tiles : dans Mid Tiles, à l'entrée côté B Lobby."
+      "image": "assets/lineups/summit/b-tiles-position.webp",
+      "note": "Dans Mid Tiles, colle-toi contre le mur, juste à droite de la grande caisse, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/b-tiles-hut-visee.webp",
