@@ -1013,5 +1013,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant dice A, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-plant-dice-a-depuis-a-lobby",
+    "map": "ascent",
+    "title": "Molly plant dice A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 56.2,
+      "y": 29.2
+    },
+    "impact": {
+      "x": 32.8,
+      "y": 12.6
+    },
+    "position": {
+      "image": "",
+      "note": "Même position que la default A depuis A Lobby."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-lobby-dice-visee.webp",
+      "note": "Place ton crosshair juste au-dessus du coin du mur, à gauche du petit pot de fleurs, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 53.6,
+        "y": 50.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-lobby-dice-resultat.webp",
+      "note": "La molly tombe sur le spot de plant dice A, devant les caisses."
+    },
+    "notes": ""
   }
 ];
