@@ -2233,5 +2233,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, contre la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "split-molly-plant-default-b-depuis-b-alley",
+    "map": "split",
+    "title": "Molly plant default B depuis B Alley",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 19.1,
+      "y": 69.9
+    },
+    "impact": {
+      "x": 34.5,
+      "y": 85.9
+    },
+    "position": {
+      "image": "assets/lineups/split/b-alley-default-carte.webp",
+      "note": "Au bout de B Alley, côté spawn défenseur, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/split/b-alley-default-visee.webp",
+      "note": "Aligne la marque rouge du HUD (en bas à gauche, à droite des 100 PV) comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 28.0,
+        "y": 90.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/split/b-alley-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, contre la caisse."
+    },
+    "notes": ""
   }
 ];
