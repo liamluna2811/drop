@@ -370,5 +370,38 @@ window.LINEUPS = [
       "note": "La molly tombe à côté de la box, sur le spot de plant open C."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-anti-plant-default-c-depuis-b-link",
+    "map": "haven",
+    "title": "Molly anti-plant default C depuis B Link",
+    "site": "C",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 33.7,
+      "y": 59.3
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-antiplant-default-position.webp",
+      "note": "Colle-toi dans le coin contre le mur, juste à gauche de la porte en bois sous le graffiti B, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-antiplant-default-visee.webp",
+      "note": "Regarde vers le haut et place ton viseur juste à gauche de la petite poutre qui dépasse du toit, puis lancer normal.",
+      "target": {
+        "x": 58.5,
+        "y": 38.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-antiplant-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default C."
+    },
+    "notes": ""
   }
 ];
