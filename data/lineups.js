@@ -3625,8 +3625,8 @@ window.LINEUPS = [
       "y": 36.9
     },
     "position": {
-      "image": "assets/lineups/pearl/b-link-default-carte.webp",
-      "note": "Place-toi au début de B Link, côté site, comme indiqué sur la carte."
+      "image": "assets/lineups/pearl/b-link-position.webp",
+      "note": "Dans B Link, colle-toi dans le coin entre la caisse en bois et la structure blanche, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/pearl/b-link-default-visee.webp",
