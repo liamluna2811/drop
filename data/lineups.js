@@ -2106,8 +2106,8 @@ window.LINEUPS = [
       "y": 51.5
     },
     "position": {
-      "image": "assets/lineups/fracture/b-arcade-default-carte.webp",
-      "note": "En haut de B Arcade, côté B Bench, comme sur la carte."
+      "image": "assets/lineups/fracture/b-arcade-position.webp",
+      "note": "En haut de B Arcade, monte sur la caisse et place-toi au bout gauche, contre le mur, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/fracture/b-arcade-default-visee.webp",
@@ -2180,8 +2180,8 @@ window.LINEUPS = [
       "y": 57.3
     },
     "position": {
-      "image": "assets/lineups/fracture/b-arcade-safe-carte.webp",
-      "note": "Même position que la molly default B depuis B Arcade : en haut de B Arcade, côté B Bench."
+      "image": "assets/lineups/fracture/b-arcade-position.webp",
+      "note": "En haut de B Arcade, monte sur la caisse et place-toi au bout gauche, contre le mur, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/fracture/b-arcade-safe-visee.webp",
