@@ -2159,5 +2159,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant safe B, dans le coin."
     },
     "notes": ""
+  },
+  {
+    "id": "fracture-molly-plant-safe-b-depuis-b-arcade",
+    "map": "fracture",
+    "title": "Molly plant safe B depuis B Arcade",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 20.9,
+      "y": 30.6
+    },
+    "impact": {
+      "x": 8.5,
+      "y": 57.3
+    },
+    "position": {
+      "image": "assets/lineups/fracture/b-arcade-safe-carte.webp",
+      "note": "Même position que la molly default B depuis B Arcade : en haut de B Arcade, côté B Bench."
+    },
+    "aim": {
+      "image": "assets/lineups/fracture/b-arcade-safe-visee.webp",
+      "note": "Place le crosshair sur le point rouge, dans le ciel juste à gauche des feuilles, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 51.2,
+        "y": 46.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/fracture/b-arcade-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe B, dans le coin."
+    },
+    "notes": ""
   }
 ];
