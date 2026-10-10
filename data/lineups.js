@@ -2328,8 +2328,8 @@ window.LINEUPS = [
       "y": 85.9
     },
     "position": {
-      "image": "assets/lineups/split/b-top-default-carte.webp",
-      "note": "En haut de B Tower (B Top), à côté de Mid Mail, comme sur la carte."
+      "image": "assets/lineups/split/b-top-default-position.webp",
+      "note": "En haut de B Tower, colle-toi dans le coin entre le pilier et le mur rose, au bord des escaliers, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-top-default-visee.webp",
