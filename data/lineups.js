@@ -1050,5 +1050,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant dice A, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-plant-dice-a-depuis-mid-cubby",
+    "map": "ascent",
+    "title": "Molly plant dice A depuis Mid Cubby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 46.6,
+      "y": 38.2
+    },
+    "impact": {
+      "x": 32.8,
+      "y": 12.6
+    },
+    "position": {
+      "image": "",
+      "note": "Même position que la default A depuis Mid Cubby."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-cubby-dice-visee.webp",
+      "note": "Place le trait de la barre des HP (le point rouge) à côté de la tuile du toit, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 32.2,
+        "y": 95.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-cubby-dice-resultat.webp",
+      "note": "La molly tombe sur le spot de plant dice A, devant les caisses."
+    },
+    "notes": ""
   }
 ];
