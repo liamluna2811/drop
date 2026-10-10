@@ -1071,8 +1071,8 @@ window.LINEUPS = [
       "y": 12.6
     },
     "position": {
-      "image": "",
-      "note": "Dans Mid Cubby, mais pas au même endroit que la default A : place-toi comme sur la carte."
+      "image": "assets/lineups/ascent/a-cubby-dice-position.webp",
+      "note": "Dans Mid Cubby, colle-toi dans le coin du mur, juste à droite du dessin de chien, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-cubby-dice-visee.webp",
@@ -1145,8 +1145,8 @@ window.LINEUPS = [
       "y": 7.9
     },
     "position": {
-      "image": "",
-      "note": "Même position que la plant dice A depuis Mid Cubby."
+      "image": "assets/lineups/ascent/a-cubby-dice-position.webp",
+      "note": "Même position que la plant dice A depuis Mid Cubby : dans le coin du mur, juste à droite du dessin de chien."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-cubby-open-visee.webp",
