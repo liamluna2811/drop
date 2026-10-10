@@ -3588,8 +3588,8 @@ window.LINEUPS = [
       "y": 36.9
     },
     "position": {
-      "image": "assets/lineups/pearl/b-ramp-default-carte.webp",
-      "note": "Place-toi en bas de B Ramp, comme indiqué sur la carte."
+      "image": "assets/lineups/pearl/b-ramp-position.webp",
+      "note": "En bas de B Ramp, colle-toi dans le coin entre le mur et le bâtiment, à droite de la porte, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/pearl/b-ramp-default-visee.webp",
@@ -3662,8 +3662,8 @@ window.LINEUPS = [
       "y": 45.6
     },
     "position": {
-      "image": "assets/lineups/pearl/b-ramp-default-carte.webp",
-      "note": "Place-toi en bas de B Ramp, comme indiqué sur la carte (même position que le default)."
+      "image": "assets/lineups/pearl/b-ramp-position.webp",
+      "note": "En bas de B Ramp, colle-toi dans le coin entre le mur et le bâtiment, à droite de la porte, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/pearl/b-ramp-safe-visee.webp",
