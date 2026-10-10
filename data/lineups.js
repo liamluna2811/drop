@@ -2551,8 +2551,8 @@ window.LINEUPS = [
       "y": 11.2
     },
     "position": {
-      "image": "assets/lineups/split/a-screens-elbow-carte.webp",
-      "note": "Au début d'A Screens, côté spawn défenseur, comme sur la carte."
+      "image": "assets/lineups/split/a-screens-elbow-position.webp",
+      "note": "Au début d'A Screens, colle-toi dans le coin entre les deux murs en bois, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/a-screens-elbow-visee.webp",
