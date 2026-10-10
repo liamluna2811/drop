@@ -2773,8 +2773,8 @@ window.LINEUPS = [
       "y": 35.8
     },
     "position": {
-      "image": "assets/lineups/summit/b-drop-default-carte.webp",
-      "note": "En bas de B Drop, à l'entrée du site B, comme sur la carte."
+      "image": "assets/lineups/summit/b-drop-default-position.webp",
+      "note": "En bas de B Drop, colle-toi dans le coin entre le mur et les casiers, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/b-drop-default-visee.webp",
