@@ -1937,5 +1937,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, devant la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "fracture-molly-plant-safe-a-depuis-spawn",
+    "map": "fracture",
+    "title": "Molly plant safe A depuis le spawn",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6.5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 64.5,
+      "y": 91.3
+    },
+    "impact": {
+      "x": 89.5,
+      "y": 52.5
+    },
+    "position": {
+      "image": "assets/lineups/fracture/a-spawn-safe-carte.webp",
+      "note": "Depuis le spawn attaquant, place-toi à l'entrée du couloir vers A Hall, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/fracture/a-spawn-safe-visee.webp",
+      "note": "Vise le ciel avec le crosshair à l'endroit de la capture, à gauche de la structure, puis lancer normal.",
+      "target": {
+        "x": 52.4,
+        "y": 41.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/fracture/a-spawn-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe A, sous la passerelle."
+    },
+    "notes": ""
   }
 ];
