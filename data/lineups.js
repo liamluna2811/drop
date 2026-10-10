@@ -1455,8 +1455,8 @@ window.LINEUPS = [
       "y": 46.2
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. À la sortie du téléporteur B, comme sur la carte."
+      "image": "assets/lineups/bind/b-tp-default-position.webp",
+      "note": "À la sortie du téléporteur B, colle-toi dans le coin du mur juste à gauche du TP, à côté de la planche, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/b-tp-default-visee.webp",
