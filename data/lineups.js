@@ -733,5 +733,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, devant les bidons."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-anti-plant-default-a-depuis-a-secret",
+    "map": "abyss",
+    "title": "Molly anti-plant default A depuis A Secret",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 13.7,
+      "y": 25.5
+    },
+    "position": {
+      "image": "assets/lineups/abyss/a-antiplant-default-position.webp",
+      "note": "À la sortie du spawn défenseur vers A Secret, colle-toi contre le muret au bout de la rampe, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/a-antiplant-default-visee.webp",
+      "note": "Place le haut de la flamme (icône de la molly dans le HUD) sur le coin du triangle dessiné sur le mur, puis lancer normal.",
+      "target": {
+        "x": 44.5,
+        "y": 88.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/a-antiplant-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, devant les bidons."
+    },
+    "notes": ""
   }
 ];
