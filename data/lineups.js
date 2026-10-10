@@ -3160,5 +3160,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site A, contre la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "sunset-molly-plant-safe-a-depuis-a-elbow",
+    "map": "sunset",
+    "title": "Molly plant safe A depuis A Elbow",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 94.9,
+      "y": 40.8
+    },
+    "impact": {
+      "x": 84.8,
+      "y": 40.4
+    },
+    "position": {
+      "image": "assets/lineups/sunset/a-elbow-default-carte.webp",
+      "note": "Place-toi à A Elbow, comme indiqué sur la carte (même position que le default)."
+    },
+    "aim": {
+      "image": "assets/lineups/sunset/a-elbow-safe-visee.webp",
+      "note": "Place le crosshair juste sous le rebord du toit, contre le mur, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 42.9,
+        "y": 44.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/sunset/a-elbow-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe du site A, à droite de la caisse."
+    },
+    "notes": ""
   }
 ];
