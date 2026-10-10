@@ -2736,8 +2736,8 @@ window.LINEUPS = [
       "y": 35.8
     },
     "position": {
-      "image": "assets/lineups/summit/b-ct-default-carte.webp",
-      "note": "Côté CT, au coin de B Gym vers le spawn défenseur, comme sur la carte."
+      "image": "assets/lineups/summit/b-ct-position.webp",
+      "note": "Côté CT, colle-toi dans le coin du mur, juste à gauche du bac à plantes, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/b-ct-default-visee.webp",
@@ -2848,8 +2848,8 @@ window.LINEUPS = [
       "y": 34.2
     },
     "position": {
-      "image": "assets/lineups/summit/b-ct-hut-carte.webp",
-      "note": "Même position que la molly anti-plant default B depuis CT : au coin de B Gym vers le spawn défenseur."
+      "image": "assets/lineups/summit/b-ct-position.webp",
+      "note": "Côté CT, colle-toi dans le coin du mur, juste à gauche du bac à plantes, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/summit/b-ct-hut-visee.webp",
