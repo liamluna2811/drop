@@ -206,8 +206,8 @@ window.LINEUPS = [
       "Post-plant"
     ],
     "spot": {
-      "x": 73.9,
-      "y": 88.1
+      "x": 73.5,
+      "y": 88.6
     },
     "position": {
       "image": "assets/lineups/haven/c-long-default-position.webp",
@@ -224,6 +224,43 @@ window.LINEUPS = [
     "result": {
       "image": "assets/lineups/haven/c-long-default-resultat.webp",
       "note": "La molly tombe sur le spot de plant default C."
+    },
+    "notes": ""
+  },
+  {
+    "id": "haven-molly-plant-box-c-depuis-c-long",
+    "map": "haven",
+    "title": "Molly plant box C depuis C Long",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Saut + lancer",
+    "fuse": 3,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 73.5,
+      "y": 88.6
+    },
+    "impact": {
+      "x": 32.2,
+      "y": 85.9
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-long-box-position.webp",
+      "note": "Même position que la molly default C : colle-toi dans le coin, contre le mur, juste à côté de la barrière en bois."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-long-box-visee.webp",
+      "note": "Place ton viseur sur le coin où le toit de gauche rejoint le bord du toit en tuiles, puis saute et lance.",
+      "target": {
+        "x": 51.5,
+        "y": 39.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-long-box-resultat.webp",
+      "note": "La molly tombe au pied de la box, sur le spot de plant box C."
     },
     "notes": ""
   }
