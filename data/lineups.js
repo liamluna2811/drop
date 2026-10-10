@@ -1963,14 +1963,51 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/fracture/a-spawn-safe-visee.webp",
-      "note": "Vise le ciel avec le crosshair à l'endroit de la capture, à gauche de la structure, puis lancer normal.",
+      "note": "Place le point rouge sur la flèche du HUD de lancer, comme sur la capture, puis lancer normal.",
       "target": {
-        "x": 52.4,
-        "y": 41.1
+        "x": 47.7,
+        "y": 81.1
       }
     },
     "result": {
       "image": "assets/lineups/fracture/a-spawn-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe A, sous la passerelle."
+    },
+    "notes": ""
+  },
+  {
+    "id": "fracture-molly-plant-safe-a-depuis-dish",
+    "map": "fracture",
+    "title": "Molly plant safe A depuis A Dish",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 66.6,
+      "y": 20.4
+    },
+    "impact": {
+      "x": 89.5,
+      "y": 52.5
+    },
+    "position": {
+      "image": "assets/lineups/fracture/a-dish-safe-carte.webp",
+      "note": "En haut d'A Dish, juste après A Gate, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/fracture/a-dish-safe-visee.webp",
+      "note": "Place le crosshair dans le ciel, sous le bord de la passerelle, au-dessus du panneau Kingdom, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 55.5,
+        "y": 42.6
+      }
+    },
+    "result": {
+      "image": "assets/lineups/fracture/a-dish-safe-resultat.webp",
       "note": "La molly tombe sur le spot de plant safe A, sous la passerelle."
     },
     "notes": ""
