@@ -403,5 +403,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default C."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-plant-open-c-depuis-c-long",
+    "map": "haven",
+    "title": "Molly plant open C depuis C Long",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3.5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 73.9,
+      "y": 78.1
+    },
+    "impact": {
+      "x": 39.6,
+      "y": 84.6
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-long-open-position.webp",
+      "note": "Colle-toi contre le mur du fond, sous le cadre accroché au mur, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-long-open-visee.webp",
+      "note": "Place le début de la ligne de l'ultime (X), à gauche de la barre, sur le sommet de la montagne, puis lancer normal.",
+      "target": {
+        "x": 63.6,
+        "y": 94.3
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-long-open-resultat.webp",
+      "note": "La molly tombe entre l'ascenseur et la box, sur le spot de plant open C."
+    },
+    "notes": ""
   }
 ];
