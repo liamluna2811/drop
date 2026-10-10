@@ -766,5 +766,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, devant les bidons."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-anti-plant-bridge-a-depuis-a-secret",
+    "map": "abyss",
+    "title": "Molly anti-plant A Bridge depuis A Secret",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 13.7,
+      "y": 25.5
+    },
+    "impact": {
+      "x": 46.5,
+      "y": 3.4
+    },
+    "position": {
+      "image": "assets/lineups/abyss/a-antiplant-bridge-position.webp",
+      "note": "Même position que l'anti-plant default A : à la sortie du spawn défenseur vers A Secret, contre le muret au bout de la rampe."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/a-antiplant-bridge-visee.webp",
+      "note": "Place le haut de la flamme (icône de la molly dans le HUD) sur le bas du triangle dessiné sur le mur, puis lancer normal.",
+      "target": {
+        "x": 43.8,
+        "y": 88.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/a-antiplant-bridge-resultat.webp",
+      "note": "La molly tombe sur le pont d'A Bridge et bloque le plant."
+    },
+    "notes": ""
   }
 ];
