@@ -2402,8 +2402,8 @@ window.LINEUPS = [
       "y": 88.1
     },
     "position": {
-      "image": "assets/lineups/split/b-top-open-carte.webp",
-      "note": "En haut de B Tower (B Top), plus près de B Tower que pour la default, comme sur la carte."
+      "image": "assets/lineups/split/b-top-open-position.webp",
+      "note": "En haut de B Tower, colle-toi contre le mur, entre la boîte aux lettres et la plante, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/split/b-top-open-visee.webp",
