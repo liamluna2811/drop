@@ -1352,8 +1352,8 @@ window.LINEUPS = [
       "y": 72.9
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans B Main, comme sur la carte."
+      "image": "assets/lineups/ascent/b-main-stairs-position.webp",
+      "note": "En bas de B Main, colle-toi dans le coin entre le pilier de droite et le mur, en face de la position de la default B, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/b-main-stairs-visee.webp",
