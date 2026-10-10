@@ -1681,5 +1681,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant triple A, à côté des caisses empilées."
     },
     "notes": ""
+  },
+  {
+    "id": "corrode-molly-plant-hut-b-depuis-b-main",
+    "map": "corrode",
+    "title": "Molly plant hut B depuis B Main",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 56.8,
+      "y": 72.9
+    },
+    "impact": {
+      "x": 40.5,
+      "y": 74.0
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. En bas de B Main, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/corrode/b-main-hut-visee.webp",
+      "note": "Place ton crosshair (le point rouge) sur la pointe du toit de la petite lucarne de la maison, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 56.1,
+        "y": 49.2
+      }
+    },
+    "result": {
+      "image": "assets/lineups/corrode/b-main-hut-resultat.webp",
+      "note": "La molly tombe sous l'abri (hut) du site B, sur le spot de plant."
+    },
+    "notes": ""
   }
 ];
