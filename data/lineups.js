@@ -700,5 +700,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, devant les bidons."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-default-a-depuis-a-tower",
+    "map": "abyss",
+    "title": "Molly default A depuis A Tower",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 4,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 43.9,
+      "y": 28.3
+    },
+    "position": {
+      "image": "assets/lineups/abyss/a-tower-default-position.webp",
+      "note": "Dans la salle d'A Tower, colle-toi contre la porte, dans le coin du mur, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/a-tower-default-visee.webp",
+      "note": "Place ton crosshair sur le montant gauche de la porte du fond, à hauteur du petit voyant, puis lancer normal.",
+      "target": {
+        "x": 57.9,
+        "y": 52.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/a-tower-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, devant les bidons."
+    },
+    "notes": ""
   }
 ];
