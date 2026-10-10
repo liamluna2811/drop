@@ -2715,5 +2715,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, devant la porte, entre les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-anti-plant-default-b-depuis-ct",
+    "map": "summit",
+    "title": "Molly anti-plant default B depuis CT",
+    "site": "B",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 34.0,
+      "y": 20.3
+    },
+    "impact": {
+      "x": 5.3,
+      "y": 35.8
+    },
+    "position": {
+      "image": "assets/lineups/summit/b-ct-default-carte.webp",
+      "note": "Côté CT, au coin de B Gym vers le spawn défenseur, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/b-ct-default-visee.webp",
+      "note": "Mets le bout de la ligne du HUD (à droite des 100 PV) dans le petit trou, à l'endroit du carré rouge, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 31.9,
+        "y": 91.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/b-ct-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default B, devant la porte, entre les caisses."
+    },
+    "notes": ""
   }
 ];
