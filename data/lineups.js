@@ -3123,5 +3123,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site A, contre la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "sunset-molly-plant-default-a-depuis-a-lobby",
+    "map": "sunset",
+    "title": "Molly plant default A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 73.2,
+      "y": 65.1
+    },
+    "impact": {
+      "x": 77.8,
+      "y": 33.7
+    },
+    "position": {
+      "image": "assets/lineups/sunset/a-lobby-default-carte.webp",
+      "note": "Place-toi à A Lobby, comme indiqué sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/sunset/a-lobby-default-visee.webp",
+      "note": "Place le crosshair là où se rejoignent les traits rouges, au-dessus de l'icône de flamme, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 41.3,
+        "y": 92.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/sunset/a-lobby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site A, contre la caisse."
+    },
+    "notes": ""
   }
 ];
