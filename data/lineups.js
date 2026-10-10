@@ -1087,5 +1087,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant dice A, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-plant-open-a-depuis-a-lobby",
+    "map": "ascent",
+    "title": "Molly plant open A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 56.2,
+      "y": 29.2
+    },
+    "impact": {
+      "x": 34.4,
+      "y": 7.9
+    },
+    "position": {
+      "image": "",
+      "note": "Même position que la default A depuis A Lobby."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-lobby-open-visee.webp",
+      "note": "Place le trait de la barre de vie (le trait rouge) sous la structure et contre le mur, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 14.8,
+        "y": 97.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-lobby-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open A, sous la caisse suspendue."
+    },
+    "notes": ""
   }
 ];
