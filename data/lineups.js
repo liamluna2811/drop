@@ -1958,8 +1958,8 @@ window.LINEUPS = [
       "y": 52.5
     },
     "position": {
-      "image": "assets/lineups/fracture/a-spawn-safe-carte.webp",
-      "note": "Depuis le spawn attaquant, place-toi à l'entrée du couloir vers A Hall, comme sur la carte."
+      "image": "assets/lineups/fracture/a-spawn-safe-position.webp",
+      "note": "Dans le spawn attaquant, colle-toi contre le mur au pied de la poutre en diagonale, juste à gauche du pilier, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/fracture/a-spawn-safe-visee.webp",
