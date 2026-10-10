@@ -1124,5 +1124,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open A, sous la caisse suspendue."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-plant-open-a-depuis-mid-cubby",
+    "map": "ascent",
+    "title": "Molly plant open A depuis Mid Cubby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 48.6,
+      "y": 35.3
+    },
+    "impact": {
+      "x": 34.4,
+      "y": 7.9
+    },
+    "position": {
+      "image": "",
+      "note": "Même position que la plant dice A depuis Mid Cubby."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-cubby-open-visee.webp",
+      "note": "Place le trait de la barre des HP (le point rouge) à côté de la tuile du toit, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 35.4,
+        "y": 92.0
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-cubby-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open A, sous la caisse suspendue."
+    },
+    "notes": ""
   }
 ];
