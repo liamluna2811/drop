@@ -877,5 +877,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, autour du générateur."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-default-a-depuis-a-lobby",
+    "map": "ascent",
+    "title": "Molly default A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 56.2,
+      "y": 29.2
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans A Lobby, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-lobby-default-visee.webp",
+      "note": "Place le trait du HUD à côté des HP (le point rouge) sur le bord de la partie claire du mur, puis lancer normal.",
+      "target": {
+        "x": 32.6,
+        "y": 90.1
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-lobby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, autour du générateur."
+    },
+    "notes": ""
   }
 ];
