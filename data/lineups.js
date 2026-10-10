@@ -2000,15 +2000,52 @@ window.LINEUPS = [
     },
     "aim": {
       "image": "assets/lineups/fracture/a-dish-safe-visee.webp",
-      "note": "Place le crosshair dans le ciel, sous le bord de la passerelle, au-dessus du panneau Kingdom, comme sur la capture, puis lancer normal.",
+      "note": "Aligne les deux points rouges de la flamme du HUD (le haut et le bas à droite de la flamme) comme sur la capture, puis lancer normal.",
       "target": {
-        "x": 55.5,
-        "y": 42.6
+        "x": 49.5,
+        "y": 93.3
       }
     },
     "result": {
       "image": "assets/lineups/fracture/a-dish-safe-resultat.webp",
       "note": "La molly tombe sur le spot de plant safe A, sous la passerelle."
+    },
+    "notes": ""
+  },
+  {
+    "id": "fracture-molly-plant-under-a-depuis-spawn",
+    "map": "fracture",
+    "title": "Molly plant under A depuis le spawn",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Saut + lancer",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 64.5,
+      "y": 91.3
+    },
+    "impact": {
+      "x": 84.6,
+      "y": 46.8
+    },
+    "position": {
+      "image": "assets/lineups/fracture/a-spawn-under-carte.webp",
+      "note": "Dans le coin du spawn attaquant, à l'entrée du couloir vers A Hall, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/fracture/a-spawn-under-visee.webp",
+      "note": "Place le crosshair dans le ciel, juste à gauche de l'arête du mur, comme sur la capture, puis saute et lance au sommet du saut.",
+      "target": {
+        "x": 58.0,
+        "y": 31.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/fracture/a-spawn-under-resultat.webp",
+      "note": "La molly tombe sur le spot de plant under A, sous la structure."
     },
     "notes": ""
   }
