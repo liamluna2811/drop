@@ -1591,8 +1591,8 @@ window.LINEUPS = [
       "y": 35.6
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans Showers (A Bath), comme sur la carte."
+      "image": "assets/lineups/bind/a-shower-triple-position.webp",
+      "note": "Dans Showers, place-toi devant le mur à gauche de l'arche qui mène au site, juste devant les planches posées contre le mur, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/a-shower-triple-visee.webp",
