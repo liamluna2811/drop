@@ -1921,8 +1921,8 @@ window.LINEUPS = [
       "y": 19.1
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. En haut d'A Main, comme sur la carte."
+      "image": "assets/lineups/corrode/a-main-default-position.webp",
+      "note": "En haut d'A Main, colle-toi contre le mur, juste à gauche du bloc de pierre cerclé, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/corrode/a-main-default-visee.webp",
