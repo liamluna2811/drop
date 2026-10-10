@@ -912,9 +912,9 @@ window.LINEUPS = [
     "notes": ""
   },
   {
-    "id": "ascent-molly-default-a-5s",
+    "id": "ascent-molly-default-a-depuis-mid-cubby",
     "map": "ascent",
-    "title": "Molly default A (5 s)",
+    "title": "Molly default A depuis Mid Cubby",
     "site": "A",
     "side": "attack",
     "throwType": "Lancer normal",
@@ -922,9 +922,13 @@ window.LINEUPS = [
     "tags": [
       "Post-plant"
     ],
+    "spot": {
+      "x": 46.6,
+      "y": 38.2
+    },
     "position": {
       "image": "",
-      "note": "Capture de la position à venir."
+      "note": "Capture de la position à venir. Dans Mid Cubby, comme sur la carte."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-default-5s-visee.webp",
