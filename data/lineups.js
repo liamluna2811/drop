@@ -1405,5 +1405,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, contre le véhicule."
     },
     "notes": ""
+  },
+  {
+    "id": "bind-molly-default-a-depuis-a-lobby",
+    "map": "bind",
+    "title": "Molly default A depuis A Lobby",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 69.0,
+      "y": 51.4
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Entre A Short et A Lobby, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/bind/a-lobby-default-visee.webp",
+      "note": "Place ton crosshair (le point rouge) juste à droite du coin du toit, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 50.8,
+        "y": 49.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/bind/a-lobby-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, contre le véhicule."
+    },
+    "notes": ""
   }
 ];
