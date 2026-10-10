@@ -1756,5 +1756,42 @@ window.LINEUPS = [
       "note": "La molly tombe sous l'abri (hut) du site B : en anti-plant ou en retake."
     },
     "notes": ""
+  },
+  {
+    "id": "corrode-molly-plant-corner-b-depuis-b-lobby",
+    "map": "corrode",
+    "title": "Molly plant corner B depuis B Lobby",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 64.8,
+      "y": 67.4
+    },
+    "impact": {
+      "x": 43.2,
+      "y": 79.0
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. En haut de B Lobby, à l'entrée de B Main, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/corrode/b-lobby-corner-visee.webp",
+      "note": "Place le petit trait rouge (au bout de la ligne des HP, à droite du « 100 ») sur l'arête du mur : le trait doit dépasser un peu l'arête vers la droite. Puis lancer normal.",
+      "target": {
+        "x": 35.7,
+        "y": 91.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/corrode/b-lobby-corner-resultat.webp",
+      "note": "La molly tombe dans le coin (corner) du site B, contre le muret."
+    },
+    "notes": ""
   }
 ];
