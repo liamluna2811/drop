@@ -2122,5 +2122,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, contre les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "fracture-molly-plant-safe-b-depuis-b-tree",
+    "map": "fracture",
+    "title": "Molly plant safe B depuis B Tree",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Saut + lancer",
+    "fuse": 4.5,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 27.2,
+      "y": 74.5
+    },
+    "impact": {
+      "x": 8.5,
+      "y": 57.3
+    },
+    "position": {
+      "image": "assets/lineups/fracture/b-tree-safe-carte.webp",
+      "note": "Dans B Tree, sous B Tunnel, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/fracture/b-tree-safe-visee.webp",
+      "note": "Place le crosshair sur le point rouge, au coin du haut du mur, comme sur la capture, puis saute et lance au sommet du saut.",
+      "target": {
+        "x": 47.5,
+        "y": 48.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/fracture/b-tree-safe-resultat.webp",
+      "note": "La molly tombe sur le spot de plant safe B, dans le coin."
+    },
+    "notes": ""
   }
 ];
