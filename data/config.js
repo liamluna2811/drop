@@ -25,7 +25,7 @@ window.VL_CONFIG = {
     'Clic droit (lancer court)',
   ],
 
-  tagSuggestions: ['Post-plant', 'Retake', 'Anti-plant', 'Exécution', 'Clear de coin', 'Spawn', 'Rapide', 'Safe'],
+  tagSuggestions: ['Post-plant', 'Retake', 'Anti-plant', 'Délogement', 'Exécution', 'Clear de coin', 'Spawn', 'Rapide', 'Safe'],
 
   // Orientation de base de chaque minimap, en degrés dans le sens horaire
   // (0, 90, 180 ou 270), pour avoir le spawn attaquant en bas.

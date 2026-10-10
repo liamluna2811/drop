@@ -1330,5 +1330,43 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default B, devant les caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-stairs-b-depuis-b-main",
+    "map": "ascent",
+    "title": "Molly stairs B depuis B Main",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Post-plant",
+      "Délogement"
+    ],
+    "spot": {
+      "x": 47.7,
+      "y": 76.4
+    },
+    "impact": {
+      "x": 22.8,
+      "y": 72.9
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. Dans B Main, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/b-main-stairs-visee.webp",
+      "note": "Place ton crosshair en bas de la fenêtre arrondie de gauche, au niveau du toit de la maison, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 47.3,
+        "y": 50.5
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/b-main-stairs-resultat.webp",
+      "note": "La molly tombe dans les escaliers (stairs) du site B : pour le post-plant ou pour déloger un défenseur."
+    },
+    "notes": ""
   }
 ];
