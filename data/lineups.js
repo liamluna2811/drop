@@ -2975,5 +2975,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant open A, contre le mur à côté de la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "summit-molly-retake-corner-a-depuis-a-cave",
+    "map": "summit",
+    "title": "Molly retake corner A depuis A Cave",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 3,
+    "tags": [
+      "Retake"
+    ],
+    "spot": {
+      "x": 92.3,
+      "y": 21.3
+    },
+    "impact": {
+      "x": 95.8,
+      "y": 39.5
+    },
+    "position": {
+      "image": "assets/lineups/summit/a-cave-corner-carte.webp",
+      "note": "Même position que la molly plant open A depuis A Cave : au fond d'A Cave, dans le coin."
+    },
+    "aim": {
+      "image": "assets/lineups/summit/a-cave-corner-visee.webp",
+      "note": "Place le crosshair sur le point rouge, dans l'arche au bout du couloir, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 51.2,
+        "y": 49.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/summit/a-cave-corner-resultat.webp",
+      "note": "La molly tombe dans le corner du site A, contre la caisse et le mur."
+    },
+    "notes": ""
   }
 ];
