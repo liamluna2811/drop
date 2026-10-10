@@ -894,8 +894,8 @@ window.LINEUPS = [
       "y": 29.2
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans A Lobby, comme sur la carte."
+      "image": "assets/lineups/ascent/a-lobby-position.webp",
+      "note": "Dans A Lobby, colle-toi contre le mur, juste à droite de la grande caisse verte, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-lobby-default-visee.webp",
@@ -1034,8 +1034,8 @@ window.LINEUPS = [
       "y": 12.6
     },
     "position": {
-      "image": "",
-      "note": "Même position que la default A depuis A Lobby."
+      "image": "assets/lineups/ascent/a-lobby-position.webp",
+      "note": "Même position que la default A depuis A Lobby : contre le mur, juste à droite de la grande caisse verte."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-lobby-dice-visee.webp",
@@ -1108,8 +1108,8 @@ window.LINEUPS = [
       "y": 7.9
     },
     "position": {
-      "image": "",
-      "note": "Même position que la default A depuis A Lobby."
+      "image": "assets/lineups/ascent/a-lobby-position.webp",
+      "note": "Même position que la default A depuis A Lobby : contre le mur, juste à droite de la grande caisse verte."
     },
     "aim": {
       "image": "assets/lineups/ascent/a-lobby-open-visee.webp",
