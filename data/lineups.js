@@ -514,5 +514,42 @@ window.LINEUPS = [
       "note": "La molly tombe devant la box, sur le spot de plant open B."
     },
     "notes": ""
+  },
+  {
+    "id": "abyss-molly-plant-open-b-depuis-b-main",
+    "map": "abyss",
+    "title": "Molly plant open B depuis B Main",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 63.5,
+      "y": 67.1
+    },
+    "impact": {
+      "x": 40.1,
+      "y": 87.0
+    },
+    "position": {
+      "image": "assets/lineups/abyss/b-main-open-position.webp",
+      "note": "Colle-toi contre le mur au bout de B Main, entre la porte grise à gauche et les bidons bleus à droite, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/abyss/b-main-open-visee.webp",
+      "note": "Place ton crosshair sur le rocher, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 55.8,
+        "y": 39.9
+      }
+    },
+    "result": {
+      "image": "assets/lineups/abyss/b-main-open-resultat.webp",
+      "note": "La molly tombe sur le spot de plant open B, devant les bidons."
+    },
+    "notes": ""
   }
 ];
