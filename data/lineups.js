@@ -2791,9 +2791,9 @@ window.LINEUPS = [
     "notes": ""
   },
   {
-    "id": "summit-molly-plant-hut-b-depuis-b-lobby",
+    "id": "summit-molly-plant-hut-b-depuis-mid-tiles",
     "map": "summit",
-    "title": "Molly plant hut B depuis B Lobby",
+    "title": "Molly plant hut B depuis Mid Tiles",
     "site": "B",
     "side": "attack",
     "throwType": "Lancer normal",
@@ -2802,27 +2802,27 @@ window.LINEUPS = [
       "Post-plant"
     ],
     "spot": {
-      "x": 28.1,
-      "y": 64.2
+      "x": 34.5,
+      "y": 63.1
     },
     "impact": {
       "x": 16.2,
       "y": 34.2
     },
     "position": {
-      "image": "assets/lineups/summit/b-lobby-hut-carte.webp",
-      "note": "Dans B Lobby, au coin vers Mid Tiles, comme sur la carte."
+      "image": "assets/lineups/summit/b-tiles-hut-carte.webp",
+      "note": "Même position que la molly default B depuis Mid Tiles : dans Mid Tiles, à l'entrée côté B Lobby."
     },
     "aim": {
-      "image": "assets/lineups/summit/b-lobby-hut-visee.webp",
-      "note": "Aligne le point rouge en bas de l'indicateur de lancer du HUD comme sur la capture, puis lancer normal.",
+      "image": "assets/lineups/summit/b-tiles-hut-visee.webp",
+      "note": "Aligne le trait rouge sous l'indicateur de lancer du HUD (au-dessus de la flamme) comme sur la capture, puis lancer normal.",
       "target": {
-        "x": 45.1,
-        "y": 89.3
+        "x": 49.4,
+        "y": 89.1
       }
     },
     "result": {
-      "image": "assets/lineups/summit/b-lobby-hut-resultat.webp",
+      "image": "assets/lineups/summit/b-tiles-hut-resultat.webp",
       "note": "La molly tombe sur le spot de plant hut B, devant la petite maison."
     },
     "notes": ""
