@@ -943,5 +943,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, autour du générateur."
     },
     "notes": ""
+  },
+  {
+    "id": "ascent-molly-anti-plant-default-a-depuis-spawn",
+    "map": "ascent",
+    "title": "Molly anti-plant default A depuis le spawn",
+    "site": "A",
+    "side": "defense",
+    "throwType": "Lancer normal",
+    "fuse": 6,
+    "tags": [
+      "Anti-plant"
+    ],
+    "spot": {
+      "x": 13.2,
+      "y": 35.9
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. À la sortie du spawn défenseur côté A, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/ascent/a-antiplant-default-visee.webp",
+      "note": "Place le trait de la barre des HP (le trait rouge) à côté de la fenêtre du bâtiment, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 34.9,
+        "y": 90.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/ascent/a-antiplant-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, autour du générateur."
+    },
+    "notes": ""
   }
 ];
