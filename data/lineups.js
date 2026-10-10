@@ -1281,8 +1281,8 @@ window.LINEUPS = [
       "y": 42.8
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Dans Mid Pizza, comme sur la carte."
+      "image": "assets/lineups/ascent/b-pizza-default-position.webp",
+      "note": "Dans Mid Pizza, colle-toi dans le coin entre le mur et le rideau de fer de la « Pizzeria da Marzio », sur les sacs, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/ascent/b-pizza-default-visee.webp",
