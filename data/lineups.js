@@ -1904,5 +1904,38 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default A, devant la caisse."
     },
     "notes": ""
+  },
+  {
+    "id": "corrode-molly-default-a-depuis-a-main",
+    "map": "corrode",
+    "title": "Molly default A depuis A Main",
+    "site": "A",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 8,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 63.0,
+      "y": 19.1
+    },
+    "position": {
+      "image": "",
+      "note": "Capture de la position à venir. En haut d'A Main, comme sur la carte."
+    },
+    "aim": {
+      "image": "assets/lineups/corrode/a-main-default-visee.webp",
+      "note": "Place le haut de la flamme du HUD (le point rouge) sur le haut de la cheminée, à gauche de la tour ronde, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 44.6,
+        "y": 90.7
+      }
+    },
+    "result": {
+      "image": "assets/lineups/corrode/a-main-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default A, devant la caisse."
+    },
+    "notes": ""
   }
 ];
