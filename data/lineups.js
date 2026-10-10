@@ -1422,8 +1422,8 @@ window.LINEUPS = [
       "y": 51.4
     },
     "position": {
-      "image": "",
-      "note": "Capture de la position à venir. Entre A Short et A Lobby, comme sur la carte."
+      "image": "assets/lineups/bind/a-lobby-default-position.webp",
+      "note": "Au bout d'A Short, monte sur le rebord en hauteur contre le mur, à côté du boîtier électrique, comme sur la capture."
     },
     "aim": {
       "image": "assets/lineups/bind/a-lobby-default-visee.webp",
