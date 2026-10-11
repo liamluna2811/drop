@@ -3752,5 +3752,42 @@ window.LINEUPS = [
       "note": "La molly tombe dans le coin art du site A, contre le mur."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-plant-default-b-depuis-a-garden",
+    "map": "haven",
+    "title": "Molly plant default B depuis A Garden",
+    "site": "B",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": 7,
+    "tags": [
+      "Post-plant"
+    ],
+    "spot": {
+      "x": 77.7,
+      "y": 42.9
+    },
+    "impact": {
+      "x": 42.6,
+      "y": 51.9
+    },
+    "position": {
+      "image": "assets/lineups/haven/b-garden-default-position.webp",
+      "note": "À A Garden, colle-toi dans le coin entre le muret en pierre et le mur, sous la poutre, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/b-garden-default-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, au bout gauche de la ligne de vie (sous le bouclier), comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 11.2,
+        "y": 97.8
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/b-garden-default-resultat.webp",
+      "note": "La molly tombe sur le spot de plant default du site B, au pied des grosses caisses."
+    },
+    "notes": ""
   }
 ];
