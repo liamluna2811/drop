@@ -2942,7 +2942,7 @@ window.LINEUPS = [
   {
     "id": "summit-molly-plant-open-a-depuis-a-cave",
     "map": "summit",
-    "title": "Molly plant open A depuis A Cave",
+    "title": "Molly plant default A depuis A Cave",
     "site": "A",
     "side": "attack",
     "throwType": "Lancer normal",
@@ -2955,8 +2955,8 @@ window.LINEUPS = [
       "y": 21.3
     },
     "impact": {
-      "x": 92.4,
-      "y": 44.4
+      "x": 88.0,
+      "y": 46.2
     },
     "position": {
       "image": "assets/lineups/summit/a-cave-position.webp",
@@ -2972,7 +2972,7 @@ window.LINEUPS = [
     },
     "result": {
       "image": "assets/lineups/summit/a-cave-open-resultat.webp",
-      "note": "La molly tombe sur le spot de plant open A, contre le mur à côté de la caisse."
+      "note": "La molly tombe sur le spot de plant default du site A, à côté de la caisse."
     },
     "notes": ""
   },

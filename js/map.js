@@ -368,6 +368,13 @@
     const m = e.target.closest('.marker');
     if (!m) return;
     e.stopPropagation();
+    // En train de placer un impact : clic sur un impact existant = même point.
+    if (editing && placing && replacing === 'impact') {
+      const l = groups.find(g => g.key === m.dataset.group)?.items[0];
+      const at = l && VL.impactFor(l);
+      if (at) placeAt({ x: at.x, y: at.y });
+      return;
+    }
     selectGroup(selectedKey === m.dataset.group ? null : m.dataset.group);
   });
 
@@ -394,6 +401,12 @@
     if (!el || !editing) return;
     e.preventDefault();
     e.stopPropagation();
+    // En train de placer un emplacement : clic sur un emplacement existant = même position.
+    if (placing && replacing === 'spot') {
+      const spot = VL.getLineup(el.dataset.id)?.spot;
+      if (spot) placeAt({ x: spot.x, y: spot.y });
+      return;
+    }
     openEditor(VL.getLineup(el.dataset.id));
   });
 
@@ -439,7 +452,7 @@
     placing = true;
     placingEl.innerHTML = '';
     $('#edit-text').innerHTML = replacing === 'impact'
-      ? '<b>Impact</b> — clique là où la molly atterrit.'
+      ? '<b>Impact</b> — clique là où la molly atterrit <span class="muted">(ou sur un impact existant pour le partager)</span>.'
       : '<b>Emplacement</b> — clique là où le joueur se place.'
         + (replacing ? '' : ' <span class="muted">(ou clique sur un emplacement existant pour le modifier)</span>');
   }
@@ -460,6 +473,10 @@
     if (!editing || !placing || e.target.closest('.viewer-tools, .edit-banner, .marker, .spot-mark')) return;
     const pt = clientToPct(e.clientX, e.clientY);
     if (pt.x < 0 || pt.x > 100 || pt.y < 0 || pt.y > 100) return;
+    placeAt(pt);
+  });
+
+  function placeAt(pt) {
     placing = false;
     if (replacing === 'impact') draftImpact = pt;
     else draftSpot = pt;
@@ -471,7 +488,7 @@
     } else {
       openEditor(null, pt);
     }
-  });
+  }
 
   /* ---------- Formulaire ---------- */
 
