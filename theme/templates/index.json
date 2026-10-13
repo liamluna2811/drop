@@ -226,30 +226,6 @@
             "label": "Nouveautés",
             "link": ""
           }
-        },
-        "promo-1": {
-          "type": "promo",
-          "settings": {
-            "position": 6,
-            "style": "dark",
-            "eyebrow": "Offre de lancement",
-            "heading": "-10 % sur tous les canapés",
-            "text": "Jusqu'à la fin du mois",
-            "button_label": "J'en profite",
-            "link": "/collections/all"
-          }
-        },
-        "promo-2": {
-          "type": "promo",
-          "settings": {
-            "position": 10,
-            "style": "light",
-            "eyebrow": "Paiement facilité",
-            "heading": "En 3 ou 4 fois sans frais",
-            "text": "Choisissez votre échéancier au moment du paiement",
-            "button_label": "",
-            "link": ""
-          }
         }
       },
       "block_order": [
@@ -258,15 +234,13 @@
         "chip-3",
         "chip-4",
         "chip-5",
-        "chip-6",
-        "promo-1",
-        "promo-2"
+        "chip-6"
       ],
       "settings": {
         "heading": "Nos canapés",
         "text": "",
         "collection": "all",
-        "products_to_show": 11,
+        "products_to_show": 5,
         "feature_first": true,
         "show_toolbar": true,
         "columns": "4",

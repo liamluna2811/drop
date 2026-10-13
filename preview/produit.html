@@ -2480,31 +2480,56 @@ input.is-unavailable + .variant-swatch::after {
   }
 }
 
-@media (min-width: 990px) {
-  .catalogue__grid .grid__item--featured {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
+/* Canapé vedette : bannière sur toute la largeur de la grille */
+.catalogue__grid .grid__item--featured {
+  grid-column: 1 / -1;
 }
 
 .media--featured {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
 }
 
-@media (min-width: 990px) {
-  .grid__item--featured .card {
+.card--featured .card__cta {
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 750px) {
+  .card--featured {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .card--featured .card__media .media {
     height: 100%;
+    border-radius: calc(var(--radius) - 1px) 0 0 calc(var(--radius) - 1px);
   }
 
-  .grid__item--featured .card__media {
-    flex: 1;
+  .card--featured .card__content {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 2.5rem;
   }
 
-  .grid__item--featured .media--featured {
-    flex: 1;
-    aspect-ratio: auto;
-    min-height: 20rem;
+  .card--featured .card__heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .card.card--featured .card__title {
+    font-size: calc(var(--heading-scale) * 1.75rem);
+  }
+
+  .card--featured .card__price {
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 1.25rem;
+  }
+
+  .card--featured .card__subtitle {
+    font-size: 0.9375rem;
   }
 }
 
@@ -2727,10 +2752,6 @@ input.is-unavailable + .variant-swatch::after {
   color: var(--color-text);
   font-size: 0.75rem;
   font-weight: 500;
-}
-
-.card--featured .card__title {
-  font-size: 1.25rem;
 }
 
 @media (max-width: 749px) {

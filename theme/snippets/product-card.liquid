@@ -146,6 +146,10 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+
+      {%- if featured -%}
+        <span class="button card__cta" aria-hidden="true">{{ 'products.product.discover' | t }}</span>
+      {%- endif -%}
     {%- else -%}
       <div class="card__heading">
         <h3 class="card__title">{{ 'products.product.example_title' | t }}</h3>

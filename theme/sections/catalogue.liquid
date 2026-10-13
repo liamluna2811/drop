@@ -129,16 +129,16 @@
     {
       "type": "range",
       "id": "products_to_show",
-      "min": 4,
-      "max": 24,
+      "min": 3,
+      "max": 12,
       "step": 1,
       "label": "Nombre de produits",
-      "default": 11
+      "default": 5
     },
     {
       "type": "checkbox",
       "id": "feature_first",
-      "label": "Mettre en avant le premier produit (grand format)",
+      "label": "Mettre en avant le premier produit (bannière sur toute la largeur)",
       "default": true
     },
     { "type": "checkbox", "id": "show_toolbar", "label": "Afficher la barre d'outils (filtres, nombre de modèles, affichage)", "default": true },
@@ -185,7 +185,7 @@
           "type": "range",
           "id": "position",
           "min": 1,
-          "max": 24,
+          "max": 12,
           "step": 1,
           "label": "Position dans la grille",
           "info": "L'encart s'affiche juste avant le produit n°…",
@@ -218,8 +218,7 @@
         { "type": "chip", "settings": { "label": "Canapés convertibles" } },
         { "type": "chip", "settings": { "label": "Canapés d'angle" } },
         { "type": "chip", "settings": { "label": "Canapés droits" } },
-        { "type": "chip", "settings": { "label": "Fauteuils" } },
-        { "type": "promo", "settings": { "position": 6 } }
+        { "type": "chip", "settings": { "label": "Fauteuils" } }
       ]
     }
   ]
