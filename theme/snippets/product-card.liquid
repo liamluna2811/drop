@@ -1,0 +1,102 @@
+{%- comment -%}
+  Carte produit utilisée dans les collections, la recherche et les sections.
+  - product : objet produit (peut être vide → carte d'exemple)
+  - ratio : 'landscape' | 'square' | 'portrait'
+  - show_secondary : affiche la 2e photo au survol
+  - index : numéro pour le placeholder
+{%- endcomment -%}
+{%- liquid
+  assign ratio = ratio | default: settings.card_ratio | default: 'landscape'
+  assign color_option = null
+  for option in product.options_with_values
+    assign option_name = option.name | downcase
+    if option_name contains 'couleur' or option_name contains 'color' or option_name contains 'tissu' or option_name contains 'coloris'
+      assign color_option = option
+      break
+    endif
+  endfor
+-%}
+
+<div class="card">
+  {%- if product != blank -%}
+    <div class="card__media">
+      <div class="media media--{{ ratio }}">
+        {%- if product.featured_media -%}
+          {{
+            product.featured_media
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 60vw',
+              widths: '300, 450, 600, 800, 1000, 1200',
+              alt: product.featured_media.alt
+              | default: product.title
+          }}
+          {%- if show_secondary and product.media[1] -%}
+            {{
+              product.media[1]
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 60vw',
+                widths: '300, 450, 600, 800, 1000, 1200',
+                alt: ''
+            }}
+          {%- endif -%}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      {%- if product.available == false -%}
+        <span class="card__badge">{{ 'products.product.sold_out' | t }}</span>
+      {%- elsif product.compare_at_price > product.price -%}
+        <span class="card__badge card__badge--sale">{{ 'products.product.on_sale' | t }}</span>
+      {%- elsif product.tags contains 'nouveau' or product.tags contains 'Nouveau' -%}
+        <span class="card__badge">{{ 'products.product.new' | t }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="card__content">
+      <h3 class="card__title">
+        <a href="{{ product.url }}">{{ product.title | escape }}</a>
+      </h3>
+      {%- if product.metafields.custom.sous_titre != blank -%}
+        <p class="card__subtitle">{{ product.metafields.custom.sous_titre }}</p>
+      {%- elsif settings.card_show_type and product.type != blank -%}
+        <p class="card__subtitle">{{ product.type | escape }}</p>
+      {%- endif -%}
+
+      {% render 'price', product: product, show_from: true %}
+
+      {%- if color_option and color_option.values.size > 1 -%}
+        <div class="card__swatches">
+          {%- for value in color_option.values limit: 5 -%}
+            {%- liquid
+              assign swatch_style = ''
+              if value.swatch.image
+                assign swatch_style = value.swatch.image | image_url: width: 40 | prepend: '--swatch: url(' | append: ')'
+              elsif value.swatch.color
+                assign swatch_style = value.swatch.color | prepend: '--swatch: '
+              endif
+            -%}
+            <span class="card__swatch" style="{{ swatch_style }}" title="{{ value | escape }}"></span>
+          {%- endfor -%}
+          <span>{{ 'products.product.colors_count' | t: count: color_option.values.size }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    {%- comment -%} Carte d'exemple tant que la boutique n'a pas de produits {%- endcomment -%}
+    <div class="card__media">
+      <div class="media media--{{ ratio }}">
+        {%- assign placeholder_index = index | modulo: 6 | plus: 1 -%}
+        {{ 'product-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    </div>
+    <div class="card__content">
+      <h3 class="card__title">{{ 'products.product.example_title' | t }}</h3>
+      <div class="price"><span>{{ 129900 | money }}</span></div>
+    </div>
+  {%- endif -%}
+</div>

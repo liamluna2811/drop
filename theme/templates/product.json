@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "breadcrumbs": { "type": "breadcrumbs", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": { "show_tax_note": true } },
+        "variant_picker": { "type": "variant_picker", "settings": { "swatches": true } },
+        "inventory": { "type": "inventory", "settings": { "in_stock_text": "En stock — expédié sous 2 semaines", "low_threshold": 3 } },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_quantity": false, "show_dynamic_checkout": false, "show_payment_terms": true } },
+        "perks": {
+          "type": "perks",
+          "settings": {
+            "perk_1": "Livraison offerte et installation dans la pièce de votre choix",
+            "perk_2": "30 jours pour changer d'avis",
+            "perk_3": "Structure garantie 10 ans",
+            "perk_4": "Échantillons de tissu gratuits sur demande"
+          }
+        },
+        "tab-description": { "type": "collapsible", "settings": { "heading": "Description", "content_type": "description", "open": true } },
+        "tab-dimensions": { "type": "collapsible", "settings": { "heading": "Dimensions", "content_type": "dimensions" } },
+        "tab-materials": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Matières & entretien",
+            "content_type": "custom",
+            "content": "<p>Structure en bois massif et panneaux certifiés. Assise en mousse haute résilience (35 kg/m³) et suspensions ensachées. Housses déhoussables : lavage à 30 °C ou nettoyage à sec selon le tissu.</p>"
+          }
+        },
+        "tab-delivery": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Livraison & retours",
+            "content_type": "custom",
+            "content": "<p>Livraison offerte dès 500 € en France métropolitaine, avec installation dans la pièce de votre choix et reprise des emballages. Vous disposez de 30 jours après réception pour changer d'avis.</p>"
+          }
+        }
+      },
+      "block_order": ["breadcrumbs", "title", "price", "variant_picker", "inventory", "buy_buttons", "perks", "tab-description", "tab-dimensions", "tab-materials", "tab-delivery"],
+      "settings": { "gallery_layout": "slider", "media_ratio": "landscape" }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": { "heading": "Vous aimerez aussi", "products_to_show": 4, "surface": false }
+    },
+    "reassurance": {
+      "type": "reassurance",
+      "blocks": {
+        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte", "text": "Dès 500 € d'achat." } },
+        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "30 jours pour changer d'avis", "text": "Retours gratuits." } },
+        "usp-3": { "type": "item", "settings": { "icon": "shield", "title": "Garantie 10 ans", "text": "Sur la structure." } },
+        "usp-4": { "type": "item", "settings": { "icon": "credit-card", "title": "Paiement en 3x ou 4x", "text": "Sans frais." } }
+      },
+      "block_order": ["usp-1", "usp-2", "usp-3", "usp-4"],
+      "settings": { "heading": "", "surface": true, "padding_top": 48, "padding_bottom": 48 }
+    }
+  },
+  "order": ["main", "recommendations", "reassurance"]
+}

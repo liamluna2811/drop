@@ -1,0 +1,53 @@
+<div class="page-width">
+  <header class="collection-hero">
+    <nav class="product__breadcrumbs" aria-label="{{ 'general.breadcrumbs' | t }}">
+      <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a> / <span aria-current="page">{{ collection.title | escape }}</span>
+    </nav>
+    <h1>{{ collection.title | escape }}</h1>
+    {%- if section.settings.show_description and collection.description != blank -%}
+      <div class="collection-hero__description rte">{{ collection.description }}</div>
+    {%- endif -%}
+  </header>
+
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    {% render 'facets', results: collection, url: collection.url %}
+
+    {%- if collection.products.size > 0 -%}
+      <ul class="grid" role="list" style="--cols-desktop: {{ section.settings.columns }}; --cols-mobile: {{ section.settings.columns_mobile }};">
+        {%- for product in collection.products -%}
+          <li>{% render 'product-card', product: product, show_secondary: true %}</li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="h3">{{ 'collections.empty' | t }}</p>
+        <a href="{{ collection.url }}" class="link">{{ 'collections.filters.clear_all' | t }}</a>
+      </div>
+    {%- endif -%}
+
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
+
+<div style="height: 5rem"></div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "checkbox", "id": "show_description", "label": "Afficher la description", "default": true },
+    { "type": "range", "id": "products_per_page", "min": 8, "max": 36, "step": 4, "label": "Produits par page", "default": 24 },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Colonnes (ordinateur)", "default": 3 },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Colonnes (mobile)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    }
+  ]
+}
+{% endschema %}

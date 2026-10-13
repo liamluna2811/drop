@@ -1,0 +1,36 @@
+<div class="page-width">
+  <header class="page-header">
+    <h1>{{ blog.title | escape }}</h1>
+  </header>
+
+  {%- paginate blog.articles by 9 -%}
+    <ul class="grid" role="list" style="--cols-desktop: 3; --cols-mobile: 1;">
+      {%- for article in blog.articles -%}
+        <li class="article-card">
+          <div class="media media--landscape">
+            {%- if article.image -%}
+              {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 33vw, 100vw', widths: '400, 600, 900', alt: article.image.alt | default: article.title }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <h2 class="article-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+          <p class="article-card__meta">{{ article.published_at | time_tag: format: 'date' }}</p>
+          {%- if article.excerpt != blank -%}
+            <p class="text-muted">{{ article.excerpt | strip_html | truncatewords: 24 }}</p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
+
+<div style="height: 5rem"></div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

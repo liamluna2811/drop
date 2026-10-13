@@ -1,0 +1,29 @@
+<section
+  class="section{% if section.settings.surface %} section--surface{% endif %}"
+  data-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent=related"
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="page-width">
+      <div class="section-header">
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <ul class="grid slider-mobile" role="list" style="--cols-desktop: 4; --cols-mobile: 2;">
+        {%- for product in recommendations.products -%}
+          <li>{% render 'product-card', product: product, show_secondary: true %}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Recommandations",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Vous aimerez aussi" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 8, "step": 1, "label": "Nombre de produits", "default": 4 },
+    { "type": "checkbox", "id": "surface", "label": "Fond coloré", "default": false }
+  ]
+}
+{% endschema %}

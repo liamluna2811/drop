@@ -1,0 +1,39 @@
+{
+  "type": "footer",
+  "name": "Pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Boutique",
+            "menu": "main-menu"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Aide",
+            "menu": "footer"
+          }
+        },
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "heading": "Service client",
+            "text": "<p>Du lundi au vendredi, 9h – 18h<br>contact@exemple.fr</p>"
+          }
+        }
+      },
+      "block_order": ["menu-1", "menu-2", "text-1"],
+      "settings": {
+        "text": "<p>Des canapés pensés pour durer, fabriqués avec soin et livrés chez vous.</p>",
+        "show_policies": true,
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

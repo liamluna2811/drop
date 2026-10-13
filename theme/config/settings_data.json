@@ -1,0 +1,25 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_background": "#FAF8F5",
+      "color_surface": "#F1ECE5",
+      "color_text": "#1F1C19",
+      "color_text_muted": "#6B635A",
+      "color_border": "#E4DDD4",
+      "color_button": "#1F1C19",
+      "color_button_text": "#FFFFFF",
+      "color_accent": "#8A6A4F",
+      "color_sale": "#A4442E",
+      "type_heading_font": "jost_n4",
+      "type_body_font": "jost_n4",
+      "heading_scale": 100,
+      "page_width": 1400,
+      "corner_radius": 2,
+      "card_ratio": "landscape",
+      "card_show_type": true,
+      "cart_type": "drawer",
+      "free_shipping_threshold": 500
+    }
+  }
+}

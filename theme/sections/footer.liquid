@@ -1,0 +1,133 @@
+{%- liquid
+  assign social_links = ''
+  if settings.social_instagram != blank
+    assign social_links = social_links | append: 'instagram,'
+  endif
+  if settings.social_facebook != blank
+    assign social_links = social_links | append: 'facebook,'
+  endif
+  if settings.social_pinterest != blank
+    assign social_links = social_links | append: 'pinterest,'
+  endif
+  if settings.social_tiktok != blank
+    assign social_links = social_links | append: 'tiktok,'
+  endif
+  if settings.social_youtube != blank
+    assign social_links = social_links | append: 'youtube,'
+  endif
+  assign social_links = social_links | split: ','
+-%}
+
+<footer class="footer">
+  <div class="page-width">
+    <div class="footer__grid" style="--footer-cols: {{ section.blocks.size | at_least: 1 }}">
+      <div class="footer__brand">
+        <p class="footer__brand-name h3">{{ shop.name }}</p>
+        {%- if section.settings.text != blank -%}
+          <div class="rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if social_links.size > 0 -%}
+          <ul class="footer__social" role="list">
+            {%- for network in social_links -%}
+              {%- assign setting_key = 'social_' | append: network -%}
+              <li>
+                <a href="{{ settings[setting_key] }}" class="icon-button" target="_blank" rel="noopener" aria-label="{{ network | capitalize }}">
+                  {%- render 'icon', name: network -%}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'menu' -%}
+              <h2 class="footer__heading">{{ block.settings.heading | default: block.settings.menu.title | escape }}</h2>
+              <ul class="footer__links" role="list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- when 'text' -%}
+              <h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>
+              <div class="rte text-muted">{{ block.settings.text }}</div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <p style="margin:0">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+
+      {%- if section.settings.show_policies -%}
+        <ul class="footer__policies" role="list">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <li><a href="{{ policy.url }}">{{ policy.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="payment-icons" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte de présentation",
+      "default": "<p>Des canapés pensés pour durer, fabriqués avec soin et livrés chez vous.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policies",
+      "label": "Afficher les liens des politiques (CGV, confidentialité…)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Afficher les moyens de paiement",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Titre", "default": "Service client" },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Du lundi au vendredi, 9h – 18h<br>contact@exemple.fr</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

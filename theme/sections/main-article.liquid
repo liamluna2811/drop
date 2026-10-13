@@ -1,0 +1,26 @@
+<article class="page-width page-narrow">
+  <header class="page-header">
+    <nav class="product__breadcrumbs" aria-label="{{ 'general.breadcrumbs' | t }}">
+      <a href="{{ blog.url }}">{{ blog.title | escape }}</a>
+    </nav>
+    <h1>{{ article.title | escape }}</h1>
+    <p class="article-card__meta">{{ article.published_at | time_tag: format: 'date' }}</p>
+  </header>
+
+  {%- if article.image -%}
+    <div class="article__hero media media--wide">
+      {{ article.image | image_url: width: 1600 | image_tag: loading: 'eager', sizes: '(min-width: 800px) 768px, 100vw', widths: '600, 900, 1200, 1600', alt: article.image.alt | default: article.title }}
+    </div>
+  {%- endif -%}
+
+  <div class="rte">{{ article.content }}</div>
+</article>
+
+<div style="height: 5rem"></div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}
