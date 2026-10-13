@@ -1,0 +1,19 @@
+{%- comment -%}
+  Boutons pour changer la densité de la grille (1 ou 2 colonnes sur
+  mobile, 3 ou 4 sur ordinateur). Le choix est mémorisé.
+  - target : id de la grille
+{%- endcomment -%}
+<div class="grid-toggle" role="group" aria-label="{{ 'collections.layout.label' | t }}" data-grid-toggle="{{ target }}">
+  <button type="button" class="grid-toggle__btn grid-toggle__btn--mobile" data-cols-mobile="1" aria-label="{{ 'collections.layout.one' | t }}">
+    {%- render 'icon', name: 'grid-1' -%}
+  </button>
+  <button type="button" class="grid-toggle__btn grid-toggle__btn--mobile" data-cols-mobile="2" aria-label="{{ 'collections.layout.two' | t }}">
+    {%- render 'icon', name: 'grid-2' -%}
+  </button>
+  <button type="button" class="grid-toggle__btn grid-toggle__btn--desktop" data-cols-desktop="3" aria-label="{{ 'collections.layout.three' | t }}">
+    {%- render 'icon', name: 'grid-2' -%}
+  </button>
+  <button type="button" class="grid-toggle__btn grid-toggle__btn--desktop" data-cols-desktop="4" aria-label="{{ 'collections.layout.four' | t }}">
+    {%- render 'icon', name: 'grid-3' -%}
+  </button>
+</div>

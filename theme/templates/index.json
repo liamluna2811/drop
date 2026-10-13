@@ -1,63 +1,52 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "overlay": 35,
-        "height": "large",
-        "alignment": "bottom-left",
-        "eyebrow": "Nouvelle collection",
-        "heading": "Le confort, simplement.",
-        "text": "<p>Des canapés élégants et durables, conçus pour la vie de tous les jours.</p>",
-        "button_label": "Découvrir les canapés",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "Notre savoir-faire",
-        "button_link_2": ""
-      }
-    },
     "reassurance": {
       "type": "reassurance",
       "blocks": {
-        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte", "text": "Dès 500 € d'achat, installation dans la pièce de votre choix." } },
-        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "30 jours pour changer d'avis", "text": "Retours gratuits et remboursement rapide." } },
-        "usp-3": { "type": "item", "settings": { "icon": "shield", "title": "Garantie 10 ans", "text": "Sur la structure de tous nos canapés." } },
-        "usp-4": { "type": "item", "settings": { "icon": "credit-card", "title": "Paiement en 3x ou 4x", "text": "Sans frais, 100 % sécurisé." } }
+        "usp-1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison offerte",
+            "text": "Dès 500 € d'achat, installation dans la pièce de votre choix."
+          }
+        },
+        "usp-2": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "30 jours pour changer d'avis",
+            "text": "Retours gratuits et remboursement rapide."
+          }
+        },
+        "usp-3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Garantie 10 ans",
+            "text": "Sur la structure de tous nos canapés."
+          }
+        },
+        "usp-4": {
+          "type": "item",
+          "settings": {
+            "icon": "credit-card",
+            "title": "Paiement en 3x ou 4x",
+            "text": "Sans frais, 100 % sécurisé."
+          }
+        }
       },
-      "block_order": ["usp-1", "usp-2", "usp-3", "usp-4"],
-      "settings": { "heading": "", "surface": true, "padding_top": 40, "padding_bottom": 40 }
-    },
-    "categories": {
-      "type": "collection-list",
-      "blocks": {
-        "cat-1": { "type": "collection", "settings": { "title": "Canapés droits" } },
-        "cat-2": { "type": "collection", "settings": { "title": "Canapés d'angle" } },
-        "cat-3": { "type": "collection", "settings": { "title": "Canapés convertibles" } },
-        "cat-4": { "type": "collection", "settings": { "title": "Fauteuils" } }
-      },
-      "block_order": ["cat-1", "cat-2", "cat-3", "cat-4"],
+      "block_order": [
+        "usp-1",
+        "usp-2",
+        "usp-3",
+        "usp-4"
+      ],
       "settings": {
-        "eyebrow": "Nos catégories",
-        "heading": "Trouvez le canapé qui vous ressemble",
-        "columns": 4,
-        "ratio": "portrait",
-        "show_count": true,
-        "surface": false,
-        "padding_top": 80,
-        "padding_bottom": 40
-      }
-    },
-    "bestsellers": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "Les plus aimés",
-        "heading": "Nos best-sellers",
-        "collection": "all",
-        "products_to_show": 4,
-        "columns": 4,
-        "slider_mobile": true,
-        "surface": false,
-        "padding_top": 40,
-        "padding_bottom": 80
+        "heading": "",
+        "surface": true,
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "savoir-faire": {
@@ -78,11 +67,39 @@
     "avis": {
       "type": "testimonials",
       "blocks": {
-        "avis-1": { "type": "testimonial", "settings": { "rating": 5, "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>", "author": "Prénom N.", "product": "Canapé 3 places" } },
-        "avis-2": { "type": "testimonial", "settings": { "rating": 5, "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>", "author": "Prénom N.", "product": "Canapé d'angle" } },
-        "avis-3": { "type": "testimonial", "settings": { "rating": 5, "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>", "author": "Prénom N.", "product": "Fauteuil" } }
+        "avis-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>",
+            "author": "Prénom N.",
+            "product": "Canapé 3 places"
+          }
+        },
+        "avis-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>",
+            "author": "Prénom N.",
+            "product": "Canapé d'angle"
+          }
+        },
+        "avis-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>",
+            "author": "Prénom N.",
+            "product": "Fauteuil"
+          }
+        }
       },
-      "block_order": ["avis-1", "avis-2", "avis-3"],
+      "block_order": [
+        "avis-1",
+        "avis-2",
+        "avis-3"
+      ],
       "settings": {
         "eyebrow": "Ils nous font confiance",
         "heading": "Ce que disent nos clients",
@@ -94,13 +111,49 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q-1": { "type": "question", "settings": { "question": "Quels sont les délais de livraison ?", "answer": "<p>Les modèles en stock sont livrés sous 1 à 2 semaines. Les modèles fabriqués sur commande sont livrés sous 6 à 8 semaines. Le délai exact est indiqué sur chaque fiche produit.</p>" } },
-        "q-2": { "type": "question", "settings": { "question": "La livraison comprend-elle l'installation ?", "answer": "<p>Oui. Nos livreurs installent votre canapé dans la pièce de votre choix et repartent avec les emballages.</p>" } },
-        "q-3": { "type": "question", "settings": { "question": "Puis-je recevoir des échantillons de tissu ?", "answer": "<p>Bien sûr. Contactez-nous pour recevoir gratuitement jusqu'à 5 échantillons avant de commander.</p>" } },
-        "q-4": { "type": "question", "settings": { "question": "Comment retourner un canapé ?", "answer": "<p>Vous disposez de 30 jours après la livraison pour changer d'avis. Contactez notre service client : nous organisons l'enlèvement à domicile.</p>" } },
-        "q-5": { "type": "question", "settings": { "question": "Les housses sont-elles lavables ?", "answer": "<p>La plupart de nos modèles sont déhoussables. Les consignes d'entretien sont précisées sur chaque fiche produit.</p>" } }
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "Quels sont les délais de livraison ?",
+            "answer": "<p>Les modèles en stock sont livrés sous 1 à 2 semaines. Les modèles fabriqués sur commande sont livrés sous 6 à 8 semaines. Le délai exact est indiqué sur chaque fiche produit.</p>"
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "La livraison comprend-elle l'installation ?",
+            "answer": "<p>Oui. Nos livreurs installent votre canapé dans la pièce de votre choix et repartent avec les emballages.</p>"
+          }
+        },
+        "q-3": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je recevoir des échantillons de tissu ?",
+            "answer": "<p>Bien sûr. Contactez-nous pour recevoir gratuitement jusqu'à 5 échantillons avant de commander.</p>"
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "Comment retourner un canapé ?",
+            "answer": "<p>Vous disposez de 30 jours après la livraison pour changer d'avis. Contactez notre service client : nous organisons l'enlèvement à domicile.</p>"
+          }
+        },
+        "q-5": {
+          "type": "question",
+          "settings": {
+            "question": "Les housses sont-elles lavables ?",
+            "answer": "<p>La plupart de nos modèles sont déhoussables. Les consignes d'entretien sont précisées sur chaque fiche produit.</p>"
+          }
+        }
       },
-      "block_order": ["q-1", "q-2", "q-3", "q-4", "q-5"],
+      "block_order": [
+        "q-1",
+        "q-2",
+        "q-3",
+        "q-4",
+        "q-5"
+      ],
       "settings": {
         "eyebrow": "Besoin d'aide ?",
         "heading": "Questions fréquentes",
@@ -118,7 +171,119 @@
         "padding_top": 40,
         "padding_bottom": 96
       }
+    },
+    "offre": {
+      "type": "offer-banner",
+      "settings": {
+        "text": "Offre de lancement : -10 % sur tous les canapés",
+        "end_date": "",
+        "link": "",
+        "background": "#1A1816",
+        "text_color": "#FFFFFF"
+      }
+    },
+    "vitrine": {
+      "type": "catalogue",
+      "blocks": {
+        "chip-1": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés convertibles",
+            "link": ""
+          }
+        },
+        "chip-2": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés d'angle",
+            "link": ""
+          }
+        },
+        "chip-3": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés droits",
+            "link": ""
+          }
+        },
+        "chip-4": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés modulables",
+            "link": ""
+          }
+        },
+        "chip-5": {
+          "type": "chip",
+          "settings": {
+            "label": "Fauteuils",
+            "link": ""
+          }
+        },
+        "chip-6": {
+          "type": "chip",
+          "settings": {
+            "label": "Nouveautés",
+            "link": ""
+          }
+        },
+        "promo-1": {
+          "type": "promo",
+          "settings": {
+            "position": 6,
+            "style": "dark",
+            "eyebrow": "Offre de lancement",
+            "heading": "-10 % sur tous les canapés",
+            "text": "Jusqu'à la fin du mois",
+            "button_label": "J'en profite",
+            "link": "/collections/all"
+          }
+        },
+        "promo-2": {
+          "type": "promo",
+          "settings": {
+            "position": 10,
+            "style": "light",
+            "eyebrow": "Paiement facilité",
+            "heading": "En 3 ou 4 fois sans frais",
+            "text": "Choisissez votre échéancier au moment du paiement",
+            "button_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "chip-1",
+        "chip-2",
+        "chip-3",
+        "chip-4",
+        "chip-5",
+        "chip-6",
+        "promo-1",
+        "promo-2"
+      ],
+      "settings": {
+        "heading": "Nos canapés",
+        "text": "",
+        "collection": "all",
+        "products_to_show": 11,
+        "feature_first": true,
+        "show_toolbar": true,
+        "columns": 4,
+        "columns_mobile": "1",
+        "button_label": "Voir tous les canapés",
+        "padding_top": 40,
+        "padding_bottom": 80
+      }
     }
   },
-  "order": ["hero", "reassurance", "categories", "bestsellers", "savoir-faire", "avis", "faq", "newsletter"]
+  "order": [
+    "offre",
+    "vitrine",
+    "reassurance",
+    "avis",
+    "savoir-faire",
+    "faq",
+    "newsletter"
+  ]
 }

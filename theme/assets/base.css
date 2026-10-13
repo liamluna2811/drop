@@ -2157,3 +2157,585 @@ input.is-unavailable + .variant-swatch::after {
 .password {
   max-width: 28rem;
 }
+
+/* ==========================================================================
+   Vitrine catalogue (accueil) — en-tête avec recherche, bandeau d'offre,
+   raccourcis catégories, grille dense et cartes encadrées.
+   ========================================================================== */
+
+/* ---------- En-tête avec barre de recherche ---------- */
+.header--search {
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    'toggle logo icons'
+    'search search search';
+  row-gap: 0.25rem;
+  padding-bottom: 0.75rem;
+}
+
+.header--search .header__menu-toggle {
+  grid-area: toggle;
+}
+
+.header--search .header__logo {
+  grid-area: logo;
+  grid-column: auto;
+  text-align: left;
+  margin-left: 0.25rem;
+}
+
+.header--search .header__icons {
+  grid-area: icons;
+  grid-column: auto;
+}
+
+.header__search {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.875rem;
+  padding: 0 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: border-color 0.2s ease;
+}
+
+.header__search:focus-within {
+  border-color: var(--color-text);
+}
+
+.header__search .icon {
+  color: var(--color-text-muted);
+}
+
+.header__search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  border: 0;
+  background: none;
+  outline: none;
+}
+
+.header__search input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.header__icon--help {
+  display: none;
+}
+
+.header__nav-row {
+  display: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.header__nav-row .menu {
+  justify-content: flex-start;
+  gap: 0.25rem 2rem;
+}
+
+.header__nav-row .menu__link {
+  padding: 0.85rem 0;
+  font-weight: 500;
+}
+
+@media (min-width: 990px) {
+  .header--search {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: 'logo search icons';
+    column-gap: 2.5rem;
+    min-height: 5rem;
+    padding-bottom: 0;
+  }
+
+  .header--search .header__menu-toggle {
+    display: none;
+  }
+
+  .header--search .header__logo {
+    margin-left: 0;
+  }
+
+  .header__search {
+    max-width: 48rem;
+  }
+
+  .header__icon--help {
+    display: inline-flex;
+  }
+
+  .header__nav-row {
+    display: block;
+  }
+}
+
+/* ---------- Bandeau d'offre ---------- */
+.offer-banner {
+  background: var(--offer-bg, var(--color-button));
+  color: var(--offer-text, var(--color-button-text));
+}
+
+.offer-banner__inner,
+.offer-banner__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.offer-banner__inner {
+  min-height: 3.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.offer-banner__text {
+  font-weight: 500;
+}
+
+.offer-banner__timer {
+  display: inline-flex;
+  gap: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.offer-banner__ends {
+  opacity: 0.8;
+}
+
+.offer-banner__timer strong {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+/* ---------- Vitrine catalogue ---------- */
+.catalogue__header {
+  margin-bottom: 1.5rem;
+}
+
+.catalogue__title {
+  margin: 0;
+  font-size: calc(var(--heading-scale) * clamp(2rem, 1.5rem + 2vw, 3rem));
+}
+
+.catalogue__intro {
+  max-width: 44rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.chips {
+  margin: 0 -1rem 2.5rem;
+}
+
+.chips__list {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0 1rem;
+  scrollbar-width: none;
+  list-style: none;
+  margin: 0;
+}
+
+.chips__list::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.chip:hover,
+.chip[aria-current='page'] {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+@media (min-width: 750px) {
+  .chips {
+    margin: 0 0 3rem;
+  }
+
+  .chips__list {
+    flex-wrap: wrap;
+    overflow: visible;
+    padding: 0;
+  }
+}
+
+.collection-hero .chips {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+.catalogue__toolbar,
+.collection-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0 1.25rem;
+  margin-bottom: 1.5rem;
+  border-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+
+.catalogue__toolbar-right,
+.collection-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button--small {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.button--small .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.grid-toggle {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.grid-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--color-text-muted);
+}
+
+.grid-toggle__btn[aria-pressed='true'] {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.grid-toggle__btn--desktop {
+  display: none;
+}
+
+@media (min-width: 990px) {
+  .grid-toggle__btn--mobile {
+    display: none;
+  }
+
+  .grid-toggle__btn--desktop {
+    display: inline-flex;
+  }
+}
+
+.catalogue__grid {
+  gap: 1rem;
+}
+
+@media (min-width: 750px) {
+  .catalogue__grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 989px) {
+  .catalogue__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 990px) {
+  .catalogue__grid .grid__item--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+.media--featured {
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 990px) {
+  .grid__item--featured .card {
+    height: 100%;
+  }
+
+  .grid__item--featured .card__media {
+    flex: 1;
+    display: flex;
+  }
+
+  .grid__item--featured .media--featured {
+    flex: 1;
+    aspect-ratio: auto;
+    min-height: 20rem;
+  }
+}
+
+.catalogue__more {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* ---------- Encarts promotionnels ---------- */
+.promo-tile__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 18rem;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  border-radius: var(--radius);
+  text-align: center;
+  text-decoration: none;
+}
+
+.promo-tile--dark .promo-tile__inner {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.promo-tile--light .promo-tile__inner {
+  background: var(--color-surface);
+}
+
+.promo-tile--image .promo-tile__inner {
+  background: var(--color-text);
+  color: #fff;
+}
+
+.promo-tile__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: transform 0.6s ease;
+}
+
+.promo-tile__inner:hover .promo-tile__image {
+  transform: scale(1.03);
+}
+
+.promo-tile__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.promo-tile__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.promo-tile__heading {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: calc(var(--heading-scale) * 1.6rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.promo-tile__text {
+  font-size: 0.9375rem;
+  opacity: 0.85;
+}
+
+.promo-tile__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+}
+
+.promo-tile__cta .icon {
+  width: 1rem;
+}
+
+/* ---------- Cartes produit (encadrées) ---------- */
+.card__badges {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.badge--new {
+  background: var(--color-badge);
+}
+
+.badge--dark {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.card--framed {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: border-color 0.2s ease;
+}
+
+.card--framed:hover {
+  border-color: var(--color-text-muted);
+}
+
+.card--framed .card__media .media {
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+}
+
+.card--framed .card__content {
+  padding: 1rem 1rem 1.25rem;
+}
+
+.card__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.card__heading .card__title {
+  margin: 0;
+}
+
+.card--uppercase .card__title {
+  font-size: 1.0625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card__price {
+  flex-shrink: 0;
+  justify-content: flex-end;
+  text-align: right;
+  font-weight: 500;
+}
+
+.card__price .price__compare {
+  font-weight: var(--font-body-weight);
+}
+
+.card .card__subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.card__swatches {
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+}
+
+.card__swatches--square .card__swatch {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1px;
+}
+
+.card__swatch-more {
+  margin-left: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.card__rating .icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--color-text);
+}
+
+.card__rating span {
+  margin-left: 0.3rem;
+}
+
+.price__badge {
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.card--featured .card__title {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 749px) {
+  .catalogue__grid[style*='--cols-mobile: 2'] .card__heading,
+  .catalogue__grid[data-cols-mobile='2'] .card__heading {
+    flex-direction: column;
+  }
+
+  .catalogue__grid[data-cols-mobile='2'] .card--framed .card__content {
+    padding: 0.75rem;
+  }
+
+  .catalogue__grid[data-cols-mobile='2'] .card--uppercase .card__title {
+    font-size: 0.9375rem;
+  }
+}

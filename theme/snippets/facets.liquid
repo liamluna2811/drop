@@ -2,6 +2,7 @@
   Filtres (Search & Discovery) dans un tiroir + tri.
   - results : collection ou search
   - url : URL de base sans paramètres
+  - grid_id : id de la grille (affiche les boutons d'affichage)
 {%- endcomment -%}
 {%- liquid
   assign sort_by = results.sort_by | default: results.default_sort_by
@@ -20,15 +21,17 @@
 <div class="collection-toolbar">
   <div class="collection-toolbar__left">
     {%- if results.filters != empty -%}
-      <button type="button" class="filter-toggle" data-drawer-open="FacetsDrawer" aria-controls="FacetsDrawer" aria-expanded="false">
-        {%- render 'icon', name: 'filter' -%}
+      <button type="button" class="button button--small" data-drawer-open="FacetsDrawer" aria-controls="FacetsDrawer" aria-expanded="false">
         {{ 'collections.filters.title' | t }}
         {%- if active_count > 0 %} ({{ active_count }}){% endif -%}
+        {%- render 'icon', name: 'filter' -%}
       </button>
     {%- endif -%}
     <span class="text-muted">{{ 'collections.products_count' | t: count: results_count }}</span>
   </div>
 
+  <div class="collection-toolbar__right">
+  {%- if grid_id != blank -%}{% render 'grid-toggle', target: grid_id %}{%- endif -%}
   {%- if results.sort_options != blank -%}
     <form class="collection-toolbar__sort" data-sort-form>
       {%- for param in results.filters -%}
@@ -50,6 +53,7 @@
       <noscript><button type="submit" class="button button--secondary">OK</button></noscript>
     </form>
   {%- endif -%}
+  </div>
 </div>
 
 {%- if active_count > 0 -%}

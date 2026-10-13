@@ -1,11 +1,11 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Canapé Lina — Aperçu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>:root{--font-body-family:'Jost',system-ui,sans-serif;--font-body-style:normal;--font-body-weight:400;
---font-heading-family:'Jost',system-ui,sans-serif;--font-heading-style:normal;--font-heading-weight:400;--heading-scale:1;
---color-bg:#FAF8F5;--color-surface:#F1ECE5;--color-text:#1F1C19;--color-text-muted:#6B635A;--color-border:#E4DDD4;
---color-button:#1F1C19;--color-button-text:#FFFFFF;--color-accent:#8A6A4F;--color-sale:#A4442E;--radius:2px;--page-width:1400px}
+--font-heading-family:'Jost',system-ui,sans-serif;--font-heading-style:normal;--font-heading-weight:600;--heading-scale:1;
+--color-bg:#FFFFFF;--color-surface:#F4F1EC;--color-text:#1A1816;--color-text-muted:#6A635B;--color-border:#E7E2DB;--color-badge:#EFE4D6;
+--color-button:#1A1816;--color-button-text:#FFFFFF;--color-accent:#8A6A4F;--color-sale:#A4442E;--radius:2px;--page-width:1400px}
 /* ==========================================================================
    Thème « Canapé » — base.css
    Design sobre : tons neutres chauds, beaucoup d'espace, peu d'effets.
@@ -2166,23 +2166,607 @@ input.is-unavailable + .variant-swatch::after {
   max-width: 28rem;
 }
 
+/* ==========================================================================
+   Vitrine catalogue (accueil) — en-tête avec recherche, bandeau d'offre,
+   raccourcis catégories, grille dense et cartes encadrées.
+   ========================================================================== */
+
+/* ---------- En-tête avec barre de recherche ---------- */
+.header--search {
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    'toggle logo icons'
+    'search search search';
+  row-gap: 0.25rem;
+  padding-bottom: 0.75rem;
+}
+
+.header--search .header__menu-toggle {
+  grid-area: toggle;
+}
+
+.header--search .header__logo {
+  grid-area: logo;
+  grid-column: auto;
+  text-align: left;
+  margin-left: 0.25rem;
+}
+
+.header--search .header__icons {
+  grid-area: icons;
+  grid-column: auto;
+}
+
+.header__search {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.875rem;
+  padding: 0 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: border-color 0.2s ease;
+}
+
+.header__search:focus-within {
+  border-color: var(--color-text);
+}
+
+.header__search .icon {
+  color: var(--color-text-muted);
+}
+
+.header__search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  border: 0;
+  background: none;
+  outline: none;
+}
+
+.header__search input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.header__icon--help {
+  display: none;
+}
+
+.header__nav-row {
+  display: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.header__nav-row .menu {
+  justify-content: flex-start;
+  gap: 0.25rem 2rem;
+}
+
+.header__nav-row .menu__link {
+  padding: 0.85rem 0;
+  font-weight: 500;
+}
+
+@media (min-width: 990px) {
+  .header--search {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: 'logo search icons';
+    column-gap: 2.5rem;
+    min-height: 5rem;
+    padding-bottom: 0;
+  }
+
+  .header--search .header__menu-toggle {
+    display: none;
+  }
+
+  .header--search .header__logo {
+    margin-left: 0;
+  }
+
+  .header__search {
+    max-width: 48rem;
+  }
+
+  .header__icon--help {
+    display: inline-flex;
+  }
+
+  .header__nav-row {
+    display: block;
+  }
+}
+
+/* ---------- Bandeau d'offre ---------- */
+.offer-banner {
+  background: var(--offer-bg, var(--color-button));
+  color: var(--offer-text, var(--color-button-text));
+}
+
+.offer-banner__inner,
+.offer-banner__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.offer-banner__inner {
+  min-height: 3.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.offer-banner__text {
+  font-weight: 500;
+}
+
+.offer-banner__timer {
+  display: inline-flex;
+  gap: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.offer-banner__ends {
+  opacity: 0.8;
+}
+
+.offer-banner__timer strong {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+/* ---------- Vitrine catalogue ---------- */
+.catalogue__header {
+  margin-bottom: 1.5rem;
+}
+
+.catalogue__title {
+  margin: 0;
+  font-size: calc(var(--heading-scale) * clamp(2rem, 1.5rem + 2vw, 3rem));
+}
+
+.catalogue__intro {
+  max-width: 44rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.chips {
+  margin: 0 -1rem 2.5rem;
+}
+
+.chips__list {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0 1rem;
+  scrollbar-width: none;
+  list-style: none;
+  margin: 0;
+}
+
+.chips__list::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.chip:hover,
+.chip[aria-current='page'] {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+@media (min-width: 750px) {
+  .chips {
+    margin: 0 0 3rem;
+  }
+
+  .chips__list {
+    flex-wrap: wrap;
+    overflow: visible;
+    padding: 0;
+  }
+}
+
+.collection-hero .chips {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+.catalogue__toolbar,
+.collection-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0 1.25rem;
+  margin-bottom: 1.5rem;
+  border-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+
+.catalogue__toolbar-right,
+.collection-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button--small {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.button--small .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.grid-toggle {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.grid-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--color-text-muted);
+}
+
+.grid-toggle__btn[aria-pressed='true'] {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.grid-toggle__btn--desktop {
+  display: none;
+}
+
+@media (min-width: 990px) {
+  .grid-toggle__btn--mobile {
+    display: none;
+  }
+
+  .grid-toggle__btn--desktop {
+    display: inline-flex;
+  }
+}
+
+.catalogue__grid {
+  gap: 1rem;
+}
+
+@media (min-width: 750px) {
+  .catalogue__grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 989px) {
+  .catalogue__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 990px) {
+  .catalogue__grid .grid__item--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+.media--featured {
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 990px) {
+  .grid__item--featured .card {
+    height: 100%;
+  }
+
+  .grid__item--featured .card__media {
+    flex: 1;
+    display: flex;
+  }
+
+  .grid__item--featured .media--featured {
+    flex: 1;
+    aspect-ratio: auto;
+    min-height: 20rem;
+  }
+}
+
+.catalogue__more {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* ---------- Encarts promotionnels ---------- */
+.promo-tile__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 18rem;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  border-radius: var(--radius);
+  text-align: center;
+  text-decoration: none;
+}
+
+.promo-tile--dark .promo-tile__inner {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.promo-tile--light .promo-tile__inner {
+  background: var(--color-surface);
+}
+
+.promo-tile--image .promo-tile__inner {
+  background: var(--color-text);
+  color: #fff;
+}
+
+.promo-tile__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: transform 0.6s ease;
+}
+
+.promo-tile__inner:hover .promo-tile__image {
+  transform: scale(1.03);
+}
+
+.promo-tile__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.promo-tile__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.promo-tile__heading {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: calc(var(--heading-scale) * 1.6rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.promo-tile__text {
+  font-size: 0.9375rem;
+  opacity: 0.85;
+}
+
+.promo-tile__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+}
+
+.promo-tile__cta .icon {
+  width: 1rem;
+}
+
+/* ---------- Cartes produit (encadrées) ---------- */
+.card__badges {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.badge--new {
+  background: var(--color-badge);
+}
+
+.badge--dark {
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.card--framed {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: border-color 0.2s ease;
+}
+
+.card--framed:hover {
+  border-color: var(--color-text-muted);
+}
+
+.card--framed .card__media .media {
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+}
+
+.card--framed .card__content {
+  padding: 1rem 1rem 1.25rem;
+}
+
+.card__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.card__heading .card__title {
+  margin: 0;
+}
+
+.card--uppercase .card__title {
+  font-size: 1.0625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card__price {
+  flex-shrink: 0;
+  justify-content: flex-end;
+  text-align: right;
+  font-weight: 500;
+}
+
+.card__price .price__compare {
+  font-weight: var(--font-body-weight);
+}
+
+.card .card__subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.card__swatches {
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+}
+
+.card__swatches--square .card__swatch {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1px;
+}
+
+.card__swatch-more {
+  margin-left: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.card__rating .icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--color-text);
+}
+
+.card__rating span {
+  margin-left: 0.3rem;
+}
+
+.price__badge {
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.card--featured .card__title {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 749px) {
+  .catalogue__grid[style*='--cols-mobile: 2'] .card__heading,
+  .catalogue__grid[data-cols-mobile='2'] .card__heading {
+    flex-direction: column;
+  }
+
+  .catalogue__grid[data-cols-mobile='2'] .card--framed .card__content {
+    padding: 0.75rem;
+  }
+
+  .catalogue__grid[data-cols-mobile='2'] .card--uppercase .card__title {
+    font-size: 0.9375rem;
+  }
+}
+
 .preview-note{background:#F1ECE5;color:#1F1C19;font-size:.8125rem;text-align:center;padding:.5rem 1rem;border-bottom:1px solid #E4DDD4}
 .media svg{position:absolute;inset:0;width:100%;height:100%}
 </style></head><body><div class="preview-note">Aperçu du thème — les illustrations seront remplacées par vos photos dans Shopify.</div>
-<div class="announcement-bar"><div class="page-width announcement-bar__inner"><p class="announcement-bar__message">Livraison offerte dès 500 € · Retours gratuits sous 30 jours</p></div></div>
-<div class="header-wrapper header-wrapper--sticky"><header class="page-width header">
+<div class="announcement-bar"><div class="page-width announcement-bar__inner"><p class="announcement-bar__message">Payez en 3 ou 4 fois sans frais · Livraison offerte dès 500 €</p></div></div>
+<div class="header-wrapper header-wrapper--sticky"><header class="page-width header header--search">
 <button class="icon-button header__menu-toggle" aria-label="Menu"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
 <div class="header__logo"><a href="index.html">Maison Canapé</a></div>
-<nav class="header__nav"><ul class="menu" role="list">
-<li class="menu__item"><a class="menu__link" href="#">Canapés droits</a></li>
-<li class="menu__item"><a class="menu__link" href="#">Canapés d'angle</a></li>
-<li class="menu__item"><a class="menu__link" href="#">Convertibles</a></li>
-<li class="menu__item"><a class="menu__link" href="#">Fauteuils</a></li>
-<li class="menu__item"><a class="menu__link" href="#">Échantillons</a></li></ul></nav>
-<div class="header__icons"><button class="icon-button" aria-label="Rechercher"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+<form class="header__search" role="search" onsubmit="return false"><label for="q" class="visually-hidden">Rechercher</label><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Rechercher un canapé, un tissu…"></form>
+<div class="header__icons"><a class="icon-button header__icon--help" href="#" aria-label="Besoin d'aide ?"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/></svg></a>
 <a class="icon-button header__icon--account" href="#" aria-label="Compte"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></a>
 <a class="icon-button" href="#" aria-label="Panier"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 14H5z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg><span class="cart-count">1</span></a></div>
-</header></div><main class="main"><section class="section" style="--section-pt:24px;--section-pb:64px"><div class="page-width"><div class="product">
+</header>
+<nav class="header__nav-row"><div class="page-width"><ul class="menu" role="list">
+<li class="menu__item"><a class="menu__link" href="#">Canapés</a></li>
+<li class="menu__item"><a class="menu__link" href="#">Fauteuils</a></li>
+<li class="menu__item"><a class="menu__link" href="#">Nouveautés</a></li>
+<li class="menu__item"><a class="menu__link" href="#">Best-sellers</a></li>
+<li class="menu__item"><a class="menu__link" href="#">Livraison rapide</a></li>
+<li class="menu__item"><a class="menu__link" href="#">Échantillons</a></li></ul></div></nav></div><main class="main"><section class="section" style="--section-pt:24px;--section-pb:64px"><div class="page-width"><div class="product">
 <div class="product__gallery"><div class="gallery__main"><div class="gallery__slide"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#E9E2D8"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="140" y="180" width="520" height="110" rx="28" fill="#DCD0C1"/>
         <rect x="110" y="250" width="580" height="120" rx="22" fill="#CDBFAE"/>
         <rect x="160" y="270" width="230" height="60" rx="14" fill="#DCD0C1"/>
@@ -2227,38 +2811,34 @@ input.is-unavailable + .variant-swatch::after {
 <div class="product__block accordion"><details class="accordion__item"><summary>Matières &amp; entretien<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="accordion__content rte"><p>Structure en bois massif, mousse haute résilience, housses lavables à 30 °C.</p></div></details></div>
 <div class="product__block accordion"><details class="accordion__item"><summary>Livraison &amp; retours<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="accordion__content rte"><p>Livraison offerte dès 500 € en France métropolitaine.</p></div></details></div>
 </div></div></div></section>
-<section class="section"><div class="page-width"><div class="section-header"><h2>Vous aimerez aussi</h2></div><ul class="grid slider-mobile" role="list" style="--cols-desktop:4"><li><div class="card"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#E4E6E1"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="120" y="250" width="560" height="120" rx="18" fill="#8E9A8A"/>
+<section class="section"><div class="page-width"><div class="section-header"><h2>Vous aimerez aussi</h2></div><ul class="grid catalogue__grid" role="list" style="--cols-desktop: 4; --cols-mobile: 1;"><li><div class="card card--framed card--uppercase"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#E4E6E1"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="120" y="250" width="560" height="120" rx="18" fill="#8E9A8A"/>
         <rect x="560" y="250" width="160" height="210" rx="18" fill="#8E9A8A"/>
         <rect x="120" y="190" width="600" height="90" rx="22" fill="#A9B3A4"/>
         <rect x="150" y="290" width="190" height="60" rx="12" fill="#A9B3A4"/>
         <rect x="350" y="290" width="190" height="60" rx="12" fill="#A9B3A4"/>
         <rect x="570" y="290" width="140" height="150" rx="12" fill="#A9B3A4"/>
-        <rect x="140" y="370" width="10" height="26" fill="#3b322b"/><rect x="690" y="460" width="10" height="22" fill="#3b322b"/></svg></div></div>
-<div class="card__content"><h3 class="card__title"><a href="produit.html">Canapé d'angle Oslo</a></h3><p class="card__subtitle">Bouclette · Angle réversible</p>
-<div class="price"><span class="price__regular price__regular--from">À partir de 2 190,00 €</span></div>
-<div class="card__swatches"><span class="card__swatch" style="--swatch:#D8CFC4"></span><span class="card__swatch" style="--swatch:#8E9A8A"></span><span>2 coloris</span></div></div></div></li><li><div class="card"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#EFE6DC"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="140" y="180" width="520" height="110" rx="28" fill="#CFA588"/>
+        <rect x="140" y="370" width="10" height="26" fill="#3b322b"/><rect x="690" y="460" width="10" height="22" fill="#3b322b"/></svg></div><div class="card__badges"><span class="badge badge--new">Nouveau</span></div></div>
+<div class="card__content"><div class="card__heading"><h3 class="card__title"><a href="produit.html">Oslo</a></h3><div class="price card__price"><span class="price__regular">1 290 €</span></div></div>
+<p class="card__subtitle">Canapé droit 3 places, bouclette écrue</p><div class="card__swatches card__swatches--square"><span class="card__swatch" style="--swatch:#CDBFAE"></span><span class="card__swatch" style="--swatch:#F1ECE3"></span><span class="card__swatch" style="--swatch:#8E9A8A"></span></div></div></div></li><li><div class="card card--framed card--uppercase"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#EFE6DC"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="140" y="180" width="520" height="110" rx="28" fill="#CFA588"/>
         <rect x="110" y="250" width="580" height="120" rx="22" fill="#B98B6E"/>
         <rect x="160" y="270" width="230" height="60" rx="14" fill="#CFA588"/>
         <rect x="410" y="270" width="230" height="60" rx="14" fill="#CFA588"/>
-        <rect x="150" y="370" width="10" height="34" fill="#3b322b"/><rect x="640" y="370" width="10" height="34" fill="#3b322b"/></svg></div></div>
-<div class="card__content"><h3 class="card__title"><a href="produit.html">Canapé Lou convertible</a></h3><p class="card__subtitle">Lin lavé · Couchage 140 cm</p>
-<div class="price"><span class="price__regular">1 590,00 €</span></div>
-<div class="card__swatches"><span class="card__swatch" style="--swatch:#B98B6E"></span><span class="card__swatch" style="--swatch:#DCD0C1"></span><span class="card__swatch" style="--swatch:#5E5A55"></span><span class="card__swatch" style="--swatch:#2F3A4A"></span><span>4 coloris</span></div></div></div></li><li><div class="card"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#E6E3DF"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="290" y="170" width="220" height="150" rx="40" fill="#77726C"/>
+        <rect x="150" y="370" width="10" height="34" fill="#3b322b"/><rect x="640" y="370" width="10" height="34" fill="#3b322b"/></svg></div><div class="card__badges"></div></div>
+<div class="card__content"><div class="card__heading"><h3 class="card__title"><a href="produit.html">Lou</a></h3><div class="price card__price"><span class="price__sale">1 699 €</span><s class="price__compare">1 990 €</s><span class="price__badge">-15 %</span></div></div>
+<p class="card__subtitle">Canapé d'angle réversible avec coffre, lin lavé</p><div class="card__swatches card__swatches--square"><span class="card__swatch" style="--swatch:#CDBFAE"></span><span class="card__swatch" style="--swatch:#F1ECE3"></span><span class="card__swatch" style="--swatch:#8E9A8A"></span><span class="card__swatch" style="--swatch:#B98B6E"></span><span class="card__swatch" style="--swatch:#5E5A55"></span><span class="card__swatch" style="--swatch:#2F3A4A"></span><span class="card__swatch-more">+1</span></div><div class="card__rating"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><span>(22)</span></div></div></div></li><li><div class="card card--framed card--uppercase"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#E6E3DF"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="290" y="170" width="220" height="150" rx="40" fill="#77726C"/>
         <rect x="250" y="250" width="300" height="120" rx="24" fill="#5E5A55"/>
         <rect x="300" y="270" width="200" height="60" rx="14" fill="#77726C"/>
-        <rect x="280" y="370" width="10" height="40" fill="#3b322b"/><rect x="510" y="370" width="10" height="40" fill="#3b322b"/></svg></div></div>
-<div class="card__content"><h3 class="card__title"><a href="produit.html">Fauteuil Nino</a></h3><p class="card__subtitle">Tissu chiné · Pieds chêne</p>
-<div class="price"><span class="price__regular">590,00 €</span></div>
-<div class="card__swatches"><span class="card__swatch" style="--swatch:#5E5A55"></span><span class="card__swatch" style="--swatch:#CDBFAE"></span><span>2 coloris</span></div></div></div></li><li><div class="card"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#ECE7E1"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="120" y="250" width="560" height="120" rx="18" fill="#D8CFC4"/>
+        <rect x="280" y="370" width="10" height="40" fill="#3b322b"/><rect x="510" y="370" width="10" height="40" fill="#3b322b"/></svg></div><div class="card__badges"><span class="badge badge--dark">Livraison rapide</span></div></div>
+<div class="card__content"><div class="card__heading"><h3 class="card__title"><a href="produit.html">Nino</a></h3><div class="price card__price"><span class="price__regular">590 €</span></div></div>
+<p class="card__subtitle">Fauteuil enveloppant, tissu chiné et pieds en chêne</p><div class="card__swatches card__swatches--square"><span class="card__swatch" style="--swatch:#CDBFAE"></span><span class="card__swatch" style="--swatch:#F1ECE3"></span><span class="card__swatch" style="--swatch:#8E9A8A"></span><span class="card__swatch" style="--swatch:#B98B6E"></span></div><div class="card__rating"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><span>(41)</span></div></div></div></li><li><div class="card card--framed card--uppercase"><div class="card__media"><div class="media media--landscape"><svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration de canapé"><rect width="800" height="560" fill="#ECE7E1"/><rect y="404" width="800" height="156" fill="rgba(0,0,0,0.04)"/><rect x="120" y="250" width="560" height="120" rx="18" fill="#D8CFC4"/>
         <rect x="560" y="250" width="160" height="210" rx="18" fill="#D8CFC4"/>
         <rect x="120" y="190" width="600" height="90" rx="22" fill="#E6DED4"/>
         <rect x="150" y="290" width="190" height="60" rx="12" fill="#E6DED4"/>
         <rect x="350" y="290" width="190" height="60" rx="12" fill="#E6DED4"/>
         <rect x="570" y="290" width="140" height="150" rx="12" fill="#E6DED4"/>
-        <rect x="140" y="370" width="10" height="26" fill="#3b322b"/><rect x="690" y="460" width="10" height="22" fill="#3b322b"/></svg></div></div>
-<div class="card__content"><h3 class="card__title"><a href="produit.html">Canapé Lina 3 places</a></h3><p class="card__subtitle">Velours côtelé · Déhoussable</p>
-<div class="price"><span class="price__regular price__regular--from">À partir de 1 290,00 €</span></div>
-<div class="card__swatches"><span class="card__swatch" style="--swatch:#CDBFAE"></span><span class="card__swatch" style="--swatch:#8E9A8A"></span><span class="card__swatch" style="--swatch:#5E5A55"></span><span>3 coloris</span></div></div></div></li></ul></div></section>
+        <rect x="140" y="370" width="10" height="26" fill="#3b322b"/><rect x="690" y="460" width="10" height="22" fill="#3b322b"/></svg></div><div class="card__badges"></div></div>
+<div class="card__content"><div class="card__heading"><h3 class="card__title"><a href="produit.html">Alma</a></h3><div class="price card__price"><span class="price__regular">2 490 €</span></div></div>
+<p class="card__subtitle">Canapé modulable 5 places, tissu texturé</p><div class="card__swatches card__swatches--square"><span class="card__swatch" style="--swatch:#CDBFAE"></span><span class="card__swatch" style="--swatch:#F1ECE3"></span><span class="card__swatch" style="--swatch:#8E9A8A"></span><span class="card__swatch" style="--swatch:#B98B6E"></span><span class="card__swatch" style="--swatch:#5E5A55"></span><span class="card__swatch" style="--swatch:#2F3A4A"></span></div><div class="card__rating"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><span>(18)</span></div></div></div></li></ul></div></section>
 <section class="section section--surface" style="--section-pt:48px;--section-pb:48px"><div class="page-width"><ul class="usp" role="list"><li class="usp__item"><span class="usp__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><h3 class="usp__title">Livraison offerte</h3><p class="usp__text">Dès 500 € d'achat, installation dans la pièce de votre choix.</p></li><li class="usp__item"><span class="usp__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v5h5"/><path d="M3.5 12A9 9 0 1 0 6 6.3L3 9"/></svg></span><h3 class="usp__title">30 jours pour changer d'avis</h3><p class="usp__text">Retours gratuits et remboursement rapide.</p></li><li class="usp__item"><span class="usp__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><h3 class="usp__title">Garantie 10 ans</h3><p class="usp__text">Sur la structure de tous nos canapés.</p></li><li class="usp__item"><span class="usp__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span><h3 class="usp__title">Paiement en 3x ou 4x</h3><p class="usp__text">Sans frais, 100 % sécurisé.</p></li></ul></div></section></main><footer class="footer"><div class="page-width"><div class="footer__grid" style="--footer-cols:3">
 <div class="footer__brand"><p class="footer__brand-name h3">Maison Canapé</p><div class="rte"><p>Des canapés pensés pour durer, fabriqués avec soin et livrés chez vous.</p></div></div>
 <div><h2 class="footer__heading">Boutique</h2><ul class="footer__links" role="list"><li><a href="#">Canapés droits</a></li><li><a href="#">Canapés d'angle</a></li><li><a href="#">Convertibles</a></li><li><a href="#">Fauteuils</a></li></ul></div>

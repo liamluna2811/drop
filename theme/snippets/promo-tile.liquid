@@ -1,0 +1,32 @@
+{%- comment -%}
+  Encart promotionnel inséré dans une grille de produits.
+  - block : bloc « promo » de la section Vitrine catalogue
+{%- endcomment -%}
+{%- assign tile_tag = 'div' -%}
+{%- if block.settings.link != blank -%}{%- assign tile_tag = 'a' -%}{%- endif -%}
+
+<li class="promo-tile promo-tile--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+  <{{ tile_tag }}{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %} class="promo-tile__inner">
+    {%- if block.settings.style == 'image' and block.settings.image != blank -%}
+      {{
+        block.settings.image
+        | image_url: width: 1000
+        | image_tag: loading: 'lazy', class: 'promo-tile__image', sizes: '(min-width: 990px) 25vw, 90vw', widths: '400, 600, 800, 1000', alt: ''
+      }}
+    {%- endif -%}
+    <span class="promo-tile__content">
+      {%- if block.settings.eyebrow != blank -%}
+        <span class="promo-tile__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if block.settings.heading != blank -%}
+        <span class="promo-tile__heading">{{ block.settings.heading | escape }}</span>
+      {%- endif -%}
+      {%- if block.settings.text != blank -%}
+        <span class="promo-tile__text">{{ block.settings.text | escape }}</span>
+      {%- endif -%}
+      {%- if block.settings.button_label != blank and block.settings.link != blank -%}
+        <span class="promo-tile__cta">{{ block.settings.button_label | escape }}{%- render 'icon', name: 'arrow-right' -%}</span>
+      {%- endif -%}
+    </span>
+  </{{ tile_tag }}>
+</li>

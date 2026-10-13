@@ -445,6 +445,75 @@
     }
   });
 
+  /* ---------- Compte à rebours du bandeau d'offre ---------- */
+  document.querySelectorAll('[data-offer-banner][data-end]').forEach(function (banner) {
+    var end = parseInt(banner.getAttribute('data-end'), 10) * 1000;
+    var parts = {
+      days: banner.querySelector('[data-days]'),
+      hours: banner.querySelector('[data-hours]'),
+      minutes: banner.querySelector('[data-minutes]'),
+      seconds: banner.querySelector('[data-seconds]')
+    };
+    function pad(n) {
+      return n < 10 ? '0' + n : String(n);
+    }
+    function tick() {
+      var diff = Math.max(0, end - Date.now());
+      if (diff === 0) {
+        banner.hidden = true;
+        window.clearInterval(timer);
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      parts.days.textContent = pad(Math.floor(s / 86400));
+      parts.hours.textContent = pad(Math.floor((s % 86400) / 3600));
+      parts.minutes.textContent = pad(Math.floor((s % 3600) / 60));
+      parts.seconds.textContent = pad(s % 60);
+    }
+    var timer = window.setInterval(tick, 1000);
+    tick();
+  });
+
+  /* ---------- Densité de la grille (mémorisée) ---------- */
+  function readPref(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  }
+  function writePref(key, value) {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (e) {}
+  }
+
+  document.querySelectorAll('[data-grid-toggle]').forEach(function (toggle) {
+    var grid = document.getElementById(toggle.getAttribute('data-grid-toggle'));
+    if (!grid) return;
+
+    function apply(kind, value, save) {
+      grid.style.setProperty('--cols-' + kind, value);
+      grid.setAttribute('data-cols-' + kind, value);
+      toggle.querySelectorAll('[data-cols-' + kind + ']').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', String(btn.getAttribute('data-cols-' + kind) === String(value)));
+      });
+      if (save) writePref('grid-cols-' + kind, value);
+    }
+
+    ['mobile', 'desktop'].forEach(function (kind) {
+      var initial = readPref('grid-cols-' + kind) || grid.style.getPropertyValue('--cols-' + kind).trim();
+      if (initial) apply(kind, initial, false);
+    });
+
+    toggle.addEventListener('click', function (event) {
+      var btn = event.target.closest('button');
+      if (!btn) return;
+      if (btn.hasAttribute('data-cols-mobile')) apply('mobile', btn.getAttribute('data-cols-mobile'), true);
+      if (btn.hasAttribute('data-cols-desktop')) apply('desktop', btn.getAttribute('data-cols-desktop'), true);
+    });
+  });
+
   /* ---------- Recommandations produit ---------- */
   document.querySelectorAll('[data-recommendations]').forEach(function (section) {
     var url = section.getAttribute('data-url');

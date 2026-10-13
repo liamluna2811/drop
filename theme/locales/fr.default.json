@@ -31,7 +31,8 @@
     "cart_count": {
       "one": "{{ count }} article",
       "other": "{{ count }} articles"
-    }
+    },
+    "help": "Besoin d'aide ?"
   },
   "sections": {
     "collection_list": {
@@ -46,6 +47,20 @@
     },
     "testimonials": {
       "rating": "Note : {{ rating }} sur 5"
+    },
+    "offer": {
+      "days": "j",
+      "hours": "h",
+      "minutes": "min",
+      "seconds": "s",
+      "ends_in": "Se termine dans"
+    },
+    "catalogue": {
+      "categories": "Catégories",
+      "models_count": {
+        "one": "{{ count }} modèle",
+        "other": "{{ count }} modèles"
+      }
     }
   },
   "products": {
@@ -75,7 +90,9 @@
         "other": "Plus que {{ count }} en stock"
       },
       "inventory_low_js": "Plus que [count] en stock",
-      "inventory_out": "Actuellement épuisé"
+      "inventory_out": "Actuellement épuisé",
+      "rating": "Note : {{ rating }} sur {{ max }}",
+      "example_subtitle": "Canapé 3 places · Tissu déhoussable"
     },
     "dimensions": {
       "width": "Largeur",
@@ -102,6 +119,13 @@
       "remove": "Retirer le filtre",
       "from": "De (€)",
       "to": "À (€)"
+    },
+    "layout": {
+      "label": "Affichage de la grille",
+      "one": "1 produit par ligne",
+      "two": "2 produits par ligne",
+      "three": "3 produits par ligne",
+      "four": "4 produits par ligne"
     }
   },
   "cart": {

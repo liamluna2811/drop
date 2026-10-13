@@ -3,6 +3,7 @@
   - product : objet produit (obligatoire)
   - use_variant : true pour afficher la variante sélectionnée
   - show_from : true pour afficher « À partir de » si les prix varient
+  - show_discount : affiche le pourcentage de réduction
   - class : classe supplémentaire (ex. 'price--large')
 {%- endcomment -%}
 {%- liquid
@@ -43,6 +44,10 @@
     </span>
     <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
     <s class="price__compare">{{ compare_at_price | money }}</s>
+    {%- if show_discount -%}
+      {%- assign discount = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price -%}
+      <span class="price__badge">-{{ discount }} %</span>
+    {%- endif -%}
   {%- else -%}
     <span class="price__regular{% if varies %} price__regular--from{% endif %}">
       {%- if varies -%}{{ 'products.product.price_from_html' | t: price: price_money }}{%- else -%}{{ price | money }}{%- endif -%}

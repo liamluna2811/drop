@@ -1,7 +1,8 @@
 # Thème Shopify « Canapé »
 
 Thème Shopify sur mesure pour une boutique de canapés : **sobre, épuré et facile à utiliser**.
-Tons neutres et chauds, beaucoup d'espace, peu d'effets, avec un parcours d'achat sans friction.
+Fond blanc, tons sable et noir profond, peu d'effets, avec un parcours d'achat sans friction.
+La page d'accueil est une **vitrine catalogue** : on voit les canapés dès l'arrivée sur le site.
 
 - `theme/` : le thème Shopify (Online Store 2.0, 100 % personnalisable dans l'éditeur Shopify)
 - `dist/theme-canape.zip` : le même thème, prêt à être importé dans Shopify
@@ -25,7 +26,9 @@ Tons neutres et chauds, beaucoup d'espace, peu d'effets, avec un parcours d'acha
 | **Paramètres > Général** | Le nom de la boutique (il s'affiche en logo tant que vous n'avez pas de logo image) |
 | **Contenu > Menus** | `main-menu` : Canapés droits, Canapés d'angle, Convertibles, Fauteuils, Échantillons · `footer` : Livraison, Retours, FAQ, Contact, CGV |
 | **Produits > Collections** | Une collection par catégorie, à relier aux blocs « Liste de catégories » de l'accueil |
-| **Éditeur de thème > Bannière principale** | Votre plus belle photo de canapé en situation (paysage, 2400 px minimum) |
+| **Éditeur de thème > Vitrine catalogue** | La collection à afficher, les raccourcis (convertibles, d'angle…), le produit mis en avant, les encarts promo et leur position dans la grille |
+| **Éditeur de thème > Bandeau d'offre** | Le texte de l'offre et la date de fin (`2026-11-30 23:59`). Le compte à rebours disparaît tout seul à la fin |
+| **Éditeur de thème > En-tête** | Le lien « Besoin d'aide ? » (FAQ ou contact) et le menu affiché sous la barre de recherche |
 | **Éditeur de thème > Avis clients** | Remplacez les textes d'exemple par de **vrais** avis |
 | **Paramètres du thème > Panier** | Le seuil de livraison offerte (500 € par défaut). Réglez le même dans **Paramètres > Expédition** |
 | **Paramètres > Politiques** | CGV, retours, confidentialité, mentions légales (obligatoires en France) |
@@ -48,15 +51,16 @@ Tons neutres et chauds, beaucoup d'espace, peu d'effets, avec un parcours d'acha
   | Sous-titre (ex. « Velours côtelé · Déhoussable ») | `custom.sous_titre` |
 
   Exemple de valeur : `214 cm`. L'onglet « Dimensions » apparaît automatiquement sur la fiche produit.
-- **Badge « Nouveau »** : ajoutez le tag `nouveau` au produit.
+- **Badges** : tag `nouveau` → badge « Nouveau » ; tout tag commençant par `badge:` crée un badge noir (ex. `badge:Livraison rapide`, `badge:Best-seller`, `badge:Convertible`). Le pourcentage de réduction s'affiche automatiquement à côté du prix barré.
+- **Avis (étoiles)** : ils s'affichent automatiquement sur les cartes si vous utilisez une application d'avis compatible (Shopify Product Reviews, Judge.me…).
 
 ## 4. Pages incluses
 
 | Page | Contenu |
 |---|---|
-| Accueil | Bannière, réassurance (livraison, retours, garantie, paiement en plusieurs fois), catégories, best-sellers, savoir-faire, avis, FAQ, newsletter |
+| Accueil | Bandeau d'offre avec compte à rebours, vitrine catalogue (grand titre, raccourcis catégories, filtres, choix d'affichage 1/2 ou 3/4 colonnes, modèle mis en avant en grand format, encarts promo dans la grille), réassurance, avis, savoir-faire, FAQ, newsletter. La bannière photo, la liste de catégories et les produits mis en avant restent disponibles dans « Ajouter une section » |
 | Fiche produit | Galerie avec miniatures, pastilles de couleur, tailles, disponibilité, ajout au panier sans rechargement, paiement en 4x (Shop Pay), avantages, onglets Description / Dimensions / Matières / Livraison, produits similaires |
-| Collection | Filtres dans un panneau latéral, tri, pagination |
+| Collection | Raccourcis vers les sous-catégories, filtres dans un panneau latéral, tri, choix d'affichage, pagination |
 | Panier | Panier coulissant + page panier, barre « livraison offerte », note de livraison (étage, digicode…) |
 | Autres | Recherche, contact (modèle `page.contact`), blog, article, 404, page « bientôt ouvert », carte cadeau |
 
@@ -64,8 +68,9 @@ Toutes les sections se modifient, se déplacent ou se masquent depuis l'éditeur
 
 ## 5. Choix de design
 
-- **Couleurs** : fond crème `#FAF8F5`, sable `#F1ECE5`, texte brun-noir `#1F1C19`, accent caramel `#8A6A4F`. Toutes les combinaisons respectent le contraste AA (WCAG), et chaque couleur se change dans **Paramètres du thème > Couleurs**.
-- **Typographie** : *Jost*, servie par Shopify (pas de Google Fonts, donc pas de souci RGPD). Modifiable dans **Paramètres du thème > Typographie**.
+- **Couleurs** : fond blanc, sable `#F4F1EC` (raccourcis, encarts), noir profond `#1A1816`, beige `#EFE4D6` (badge « Nouveau »), brique `#A4442E` (promos). Toutes les combinaisons respectent le contraste AA (WCAG), et chaque couleur se change dans **Paramètres du thème > Couleurs**.
+- **Typographie** : *Jost* (titres en semi-gras, noms de modèles en majuscules), servie par Shopify (pas de Google Fonts, donc pas de souci RGPD). Modifiable dans **Paramètres du thème > Typographie**.
+- **Inspiration** : la page d'accueil reprend le *principe* d'une page catalogue de grande enseigne de canapés (catalogue visible tout de suite, raccourcis, cartes détaillées), avec un style, des textes et un code entièrement originaux.
 - **Accessibilité** : navigation complète au clavier, lien « Aller au contenu », zones cliquables de 44 px minimum, prise en compte de « réduire les animations ».
 - **Performance** : aucune librairie externe, JavaScript léger, images responsives chargées à la demande.
 

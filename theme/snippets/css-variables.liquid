@@ -2,6 +2,10 @@
   assign body_font = settings.type_body_font
   assign body_font_medium = body_font | font_modify: 'weight', '500'
   assign heading_font = settings.type_heading_font
+  assign heading_font_bold = heading_font | font_modify: 'weight', settings.heading_weight
+  if heading_font_bold
+    assign heading_font = heading_font_bold
+  endif
 -%}
 
 {%- unless body_font.system? -%}
@@ -34,6 +38,7 @@
     --color-button-text: {{ settings.color_button_text }};
     --color-accent: {{ settings.color_accent }};
     --color-sale: {{ settings.color_sale }};
+    --color-badge: {{ settings.color_badge }};
 
     --radius: {{ settings.corner_radius }}px;
     --page-width: {{ settings.page_width }}px;
