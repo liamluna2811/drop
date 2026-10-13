@@ -143,13 +143,14 @@
     },
     { "type": "checkbox", "id": "show_toolbar", "label": "Afficher la barre d'outils (filtres, nombre de modèles, affichage)", "default": true },
     {
-      "type": "range",
+      "type": "select",
       "id": "columns",
-      "min": 3,
-      "max": 4,
-      "step": 1,
       "label": "Colonnes (ordinateur)",
-      "default": 4
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
     },
     {
       "type": "select",

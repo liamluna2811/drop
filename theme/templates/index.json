@@ -269,7 +269,7 @@
         "products_to_show": 11,
         "feature_first": true,
         "show_toolbar": true,
-        "columns": 4,
+        "columns": "4",
         "columns_mobile": "1",
         "button_label": "Voir tous les canapés",
         "padding_top": 40,
