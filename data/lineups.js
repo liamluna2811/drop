@@ -3789,5 +3789,42 @@ window.LINEUPS = [
       "note": "La molly tombe sur le spot de plant default du site B, au pied des grosses caisses."
     },
     "notes": ""
+  },
+  {
+    "id": "haven-molly-delogement-ct-c-depuis-c-lobby",
+    "map": "haven",
+    "title": "Molly délogement CT C depuis C Lobby",
+    "site": "C",
+    "side": "attack",
+    "throwType": "Lancer normal",
+    "fuse": null,
+    "tags": [
+      "Délogement"
+    ],
+    "spot": {
+      "x": 71.4,
+      "y": 76.0
+    },
+    "impact": {
+      "x": 30.3,
+      "y": 74.1
+    },
+    "position": {
+      "image": "assets/lineups/haven/c-lobby-ct-position.webp",
+      "note": "À C Lobby, colle-toi contre le montant gauche du portail en bois, sous la poutre, comme sur la capture."
+    },
+    "aim": {
+      "image": "assets/lineups/haven/c-lobby-ct-visee.webp",
+      "note": "Place le crosshair sur le trait rouge, en bas à gauche de la barre de la molly, comme sur la capture, puis lancer normal.",
+      "target": {
+        "x": 36.3,
+        "y": 86.4
+      }
+    },
+    "result": {
+      "image": "assets/lineups/haven/c-lobby-ct-resultat.webp",
+      "note": "La molly tombe en CT, au pied de l'escalier entre les toits, pour déloger le défenseur."
+    },
+    "notes": ""
   }
 ];
