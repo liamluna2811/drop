@@ -3797,7 +3797,7 @@ window.LINEUPS = [
     "site": "C",
     "side": "attack",
     "throwType": "Lancer normal",
-    "fuse": null,
+    "fuse": 6,
     "tags": [
       "Délogement"
     ],
