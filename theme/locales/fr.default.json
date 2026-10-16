@@ -74,6 +74,7 @@
       "regular_price": "Prix habituel",
       "price_from_html": "À partir de {{ price }}",
       "tax_included": "TVA incluse. Livraison calculée à l'étape suivante.",
+      "eco_participation": "Dont éco-participation : {{ amount }}",
       "colors_count": {
         "one": "{{ count }} coloris",
         "other": "{{ count }} coloris"
@@ -175,7 +176,7 @@
     "order": "Numéro de commande (facultatif)",
     "message": "Message",
     "send": "Envoyer",
-    "success": "Merci, votre message a bien été envoyé. Nous vous répondons sous 24 h ouvrées.",
+    "success": "Merci, votre message a bien été envoyé. Nous vous répondons dès que possible.",
     "error": "Merci de corriger les champs suivants :"
   },
   "password": {

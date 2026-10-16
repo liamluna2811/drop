@@ -91,6 +91,11 @@
               {%- if block.settings.show_tax_note -%}
                 <p class="product__installments">{{ 'products.product.tax_included' | t }}</p>
               {%- endif -%}
+              {%- assign eco_amount = product.metafields.custom.eco_participation.value -%}
+              {%- if eco_amount != blank and eco_amount > 0 -%}
+                {%- assign eco_money = eco_amount | times: 100 | round | money -%}
+                <p class="product__installments">{{ 'products.product.eco_participation' | t: amount: eco_money }}</p>
+              {%- endif -%}
 
             {%- when 'text' -%}
               <div class="product__block product__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
