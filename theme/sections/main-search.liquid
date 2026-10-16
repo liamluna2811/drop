@@ -1,0 +1,61 @@
+<div class="page-width">
+  <header class="page-header">
+    <h1>{{ 'search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form" style="max-width:36rem">
+      <label for="SearchPageInput" class="visually-hidden">{{ 'header.search' | t }}</label>
+      <input
+        id="SearchPageInput"
+        class="input"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'header.search_placeholder' | t }}"
+      >
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="button">{{ 'header.search_submit' | t }}</button>
+    </form>
+  </header>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      {% render 'facets', results: search, url: routes.search_url %}
+      {%- if search.results_count > 0 -%}
+        <ul class="grid" role="list" style="--cols-desktop: 4; --cols-mobile: 2;">
+          {%- for item in search.results -%}
+            <li>
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {% render 'product-card', product: item %}
+                {%- when 'article' -%}
+                  <div class="article-card">
+                    <p class="article-card__meta">{{ 'search.article' | t }}</p>
+                    <h3 class="article-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
+                  </div>
+                {%- when 'page' -%}
+                  <div class="article-card">
+                    <p class="article-card__meta">{{ 'search.page' | t }}</p>
+                    <h3 class="article-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
+                  </div>
+              {%- endcase -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <div class="empty-state">
+          <p class="h3">{{ 'search.no_results' | t: terms: search.terms }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="link">{{ 'cart.continue_shopping' | t }}</a>
+        </div>
+      {%- endif -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+<div style="height: 5rem"></div>
+
+{% schema %}
+{
+  "name": "Résultats de recherche",
+  "settings": []
+}
+{% endschema %}

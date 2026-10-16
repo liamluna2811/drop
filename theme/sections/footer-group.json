@@ -1,0 +1,39 @@
+{
+  "type": "footer",
+  "name": "Pied de page",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Boutique",
+            "menu": "main-menu"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Informations",
+            "menu": "footer"
+          }
+        },
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "heading": "Service client",
+            "text": "<p>Une question ? Écrivez-nous depuis la <a href=\"/pages/contact\">page Contact</a>.</p>"
+          }
+        }
+      },
+      "block_order": ["menu-1", "menu-2", "text-1"],
+      "settings": {
+        "text": "<p>Des canapés confortables, livrés compressés chez vous et sans montage.</p>",
+        "show_policies": false,
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": ["footer"]
+}

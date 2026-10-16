@@ -1,0 +1,58 @@
+{%- comment -%}
+  Tiroir panier : s'ouvre après un ajout au panier.
+  Rechargé via la Section Rendering API (voir assets/theme.js).
+{%- endcomment -%}
+<div id="CartDrawer" class="drawer drawer--right cart-drawer" data-cart-drawer>
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle" tabindex="-1">
+    <div class="drawer__header">
+      <h2 id="CartDrawerTitle">
+        {{ 'cart.title' | t }}
+        {%- if cart.item_count > 0 %} ({{ cart.item_count }}){% endif -%}
+      </h2>
+      <button type="button" class="icon-button" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close' -%}
+      </button>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="drawer__body">
+        {% render 'free-shipping' %}
+        <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm" class="cart-items" novalidate>
+          {%- for item in cart.items -%}
+            {% render 'cart-line', item: item, line: forloop.index, context: 'drawer' %}
+          {%- endfor -%}
+        </form>
+      </div>
+
+      <div class="drawer__footer">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row">
+            <span>{{ discount.title }}</span>
+            <span>-{{ discount.total_allocated_amount | money }}</span>
+          </div>
+        {%- endfor -%}
+        <div class="cart-summary__row cart-summary__row--total" style="margin-top:0;padding-top:0;border:0">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money_with_currency }}</span>
+        </div>
+        <p class="cart-summary__note">{{ 'cart.taxes_and_shipping' | t }}</p>
+        <button type="submit" name="checkout" form="CartDrawerForm" class="button button--full">
+          {%- render 'icon', name: 'lock' -%}
+          {{ 'cart.checkout' | t }}
+        </button>
+        <p class="text-center" style="margin:0.9rem 0 0">
+          <a href="{{ routes.cart_url }}" class="link">{{ 'cart.view_cart' | t }}</a>
+        </p>
+      </div>
+    {%- else -%}
+      <div class="drawer__body">
+        <div class="cart-drawer__empty">
+          <p class="h3">{{ 'cart.empty' | t }}</p>
+          <p class="text-muted">{{ 'cart.empty_text' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

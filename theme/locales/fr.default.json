@@ -1,0 +1,196 @@
+{
+  "accessibility": {
+    "skip_to_content": "Aller au contenu",
+    "close": "Fermer"
+  },
+  "general": {
+    "page": "Page {{ page }}",
+    "home": "Accueil",
+    "breadcrumbs": "Fil d'Ariane",
+    "announcement": "Annonce",
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "page": "Page {{ number }}"
+    },
+    "404": {
+      "title": "Page introuvable",
+      "text": "La page que vous cherchez n'existe pas ou a été déplacée."
+    }
+  },
+  "header": {
+    "menu": "Menu",
+    "main_navigation": "Navigation principale",
+    "view_all": "Tout voir",
+    "search": "Rechercher",
+    "search_placeholder": "Rechercher un canapé, un tissu…",
+    "search_submit": "Rechercher",
+    "account": "Mon compte",
+    "cart": "Panier",
+    "cart_count": {
+      "one": "{{ count }} article",
+      "other": "{{ count }} articles"
+    },
+    "help": "Besoin d'aide ?"
+  },
+  "sections": {
+    "collection_list": {
+      "view_all": "Toutes les collections",
+      "products_count": {
+        "one": "{{ count }} modèle",
+        "other": "{{ count }} modèles"
+      }
+    },
+    "featured_collection": {
+      "view_all": "Tout voir"
+    },
+    "testimonials": {
+      "rating": "Note : {{ rating }} sur 5"
+    },
+    "offer": {
+      "days": "j",
+      "hours": "h",
+      "minutes": "min",
+      "seconds": "s",
+      "ends_in": "Se termine dans"
+    },
+    "catalogue": {
+      "categories": "Catégories",
+      "models_count": {
+        "one": "{{ count }} modèle",
+        "other": "{{ count }} modèles"
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "on_sale": "Promo",
+      "new": "Nouveau",
+      "sale_price": "Prix promotionnel",
+      "regular_price": "Prix habituel",
+      "price_from_html": "À partir de {{ price }}",
+      "tax_included": "TVA incluse. Livraison calculée à l'étape suivante.",
+      "eco_participation": "Dont éco-participation : {{ amount }}",
+      "colors_count": {
+        "one": "{{ count }} coloris",
+        "other": "{{ count }} coloris"
+      },
+      "example_title": "Nom du canapé",
+      "gallery": "Galerie d'images",
+      "show_media": "Afficher l'image {{ index }}",
+      "quantity": "Quantité",
+      "quantity_decrease": "Diminuer la quantité",
+      "quantity_increase": "Augmenter la quantité",
+      "inventory_in": "En stock",
+      "inventory_low": {
+        "one": "Plus que {{ count }} en stock",
+        "other": "Plus que {{ count }} en stock"
+      },
+      "inventory_low_js": "Plus que [count] en stock",
+      "inventory_out": "Actuellement épuisé",
+      "rating": "Note : {{ rating }} sur {{ max }}",
+      "example_subtitle": "Canapé 3 places · Livré compressé",
+      "discover": "Découvrir"
+    },
+    "dimensions": {
+      "width": "Largeur",
+      "depth": "Profondeur",
+      "height": "Hauteur",
+      "seat_height": "Hauteur d'assise",
+      "seat_depth": "Profondeur d'assise"
+    }
+  },
+  "collections": {
+    "products_count": {
+      "one": "{{ count }} produit",
+      "other": "{{ count }} produits"
+    },
+    "empty": "Aucun produit ne correspond à votre sélection.",
+    "sort": {
+      "label": "Trier par"
+    },
+    "filters": {
+      "title": "Filtrer",
+      "apply": "Voir les résultats",
+      "clear": "Effacer",
+      "clear_all": "Tout effacer",
+      "remove": "Retirer le filtre",
+      "from": "De (€)",
+      "to": "À (€)"
+    },
+    "layout": {
+      "label": "Affichage de la grille",
+      "one": "1 produit par ligne",
+      "two": "2 produits par ligne",
+      "three": "3 produits par ligne",
+      "four": "4 produits par ligne"
+    }
+  },
+  "cart": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide",
+    "empty_text": "Découvrez nos canapés et trouvez celui qui vous correspond.",
+    "continue_shopping": "Découvrir nos canapés",
+    "remove": "Retirer",
+    "decrease": "Diminuer la quantité de {{ product }}",
+    "increase": "Augmenter la quantité de {{ product }}",
+    "quantity_for": "Quantité pour {{ product }}",
+    "update": "Mettre à jour",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "shipping_calculated": "Calculée à l'étape suivante",
+    "total": "Total",
+    "summary": "Récapitulatif",
+    "taxes_and_shipping": "TVA incluse. Frais de livraison calculés lors du paiement.",
+    "checkout": "Passer commande",
+    "view_cart": "Voir le panier",
+    "note": "Une précision pour la livraison ? (étage, digicode…)",
+    "note_placeholder": "Ex. 3e étage sans ascenseur, code 1234B",
+    "free_shipping_remaining_html": "Plus que <strong>{{ amount }}</strong> pour profiter de la livraison offerte",
+    "free_shipping_reached": "Bonne nouvelle : la livraison est offerte !",
+    "trust_secure": "Paiement 100 % sécurisé",
+    "trust_delivery": "Livraison à domicile en France",
+    "trust_returns": "14 jours pour changer d'avis",
+    "error": "Une erreur est survenue. Merci de réessayer."
+  },
+  "search": {
+    "title": "Recherche",
+    "no_results": "Aucun résultat pour « {{ terms }} ».",
+    "article": "Article",
+    "page": "Page"
+  },
+  "newsletter": {
+    "label": "Adresse e-mail",
+    "placeholder": "Votre adresse e-mail",
+    "button": "S'inscrire",
+    "success": "Merci ! Vous êtes bien inscrit(e)."
+  },
+  "contact": {
+    "name": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "order": "Numéro de commande (facultatif)",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Merci, votre message a bien été envoyé. Nous vous répondons dès que possible.",
+    "error": "Merci de corriger les champs suivants :"
+  },
+  "password": {
+    "notify": "Me prévenir",
+    "enter": "Accès propriétaire",
+    "label": "Mot de passe",
+    "submit": "Entrer",
+    "error": "Mot de passe incorrect."
+  },
+  "gift_card": {
+    "title": "Carte cadeau",
+    "code": "Votre code",
+    "expired": "Cette carte cadeau n'est plus valable.",
+    "expires_on": "Valable jusqu'au {{ date }}",
+    "shop": "Utiliser ma carte cadeau"
+  }
+}

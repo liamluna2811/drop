@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": { "type": "main-cart", "settings": { "show_note": true, "show_express": true } },
+    "reassurance": {
+      "type": "reassurance",
+      "blocks": {
+        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison à domicile", "text": "Livré compressé, sans montage." } },
+        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "14 jours pour changer d'avis", "text": "Après réception de votre commande." } },
+        "usp-3": { "type": "item", "settings": { "icon": "lock", "title": "Paiement 100 % sécurisé", "text": "Vos données bancaires sont protégées." } },
+        "usp-4": { "type": "item", "settings": { "icon": "mail", "title": "Une question ?", "text": "Notre équipe vous répond par e-mail." } }
+      },
+      "block_order": ["usp-1", "usp-2", "usp-3", "usp-4"],
+      "settings": { "heading": "", "surface": true, "padding_top": 48, "padding_bottom": 48 }
+    }
+  },
+  "order": ["main", "reassurance"]
+}

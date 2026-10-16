@@ -1,0 +1,46 @@
+{%- liquid
+  assign body_font = settings.type_body_font
+  assign body_font_medium = body_font | font_modify: 'weight', '500'
+  assign heading_font = settings.type_heading_font
+  assign heading_font_bold = heading_font | font_modify: 'weight', settings.heading_weight
+  if heading_font_bold
+    assign heading_font = heading_font_bold
+  endif
+-%}
+
+{%- unless body_font.system? -%}
+  {{ body_font | font_url | preload_tag: as: 'font', type: 'font/woff2' }}
+{%- endunless -%}
+{%- unless heading_font.system? -%}
+  {{ heading_font | font_url | preload_tag: as: 'font', type: 'font/woff2' }}
+{%- endunless -%}
+
+{% style %}
+  {{ body_font | font_face: font_display: 'swap' }}
+  {{ body_font_medium | font_face: font_display: 'swap' }}
+  {{ heading_font | font_face: font_display: 'swap' }}
+
+  :root {
+    --font-body-family: {{ body_font.family }}, {{ body_font.fallback_families }};
+    --font-body-style: {{ body_font.style }};
+    --font-body-weight: {{ body_font.weight }};
+    --font-heading-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+    --font-heading-style: {{ heading_font.style }};
+    --font-heading-weight: {{ heading_font.weight }};
+    --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+
+    --color-bg: {{ settings.color_background }};
+    --color-surface: {{ settings.color_surface }};
+    --color-text: {{ settings.color_text }};
+    --color-text-muted: {{ settings.color_text_muted }};
+    --color-border: {{ settings.color_border }};
+    --color-button: {{ settings.color_button }};
+    --color-button-text: {{ settings.color_button_text }};
+    --color-accent: {{ settings.color_accent }};
+    --color-sale: {{ settings.color_sale }};
+    --color-badge: {{ settings.color_badge }};
+
+    --radius: {{ settings.corner_radius }}px;
+    --page-width: {{ settings.page_width }}px;
+  }
+{% endstyle %}

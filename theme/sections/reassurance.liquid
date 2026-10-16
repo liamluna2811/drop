@@ -1,0 +1,80 @@
+{%- comment -%}
+  Bandeau de réassurance : livraison, retours, garantie, paiement.
+{%- endcomment -%}
+<section
+  class="section{% if section.settings.surface %} section--surface{% endif %}"
+  style="--section-pt: {{ section.settings.padding_top }}px; --section-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header section-header--center">
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+    {%- endif -%}
+    <ul class="usp" role="list" style="--usp-cols: {{ section.blocks.size | at_most: 4 }}">
+      {%- for block in section.blocks -%}
+        <li class="usp__item" {{ block.shopify_attributes }}>
+          <span class="usp__icon">{%- render 'icon', name: block.settings.icon -%}</span>
+          <h3 class="usp__title">{{ block.settings.title | escape }}</h3>
+          {%- if block.settings.text != blank -%}
+            <p class="usp__text">{{ block.settings.text | escape }}</p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Réassurance",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre" },
+    { "type": "checkbox", "id": "surface", "label": "Fond coloré", "default": true },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge haute", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "label": "Marge basse", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Argument",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "options": [
+            { "value": "truck", "label": "Livraison" },
+            { "value": "return", "label": "Retour" },
+            { "value": "shield", "label": "Garantie" },
+            { "value": "credit-card", "label": "Paiement" },
+            { "value": "lock", "label": "Sécurité" },
+            { "value": "leaf", "label": "Écologie" },
+            { "value": "sofa", "label": "Canapé" },
+            { "value": "tools", "label": "Fabrication" },
+            { "value": "swatch", "label": "Échantillons" },
+            { "value": "phone", "label": "Téléphone" },
+            { "value": "calendar", "label": "Calendrier" },
+            { "value": "heart", "label": "Cœur" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Livraison à domicile" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Partout en France, livré compressé et sans montage." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Réassurance",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "title": "Livraison à domicile", "text": "Partout en France, livré compressé et sans montage." } },
+        { "type": "item", "settings": { "icon": "return", "title": "14 jours pour changer d'avis", "text": "Retour possible après réception de votre commande." } },
+        { "type": "item", "settings": { "icon": "lock", "title": "Paiement 100 % sécurisé", "text": "Vos données bancaires sont protégées." } },
+        { "type": "item", "settings": { "icon": "mail", "title": "Une question ?", "text": "Notre équipe vous répond par e-mail." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

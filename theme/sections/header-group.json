@@ -1,0 +1,43 @@
+{
+  "type": "header",
+  "name": "En-tête",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Livraison à domicile partout en France · Livré compressé, sans montage",
+            "link": ""
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Paiement 100 % sécurisé · Une question ? Écrivez-nous",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["announcement-1", "announcement-2"],
+      "settings": {
+        "interval": 5
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "layout": "search",
+        "logo_width": 140,
+        "logo_position": "left",
+        "menu": "main-menu",
+        "sticky": true,
+        "show_search": true,
+        "help_link": "/pages/contact",
+        "phone": ""
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

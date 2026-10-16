@@ -1,0 +1,270 @@
+{
+  "sections": {
+    "reassurance": {
+      "type": "reassurance",
+      "blocks": {
+        "usp-1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Livraison à domicile",
+            "text": "Partout en France, livré compressé et sans montage."
+          }
+        },
+        "usp-2": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "14 jours pour changer d'avis",
+            "text": "Retour possible après réception de votre commande."
+          }
+        },
+        "usp-3": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "title": "Paiement 100 % sécurisé",
+            "text": "Vos données bancaires sont protégées."
+          }
+        },
+        "usp-4": {
+          "type": "item",
+          "settings": {
+            "icon": "mail",
+            "title": "Une question ?",
+            "text": "Notre équipe vous répond par e-mail."
+          }
+        }
+      },
+      "block_order": [
+        "usp-1",
+        "usp-2",
+        "usp-3",
+        "usp-4"
+      ],
+      "settings": {
+        "heading": "",
+        "surface": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "savoir-faire": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_left",
+        "ratio": "portrait",
+        "eyebrow": "Notre sélection",
+        "heading": "Le confort, sans les contraintes",
+        "text": "<p>Nos canapés sont livrés compressés sous vide dans un carton : ils passent les portes étroites et les escaliers, et s'installent sans outils. Déballez, patientez 72 heures, c'est prêt. Chenille douce, velours côtelé ou bouclette : des matières chaleureuses, dans des formats pour chaque pièce.</p>",
+        "button_label": "Voir les canapés",
+        "button_link": "/collections/all",
+        "surface": false,
+        "padding_top": 40,
+        "padding_bottom": 80
+      }
+    },
+    "avis": {
+      "type": "testimonials",
+      "blocks": {
+        "avis-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>",
+            "author": "Prénom N.",
+            "product": "Canapé 3 places"
+          }
+        },
+        "avis-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>",
+            "author": "Prénom N.",
+            "product": "Canapé d'angle"
+          }
+        },
+        "avis-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "<p>Remplacez ce texte par un véritable avis client : livraison, confort, qualité du tissu…</p>",
+            "author": "Prénom N.",
+            "product": "Fauteuil"
+          }
+        }
+      },
+      "block_order": [
+        "avis-1",
+        "avis-2",
+        "avis-3"
+      ],
+      "settings": {
+        "eyebrow": "Ils nous font confiance",
+        "heading": "Ce que disent nos clients",
+        "surface": true,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "Quels sont les délais de livraison ?",
+            "answer": "<p>Comptez en général 1 à 2 semaines entre votre commande et la livraison à domicile. Les frais de livraison sont calculés au moment du paiement.</p>"
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "Faut-il monter le canapé ?",
+            "answer": "<p>Dans la plupart des cas, non. Votre canapé est livré à domicile, compressé sous vide dans un carton : il suffit de le déballer et de le laisser reprendre sa forme pendant 72 heures. Les rares modèles à assembler le précisent sur leur fiche et se montent simplement.</p>"
+          }
+        },
+        "q-3": {
+          "type": "question",
+          "settings": {
+            "question": "Combien de temps faut-il pour que le canapé prenne sa forme ?",
+            "answer": "<p>Comptez 72 heures après le déballage pour que la mousse reprenne entièrement son volume. Évitez de vous asseoir dessus avant ce délai.</p>"
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "Comment retourner un canapé ?",
+            "answer": "<p>Vous disposez de 14 jours après réception pour changer d'avis. Contactez notre service client : nous vous indiquons la marche à suivre pour le retour et le remboursement.</p>"
+          }
+        },
+        "q-5": {
+          "type": "question",
+          "settings": {
+            "question": "Comment entretenir mon canapé ?",
+            "answer": "<p>Dépoussiérez-le régulièrement avec une brosse douce ou un aspirateur, et traitez les taches rapidement avec un chiffon légèrement humide. Évitez les produits abrasifs.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q-1",
+        "q-2",
+        "q-3",
+        "q-4",
+        "q-5"
+      ],
+      "settings": {
+        "eyebrow": "Besoin d'aide ?",
+        "heading": "Questions fréquentes",
+        "surface": false,
+        "padding_top": 80,
+        "padding_bottom": 40
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Restons en contact",
+        "text": "<p>Nouveautés, conseils déco et offres réservées aux abonnés. Pas plus d'un e-mail par mois.</p>",
+        "surface": false,
+        "padding_top": 40,
+        "padding_bottom": 96
+      }
+    },
+    "offre": {
+      "type": "offer-banner",
+      "disabled": true,
+      "settings": {
+        "text": "Offre de lancement sur une sélection de canapés",
+        "end_date": "",
+        "link": "",
+        "background": "#1A1816",
+        "text_color": "#FFFFFF"
+      }
+    },
+    "vitrine": {
+      "type": "catalogue",
+      "blocks": {
+        "chip-1": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés convertibles",
+            "collection": "canapes-convertibles",
+            "link": ""
+          }
+        },
+        "chip-2": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés d'angle",
+            "collection": "canapes-d-angle",
+            "link": ""
+          }
+        },
+        "chip-3": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés droits",
+            "collection": "canapes-droits",
+            "link": ""
+          }
+        },
+        "chip-4": {
+          "type": "chip",
+          "settings": {
+            "label": "Canapés modulables",
+            "collection": "canapes-modulables",
+            "link": ""
+          }
+        },
+        "chip-5": {
+          "type": "chip",
+          "settings": {
+            "label": "Fauteuils",
+            "collection": "fauteuils",
+            "link": ""
+          }
+        },
+        "chip-6": {
+          "type": "chip",
+          "settings": {
+            "label": "Livraison offerte",
+            "collection": "livraison-offerte",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "chip-1",
+        "chip-2",
+        "chip-3",
+        "chip-4",
+        "chip-5",
+        "chip-6"
+      ],
+      "settings": {
+        "heading": "Nos canapés",
+        "text": "",
+        "collection": "all",
+        "products_to_show": 5,
+        "feature_first": true,
+        "show_toolbar": true,
+        "columns": "4",
+        "columns_mobile": "1",
+        "button_label": "Voir tous les canapés",
+        "padding_top": 40,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "offre",
+    "vitrine",
+    "reassurance",
+    "avis",
+    "savoir-faire",
+    "faq",
+    "newsletter"
+  ]
+}

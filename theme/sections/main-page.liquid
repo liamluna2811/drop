@@ -1,0 +1,15 @@
+<div class="page-width page-narrow">
+  <header class="page-header">
+    <h1 style="margin:0">{{ page.title | escape }}</h1>
+  </header>
+  <div class="rte">{{ page.content }}</div>
+</div>
+
+<div style="height: 5rem"></div>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}
