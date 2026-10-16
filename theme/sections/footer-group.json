@@ -15,7 +15,7 @@
         "menu-2": {
           "type": "menu",
           "settings": {
-            "heading": "Aide",
+            "heading": "Informations",
             "menu": "footer"
           }
         },
@@ -23,14 +23,14 @@
           "type": "text",
           "settings": {
             "heading": "Service client",
-            "text": "<p>Du lundi au vendredi, 9h – 18h<br>contact@exemple.fr</p>"
+            "text": "<p>Une question ? Écrivez-nous depuis la <a href=\"/pages/contact\">page Contact</a>.</p>"
           }
         }
       },
       "block_order": ["menu-1", "menu-2", "text-1"],
       "settings": {
         "text": "<p>Des canapés confortables, livrés compressés chez vous et sans montage.</p>",
-        "show_policies": true,
+        "show_policies": false,
         "show_payment_icons": true
       }
     }
