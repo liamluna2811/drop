@@ -22,17 +22,17 @@
         "usp-3": {
           "type": "item",
           "settings": {
-            "icon": "shield",
-            "title": "Garantie 10 ans",
-            "text": "Sur la structure de tous nos canapés."
+            "icon": "lock",
+            "title": "Paiement 100 % sécurisé",
+            "text": "Vos données bancaires sont protégées."
           }
         },
         "usp-4": {
           "type": "item",
           "settings": {
-            "icon": "credit-card",
-            "title": "Paiement en 3x ou 4x",
-            "text": "Sans frais, 100 % sécurisé."
+            "icon": "mail",
+            "title": "Une question ?",
+            "text": "Notre équipe vous répond par e-mail."
           }
         }
       },
@@ -54,11 +54,11 @@
       "settings": {
         "layout": "image_left",
         "ratio": "portrait",
-        "eyebrow": "Notre savoir-faire",
-        "heading": "Fabriqués pour durer",
-        "text": "<p>Structure en bois massif, suspensions ensachées et tissus déhoussables : chaque canapé est assemblé avec soin dans nos ateliers partenaires en Europe. Des matériaux choisis pour leur robustesse, un design pensé pour traverser les années.</p>",
-        "button_label": "En savoir plus",
-        "button_link": "",
+        "eyebrow": "Notre sélection",
+        "heading": "Le confort, sans les contraintes",
+        "text": "<p>Nos canapés sont livrés compressés sous vide dans un carton : ils passent les portes étroites et les escaliers, et s'installent sans outils. Déballez, patientez 72 heures, c'est prêt. Chenille douce, velours côtelé ou bouclette : des matières chaleureuses, dans des formats pour chaque pièce.</p>",
+        "button_label": "Voir les canapés",
+        "button_link": "/collections/all",
         "surface": false,
         "padding_top": 40,
         "padding_bottom": 80
@@ -128,8 +128,8 @@
         "q-3": {
           "type": "question",
           "settings": {
-            "question": "Puis-je recevoir des échantillons de tissu ?",
-            "answer": "<p>Bien sûr. Contactez-nous pour recevoir gratuitement jusqu'à 5 échantillons avant de commander.</p>"
+            "question": "Combien de temps faut-il pour que le canapé prenne sa forme ?",
+            "answer": "<p>Comptez 72 heures après le déballage pour que la mousse reprenne entièrement son volume. Évitez de vous asseoir dessus avant ce délai.</p>"
           }
         },
         "q-4": {
@@ -142,8 +142,8 @@
         "q-5": {
           "type": "question",
           "settings": {
-            "question": "Les housses sont-elles lavables ?",
-            "answer": "<p>La plupart de nos modèles sont déhoussables. Les consignes d'entretien sont précisées sur chaque fiche produit.</p>"
+            "question": "Comment entretenir mon canapé ?",
+            "answer": "<p>Dépoussiérez-le régulièrement avec une brosse douce ou un aspirateur, et traitez les taches rapidement avec un chiffon légèrement humide. Évitez les produits abrasifs.</p>"
           }
         }
       },
@@ -174,8 +174,9 @@
     },
     "offre": {
       "type": "offer-banner",
+      "disabled": true,
       "settings": {
-        "text": "Offre de lancement : -10 % sur tous les canapés",
+        "text": "Offre de lancement sur une sélection de canapés",
         "end_date": "",
         "link": "",
         "background": "#1A1816",

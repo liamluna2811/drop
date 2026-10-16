@@ -29,7 +29,7 @@
       },
       "block_order": ["menu-1", "menu-2", "text-1"],
       "settings": {
-        "text": "<p>Des canapés pensés pour durer, fabriqués avec soin et livrés chez vous.</p>",
+        "text": "<p>Des canapés confortables, livrés compressés chez vous et sans montage.</p>",
         "show_policies": true,
         "show_payment_icons": true
       }

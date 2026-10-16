@@ -92,7 +92,7 @@
       "inventory_low_js": "Plus que [count] en stock",
       "inventory_out": "Actuellement épuisé",
       "rating": "Note : {{ rating }} sur {{ max }}",
-      "example_subtitle": "Canapé 3 places · Tissu déhoussable",
+      "example_subtitle": "Canapé 3 places · Livré compressé",
       "discover": "Découvrir"
     },
     "dimensions": {
