@@ -190,6 +190,7 @@
           "type": "chip",
           "settings": {
             "label": "Canapés convertibles",
+            "collection": "canapes-convertibles",
             "link": ""
           }
         },
@@ -197,6 +198,7 @@
           "type": "chip",
           "settings": {
             "label": "Canapés d'angle",
+            "collection": "canapes-d-angle",
             "link": ""
           }
         },
@@ -204,6 +206,7 @@
           "type": "chip",
           "settings": {
             "label": "Canapés droits",
+            "collection": "canapes-droits",
             "link": ""
           }
         },
@@ -211,6 +214,7 @@
           "type": "chip",
           "settings": {
             "label": "Canapés modulables",
+            "collection": "canapes-modulables",
             "link": ""
           }
         },
@@ -218,13 +222,15 @@
           "type": "chip",
           "settings": {
             "label": "Fauteuils",
+            "collection": "fauteuils",
             "link": ""
           }
         },
         "chip-6": {
           "type": "chip",
           "settings": {
-            "label": "Nouveautés",
+            "label": "Livraison offerte",
+            "collection": "livraison-offerte",
             "link": ""
           }
         }
