@@ -19,7 +19,7 @@
       "card_ratio": "landscape",
       "card_show_type": true,
       "cart_type": "drawer",
-      "free_shipping_threshold": 500,
+      "free_shipping_threshold": 0,
       "color_badge": "#EFE4D6",
       "heading_weight": "600",
       "card_framed": true,

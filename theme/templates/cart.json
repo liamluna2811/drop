@@ -4,8 +4,8 @@
     "reassurance": {
       "type": "reassurance",
       "blocks": {
-        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte", "text": "Dès 500 € d'achat." } },
-        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "30 jours pour changer d'avis", "text": "Retours gratuits." } },
+        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison à domicile", "text": "Livré compressé, sans montage." } },
+        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "14 jours pour changer d'avis", "text": "Après réception de votre commande." } },
         "usp-3": { "type": "item", "settings": { "icon": "shield", "title": "Garantie 10 ans", "text": "Sur la structure." } },
         "usp-4": { "type": "item", "settings": { "icon": "credit-card", "title": "Paiement en 3x ou 4x", "text": "Sans frais." } }
       },

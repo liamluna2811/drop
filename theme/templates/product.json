@@ -7,13 +7,13 @@
         "title": { "type": "title", "settings": {} },
         "price": { "type": "price", "settings": { "show_tax_note": true } },
         "variant_picker": { "type": "variant_picker", "settings": { "swatches": true } },
-        "inventory": { "type": "inventory", "settings": { "in_stock_text": "En stock — expédié sous 2 semaines", "low_threshold": 3 } },
+        "inventory": { "type": "inventory", "settings": { "in_stock_text": "En stock — livré sous 1 à 2 semaines", "low_threshold": 3 } },
         "buy_buttons": { "type": "buy_buttons", "settings": { "show_quantity": false, "show_dynamic_checkout": false, "show_payment_terms": true } },
         "perks": {
           "type": "perks",
           "settings": {
-            "perk_1": "Livraison offerte et installation dans la pièce de votre choix",
-            "perk_2": "30 jours pour changer d'avis",
+            "perk_1": "Livré compressé : passe partout, sans montage",
+            "perk_2": "14 jours pour changer d'avis",
             "perk_3": "Structure garantie 10 ans",
             "perk_4": "Échantillons de tissu gratuits sur demande"
           }
@@ -33,7 +33,7 @@
           "settings": {
             "heading": "Livraison & retours",
             "content_type": "custom",
-            "content": "<p>Livraison offerte dès 500 € en France métropolitaine, avec installation dans la pièce de votre choix et reprise des emballages. Vous disposez de 30 jours après réception pour changer d'avis.</p>"
+            "content": "<p>Livraison à domicile en France métropolitaine, en général sous 1 à 2 semaines. Les frais de livraison sont calculés au moment du paiement.</p><p>La plupart de nos canapés sont livrés compressés sous vide dans un carton : ils passent facilement les portes et les escaliers, sans montage. Déballez-le et laissez-le reprendre sa forme pendant 72 heures avant de vous asseoir.</p><p>Vous disposez de 14 jours après réception pour changer d'avis : contactez-nous pour organiser le retour.</p>"
           }
         }
       },
@@ -47,8 +47,8 @@
     "reassurance": {
       "type": "reassurance",
       "blocks": {
-        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison offerte", "text": "Dès 500 € d'achat." } },
-        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "30 jours pour changer d'avis", "text": "Retours gratuits." } },
+        "usp-1": { "type": "item", "settings": { "icon": "truck", "title": "Livraison à domicile", "text": "Livré compressé, sans montage." } },
+        "usp-2": { "type": "item", "settings": { "icon": "return", "title": "14 jours pour changer d'avis", "text": "Après réception de votre commande." } },
         "usp-3": { "type": "item", "settings": { "icon": "shield", "title": "Garantie 10 ans", "text": "Sur la structure." } },
         "usp-4": { "type": "item", "settings": { "icon": "credit-card", "title": "Paiement en 3x ou 4x", "text": "Sans frais." } }
       },

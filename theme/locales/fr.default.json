@@ -152,8 +152,8 @@
     "free_shipping_remaining_html": "Plus que <strong>{{ amount }}</strong> pour profiter de la livraison offerte",
     "free_shipping_reached": "Bonne nouvelle : la livraison est offerte !",
     "trust_secure": "Paiement 100 % sécurisé",
-    "trust_delivery": "Livraison et installation à domicile",
-    "trust_returns": "30 jours pour changer d'avis",
+    "trust_delivery": "Livraison à domicile en France",
+    "trust_returns": "14 jours pour changer d'avis",
     "error": "Une erreur est survenue. Merci de réessayer."
   },
   "search": {
