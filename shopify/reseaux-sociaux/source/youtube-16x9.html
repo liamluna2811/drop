@@ -1,0 +1,83 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.scene{position:absolute;inset:0;display:none;overflow:hidden}
+.mk{display:inline-block;line-height:.8;padding:.1em .12em .06em;background:var(--lime);color:var(--navy)}
+.kicker{font-weight:800;font-size:34px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.h{font-family:var(--display);text-transform:uppercase;line-height:1.08}
+.txt{position:absolute;left:110px;top:0;bottom:0;width:800px;display:flex;flex-direction:column;justify-content:center;gap:30px}
+.pics{position:absolute;right:0;top:0;bottom:0;width:980px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pics div{overflow:hidden}
+.pics img{width:100%;height:100%;object-fit:cover;display:block}
+.price{display:inline-flex;font-weight:800;font-size:48px;padding:14px 34px;border-radius:999px;background:var(--navy);color:var(--lime);align-self:flex-start}
+.logo{font-size:40px}.logo img{height:54px}
+.navy{background:var(--navy);color:var(--bg)}
+.navy .kicker{color:rgba(246,244,238,.75)}
+.navy .logo{color:var(--bg)}
+.lime{background:var(--lime);color:var(--navy)}
+.small{font-size:24px}
+</style></head><body><div class="stage grain">
+
+<!-- 1. Accroche (0 – 3 s) -->
+<div class="scene" id="s1" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+  <p class="kicker anim" style="animation:up .5s .1s both">Au padel, t'es plutôt…</p>
+  <p class="h anim" style="font-size:150px;margin-top:40px;animation:slam .45s .5s both">Côté <span class="mk">drive</span></p>
+  <p class="anim" style="font-family:var(--display);font-size:56px;color:var(--orange);margin:18px 0;animation:fadeIn .3s 1.0s both">OU</p>
+  <p class="h anim" style="font-size:150px;animation:slam .45s 1.2s both">Côté <span class="mk">revés</span> ?</p>
+</div>
+
+<!-- 2. Lifestyle (3 – 6 s) -->
+<div class="scene" id="s2">
+  <div class="txt">
+    <div class="logo anim" style="animation:fadeIn .4s 3.1s both"><img src="logo-mark.png">BANDEJA <b>CLUB</b></div>
+    <p class="h anim" style="font-size:96px;animation:up .5s 3.2s both">Choisis<br><span class="mk">ton camp</span></p>
+    <p class="anim" style="font-size:34px;font-weight:600;color:var(--muted);animation:up .45s 3.4s both">T-shirts de padel · 100 % coton</p>
+    <span class="price anim" style="animation:slam .45s 3.7s both">dès 32,99 €</span>
+  </div>
+  <div class="pics">
+    <div class="anim" style="animation:fromR .6s 3.05s both"><img src="a/drive-f-woman-black.jpg" style="object-position:50% 25%"></div>
+    <div class="anim" style="animation:fromR .6s 3.2s both"><img src="a/reves-f-man-black.jpg" style="object-position:50% 25%"></div>
+  </div>
+</div>
+
+<!-- 3. Personnalisé (6 – 9 s) -->
+<div class="scene navy" id="s3">
+  <div class="txt">
+    <p class="kicker anim" style="animation:up .4s 6.1s both">Ton t-shirt personnalisé</p>
+    <p class="h anim" style="font-size:84px;animation:up .5s 6.2s both">Ton <span class="mk">nom.</span><br>Ton <span class="mk">numéro.</span></p>
+    <p class="anim" style="font-size:32px;font-weight:600;opacity:.85;animation:up .45s 6.5s both">Aperçu en direct avant de commander</p>
+    <span class="price anim" style="background:var(--lime);color:var(--navy);animation:slam .45s 6.8s both">41,99 €</span>
+    <p class="small anim" style="color:rgba(246,244,238,.75);animation:fadeIn .4s 7s both">Prénoms d'exemple</p>
+  </div>
+  <div class="pics">
+    <div class="anim" style="animation:up .6s 6.05s both"><img src="a/sun-b-man-pink-perso.jpg" style="object-position:50% 40%"></div>
+    <div class="anim" style="animation:up .6s 6.25s both"><img src="a/clubp-b-man-blue-perso.jpg" style="object-position:50% 46%"></div>
+  </div>
+</div>
+
+<!-- 4. J'ai padel (9 – 12 s) -->
+<div class="scene lime" id="s4">
+  <div class="txt">
+    <p class="h anim" style="font-size:54px;color:#33414F;animation:up .4s 9.1s both">Pas ce soir,</p>
+    <p class="h anim" style="font-size:136px;animation:slam .45s 9.35s both">J'ai <span class="mk" style="background:var(--navy);color:var(--lime)">padel.</span></p>
+    <p class="anim" style="font-size:32px;font-weight:700;animation:up .45s 9.8s both">Au dos : « Et demain non plus. »</p>
+    <span class="price anim" style="animation:slam .45s 10.1s both">32,99 €</span>
+  </div>
+  <div class="pics">
+    <div class="anim" style="animation:fromR .6s 9.05s both"><img src="a/jp-f-woman-pink.jpg" style="object-position:50% 28%"></div>
+    <div class="anim" style="animation:fromR .6s 9.2s both"><img src="a/jp-b-man-pink.jpg" style="object-position:50% 40%"></div>
+  </div>
+</div>
+
+<!-- 5. Fin (12 – 15 s) -->
+<div class="scene navy" id="s5" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+  <div class="logo anim" style="font-size:64px;animation:fadeIn .4s 12.1s both"><img src="logo-mark-light.png" style="height:86px">BANDEJA <b>CLUB</b></div>
+  <p class="anim" style="font-size:38px;font-weight:600;margin-top:46px;opacity:.85;animation:up .45s 12.4s both">T-shirts de padel · fabriqués à la demande</p>
+  <p class="anim" style="font-size:38px;font-weight:600;margin-top:16px;opacity:.85;animation:up .45s 12.55s both">Livraison offerte dès 60 €</p>
+  <p class="anim" style="font-size:60px;font-weight:800;margin-top:56px;color:var(--lime);animation:slam .45s 12.8s both">bandejaclubboutique.fr</p>
+</div>
+</div>
+<script>
+var S=[[0,3000],[3000,6000],[6000,9000],[9000,12000],[12000,99999]];
+window.tick=function(t){S.forEach(function(r,i){var e=document.getElementById('s'+(i+1));e.style.display=(t>=r[0]&&t<r[1])?(i==0||i==4?'flex':'block'):'none';});};
+tick(location.hash?+location.hash.slice(1):0);
+</script></body></html>
